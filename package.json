@@ -1,0 +1,18 @@
+{
+  "name": "alicetest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dblapi.js": "^2.3.0",
+    "discord.js": "^11.5.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "node-fetch": "^2.6.0"
+  }
+}

@@ -835,6 +835,334 @@ bot.on("messageDelete", message => {
   );
 });
 
+bot.on("messageDeleteBulk", messages => {
+  const guild = messages.first().guild;
+  const channel = messages.first().channel;
+  con.query(`SELECT * FROM Logs WHERE guildID='${guild.id}'`, (err, rows) => {
+    con.query(
+      `SELECT * FROM Langs WHERE guildID='${guild.id}'`,
+      (err, langs) => {
+        if (!langs)
+          bot.lang = JSON.parse(fs.readFileSync(`./languages/en.json`, "utf8"));
+        else
+          bot.lang = JSON.parse(
+            fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+          );
+        con.query(
+          `SELECT * FROM LogsIgnore WHERE guildID='${guild.id}'`,
+          (err, ignore) => {
+            if (rows[0]) {
+              if (rows[0].channelID) {
+                if (rows[0].activated === "true") {
+                  if (rows[0].messagedeletebulk === "true") {
+                    if (!ignore[0] || ignore[0].ignored === "false") {
+                      const logsChan = bot.channels.get(rows[0].channelID);
+                      if (logsChan) {
+                        const fetch = require("node-fetch");
+                        const qbin = (q, e, s) =>
+                          fetch("https://qbin.io", {
+                            method: "PUT",
+                            body: q,
+                            headers: {
+                              e,
+                              s
+                            }
+                          }).then(y => y.text());
+                        let haste;
+                        let msg = bot.lang.logs.messageDeleteBulk.msg;
+                        messages.forEach(m => {
+                          let content;
+                          if (m.attachments.first() && !m.content) {
+                            const str =
+                              bot.lang.logs.messageDeleteBulk.attachment;
+                            const res = str.replace(
+                              "${m.attachments.first().url}",
+                              m.attachments.first().proxyURL
+                            );
+                            content = res;
+                          } else if (m.attachments.first() && m.content) {
+                            const str =
+                              bot.lang.logs.messageDeleteBulk.attachmsg;
+                            const res = str
+                              .replace(
+                                "${m.attachments.first().url}",
+                                m.attachments.first().proxyURL
+                              )
+                              .replace("${m.content}", m.content);
+                            content = res;
+                          } else if (m.content) content = m.content;
+                          else
+                            content = bot.lang.logs.messageDeleteBulk.nocontent;
+                          const moment = require("moment");
+                          moment.locale("fr");
+                          const m_time = moment(m.createdAt).format(
+                            bot.lang.logs.messageDeleteBulk.timeformat
+                          );
+                          msg += `${m.author.tag} (${m.author.id}) | ${m.id} | ${m_time} | ${content}\n`;
+                        });
+                        qbin(msg, 0, "none").then(newGist => {
+                          const str = bot.lang.logs.messageDeleteBulk.desc
+                            .replace("${messages.size}", messages.size)
+                            .replace(
+                              "${messages.first().channel.id}",
+                              messages.first().channel.id
+                            );
+                          const chanCr = new Discord.RichEmbed()
+                            .setAuthor(bot.lang.logs.messageDeleteBulk.mass)
+                            .setDescription(str)
+                            .addField(
+                              bot.lang.logs.messageDeleteBulk.deleted,
+                              newGist
+                            )
+                            .setTimestamp()
+                            .setFooter(messages.first().id)
+                            .setColor("RANDOM");
+                          logsChan.send(chanCr);
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        );
+      }
+    );
+  });
+});
+
+bot.on("messageUpdate", (oldMessage, newMessage) => {
+  con.query(
+    `SELECT * FROM Logs WHERE guildID='${oldMessage.guild.id}'`,
+    (err, rows) => {
+      con.query(
+        `SELECT * FROM Langs WHERE guildID='${oldMessage.guild.id}'`,
+        (err, langs) => {
+          if (!langs)
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8")
+            );
+          else
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+            );
+          if (rows[0]) {
+            if (rows[0].channelID) {
+              if (rows[0].activated === "true") {
+                if (rows[0].messageupdate === "true") {
+                  const logsChan = bot.channels.get(rows[0].channelID);
+                  if (logsChan) {
+                    if (oldMessage.content !== newMessage.content) {
+                      if (oldMessage.content.length !== 0) {
+                        if (!oldMessage.author.bot) {
+                          const str = bot.lang.logs.messageUpdate.desc
+                            .replace(
+                              "${oldMessage.author.tag}",
+                              oldMessage.author.tag
+                            )
+                            .replace(
+                              "${oldMessage.channel.id}",
+                              oldMessage.channel.id
+                            );
+                          const chanCr = new Discord.RichEmbed()
+                            .setAuthor(
+                              oldMessage.author.tag,
+                              oldMessage.author.avatarURL
+                            )
+                            .setDescription(str)
+                            .addField(
+                              bot.lang.logs.messageUpdate.old,
+                              oldMessage.content
+                            )
+                            .addField(
+                              bot.lang.logs.messageUpdate.new,
+                              newMessage.content
+                            )
+                            .setTimestamp()
+                            .setFooter(
+                              `ID user : ${oldMessage.author.id} | ID msg : ${oldMessage.id}`
+                            )
+                            .setColor("RANDOM");
+                          logsChan.send(chanCr);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      );
+    }
+  );
+});
+
+bot.on("roleCreate", role => {
+  con.query(
+    `SELECT * FROM Logs WHERE guildID='${role.guild.id}'`,
+    (err, rows) => {
+      con.query(
+        `SELECT * FROM Langs WHERE guildID='${role.guild.id}'`,
+        (err, langs) => {
+          if (!langs)
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8")
+            );
+          else
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+            );
+          if (rows[0]) {
+            if (rows[0].channelID) {
+              if (rows[0].activated === "true") {
+                if (rows[0].rolecreate === "true") {
+                  const logsChan = bot.channels.get(rows[0].channelID);
+                  if (logsChan) {
+                    const str = bot.lang.logs.roleCreate.replace(
+                      "${role.name}",
+                      role.name
+                    );
+                    const chanCr = new Discord.RichEmbed()
+                      .setAuthor(role.guild.name, role.guild.iconURL)
+                      .setDescription(str)
+                      .setTimestamp()
+                      .setFooter(`ID: ${role.id}`)
+                      .setColor("RANDOM");
+                    logsChan.send(chanCr);
+                  }
+                }
+              }
+            }
+          }
+        }
+      );
+    }
+  );
+});
+
+bot.on("roleDelete", role => {
+  con.query(
+    `SELECT * FROM Logs WHERE guildID='${role.guild.id}'`,
+    (err, rows) => {
+      con.query(
+        `SELECT * FROM Langs WHERE guildID='${role.guild.id}'`,
+        (err, langs) => {
+          if (!langs)
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8")
+            );
+          else
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+            );
+          if (rows[0]) {
+            if (rows[0].channelID) {
+              if (rows[0].activated === "true") {
+                if (rows[0].roledelete === "true") {
+                  const logsChan = bot.channels.get(rows[0].channelID);
+                  if (logsChan) {
+                    const str = bot.lang.logs.roleDelete.replace(
+                      "${role.name}",
+                      role.name
+                    );
+                    const chanCr = new Discord.RichEmbed()
+                      .setAuthor(role.guild.name, role.guild.iconURL)
+                      .setDescription(str)
+                      .setTimestamp()
+                      .setFooter(`ID: ${role.id}`)
+                      .setColor("RANDOM");
+                    logsChan.send(chanCr);
+                  }
+                }
+              }
+            }
+          }
+        }
+      );
+    }
+  );
+});
+
+bot.on("voiceStateUpdate", (voiceOld, voiceNew) => {
+  con.query(
+    `SELECT * FROM Logs WHERE guildID='${voiceNew.guild.id}'`,
+    (err, rows) => {
+      con.query(
+        `SELECT * FROM Langs WHERE guildID='${voiceNew.guild.id}'`,
+        (err, langs) => {
+          if (!langs)
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8")
+            );
+          else
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+            );
+          if (rows[0]) {
+            if (rows[0].channelID) {
+              if (rows[0].activated === "true") {
+                if (rows[0].voicestateupdate === "true") {
+                  const logsChan = bot.channels.get(rows[0].channelID);
+                  if (logsChan) {
+                    const vcOld = voiceOld.voiceChannel;
+                    const vcNew = voiceNew.voiceChannel;
+                    if (!vcOld && vcNew) {
+                      const str = bot.lang.logs.voiceStateUpdate.joined
+                        .replace("${voiceNew.user.tag}", voiceNew.user.tag)
+                        .replace("${vcNew.name}", vcNew.name);
+                      const chanCr = new Discord.RichEmbed()
+                        .setAuthor(
+                          voiceNew.user.tag,
+                          voiceNew.user.displayAvatarURL
+                        )
+                        .setDescription(str)
+                        .setTimestamp()
+                        .setFooter(`ID: ${vcNew.id}`)
+                        .setColor("RANDOM");
+                      logsChan.send(chanCr);
+                    } else if (vcOld && !vcNew) {
+                      const str = bot.lang.logs.voiceStateUpdate.leaved
+                        .replace("${voiceNew.user.tag}", voiceNew.user.tag)
+                        .replace("${vcOld.name}", vcOld.name);
+                      const chanCr = new Discord.RichEmbed()
+                        .setAuthor(
+                          voiceNew.user.tag,
+                          voiceNew.user.displayAvatarURL
+                        )
+                        .setDescription(str)
+                        .setTimestamp()
+                        .setFooter(`ID: ${vcOld.id}`)
+                        .setColor("RANDOM");
+                      logsChan.send(chanCr);
+                    } else if (vcOld && vcNew && vcOld.id != vcNew.id) {
+                      const str = bot.lang.logs.voiceStateUpdate.switch
+                        .replace("${voiceNew.user.tag}", voiceNew.user.tag)
+                        .replace("${vcOld.name}", vcOld.name)
+                        .replace("${vcNew.name}", vcNew.name);
+                      const chanCr = new Discord.RichEmbed()
+                        .setAuthor(
+                          voiceNew.user.tag,
+                          voiceNew.user.displayAvatarURL
+                        )
+                        .setDescription(str)
+                        .setTimestamp()
+                        .setFooter(`ID: ${vcOld.id} -> ${vcNew.id}`)
+                        .setColor("RANDOM");
+                      logsChan.send(chanCr);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      );
+    }
+  );
+});
+
 fs.readdir("./commands/", (err, files) => {
   if (err) throw err;
   const jsfile = files.filter(f => f.split(".").pop() === "js");
