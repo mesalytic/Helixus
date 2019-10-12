@@ -21,8 +21,8 @@ con.connect(err => {
 
 bot.on("ready", async () => {
   const wb = new Discord.WebhookClient(
-    "551739479292117010",
-    "T16CHRNZ4B3RBkU03taP1xq3tIYKOI_4_q9E4om7S6O28Bk3MHt0z9ZTQbk1rgRKRiB_"
+    config.webhook.id,
+    config.webhook.password
   );
   wb.send(`:white_check_mark: Shard ${bot.shard.id + 1} connecté !`);
   console.log(
@@ -52,8 +52,8 @@ bot.on("ready", async () => {
 
 bot.on("reconnecting", () => {
   const wb = new Discord.WebhookClient(
-    "551739479292117010",
-    "T16CHRNZ4B3RBkU03taP1xq3tIYKOI_4_q9E4om7S6O28Bk3MHt0z9ZTQbk1rgRKRiB_"
+    config.webhook.id,
+    config.webhook.password
   );
   wb.send(`:warning: Le shard ${bot.shard.id + 1} se reconnecte !`);
 });

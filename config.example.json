@@ -1,5 +1,8 @@
 {
-    "token": "xxxxx",
-    "dbpassword": "xxxxx"
+  "token": "xxxxx",
+  "dbpassword": "xxxxx",
+  "webhook_status": {
+    "id": "xxxxx",
+    "password": "xxxxx"
   }
-  
+}
