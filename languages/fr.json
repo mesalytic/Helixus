@@ -1,0 +1,1089 @@
+{
+  "lang": "fr",
+  "modlogs": {
+    "type": "Type",
+    "type_ban": "Ban",
+    "type_kick": "Kick",
+    "banned_user": "Utilisateur banni",
+    "kicked_user": "Utilisateur kick",
+    "mod": "Modérateur",
+    "reason": "Raison"
+  },
+  "logs": {
+    "channelCreate": "**Le salon <#${channel.id}> a été créé.**",
+    "channelDelete": "**Le salon #${channel.name} a été supprimé.**",
+    "emojiCreate": "**L'emoji ${emoji.name} a été ajouté.**",
+    "emojiDelete": "**L'emoji ${emoji.name} a été supprimé.**",
+    "emojiUpdate": {
+      "old": "Ancien nom de l'emoji",
+      "new": "Nouveau nom de l'emoji",
+      "desc": "**L'emoji ${oldEmoji.name} a été modifié.**"
+    },
+    "guildBanAdd": {
+      "noreason": "Aucune raison",
+      "bannedby": "Banni par",
+      "reason": "Raison",
+      "desc": "**L'utilisateur ${user.tag} a été banni.**"
+    },
+    "guildBanRemove": {
+      "noreason": "Aucune raison",
+      "unbannedby": "Débanni par",
+      "reason": "Raison",
+      "desc": "**L'utilisateur ${user.tag} a été débanni.**"
+    },
+    "guildMemberUpdate": {
+      "nooldnickname": "Aucun ancien pseudo",
+      "nonewnickname": "Aucun nouveau pseudo",
+      "desc1": "**${newMember.user.tag}** a eu son pseudo de changé sur le serveur.",
+      "oldnickname": "Ancien pseudo",
+      "newnickname": "Nouveau pseudo",
+      "changedby": "Changé par",
+      "desc2": "**${newMember.user.tag}** a eu un nouveau role",
+      "roleobtained": "Role obtenu",
+      "givenby": "Donné par",
+      "desc3": "**${newMember.user.tag}** a perdu un role",
+      "lostrole": "Role perdu",
+      "removedby": "Retiré par"
+    },
+    "userUpdate": {
+      "desc": "**${newUser.tag}** a changé son pseudo.",
+      "old": "Ancien pseudo",
+      "new": "Nouveau pseudo"
+    },
+    "guildMemberAdd": {
+      "desc": "**L'utilisateur ${member.user.tag} est arrivé sur le serveur !**"
+    },
+    "guildMemberRemove": "**L'utilisateur ${member.user.tag} est parti du serveur !**",
+    "messageDelete": {
+      "desc": "**Un message de ${message.author.tag} a été supprimé en <#${message.channel.id}>**",
+      "attachment": "Fichier attaché (peut ne pas fonctionner)",
+      "message": "Contenu du message",
+      "deletedby": "Supprimé par : "
+    },
+    "messageDeleteBulk": {
+      "msg": "ATTENTION !! A LIRE DE BAS EN HAUT !\n\n",
+      "attachment": "Fichier attaché : ${m.attachments.first().url}",
+      "attachmsg": "Fichier attaché : ${m.attachments.first().url} | Message : ${m.content}",
+      "nocontent": "Aucun contenu",
+      "mass": "Suppression massive",
+      "desc": "**${messages.size} messages ont été supprimés dans le channel <#${messages.first().channel.id}>.**",
+      "deleted": "Messages supprimés",
+      "timeformat": "Do/MM/YYYY - HH:mm:ss"
+    },
+    "roleCreate": "**Le role ${role.name} a été créé.**",
+    "roleDelete": "**Le role ${role.name} a été supprimé.**",
+    "voiceStateUpdate": {
+      "joined": "**${voiceNew.user.tag} a rejoint le salon ${vcNew.name}**",
+      "leaved": "**${voiceNew.user.tag} a quitté le salon ${vcOld.name}**",
+      "switch": "**${voiceNew.user.tag} a quitté le salon ${vcOld.name} pour aller au salon ${vcNew.name}**"
+    },
+    "messageUpdate": {
+      "desc": "**${oldMessage.author.tag} a modifié un message en <#${oldMessage.channel.id}>.**",
+      "old": "Ancien message",
+      "new": "Nouveau message"
+    }
+  },
+  "musicfunc": {
+    "err1": "Je n'ai pas pu rejoindre le salon: ${error}",
+    "added": "✅ **${song.title}** a été ajoutée à la queue!",
+    "music": "🎶 Musique : **${song.title}**"
+  },
+  "levelup": "Félicitations {user}, tu es passé niveau **{level}** !",
+  "admin": {
+    "modlogs": {
+      "noperms": "Tu n'as pas la permission.",
+      "reset_success": "Le salon modlogs a été réinitialisé.",
+      "reset_notattributed": "Aucun salon modlogs n'a été attribué.",
+      "nochans": "Veuillez mentionner un salon.",
+      "success": "Le salon ${chan} affichera désormais les avertissements, kicks et bans fait par le bot.",
+      "help_description": "Configurer le salon des modlogs qui affichera les avertissements, les kicks et les bans effectués par le bot.",
+      "help_usage": "am!modlogs #salon"
+    },
+    "autorole": {
+      "off_not-activated": "Aucun rôle n'a été ajouté a l'autorole.",
+      "off_success": "L'autorole a été désactivé.",
+      "roleAdd_success": "Le rôle **${role.name}** a été ajouté a l'autorole.",
+      "roleAdd_failure": "Aucun rôle trouvé. En cas de commande incorrecte, veuillez verifier le **am!help autorole**.",
+      "help_description": "Permet de configurer l'autorole, afin de donner un role automatiquement aux nouveaux arrivants du serveur.",
+      "help_usage": "am!autorole off\nam!autorole <Nom du role (ou ID du role ou mention du role)>"
+    },
+    "logs": {
+      "noperms": "Tu n'as pas la permission.",
+      "noargs": "Veuillez indiquer une option. Faites **am!help logs** pour en savoir plus.",
+      "on_alreadyActivated": "Les logs sont deja activés sur ce serveur.",
+      "on_success": "<a:checked:460568021782626316> Les logs ont été activés sur ce serveur... mais pas totalement ! Faites **am!logs channel <#mention>** afin de désigner le channel des logs.",
+      "channel_nochans": "Vous devez mentionner au moins un salon.",
+      "channel_not-activated": "Les logs ne sont pas activés.",
+      "channel_success": "<a:checked:460568021782626316> Les logs s'afficheront désormais sur le channel <#${channel.id}> (ID : ${channel.id})",
+      "ignore_m": "Les logs ont été désactivés dans ces salons : ",
+      "ignore_s": "Les logs ont été réactivés dans ces salons : ",
+      "ignore_nochans": "Vous devez mentionner au moins un salon.",
+      "ignore_madd": "Pour réactiver les logs dans les salons désactivés, il suffit de refaire la commande en mentionnant les salons en question.\n\n",
+      "ignore_mrep1": ", Pour ",
+      "ignore_mrep2": ".\n\nPour ",
+      "ignore_sadd": "Seuls les personnes ayant la permission de gérer les salons pourront réactiver les logs dans les salons désactivés.",
+      "ignore_srep1": ", Seuls ",
+      "ignore_srep2": ".\n\nSeuls ",
+      "off_alreadyDisabled": "Les logs ne sont pas activés sur ce serveur.",
+      "off_success": "<a:checked:460568021782626316> Les logs ont été désactivés sur ce serveur !",
+      "mods_notActivated": "Les logs ne sont pas activés sur ce serveur.",
+      "mods_noChan": "Veuillez définir le salon des logs.",
+      "mods_noArgs": "Voici la liste des modules présents :\nchannelCreate - Création de salons ${one()}\nchannelDelete - Suppression de salons ${two()}\nemojiCreate - Création d'emojis ${three()}\nemojiDelete - Suppression d'emojis ${four()}\nemojiUpdate - Mise a jour d'emojis ${five()}\nguildBanAdd - Ban d'un membre ${six()}\nguildBanRemove - Unban d'un membre ${seven()}\nguildMemberUpdate - Edition de pseudos (globaux ou serveur), ajout / enlevement d'un role a un membre ${eight()}\nguildMemberAdd - Arrivée d'un membre ${nine()}\nguildMemberRemove - Départ d'un membre ${ten()}\nmessageDelete - Suppression de messages ${eleven()}\nmessagesDeleteBulk - Suppression massive de messages ${twelve()}\nmessageUpdate - Edition d'un message ${thirteen()}\nroleCreate - Création d'un role ${fourteen()}\nroleDelete - Suppression d'un role ${fifteen()}\nvoiceStateUpdate - Rejoindre, quitter, ou se déplacer d'un salon vocal a un autre ${sixteen()}",
+      "mods_activated": "`${args[1].toLowerCase()}` activé",
+      "mods_disabled": "`${args[1].toLowerCase()}` désactivé",
+      "help_description": "Active ou désactive les logs",
+      "help_usage": "am!logs on\nam!logs off\nam!logs channel <#channel>\nam!logs mods [mods]"
+    },
+    "say": {
+      "noargs": "Veuillez indiquer un texte",
+      "nopermission": "Vous n'avez pas la permission",
+      "help_description": "Le bot répète ce que vous dites",
+      "help_usage": "am!say <texte>"
+    },
+    "setprefix": {
+      "nopermission": "Vous n'avez pas la permission",
+      "noargs": "Utilisation : ${prefix}setprefix <nouveau préfixe>",
+      "prefixtoolong": "Votre préfixe ne doit pas dépasser les 5 caractères.",
+      "newprefix": "Les changements ont été pris en compte.\nNouveau préfixe : ${args[0]}",
+      "help_description": "Permet de configurer le prefixe du bot pour votre serveur.",
+      "help_usage": "am!setprefix <nouveau prefix>"
+    },
+    "lang": {
+      "noperms": "Vous n'avez pas les permissions nécéssaires.",
+      "noargs": "Veuillez choisir entre `FR` ou `EN` ou `IT`",
+      "en": "Language succesfully changed to `EN`",
+      "fr": "Langue changée en `FR`",
+      "it": "Lingua modificata in `IT`",
+      "help_description": "Permet de changer la langue du bot sur votre serveur",
+      "help_usage": "am!lang <fr/en/it>"
+    },
+    "joinmsg": {
+      "noperms": "Vous n'avez pas la permission.",
+      "reset_success": "Votre message de bienvenue a bien été réinitialisé.",
+      "nochannels": "Veuillez mentionner un salon.",
+      "first": "Bien, le message sera envoyé en ${channel}. Maintenant indiquez le message que le bot devra mettre.\nMettez directement le message de bienvenue, ne mettez pas la commande dans le message.\nVous pouvez utiliser des balises :\n{user} pour mentionner le membre\n{username} pour afficher uniquement le pseudo du membre\n{guild} pour afficher le nom du serveur",
+      "second": "Très bien, ce message sera dorénavant affiché dans le salon ${channel} dès que quelqu'un rejoindra votre serveur !",
+      "help_description": "Configure le message qui s'affichera quand un membre rejoindra votre serveur\n\nVous pouvez utiliser des balises :\n{user} pour mentionner le membre\n{username} pour afficher uniquement le pseudo du membre\n{guild} pour afficher le nom du serveur",
+      "help_usage": "am!joinmsg <#salon>"
+    },
+    "leavemsg": {
+      "noperms": "Vous n'avez pas la permission.",
+      "reset_success": "Votre message de départ a bien été réinitialisé.",
+      "nochannels": "Veuillez mentionner un salon.",
+      "first": "Bien, le message sera envoyé en ${channel}. Maintenant indiquez le message que le bot devra mettre.\nMettez directement le message de départ, ne mettez pas la commande dans le message.\nVous pouvez utiliser des balises :\n{username} pour afficher uniquement le pseudo du membre\n{guild} pour afficher le nom du serveur",
+      "second": "Très bien, ce message sera dorénavant affiché dans le salon ${channel} dès que quelqu'un partira de votre serveur !",
+      "help_description": "Configure le message qui s'affichera quand un membre quittera votre serveur\n\nVous pouvez utiliser des balises :\n{username} pour afficher uniquement le pseudo du membre\n{guild} pour afficher le nom du serveur",
+      "help_usage": "am!leavemsg <#salon>"
+    },
+    "ignore": {
+      "m": "Les commandes ont été désactivés dans ces salons : ",
+      "s": "Les commandes ont été réactivés dans ces salons : ",
+      "nochans": "Vous devez mentionner au moins un salon.",
+      "madd": "Pour réactiver les commandes dans les salons désactivés, il suffit de refaire la commande en mentionnant les salons en question.\n\n",
+      "mrep1": ", Pour ",
+      "mrep2": ".\n\nPour ",
+      "sadd": "Seuls les personnes ayant la permission de gérer les membres pourront continuer a effectuer des commandes dans les salons désactivés.",
+      "srep1": ", Seuls ",
+      "srep2": ".\n\nSeuls ",
+      "help_description": "Permet d'activer ou désactiver les commandes dans des salons.\n\nA savoir que ceux ayant la permissions de gérer les membres pourront continuer a executer les commandes dans les salons désactivés.",
+      "help_usage": "am!ignore <#salons> (vous pouvez en mettre plusieurs)"
+    }
+  },
+  "fun": {
+    "hangman": {
+      "alrgame": "Seulement une partie par partie !",
+      "letsgo": "C'est parti !",
+      "welldone": "Bien joué !",
+      "nope": "Raté !",
+      "whatletter": "Quelle lettre choisis-tu ?",
+      "incorrect": "Essais incorrects:",
+      "none": "Aucun",
+      "timesup": "Temps écoulé !",
+      "won": "Tu as gagné, le mot était ${word} !",
+      "lost": "Dommage... c'était ${word}...",
+      "help_description": "Permet de jouer au jeu du pendu. (mots français uniquement)",
+      "help_usage": "am!hangman"
+    },
+    "cat": {
+      "help_description": "Affiche une image de chat.",
+      "help_usage": "am!cat"
+    },
+    "dog": {
+      "help_description": "Affiche une image de chien.",
+      "help_usage": "am!dog"
+    },
+    "choose": {
+      "nooptions": "Veuillez indiquer au moins deux choix. (am!choose option1 | option2)",
+      "result": "J'ai choisie : ${chooseoption[Math.floor(Math.random() * chooseoption.length)]}",
+      "help_description": "Le bot choisira parmis les choix que vous lui proposez.",
+      "help_usage": "am!choose <solution 1 | solution 2>"
+    },
+    "dice": {
+      "result": "Le dé a lancé un ",
+      "help_description": "Faites rouler un dé.",
+      "help_usage": "am!dice"
+    },
+    "meme": {
+      "pleasewait": "Veuillez patienter...",
+      "requestedby": "Requête de ${message.author.tag}",
+      "title": "Titre du meme : ***${data.title[0]}***",
+      "help_description": "Te voici avec des memes aléatoires <:doggy:451450396129361920>",
+      "help_usage": "am!meme"
+    },
+    "flip": {
+      "launched": "Attends un peu...",
+      "result": "La pièce est atterie sur ",
+      "help_description": "Pile ou face ?",
+      "help_usage": "am!flip"
+    },
+    "reverse": {
+      "noargs": "Veuillez indiquer un texte.",
+      "broken": "\n..Hé mais... TU AS TOUT CASSER !",
+      "help_description": "Met votre texte a l'envers",
+      "help_usage": "am!reverse <texte>"
+    },
+    "rps": {
+      "noargs": "Veuillez choisir entre `pierre` `feuille` et `ciseaux` !",
+      "wrongchoice": "Il faut choisir entre `feuille`, `ciseaux` ou `pierre`.",
+      "tie": "**Égalité !**",
+      "rock": "Pierre - :punch:",
+      "paper": "Feuille - :page_facing_up:",
+      "scissors": "Ciseaux - :scissors:",
+      "embedtie": "Aucun gagnant : Egalité !",
+      "winner": "Gagnant",
+      "userchoice": "Votre choix",
+      "botchoice": "Choix du bot",
+      "help_description": "Joue au pierre feuille ciseaux avec le bot",
+      "help_usage": "am!rps <votre choix>"
+    },
+    "select": {
+      "noargs": "J'ai choisie ${randommember} !",
+      "withsubject": "Le membre sélectionné pour __**${randomtexte}**__ est ***${randommember}*** !",
+      "help_description": "Le bot choisis un membre aléatoirement",
+      "help_usage": "am!select [sujet]"
+    },
+    "rpsdual": {
+      "rock": "pierre",
+      "paper": "papier",
+      "scissors": "ciseaux",
+      "noment": "Veuillez mentionner la personne a defier.",
+      "botment": "Vous ne pouvez pas defier un bot.",
+      "yourself": "Vous ne pouvez pas vous défier.",
+      "duel": "${play2.username} a été défié par ${play1.username}, pour accepter dites `accept`, sinon `refuse`.",
+      "timesup": "Temps ecoulé.",
+      "starting": "Commencons !",
+      "u1": "${play1.username} fait son choix.",
+      "choose": "Choisis entre `pierre`, `feuille`, `ciseaux` !",
+      "choice": "Choix pris en compte",
+      "u2": "${play1.username} a choisi, c'est maintenant a ${play2} de choisir..",
+      "tie": "**Égalité !**",
+      "p2won": "${play2.username} a gagné !",
+      "p1won": "${play1.username} a gagné !",
+      "p1choice": "Choix de ${play1.username}",
+      "p2choice": "Choix de ${play2.username}",
+      "rscissors": ":scissors: - Ciseaux",
+      "rrock": ":punch: - Pierre",
+      "rpaper": ":page_facing_up: - Feuille"
+    },
+    "tictactoe": {
+      "noplayer": "Vous ne pouvez pas jouer tout seul.",
+      "bot": "Vous ne pouvez pas jouer contre un bot.",
+      "yourself": "Vous ne pouvez pas jouer contre vous même.",
+      "alreadyplaying": "Seulement une partie par salon !",
+      "asking": "${opponent}, voulez vous jouer au tic-tac-toe contre ${message.author} ? Répondez par `oui` ou `non`.",
+      "notaccepted": "Le défi n'a pas été accepté.",
+      "side": "Quel coté prenez-vous ?",
+      "timesup": "Temps ecoulé.",
+      "win": "Bien joué, ",
+      "tie": "**Égalité !**",
+      "help_description": "Jouez au tictactoe avec vos amis !",
+      "help_usage": "am!tictactoe <@mention>"
+    }
+  },
+  "images": {
+    "3000years": {
+      "help_description": "Ajoute votre image sur le meme Pokémon `It's been 3000 years...`",
+      "help_usage": "am!3000years [mention]"
+    },
+    "blur": {
+      "help_description": "Floute votre image",
+      "help_usage": "am!blur [mention]"
+    },
+    "bobross": {
+      "help_description": "Bobross peint votre image",
+      "help_usage": "am!bobross [mention]"
+    },
+    "contrast": {
+      "help_description": "Contraste votre image",
+      "help_usage": "am!contrast [mention]"
+    },
+    "convolute": {
+      "help_description": "Applique des napes de courants sur votre image",
+      "help_usage": "am!convolute [mention]"
+    },
+    "grayscale": {
+      "help_description": "Met votre image en noir et blanc",
+      "help_usage": "am!grayscale [mention]"
+    },
+    "invert": {
+      "help_description": "Inverse les couleurs de votre image",
+      "help_usage": "am!invert [mention]"
+    },
+    "pixel": {
+      "help_description": "Pixélise votre image",
+      "help_usage": "am!pixel [mention]"
+    },
+    "rainbow": {
+      "help_description": "Ajoute un filtre arc-en-ciel sur votre image",
+      "help_usage": "am!rainbow [mention]"
+    },
+    "sepia": {
+      "help_description": "Ajoute un filtre sépia a votre image",
+      "help_usage": "am!sepia [mention]"
+    },
+    "urss": {
+      "help_description": "Ajoute un filtre URSS a votre image",
+      "help_usage": "am!urss [mention]"
+    },
+    "brazzers": {
+      "help_description": "Ajoute un logo Brazzers a votre image",
+      "help_usage": "am!brazzers\nam!brazzers @mention"
+    },
+    "robot": {
+      "help_description": "Montre une photo de robot unique a vous (ou au texte indiqué)",
+      "help_usage": "am!robot [arguments]"
+    },
+    "beautiful": {
+      "botnopermission": "Je n'ai pas la permission d'attacher des images.",
+      "help_description": "U see this ? Beautiful.",
+      "help_usage": "am!beautiful [mention]"
+    },
+    "qrcode": {
+      "error": "Une erreur est survenue : `${err.message}`. Veuillez réessayer plus tard !",
+      "help_description": "Créé un QR-Code d'un lien ou d'un texte",
+      "help_usage": "am!qrcode <lien>\nam!qrcode <texte>"
+    },
+    "triggered": {
+      "wait": "Veuillez patienter...",
+      "help_description": "Es-tu triggered ?",
+      "help_usage": "am!triggered [mention]"
+    }
+  },
+  "infos": {
+    "uptime": {
+      "r": "Le bot est en ligne depuis ${duration}",
+      "help_description": "Vous donne l'uptime actuel.",
+      "help_usage": "am!uptime"
+    },
+    "shard": {
+      "actual": "**Vous êtes sur le shard",
+      "help_description": "Vous envoie le shard actuel.",
+      "help_usage": "am!shard"
+    },
+    "botinfo": {
+      "infobot": "***Informations a propos du bot***",
+      "ramusage": "Utilisation mémoire",
+      "onlinesince": "En ligne depuis",
+      "users": "Utilisateurs",
+      "servers": "Serveurs",
+      "channels": "Salons",
+      "cpu": "Processeur",
+      "cpuusage": "Utilisation processeur",
+      "architecture": "Architecture",
+      "platform": "Platforme",
+      "shards": "Shard",
+      "creator": "Créatrice",
+      "langage": "Language de programmation",
+      "wrapper": "Wrapper API",
+      "support": "Serveur de support",
+      "invitation": "Lien d'invitation",
+      "website": "Site web",
+      "help_description": "Affiche les informations du bot",
+      "help_usage": "am!botinfo"
+    },
+    "serverinfo": {
+      "infoserv": "***Informations a propos du serveur***",
+      "servname": "Nom du serveur",
+      "createdat": "Créé le",
+      "createddate": "DD-MM-Y à HH:mm:SS",
+      "country": "Région",
+      "joinedat": "Serveur rejoint le",
+      "joindate": "DD-MM-Y à HH:mm:SS",
+      "total": "Membres totaux",
+      "owner": "Propriétaire du serveur",
+      "id": "ID du serveur",
+      "channels": "Salons",
+      "roles": "Rôles",
+      "rolelist": "Liste des rôles",
+      "help_description": "Vous montre des informations a propos du serveur auquel la commande est faite.",
+      "help_usage": "am!serverinfo"
+    },
+    "userinfo": {
+      "online": "<:online:515833180423716874> En ligne",
+      "idle": "<:idle:515832421606883328> Absent",
+      "dnd": "<:dnd:515833160219623445> Ne pas déranger",
+      "offline": "<:offline:515833137801199636> Hors ligne",
+      "status": ":star: Statut",
+      "createdthe": ":calendar_spiral: Créé le",
+      "createddate": "DD-MM-Y à HH:mm:SS",
+      "game": ":video_game: Jeu",
+      "roles": ":rocket: Rôles",
+      "commonserv": "Serveurs en commun avec le bot",
+      "none": "Aucun",
+      "help_description": "Obtenir des infos sur soi-même ou sur quelqu'un",
+      "help_usage": "am!userinfo [mention]"
+    },
+    "weather": {
+      "noargs": "Veuillez indiquer une ville !",
+      "time": "Temps pour ${current.observationpoint}",
+      "timezone": "Plage horaine",
+      "degreetype": "Mesure",
+      "temperature": "Température",
+      "feelslike": "Ressenti",
+      "wind": "Vents",
+      "humidity": "Humidité",
+      "observationtime": "Temps d'observation",
+      "error": "Ville inconnue ou non-existante..",
+      "help_description": "Obtenir le temps météo d'une ville",
+      "help_usage": "am!weather <ville>"
+    },
+    "shards": {
+      "help_description": "Vous envoie des informations sur tous les shards.",
+      "help_usage": "am!shards"
+    }
+  },
+  "membres": {
+    "afk": {
+      "nowafk": "Vous êtes maintenant AFK.",
+      "notafk": "Vous n'êtes plus AFK.",
+      "noreason": "Aucune raison",
+      "help_description": "Permet de se mettre afk",
+      "help_usage": "am!afk [raison]"
+    },
+    "ascii": {
+      "toolong": "Vous avez dépassé la limite de 15 caractères de ${diff}.",
+      "noargs": "Veuillez indiquer un texte.",
+      "help_description": "Transforme votre message en ASCII-Art",
+      "help_usage": "am!ascii <message>"
+    },
+    "botinvite": {
+      "invite": "Pour m'inviter sur ton serveur, rien de plus simple, clique sur ce lien ! :wink: https://is.gd/LienHelixus",
+      "help_description": "Affiche l'invitation du bot",
+      "help_usage": "am!botinvite"
+    },
+    "discrim": {
+      "noargs": "Veuillez indiquer un discrim valide !",
+      "help_description": "Permet de vérifier les membres ayant le discriminateur défini.",
+      "help_usage": "am!discrim <discriminateur> (ex : discrim 6595)"
+    },
+    "emoji": {
+      "nopermission": "Vous n'avez pas la permission !",
+      "notfound": "L'emote n'a pas été trouvé sur votre serveur.",
+      "unicode": "Les emotes unicode ne sont pas supportés.",
+      "add_noargs": "Veuillez indiquer le nom de l'emote !",
+      "add_both": "Veuillez mettre soit une image attachée, soit une emote customisée.",
+      "add_created": "L'emote ${emote.name} a bien été créé.",
+      "add_already": "Vous ne pouvez pas ajouter une emote deja existante sur le serveur..",
+      "remove_noargs": "Veuillez préciser quel emote souhaitez-vous retirer.",
+      "remove_success": "L'emote ${emote.name} a été retiré.",
+      "rename_success": "L'emote a bien été modifié en ${args[2]}.",
+      "duration": "D MMMM YYYY [a] H:mm:s",
+      "success": "Nom: ${name}\nAperçu: ${apercu}\nID: ${id}\nCréation: ${duration}",
+      "help_description": "Permet aux membres d'avoir des informations sur un emote en particulier et d'avoir une image de n'importe quelle emote.\nPermet aux modérateurs d'ajouter, retirer ou renommer des emotes (via des emotes globales ou nitro, ou via des images ou gifs).",
+      "help_usage": "am!emoji <nom/emote>\nam!emoji add <nom/emote> <emote (ou image)>\nam!emoji remove <nom/emote>\nam!emoji rename <ancien nom/emote> <nouveau nom>"
+    },
+    "fortnite": {
+      "noargs": ":x: **Erreur:** Veuillez indiquer la plateforme `pc ; xbl ; psn` :x:",
+      "nonick": ":x: **Erreur:** Veuillez indiquer un pseudo. :x:",
+      "notfound": "Utilisateur non trouvé...",
+      "stats": "Statistiques Fortnite de **${data.username}**",
+      "help_description": "Voir les stats d'un joueur Fortnite.",
+      "help_usage": "am!fortnite <platforme> <joueur>"
+    },
+    "help": {
+      "info": "Pour en savoir plus sur une commande, faites `${prefix}help [commande]`",
+      "adm": ":hammer_pick: Administration",
+      "textedit": ":writing_hand: Edition de textes",
+      "fun": ":game_die: Fun",
+      "infos": ":card_index: Informations",
+      "images": ":frame_with_picture: Images",
+      "interact": "Intéraction",
+      "interv": "Interv",
+      "members": ":man: Membres",
+      "mods": ":hammer: Modération",
+      "music": ":musical_note: Musique",
+      "nsfw": ":underage: NSFW",
+      "radio": ":radio: Radio",
+      "support": ":desktop: Support",
+      "cmd_help": "Page d'aide pour la commande __${command.help.name}__",
+      "cmd_obligfalc": "<> - Obligatoire | [] - Facultatif\n\n__**Les signes <> et [] ne sont pas a mettre dans la commande.**__",
+      "cmd_desc": "Description",
+      "cmd_usage": "Usage",
+      "invalid": "La commande est invalide.",
+      "levels": ":chart_with_upwards_trend: Levels",
+      "help_description": "Afficher ce message",
+      "help_usage": "am!help [commande]"
+    },
+    "math": {
+      "noargs": "__**Vous devez indiquer un calcul.**__",
+      "result": "Calcul : ${question}\nRésultat: ${answer}",
+      "help_description": "Permet de résoudre des équations mathématiques.",
+      "help_usage": "am!math <calcul>"
+    },
+    "npm": {
+      "desc": "Description",
+      "author": "Auteur",
+      "latest": "Dernière version",
+      "github": "GitHub",
+      "norepo": "Aucun repository",
+      "maintenors": "Maintenus par",
+      "notfound": "Module NPM **${args[0]}** non trouvé.",
+      "noargs": "Veuillez indiquer le nom du module.",
+      "help_description": "Donne des informations a propos d'un module NPM.",
+      "help_usage": "am!npm <module>"
+    },
+    "ping": {
+      "latency": "Latence",
+      "api": "Latence API",
+      "help_description": "Pong ?",
+      "help_usage": "am!ping"
+    },
+    "pp": {
+      "youravatar": "**Voici ton avatar :**",
+      "hisavatar": "**Voici son avatar :**",
+      "help_description": "Affiche votre photo de profil ou celle d'une personne mentionnée",
+      "help_usage": "am!pp [mention]"
+    },
+    "randomhexcolor": {
+      "res": "https://www.colorhexa.com/${color}\nCode HEX : #${color}",
+      "help_description": "Genère une couleur aléatoire",
+      "help_usage": "am!randomhexcolor"
+    },
+    "serverinvite": {
+      "res": "Pour accéder au serveur support d'Helixus, clique ici ! :wink: https://discord.gg/UKQNxzu",
+      "help_description": "Recuperer l'invitation du serveur de support",
+      "help_usage": "am!serverinvite"
+    },
+    "shorten": {
+      "noargs0": "Veuillez indiquer un URL",
+      "errnoargs1": "Veuillez entrer une URL Valide.",
+      "errargs1": "Erreur: **${res}**",
+      "resp": "**<${res}>**",
+      "help_description": "Raccourcir un lien",
+      "help_usage": "am!shorten <lien> [nom du lien raccourci]"
+    },
+    "osu": {
+      "404": "Aucun resultat trouvé !",
+      "username": "Pseudo",
+      "level": "Niveau",
+      "accuracy": "Taux de précision",
+      "rank": "Rang",
+      "totalgames": "Nombre de parties",
+      "country": "Pays",
+      "rankedscore": "Score rank",
+      "totalscore": "Score total",
+      "noargs": "Usage: am!osu <pseudo> | <mode>",
+      "help_description": "Affiche les stats d'un joueur osu!",
+      "help_usage": "am!osu <pseudo> | <standard/taiko/mania/ctb>"
+    }
+  },
+  "mods": {
+    "ban": {
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "bnotperm": "📛 Je n'ai pas la permission 📛",
+      "noment": "**:x: Veuillez mentionner l'utilisateur que vous voulez ban**",
+      "notposs": "Vous ne pouvez pas bannir cette personne.",
+      "noreason": "Aucune raison",
+      "banned": "${member.displayName} a bien été ban :wink: (raison : ${breason})",
+      "catchban": "Une erreur est survenue: ${err.message}",
+      "help_description": "Permet de bannir quelqu'un",
+      "help_usage": "am!ban <mention> <raison>"
+    },
+    "hackban": {
+      "noid": "Veuillez indiquer l'ID d'un utilisateur.",
+      "noreason": "Aucune raison",
+      "noperms": "Vous n'avez pas la permission.",
+      "nobanyou": "Tu ne peux pas te bannir.",
+      "nobanme": "Serieusement ? Tu veux me bannir ?",
+      "catch1": "Je n'ai pas reussi a bannir la personne avec l'ID ${id}",
+      "ban": "J'ai banni l'utilisateur **${id.username}#${id.discriminator}**. (id : ${mid})",
+      "catch2": "Il n'y a pas d'utilisateur avec l'ID ${mid}, veuillez rééssayer. :face_palm:",
+      "help_description": "Bannir quelqu'un n'étant pas sur votre serveur.",
+      "help_usage": "am!hackban <id>"
+    },
+    "kick": {
+      "noreason": "Aucune raison",
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "bnotperm": "📛 Je n'ai pas la permission 📛",
+      "noment": "**:x: Veuillez mentionner l'utilisateur que vous voulez kick**",
+      "notposs": "Vous ne pouvez pas kick cette personne.",
+      "kick": "👋 ${member.displayName} à été bel et bien kick 💫",
+      "catch": "Erreur : Le role du membre est supérieur au mien ! (Si le problème persiste toujours : contactez ${prefix}support !",
+      "help_description": "Kick quelqu'un du serveur.",
+      "help_usage": "am!kick <mention> [raison]"
+    },
+    "lockdown": {
+      "noperm": "Vous n'avez pas la permission.",
+      "usage": "Veuillez indiquer un temps en (s)econdes, (m)inutes ou (h)eures.",
+      "unlocked": "Salon dévérouillé.",
+      "locked": "Salon verouillé pour ${ms(ms(time), { long:true })}",
+      "help_description": "Permet de vérouiller un channel pendant un temps indiqué",
+      "help_usage": "am!lockdown <temps en s/m/h>"
+    },
+    "mute": {
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "bnotperm": "📛 Je n'ai pas la permission 📛",
+      "notposs": "Vous ne pouvez pas mute cette personne",
+      "noment": "**:x: Veuillez mentionner l'utilisateur que vous voulez mute**",
+      "first1": "Premiere utilisation du mute... Etapes :\nCréation du role de mute...",
+      "first2": "Premiere utilisation du mute... Etapes :\nCréation du role de mute terminé !\nConfiguration des permissions du role dans chaque salons...",
+      "first3": "Premiere utilisation du mute... Etapes :\nCréation du role de mute terminé !\nConfiguration des permissions du role dans chaque salons terminées !\nMute de la personne en cours...",
+      "muted": "${member.user.tag} (ID: ${member.id}) a été mute par ${message.author.tag} (ID: ${message.author.id})",
+      "help_description": "Permet de mute un membre du serveur.",
+      "help_usage": "am!mute <mention>"
+    },
+    "purge": {
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "bnotperm": "📛 Je n'ai pas la permission 📛",
+      "noargs": "Choisissez un nombre supérieur ou égal à 2",
+      "purged": "J'ai supprimé **${deleteCount}** messages",
+      "help_description": "Supprime un nombre défini de messages",
+      "help_usage": "am!purge <nombre>"
+    },
+    "slowmode": {
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "changing": "Changement du slowmode en cours...",
+      "deactivate": "***Le SlowMode a été désactivé sur ce salon !***",
+      "noargs": "Veuillez indiquer un chiffre entre 1 et 21600 (6h).",
+      "change": "***Le slowmode de ce salon a été changé. Les membres pourront désormais poster un message toutes les __${args[0]}__ secondes.***",
+      "help_description": "Permet de régler le slowmode du salon où la commande est effectué.",
+      "help_usage": "am!slowmode off\nam!slowmode <1-21600>"
+    },
+    "softban": {
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "noment": "Veuillez mentionner un ou plusieurs utilisateurs.",
+      "err1": "Je ne peux pas softban l'utilisateur ${m.username}",
+      "softban": "`${m.tag}` a été softban.",
+      "err2": "Une erreur est survenue pendant le softban de ${m.username}",
+      "help_description": "Kick une ou plusieurs personne/s tout en supprimant ses/leurs messages",
+      "help_usage": "am!softban <@mention / @mentions>"
+    },
+    "unban": {
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "bnotperm": "📛 Je n'ai pas la permission 📛",
+      "noreason": "Aucune raison",
+      "noid": "Veuillez indiquer l'id du membre que vous souhaitez unban.",
+      "err": "Je n'ai pas pu le débannir car : ${error}",
+      "unban": "L'utilisateur avec l'ID ${user} a bien été débanni. Raison : ${reason}",
+      "help_description": "Unban quelqu'un",
+      "help_usage": "am!unban <mention> [raison]"
+    },
+    "unmute": {
+      "unotperm": "📛 Tu n'as pas la permission 📛",
+      "bnotperm": "📛 Je n'ai pas la permission 📛",
+      "noment": "**:x: Veuillez mentionner l'utilisateur que vous voulez unmute**",
+      "nobodymuted": "Aucune personne a été mute sur ce serveur...",
+      "notmuted": "Il n'a pas été mute..",
+      "unmute": "${member.user.tag} (ID: ${member.id}) a été unmute par ${message.author.tag} (ID: ${message.author.id})",
+      "help_description": "Permet d'unmute quelqu'un",
+      "help_usage": "am!unmute <mention>"
+    },
+    "warn": {
+      "notperm": "Vous n'avez pas la permission",
+      "delete_noargs": "Usage: am!warn delete <nombre> <mention>",
+      "delete_notvaliduser": "C'est pas compliqué de mentionner quelqu'un correctement non ?",
+      "delete_nowarns": "Cet utilisateur n'a pas d'avertissements.",
+      "delete_more": "Vous ne pouvez pas retirer + de warns que ce qu'a l'utilisateur.",
+      "delete_success": "Vous avez retiré a l'utilisateur ${user.user.tag} ${args[1]} warns. Il en possède maintenant ${warnsa} warns.",
+      "channel_success": "Les warns s'afficheront désormais dans le salon <#${channels.fetch(`channel_${message.guild.id}`)}> (id : ${channels.fetch(`channel_${message.guild.id}`)}",
+      "kick_success": "Toute personne avec ${kicks.fetch(`kicks_${message.guild.id}`)} avertissements sera exclu.",
+      "ban_success": "Toute personne avec ${bans.fetch(`bans_${message.guild.id}`)} avertissements sera banni.",
+      "noment": "Veuillez mentionner quelqu'un !",
+      "noreason": "Veuillez indiquer une raison !",
+      "bannotdefined": "Veuillez definir le nombre d'avertissements avant ban. (am!warn ban <nombre>)",
+      "kicknotdefined": "Veuillez definir le nombre d'avertissements avant kick. (am!warn kick <nombre>)",
+      "channotdefined": "Pensez a configurer un salon mod-logs via la commande `am!modlogs`.",
+      "notposs": "Je ne peux pas mettre un warn a cette personne.",
+      "warn1": "**Cas**: ${guildcasenumber}\n\nL'utilisateur <@${user.id}> a été kick pour avoir reçu ${kicksn} avertissements.\n**Raison**: ${reason}",
+      "warn1_footer": "ID MOD ${mod.id} | Modérateur ${mod.tag}",
+      "warn1_success": "${user.user.tag} a été averti.",
+      "warn1_fail": "Je n'ai pas les permissions de le kick.",
+      "warn1_mp": "Vous avez été kick du serveur ${message.guild.name} pour ${reason} après avoir obtenu ${kicksn} avertissements.",
+      "warn2": "**Cas**: ${guildcasenumber}\n\nL'utilisateur <@${user.id}> a été banni pour avoir reçu ${bansn} avertissements.\n**Raison**: ${reason}",
+      "warn2_footer": "ID MOD ${mod.id} | Modérateur ${mod.tag}",
+      "warn2_success": "${user.user.tag} a été averti.",
+      "warn2_fail": "Je n'ai pas les permissions de le bannir.",
+      "warn2_mp": "Vous avez été banni du serveur ${message.guild.name} pour ${reason} après avoir obtenu ${kicksn} avertissements.",
+      "warn3": "**Cas**: ${guildcasenumber}\n\nL'utilisateur <@${user.id}> a été averti.\n**Raison**: ${reason}\n**Nombre d'avertissements**: ${warns}",
+      "warn3_footer": "ID MOD ${mod.id} | Modérateur ${mod.tag}",
+      "warn3_success": "${user.user.tag} a été averti.",
+      "warn3_mp": "Vous avez été averti sur le serveur ${message.guild.name} pour ${reason}.",
+      "help_description": "Permet d'avertir quelqu'un",
+      "help_usage": "am!warn <@mention> <raison>\nam!warn delete <nombre> <@user>\nam!warn channel <#mention>\nam!warn ban <nombre>\nam!warn kick <nombre>"
+    }
+  },
+  "musique": {
+    "shuffle": {
+      "nomusic": "Aucune musique est en cours.",
+      "notenough": "Veuillez ajouter plus de 2 musiques.",
+      "tenmusic": "__**Les 10 premières musiques de la queue**__",
+      "playing": "**En cours:**",
+      "progress": "**Progression:**",
+      "left": "restant",
+      "help_description": "Permet de mélanger les musiques des salons",
+      "help_usage": "am!shuffle"
+    },
+    "duplicate": {
+      "nochannel": "Vous n'êtes pas dans un salon vocal",
+      "nomusic": "Aucune musique n'est en cours.",
+      "choose": "Veuillez indiquer le nombre de fois que vous souhaitez voir cette musique dupliquée.",
+      "duplicated": "La musique a été ajoutée ${Number(args[0])} ${Number(args[0]) === 1 ? 'foi': 'fois'}",
+      "toomuch": "Vous ne pouvez pas dupliquer plus de 50 fois une musique (par commande).",
+      "nottoomuch": "Vous devez indiquer un chiffre supérieur a 1.",
+      "help_description": "Pouvoir dupliquer la musique en cours avec le nombre de fois voulu",
+      "help_usage": "am!duplicate <nombre>"
+    },
+    "forceskip": {
+      "noperms": "Tu n'as pas la permission",
+      "nochannel": "Tu n'es pas dans un salon vocal..",
+      "noskip": "Il n'y a aucune musique a passer...",
+      "skipped": "La musique a été passée.",
+      "help_description": "Pouvoir skip une musique sans vote (modérateurs seulement)",
+      "help_usage": "am!forceskip"
+    },
+    "np": {
+      "nomusic": "Il n'y a aucune musique...",
+      "music": "Musique en cours :",
+      "time": "**Temps :**",
+      "left": "restants",
+      "addedby": "**Ajouté par :**",
+      "help_description": "Permet d'afficher la musique en cours de lecture.",
+      "help_usage": "am!np"
+    },
+    "pause": {
+      "paused": "La musique a bien été mise en pause !",
+      "nomusic": "Il n'y a rien de joué.",
+      "help_description": "Permet de mettre en pause la musique en cours.",
+      "help_usage": "am!pause"
+    },
+    "play": {
+      "nochannel": "Vous n'êtes pas dans un salon vocal",
+      "duration": "**Durée :** ${song.duration}",
+      "starts": "Commence à jouer :",
+      "requestedby": "Proposé par",
+      "newqueue": "Nouvelle chanson ajoutée à la queue musicale :",
+      "cannotjoin": "Je ne peux pas rejoindre le salon vocal",
+      "playlistadded": "La playlist **${playlist.title}** a été ajouté à la queue !",
+      "noresults": "Je ne peux pas obtenir de resultats.",
+      "select": "Sélection de chanson :",
+      "search": "Veuillez indiquer une valeur afin d'indiquer l'un des résultats de recherche compris entre 1 et 10.",
+      "cancel": "Aucune valeur ou une valeur non valide saisie, annulation de la sélection vidéo.",
+      "help_description": "Permet de lancer une musique via un lien vidéo, des tags ou un lien de playlist.",
+      "help_usage": "am!play <lien vidéo>\nam!play <tags>\nam!play <lien playlist>"
+    },
+    "queue": {
+      "nomusic": "Il n'y a aucune musique dans la queue.",
+      "music": "Musique en cours :",
+      "queue": "Queue musicale :",
+      "embedtitle": "Queue (page ${paginated.page}/${paginated.maxPage})",
+      "usage": "Veuillez utiliser `am!queue <nombre>` pour voir une page en particulier.\n",
+      "progress": "**En cours:**",
+      "progression": "**Progression:**",
+      "left": "restant",
+      "totaltime": "**Temps total restant :**",
+      "help_description": "Permet de voir les musiques étant dans la queue",
+      "help_usage": "am!queue [numéro de page]"
+    },
+    "resume": {
+      "resumed": "La musique a été relancée.",
+      "nomusic": "Aucune musique n'est en cours.",
+      "help_description": "Permet de relancer la musique.",
+      "help_usage": "am!resume"
+    },
+    "skip": {
+      "nochannel": "Vous n'êtes pas dans un salon vocal.",
+      "nomusic": "Aucune musique n'est en cours.",
+      "alrvoted": "Tu as déjà voté pour le skip !",
+      "vote": "${message.author} a voté pour passer la musique, il faut ${message.guild.me.voiceChannel.members.size / 2} votes pour passer la musique.",
+      "voted": "${message.author} a voté ! ${mapload.users.length}/${message.guild.me.voiceChannel.members.size / 2} votes.",
+      "skipped": "La musique a été passée.",
+      "help_description": "Permet de passer une musique.",
+      "help_usage": "am!skip"
+    },
+    "stop": {
+      "nochannel": "Vous n'êtes pas dans un salon vocal",
+      "nomusic": "Aucune musique n'est jouée.",
+      "stopped": "J'ai bien arrêté la musique et quitté le salon.",
+      "help_description": "Permet de stopper la musique du bot.",
+      "help_usage": "am!stop"
+    },
+    "volume": {
+      "nochannel": "Vous n'êtes pas dans un salon vocal.",
+      "nomusic": "Vous n'avez pas de musique en cours.",
+      "currentvolume": "Le volume actuel est de ${serverQueue.volume}%",
+      "toohigh": "Vous ne pouvez que mettre un volume entre 1 et 100.",
+      "toolow": "Vous ne pouvez que mettre un volume entre 1 et 100.",
+      "volumeset": "Le volume a été réglé a **${volumeinput[1]}%**",
+      "help_description": "Permet de configurer le volume du bot.",
+      "help_usage": "am!volume <1-100>"
+    },
+    "loop": {
+      "nomusic": "Aucune musique n'est en cours.",
+      "disabled": "La boucle a été désactivée.",
+      "enabled": "La boucle a été activée.",
+      "help_description": "Permet de mettre une musique en boucle.",
+      "help_usage": "am!loop"
+    },
+    "radio": {
+      "join_novoc": "Vous n'êtes pas dans un salon vocal.",
+      "join_notposs": "Je ne peux pas jouer de musique dans ce salon.",
+      "join_joined": "J'ai rejoint le salon.",
+      "leave_novoc": "Vous n'êtes pas dans un salon vocal..",
+      "list_desc": "POur jouer une radio, tapez `am!radio play <radio>`",
+      "list_fr": "Radios françaises",
+      "list_de": "Radios allemandes",
+      "list_ukr": "Radios ukrainiennes",
+      "list_uk": "Radios britanniques",
+      "list_be": "Radios belges",
+      "list_ru": "Radios russes",
+      "play_novoc": "Vous n'êtes pas dans un salon vocal.",
+      "play_join": "Je ne peux pas jouer de musique dans ce salon.",
+      "play_noargs": "Veuillez indiquer une radio correcte. Pour voir la liste des radios `am!radio list`",
+      "play_launched": "Radio launched ! (${suffix})",
+      "help_description": "Permet de lancer la radio.",
+      "help_usage": "am!radio join\nam!radio leave\nam!radio list\nam!radio play <radio>"
+    }
+  },
+  "nsfw": {
+    "yandere": {
+      "banned": "Ce terme est banni.",
+      "real_size": "**Taille réelle :**",
+      "noresults": "Aucun résultat trouvé",
+      "help_description": "Affiche une image aléatoire trouvée sur Yande.re suivant les tags indiqués (hormis les termes hors TOS)",
+      "help_usage": "am!yandere <tags>"
+    },
+    "4k": {
+      "nonsfw": "Veuillez faire cette commande dans un salon NSFW.",
+      "wait": "Veuillez patienter...",
+      "request": "Requête par ${message.author.tag}",
+      "notdisplay": "[Cliquez ici si la photo ne s'affiche pas](${body.message})",
+      "serviceby": "Service par NekoBotAPI",
+      "help_description": "Affiche une image catégorisée 4k (Images NSFW)",
+      "help_usage": "am!4k"
+    },
+    "ass": {
+      "nonsfw": "Veuillez faire cette commande dans un salon NSFW.",
+      "wait": "Veuillez patienter...",
+      "request": "Requête de ${message.author.tag}",
+      "notdisplay": "[Cliquez ici si la photo ne s'affiche pas](${res.body.message})",
+      "serviceby": "Service par NekoBotAPI",
+      "help_description": "Affiche des fessiers.",
+      "help_usage": "am!ass"
+    },
+    "gelbooru": {
+      "nonsfw": "Veuillez faire cette commande dans un salon NSFW.",
+      "wait": "Veuillez patienter...",
+      "noresults": "Aucun résultat trouvé.",
+      "q": "Questionnable",
+      "s": "Sécurisé",
+      "e": "Explicite",
+      "request": "Requête de ${message.author.tag}",
+      "result": "Postée par ${data.owner}\nScore : ${data.score}\nRang: ${rank}\nTags: `${data.tags}`\nLien: ${data.file_url}\nPostée le: ${duration}",
+      "help_description": "Affiche une image aléatoire trouvée suivant les tags indiqués (peut afficher des images NSFW)",
+      "help_usage": "am!gelbooru [tags]"
+    },
+    "hentai": {
+      "nonsfw": "Veuillez faire cette commande dans un salon NSFW.",
+      "wait": "Veuillez patienter...",
+      "request": "Requête de ${message.author.tag}",
+      "notdisplay": "[Cliquez ici si la photo ne s'affiche pas](${res.body.message})",
+      "serviceby": "Service par NekoBotAPI",
+      "help_description": "Affiche des photos venant d'hentais.",
+      "help_usage": "am!hentai"
+    },
+    "lesbian": {
+      "nonsfw": "Veuillez faire cette commande dans un salon NSFW.",
+      "noimg": "Rééssaye...",
+      "wait": "Veuillez patienter...",
+      "requestedby": "Requête par",
+      "nodisplay": "[Cliquez ici si la photo ne s'affiche pas]",
+      "reddit": "Photo trouvée sur Reddit",
+      "help_description": "Affiche des photos NSFW de lesbiennes.",
+      "help_usage": "am!lesbian"
+    }
+  },
+  "textedit": {
+    "base64": {
+      "err": "C'est pas un code BASE64.",
+      "help_description": "Permet d'encoder/décoder du texte en Base64.",
+      "help_usage": "am!base64 encode <texte>\base64 decode <code base64>"
+    },
+    "vaporwave": {
+      "help_description": "Ｄｅ　ｑｕｏｉ　ｒｅｎｄｒｅ　ｖｏｔｒｅ　ｔｅｘｔｅ　ｅｓｔｈｅｔｉｑｕｅ",
+      "help_usage": "am!vaporwave <texte>"
+    },
+    "binary": {
+      "help_description": "Convertis du texte vers du code binaire",
+      "help_usage": "am!binary <texte>"
+    }
+  },
+  "levels": {
+    "top": {
+      "disabled": "Le système de niveau est désactivé, pour l'activer veuillez faire `am!levels on`",
+      "notfound": "???? (utilisateur ayant quitté le serveur)",
+      "top10": "TOP 10 du serveur",
+      "help_description": "Affiche le top 10 des membres du serveur.",
+      "help_usage": "am!top"
+    },
+    "levels": {
+      "nopermission": "Tu n'as pas la permission.",
+      "noargs": "Veuillez préciser `on`, `off` ou `message`",
+      "off_alrdisabled": "Le système de niveau est déjà désactivé, pour l'activer veuillez faire `am!levels on`",
+      "off_disabled": "Les levels ont bien été désactivés.",
+      "on_alrenabled": "Le système de niveau est déjà activé, pour le désactiver veuillez faire `am!levels off`",
+      "on_enabled": "Les levels ont bien été activés.",
+      "message_channel": "Ou souhaitez-vous que le message de level-up soit affiché ?\nPour qu'il soit affiché dans le salon du level-up, tapez `msgChannel`, sinon mentionnez le salon.",
+      "message_message": "Quel sera le message affiché pour le level-up ?\n\nVous pouvez utiliser des tags :\n{user} pour mentionner l'utilisateur\n{level} pour indiquer le niveau",
+      "message_finished": "Très bien, ce message sera affiché a chaque level-up.",
+      "message_error": "Vous n'avez pas mentionné de salon ou indiqué le tag `msgChannel`.",
+      "rewards_norole": "Veuillez indiquer le rôle (avec l'ID, le nom du rôle ou bien en le mentionnant, ou `reset` si vous voulez réinitialiser le role attribué a ce niveau.) ! (Usage : `am!levels rewards <rôle / reset> | <niveau>`)",
+      "rewards_nolevel": "Veuillez indiquer a quel niveau le rôle doit être donné ! (Usage: `am!levels rewards <rôle> | <niveau>`)",
+      "rewards_reset_deleted": "Le rôle attribué au niveau ${niveau} a été supprimé des rewards.",
+      "rewards_reset_notfound": "Aucun rôle n'a été attribué au niveau ${niveau}.",
+      "rewards_notfound": "Ce rôle n'a pas été trouvé.",
+      "rewards_added": "Très bien, le role ${role} sera attribué a tous ceux ayant le niveau ${niveau}.",
+      "help_description": "Permet de configurer le système de level sur le serveur",
+      "help_usage": "am!levels on\nam!levels off\nam!levels message\nam!levels rewards",
+      "modify_nouser": "Veuillez mentionner un utilisateur.",
+      "modify_norows": "Cet utilisateur n'a pas de niveau sur ce serveur.",
+      "modify_noargs1": "Veuillez choisir une option entre `add` ou `remove`",
+      "modify_noargs": "Veuillez choisir une option entre `xp` ou `level`",
+      "modify_xpadded": "Vous avez ajouté ${args[3]} xp a ${u}.",
+      "modify_xpremoved": "Vous avez retiré ${args[3]} xp a ${u}.",
+      "modify_leveladded": "Vous avez ajouté ${args[3]} niveaux a ${u}.",
+      "modify_levelremoved": "Vous avez retiré ${args[3]} niveaux a ${u}.",
+      "reset_nouser": "Veuillez mentionner un utilisateur.",
+      "reset_resetted": "L'utilisateur ${u} a été reset."
+    },
+    "level": {
+      "level": "Vous êtes niveau ${lvl} avec ${xp}/${diffenrece} XP.",
+      "difference": "${difference} xp avant le level up!",
+      "help_description": "Affiche votre niveau actuel (et votre nombre d'xp)",
+      "help_usage": "am!level"
+    }
+  },
+  "rp": {
+    "smug": {
+      "ment": "**${message.member.user.username}** est prétentieux envers **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** est prétentieux.",
+      "help_description": "Soyez prétentieux envers quelqu'un.",
+      "help_usage": "am!smug\nam!smug @user"
+    },
+    "baka": {
+      "ment": "**${message.member.user.username}** a traité **${member.user.username}** de baka.",
+      "noment": "**${message.member.user.username}** est un baka.",
+      "help_description": "Dit a quelqu'un que c'est un \"baka\" ! (idiot)",
+      "help_usage": "am!baka\nam!baka @user"
+    },
+    "tickle": {
+      "ment": "**${message.member.user.username}** chatouille **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** chatouille **Helixus**.",
+      "help_description": "Chatouille quelqu'un.",
+      "help_usage": "am!tickle\nam!tickle @user"
+    },
+    "slap": {
+      "ment": "**${message.member.user.username}** gifle **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** gifle **Helixus**.",
+      "help_description": "Donne une claque à quelqu'un.",
+      "help_usage": "am!slap\nam!slap @user"
+    },
+    "pat": {
+      "ment": "**${message.member.user.username}** caresse **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** caresse **Helixus**.",
+      "help_description": "Caresse quelqu'un.",
+      "help_usage": "am!pat\nam!pat @user"
+    },
+    "kiss": {
+      "ment": "**${message.member.user.username}** a embrassé **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** a embrassé **Helixus**.",
+      "help_description": "Embrasse quelqu'un.",
+      "help_usage": "am!kiss\nam!kiss @user"
+    },
+    "hug": {
+      "ment": "**${message.member.user.username}** fait un calin à **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** fait un calin à **Helixus**.",
+      "help_description": "Caline quelqu'un.",
+      "help_usage": "am!hug\nam!hug @user"
+    },
+    "feed": {
+      "ment": "**${message.member.user.username}** donne a manger à **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** mange.",
+      "help_description": "Donne a manger à quelqu'un.",
+      "help_usage": "am!feed\nam!feed @user"
+    },
+    "cuddle": {
+      "ment": "**${message.member.user.username}** cajole **${member.user.username}**.",
+      "noment": "**${message.member.user.username}** cajole **Helixus**.",
+      "help_description": "Cajole quelqu'un.",
+      "help_usage": "am!cuddle\nam!cuddle @user"
+    }
+  },
+  "rpg": {
+    "backpack": {
+      "help_description": "Permet de voir le contenu de votre backpack",
+      "help_usage": "am!backpack\nam!backpack drop"
+    },
+    "crafting": {
+      "help_description": "Permet de craft des items",
+      "help_usage": "am!crafting craft <montant> <item>"
+    },
+    "dungeon": {
+      "help_description": "Permet d'aller dans un donjon",
+      "help_usage": "am!dungeon <nom du donjon>"
+    },
+    "dungeoninfo": {
+      "help_description": "Permet de lister les donjons / de voir les infos d'un donjon.",
+      "help_usage": "am!dungeoninfo\nam!dungeoninfo <donjon>"
+    },
+    "fishing": {
+      "help_description": "Permet de pêcher.",
+      "help_usage": "am!fishing"
+    },
+    "idle": {
+      "help_description": "Permet d'annuler toute tache.",
+      "help_usage": "am!idle"
+    },
+    "info": {
+      "help_description": "Permet de voir les infos de votre compte",
+      "help_usage": "am!info"
+    },
+    "inventory": {
+      "help_description": "Permet de voir votre inventaire / d'utiliser ou d'unéquiper un item de votre inventaire",
+      "help_usage": "am!inventory\nam!inventory use <nom d'item>\nam!inventory unequip <nom d'item>"
+    },
+    "iteminfo": {
+      "help_description": "Permet d'avoir des informations sur un item",
+      "help_usage": "am!iteminfo"
+    },
+    "mining": {
+      "help_description": "Permet de miner.",
+      "help_usage": "am!mining"
+    },
+    "shop": {
+      "help_description": "Permet de voir la boutique / d'acheter un item dans la boutique / de vendre un item.",
+      "help_usage": "am!shop\nam!shop buy <nom d'item>\nam!shop sell <nom d'item>"
+    },
+    "start": {
+      "help_description": "Permet de commencer votre aventure",
+      "help_usage": "am!start"
+    },
+    "tutorial": {
+      "help_description": "Permet de voir le tutoriel",
+      "help_usage": "am!tutorial"
+    },
+    "woodcutting": {
+      "help_description": "Permet de couper du bois",
+      "help_usage": "am!woodcutting"
+    }
+  }
+}
