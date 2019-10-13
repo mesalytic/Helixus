@@ -1180,11 +1180,22 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 bot.on("message", async message => {
+  con.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefix) => {
+
+  
+  
   var mprefix;
+  var prefix;
+
+  if (!prefix[0]) prefix = "ab!";
+  else prefix = prefix[0].prefix;
+
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
+
   if (message.content.startsWith("ab!")) mprefix = "ab!";
   if (message.content.startsWith("helixusdev>")) mprefix = "helixusdev>";
+  if (message.content.startsWith(prefix)) mprefix = prefix;
 
   const args = message.content.split(" ").slice(1);
   const cmd = message.content.split(" ")[0];
@@ -1212,7 +1223,7 @@ bot.on("message", async message => {
         else auth = false;
       }
 
-      if (!mprefix) return;
+      if (!mprefix || !message.content.startsWith(mprefix)) return;
       const commandfile =
         bot.commands.get(cmd.slice(mprefix.length)) ||
         bot.aliases.get(cmd.slice(mprefix.length));
@@ -1223,6 +1234,7 @@ bot.on("message", async message => {
       }
     }
   );
+});
 });
 
 bot.login(config.token);
