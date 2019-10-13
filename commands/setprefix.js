@@ -6,9 +6,9 @@ module.exports.run = async (bot, message, args, con) => {
 
       if (!rows[0]) {
         con.query(
-          `INSERT INTO Prefixes (guildID, prefix) VALUES ('${message.guild.id}', '/')`
+          `INSERT INTO Prefixes (guildID, prefix) VALUES ('${message.guild.id}', 'am!')`
         );
-        prefix = "/";
+        prefix = "am!";
       } else {
         prefix = rows[0].prefix;
       }
