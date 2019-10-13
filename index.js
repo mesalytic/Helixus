@@ -21,8 +21,8 @@ con.connect(err => {
 
 bot.on("ready", async () => {
   const wb = new Discord.WebhookClient(
-    config.webhook.id,
-    config.webhook.password
+    config.webhook_status.id,
+    config.webhook_status.password
   );
   wb.send(`:white_check_mark: Shard ${bot.shard.id + 1} connecté !`);
   console.log(
@@ -52,8 +52,8 @@ bot.on("ready", async () => {
 
 bot.on("reconnecting", () => {
   const wb = new Discord.WebhookClient(
-    config.webhook.id,
-    config.webhook.password
+    config.webhook_status.id,
+    config.webhook_status.password
   );
   wb.send(`:warning: Le shard ${bot.shard.id + 1} se reconnecte !`);
 });
@@ -66,7 +66,7 @@ bot.on("channelCreate", channel => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -110,7 +110,7 @@ bot.on("channelDelete", channel => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -153,7 +153,7 @@ bot.on("emojiCreate", emoji => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${emoji.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -197,7 +197,7 @@ bot.on("emojiDelete", emoji => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${emoji.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -240,7 +240,7 @@ bot.on("emojiUpdate", (oldEmoji, newEmoji) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${oldEmoji.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -286,7 +286,7 @@ bot.on("guildBanAdd", async (guild, user) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${guild.id}'`,
         async (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -346,7 +346,7 @@ bot.on("guildBanRemove", async (guild, user) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${guild.id}'`,
         async (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -405,7 +405,7 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${oldMember.guild.id}'`,
         async (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -593,7 +593,7 @@ bot.on("guildMemberAdd", member => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${member.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -652,7 +652,7 @@ bot.on("guildMemberRemove", member => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${member.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -696,7 +696,7 @@ bot.on("messageDelete", message => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${message.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -842,7 +842,7 @@ bot.on("messageDeleteBulk", messages => {
     con.query(
       `SELECT * FROM Langs WHERE guildID='${guild.id}'`,
       (err, langs) => {
-        if (!langs)
+        if (!langs[0])
           bot.lang = JSON.parse(fs.readFileSync(`./languages/en.json`, "utf8"));
         else
           bot.lang = JSON.parse(
@@ -939,7 +939,7 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${oldMessage.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -1006,7 +1006,7 @@ bot.on("roleCreate", role => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${role.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -1049,7 +1049,7 @@ bot.on("roleDelete", role => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${role.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
@@ -1092,7 +1092,7 @@ bot.on("voiceStateUpdate", (voiceOld, voiceNew) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${voiceNew.guild.id}'`,
         (err, langs) => {
-          if (!langs)
+          if (!langs[0])
             bot.lang = JSON.parse(
               fs.readFileSync(`./languages/en.json`, "utf8")
             );
