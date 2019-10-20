@@ -231,20 +231,24 @@
       "help_usage": "am!meme"
     },
     "flip": {
+      "heads": "Pile",
+      "tails": "Face",
       "launched": "Attends un peu...",
-      "result": "La pièce est atterie sur ",
+      "result": "La pièce est atterie sur",
       "help_description": "Pile ou face ?",
       "help_usage": "am!flip"
     },
     "reverse": {
       "noargs": "Veuillez indiquer un texte.",
-      "broken": "\n..Hé mais... TU AS TOUT CASSER !",
+      "broken": "..Hé mais... TU AS TOUT CASSER !",
       "help_description": "Met votre texte a l'envers",
       "help_usage": "am!reverse <texte>"
     },
     "rps": {
+      "choice_rock": "pierre",
+      "choice_paper": "feuille",
+      "choice_scissors": "ciseaux",
       "noargs": "Veuillez choisir entre `pierre` `feuille` et `ciseaux` !",
-      "wrongchoice": "Il faut choisir entre `feuille`, `ciseaux` ou `pierre`.",
       "tie": "**Égalité !**",
       "rock": "Pierre - :punch:",
       "paper": "Feuille - :page_facing_up:",

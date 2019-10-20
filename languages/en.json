@@ -245,20 +245,24 @@
       "help_usage": "am!meme"
     },
     "flip": {
+      "heads": "Heads",
+      "tails": "Tails",
       "launched": "Wait...",
-      "result": "The coin flipped a ",
+      "result": "The coin flipped a",
       "help_description": "Heads or tails ?",
       "help_usage": "am!flip"
     },
     "reverse": {
       "noargs": "Please specify a text",
-      "broken": "\n..But... YOU BROKE EVERYTHING !",
+      "broken": "..But... YOU BROKE EVERYTHING !",
       "help_description": "Reverses your text",
       "help_usage": "am!reverse <text>"
     },
     "rps": {
+      "choice_rock": "rock",
+      "choice_paper": "paper",
+      "choice_scissors": "scissors",
       "noargs": "Please choose between `rock`, `paper` or `scissors` !",
-      "wrongchoice": "Please choose between `rock`, `paper` or `scissors` !",
       "tie": "**It's a tie !**",
       "rock": "Rock - :punch:",
       "paper": "Paper - :page_facing_up:",

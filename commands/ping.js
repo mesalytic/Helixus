@@ -12,8 +12,6 @@ module.exports.run = async (bot, message, args, con) => {
     .addField(bot.lang.membres.ping.api, `${Math.round(bot.ping)}ms`)
     .setTimestamp();
   message.channel.send(ping_embed);
-
-  console.log(con.query);
 };
 module.exports.help = {
   name: "ping",

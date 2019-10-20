@@ -231,20 +231,24 @@
       "help_usage": "am!meme"
     },
     "flip": {
+      "heads": "Pila",
+      "tails": "Faccia",
       "launched": "Aspetta...",
-      "result": "La moneta è stata caduta su ",
+      "result": "La moneta è stata caduta su",
       "help_description": "Pila o faccia ?",
       "help_usage": "am!flip"
     },
     "reverse": {
       "noargs": "Indica un testo.",
-      "broken": "\n..Ma... HAI ROTTO TUTTO !",
+      "broken": "..Ma... HAI ROTTO TUTTO !",
       "help_description": "Mettere un testo sottosopra",
       "help_usage": "am!reverse <testo>"
     },
     "rps": {
+      "choice_rock": "pietra",
+      "choice_paper": "carta",
+      "choice_scissors": "forbice",
       "noargs": "Sceglie tra `carta`, `forbice` e `pietra` !",
-      "wrongchoice": "Sceglie tra `carta`, `forbice` e `pietra`.",
       "tie": "**Uguaglianza !**",
       "rock": "Pietra - :punch:",
       "paper": "Carta - :page_facing_up:",

@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args, con) => {
           con.query(
             `INSERT INTO Langs (guildID, lang) VALUES ('${
               message.guild.id
-            }', '${args[0].toLowerCase()}')`, console.log
+            }', '${args[0].toLowerCase()}')`
           );
         else
           con.query(
