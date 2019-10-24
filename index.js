@@ -7,6 +7,7 @@ const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 bot.lang;
+bot.config = config;
 
 var con = mysql.createConnection({
   host: "localhost",

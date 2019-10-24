@@ -305,6 +305,28 @@
     }
   },
   "images": {
+    "steamplaying": {
+      "nogame": "Veuillez indiquer un argument (un titre de jeu par exemple) !",
+      "toolong": "Veuillez indiquer un texte inférieur ou égal a 20 caractères.",
+      "help_description": "Vous permet de creer une carte `Steam Playing` customisée.",
+      "help_usage": "am!steamplaying <game>"
+    },
+    "glitch": {
+      "help_description": "Permet d'ajouter un effet de glitch a votre image.",
+      "help_usage": "am!glitch [@user]"
+    },
+    "frame": {
+      "help_description": "Rajoute un cadre a votre image.",
+      "help_usage": "am!frame [@user]"
+    },
+    "distort": {
+      "help_description": "Permet de distordre votre image.",
+      "help_usage": "am!distort [@user]"
+    },
+    "circle": {
+      "help_description": "Permet d'encercler votre image.",
+      "help_usage": "am!circle [@user]"
+    },
     "3000years": {
       "help_description": "Ajoute votre image sur le meme Pokémon `It's been 3000 years...`",
       "help_usage": "am!3000years [mention]"

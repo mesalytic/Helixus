@@ -4,5 +4,6 @@
   "webhook_status": {
     "id": "xxxxx",
     "password": "xxxxx"
-  }
+  },
+  "helixusapi": "xxxxx"
 }

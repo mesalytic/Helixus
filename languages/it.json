@@ -305,6 +305,28 @@
     }
   },
   "images": {
+    "steamplaying": {
+      "nogame": "Indica un argomento (ad esempio un titolo di gioco) !",
+      "toolong": "Inserisci un testo inferiore o uguale a 20 caratteri.",
+      "help_description": "Ti permette di creare una mappa `Steam Playing` personalizzata.",
+      "help_usage": "am!steamplaying <game>"
+    },
+    "glitch": {
+      "help_description": "Aggiunge un effetto glitch alla tua immagine.",
+      "help_usage": "am!glitch [@user]"
+    },
+    "frame": {
+      "help_description": "Aggiungi una cornice alla tua immagine..",
+      "help_usage": "am!frame [@user]"
+    },
+    "distort": {
+      "help_description": "Per distorcere la tua immagine.",
+      "help_usage": "am!distort [@user]"
+    },
+    "circle": {
+      "help_description": "Ti consente di circondare la tua immagine.",
+      "help_usage": "am!circle [@user]"
+    },
     "3000years": {
       "help_description": "Mettere la pp sul meme Pokemon `It's been 3000 years...`",
       "help_usage": "am!3000years [tag]"
