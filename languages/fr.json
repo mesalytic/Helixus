@@ -1,5 +1,23 @@
 {
   "lang": "fr",
+  "regions": {
+    "brazil": "Brésil",
+    "us-west": "Amérique de l'Ouest",
+    "japan": "Japon",
+    "singapore": "Singapour",
+    "eu-central": "Europe Centrale",
+    "hongkong": "Hong Kong",
+    "us-south": "Amérique du Sud",
+    "southafrica": "Afrique du Sud",
+    "us-central": "Amérique centrale",
+    "london": "Londres",
+    "us-east": "Amérique de l'Est",
+    "sydney": "Sydney",
+    "eu-west": "Europe de l'Ouest",
+    "amsterdam": "Amsterdam",
+    "frankfurt": "Frankfurt",
+    "russia": "Russie"
+  },
   "modlogs": {
     "type": "Type",
     "type_ban": "Ban",
