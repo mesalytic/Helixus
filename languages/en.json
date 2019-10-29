@@ -993,7 +993,7 @@
     },
     "levels": {
       "nopermission": "You don't have the permissions.",
-      "noargs": "Please specify `on`, `off` or `message`",
+      "noargs": "Please specify `on`, `off`, `message`, `rewards` or `modify`.",
       "off_alrdisabled": "Levelling is already disabled, to enable it please type `am!levels on`",
       "off_disabled": "Levelling is now disabled.",
       "on_alrenabled": "Levelling is already enabled, to disable it, please type `am!levels off`",
@@ -1019,6 +1019,7 @@
       "modify_leveladded": "You have added ${args[3]} levels to ${u}.",
       "modify_levelremoved": "You have removed ${args[3]} levels to ${u}.",
       "reset_nouser": "Please mention a user.",
+      "reset_norows": "This user has no XP on this server.",
       "reset_resetted": "The user ${u} has been reset."
     },
     "level": {

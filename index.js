@@ -1181,61 +1181,212 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 bot.on("message", async message => {
-  con.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefix) => {
+  con.query(
+    `SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`,
+    (err, prefix) => {
+      var mprefix;
+      var prefix;
 
-  
-  
-  var mprefix;
-  var prefix;
+      if (!prefix[0]) prefix = "ab!";
+      else prefix = prefix[0].prefix;
 
-  if (!prefix[0]) prefix = "ab!";
-  else prefix = prefix[0].prefix;
+      if (message.author.bot) return;
+      if (message.channel.type === "dm") return;
 
+      if (message.content.startsWith("ab!")) mprefix = "ab!";
+      if (message.content.startsWith("helixusdev>")) mprefix = "helixusdev>";
+      if (message.content.startsWith(prefix)) mprefix = prefix;
+
+      const args = message.content.split(" ").slice(1);
+      const cmd = message.content.split(" ")[0];
+      con.query(
+        `SELECT * FROM Langs WHERE guildID='${message.guild.id}'`,
+        (err, langs) => {
+          if (!langs[0])
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8")
+            );
+          else
+            bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+            );
+        }
+      );
+
+      con.query(
+        `SELECT * FROM IgnoreChannels WHERE channelID = '${message.channel.id}'`,
+        (err, rows) => {
+          let auth;
+
+          if (!rows[0]) auth = true;
+          else if (rows[0].ignored === "false") auth = true;
+          else if (rows[0].ignored === "true") {
+            if (message.member.permissions.has("MANAGE_CHANNELS")) auth = true;
+            else auth = false;
+          }
+
+          if (!mprefix || !message.content.startsWith(mprefix)) return;
+          const commandfile =
+            bot.commands.get(cmd.slice(mprefix.length)) ||
+            bot.aliases.get(cmd.slice(mprefix.length));
+          if (commandfile) {
+            console.log(auth);
+            if (auth === false) return;
+            commandfile.run(bot, message, args, con);
+          }
+        }
+      );
+    }
+  );
+});
+
+bot.on("message", message => {
   if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
+  if (message.guild.type === "dm") return;
+  if (message.system) return;
 
-  if (message.content.startsWith("ab!")) mprefix = "ab!";
-  if (message.content.startsWith("helixusdev>")) mprefix = "helixusdev>";
-  if (message.content.startsWith(prefix)) mprefix = prefix;
+  const userregex = /{user}/g;
+  const levelregex = /{level}/g;
 
-  const args = message.content.split(" ").slice(1);
-  const cmd = message.content.split(" ")[0];
-  con.query(
-    `SELECT * FROM Langs WHERE guildID='${message.guild.id}'`,
-    (err, langs) => {
-      if (!langs[0])
-        bot.lang = JSON.parse(fs.readFileSync(`./languages/en.json`, "utf8"));
-      else
-        bot.lang = JSON.parse(
-          fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
-        );
-    }
-  );
+  const xpAdd = Math.floor(Math.random() * (26 - 5 + 1) + 5);
 
   con.query(
-    `SELECT * FROM IgnoreChannels WHERE channelID = '${message.channel.id}'`,
+    `SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`,
     (err, rows) => {
-      let auth;
+      if (rows[0] || rows[0].activated === "true") {
+        con.query(
+          `SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`,
+          (err, cRows) => {
+            if (!cRows[0])
+              con.query(
+                `INSERT INTO Cooldowns (userID, active) VALUES ('${message.author.id}', 'true')`
+              );
+            setTimeout(() => {
+              con.query(
+                `DELETE FROM Cooldowns WHERE userID='${message.author.id}'`
+              );
+            }, 60 * 1000);
+          }
+        );
 
-      if (!rows[0]) auth = true;
-      else if (rows[0].ignored === "false") auth = true;
-      else if (rows[0].ignored === "true") {
-        if (message.member.permissions.has("MANAGE_CHANNELS")) auth = true;
-        else auth = false;
-      }
+        con.query(
+          `SELECT * FROM Levels WHERE id = '${message.guild.id}-${message.author.id}'`,
+          (err, lRows) => {
+            var fetchchan;
+            var fetchstr;
+            if (!lRows[0]) return;
+            if (!Number(lRows[0].points)) return;
+            const clvl = 5 * (lRows[0].level ^ 2) + 50 * lRows[0].level + 100;
+            if (Number(lRows[0].points) > clvl) {
+              con.query(
+                `UPDATE Levels SET level = '${Number(lRows[0].level) +
+                  1}', points = '0' WHERE id = '${message.guild.id}-${
+                  message.author.id
+                }'`
+              );
 
-      if (!mprefix || !message.content.startsWith(mprefix)) return;
-      const commandfile =
-        bot.commands.get(cmd.slice(mprefix.length)) ||
-        bot.aliases.get(cmd.slice(mprefix.length));
-      if (commandfile) {
-        console.log(auth);
-        if (auth === false) return;
-        commandfile.run(bot, message, args, con);
+              if (
+                !rows[0].lvlupChannelID ||
+                rows[0].lvlupChannelID === "msgChannel"
+              )
+                fetchchan = message.channel.id;
+              else fetchchan = rows[0].lvlupChannelID;
+
+              if (!rows[0].lvlupMessage) fetchstr = bot.lang.levelup;
+              else fetchstr = rows[0].lvlupMessage;
+
+              con.query(
+                `SELECT * FROM LevelsRewards WHERE guildID='${
+                  message.guild.id
+                }' AND level='${lRows[0].level + 1}'`,
+                (err, rRows) => {
+                  if (rRows[0]) {
+                    const role = message.guild.roles.get(rRows[0].roleID);
+                    if (!message.member.roles.has(role))
+                      message.member.addRole(role);
+                  }
+                }
+              );
+              for (let i = 0; i < Number(lRows[0].level); i++) {
+                con.query(
+                  `SELECT * FROM LevelsRewards WHERE guildID='${
+                    message.guild.id
+                  }' AND level='${i + 1}'`,
+                  (err, rRows) => {
+                    if (rRows[0]) {
+                      const role = message.guild.roles.get(rRows[0].roleID);
+                      if (!message.member.roles.has(role))
+                        message.member.addRole(role);
+                    }
+                  }
+                );
+              }
+
+              const res = fetchstr
+                .replace(userregex, message.author)
+                .replace(levelregex, Number(lRows[0].level + 1));
+              bot.channels
+                .get(fetchchan)
+                .send(res)
+                .catch(() => {});
+            }
+          }
+        );
       }
     }
   );
 });
+
+bot.on("message", message => {
+  if (message.author.bot) return;
+  if (message.guild.type === "dm") return;
+  if (message.system) return;
+
+  const xpAdd = Math.floor(Math.random() * (26 - 5 + 1) + 5);
+
+  con.query(
+    `SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`,
+    (err, rows) => {
+      if (rows[0] || rows[0].activated === "true") {
+        con.query(
+          `SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`,
+          (err, cRows) => {
+            if (cRows[0]) return;
+            con.query(
+              `SELECT * FROM Levels WHERE id = '${message.guild.id}-${message.author.id}'`,
+              (err, lRows) => {
+                if (err) throw err;
+
+                if (rows.length < 1) {
+                  con.query(
+                    `INSERT INTO Levels (id, user, guild, points, level) VALUES ('${
+                      message.guild.id
+                    }-${message.author.id}', '${message.author.id}', '${
+                      message.guild.id
+                    }', '${generateXP()}', '1')`
+                  );
+                } else {
+                  const xp = Number(lRows[0].points);
+                  con.query(
+                    `UPDATE Levels SET points = '${lRows[0].points +
+                      generateXP()}' WHERE id = '${message.guild.id}-${
+                      message.author.id
+                    }'`
+                  );
+                }
+              }
+            );
+          }
+        );
+      }
+    }
+  );
 });
+
+function generateXP() {
+  const min = 15;
+  const max = 25;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 bot.login(config.token);

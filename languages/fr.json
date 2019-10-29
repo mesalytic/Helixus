@@ -981,7 +981,7 @@
     },
     "levels": {
       "nopermission": "Tu n'as pas la permission.",
-      "noargs": "Veuillez préciser `on`, `off` ou `message`",
+      "noargs": "Veuillez préciser `on`, `off`, `message`, `rewards` ou `modify`.",
       "off_alrdisabled": "Le système de niveau est déjà désactivé, pour l'activer veuillez faire `am!levels on`",
       "off_disabled": "Les levels ont bien été désactivés.",
       "on_alrenabled": "Le système de niveau est déjà activé, pour le désactiver veuillez faire `am!levels off`",
@@ -1007,6 +1007,7 @@
       "modify_leveladded": "Vous avez ajouté ${args[3]} niveaux a ${u}.",
       "modify_levelremoved": "Vous avez retiré ${args[3]} niveaux a ${u}.",
       "reset_nouser": "Veuillez mentionner un utilisateur.",
+      "reset_norows": "Cet utilisateur n'a pas de niveau sur ce serveur.",
       "reset_resetted": "L'utilisateur ${u} a été reset."
     },
     "level": {

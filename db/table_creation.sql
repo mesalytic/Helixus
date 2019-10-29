@@ -3,6 +3,11 @@ CREATE TABLE IF NOT EXISTS `Autorole` (
   `guildID` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `Cooldowns` (
+  `userID` varchar(50) DEFAULT NULL,
+  `active` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `IgnoreChannels` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,
@@ -24,6 +29,28 @@ CREATE TABLE IF NOT EXISTS `LeaveMessages` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,
   `leavemsg` varchar(2000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `Levels` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `guild` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `points` int(11) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `pointfornextlvl` bigint(20) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `LevelsConfig` (
+  `activated` varchar(5) DEFAULT NULL,
+  `guildID` varchar(50) DEFAULT NULL,
+  `lvlupChannelID` varchar(50) DEFAULT NULL,
+  `lvlupMessage` varchar(1700) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `LevelsRewards` (
+  `guildID` varchar(50) DEFAULT NULL,
+  `roleID` varchar(50) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `Logs` (
