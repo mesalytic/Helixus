@@ -629,7 +629,7 @@
       "help_usage": "am!shorten <link> [name of the link]"
     },
     "osu": {
-      "noargs": "Usage: am!osu <username> | <mode>",
+      "noargs": "Usage: am!osu <username> <mode>",
       "404": "No results found !",
       "username": "Username",
       "level": "Level",
@@ -640,7 +640,7 @@
       "rankedscore": "Ranked score",
       "totalscore": "Total score",
       "help_description": "Displays stats of an osu! player",
-      "help_usage": "am!osu <username> | <standard/taiko/mania/ctb>"
+      "help_usage": "am!osu <username> <standard/taiko/mania/ctb>"
     }
   },
   "mods": {

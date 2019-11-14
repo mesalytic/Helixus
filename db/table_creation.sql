@@ -1,3 +1,8 @@
+CREATE TABLE IF NOT EXISTS `Afk` (
+  `userID` varchar(36) DEFAULT NULL,
+  `reason` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `Autorole` (
   `roleID` varchar(50) DEFAULT NULL,
   `guildID` varchar(50) DEFAULT NULL
@@ -37,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `Levels` (
   `guild` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `points` int(11) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
-  `pointfornextlvl` bigint(20) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `LevelsConfig` (

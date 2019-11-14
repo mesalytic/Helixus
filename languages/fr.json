@@ -626,9 +626,9 @@
       "country": "Pays",
       "rankedscore": "Score rank",
       "totalscore": "Score total",
-      "noargs": "Usage: am!osu <pseudo> | <mode>",
+      "noargs": "Usage: am!osu <pseudo> <mode>",
       "help_description": "Affiche les stats d'un joueur osu!",
-      "help_usage": "am!osu <pseudo> | <standard/taiko/mania/ctb>"
+      "help_usage": "am!osu <pseudo> <standard/taiko/mania/ctb>"
     }
   },
   "mods": {

@@ -626,9 +626,9 @@
       "country": "Paese",
       "rankedscore": "Punteggio rank",
       "totalscore": "Punteggio totale",
-      "noargs": "Uso: am!osu <Nickname> | <Modo>",
+      "noargs": "Uso: am!osu <Nickname> <Modo>",
       "help_description": "Ottenere le statistiche di un giocatore osu!",
-      "help_usage": "am!osu <Nickname> | <standard/taiko/mania/ctb>"
+      "help_usage": "am!osu <Nickname> <standard/taiko/mania/ctb>"
     }
   },
   "mods": {

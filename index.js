@@ -1181,6 +1181,34 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 bot.on("message", async message => {
+  if (message.author.bot) return;
+  if (message.guild.type === "dm") return;
+  if (message.system) return;
+
+  con.query(
+    `SELECT * FROM Afk WHERE userID = '${message.author.id}'`,
+    (err, rows) => {
+      if (rows[0]) {
+        message.reply("You are not AFK anymore.");
+        con.query(`DELETE FROM Afk WHERE userID='${message.author.id}'`);
+      }
+    }
+  );
+
+  const mentioned = message.mentions.members.first();
+  if (mentioned) {
+    con.query(
+      `SELECT * FROM Afk WHERE userID = '${mentioned.id}'`,
+      (err, rows) => {
+        if (rows[0]) {
+          message.channel.send(
+            `${mentioned.user.tag} is afk : ${rows[0].reason}`
+          );
+        }
+      }
+    );
+  }
+
   con.query(
     `SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`,
     (err, prefix) => {
@@ -1189,9 +1217,6 @@ bot.on("message", async message => {
 
       if (!prefix[0]) prefix = "ab!";
       else prefix = prefix[0].prefix;
-
-      if (message.author.bot) return;
-      if (message.channel.type === "dm") return;
 
       if (message.content.startsWith("ab!")) mprefix = "ab!";
       if (message.content.startsWith("helixusdev>")) mprefix = "helixusdev>";
