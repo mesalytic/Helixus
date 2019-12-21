@@ -1,4 +1,4 @@
-# Helixus
+# Helixus (Beta V2)
 
 > Helixus is a multifunction bot available in some languages !
 
