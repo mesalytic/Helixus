@@ -633,6 +633,7 @@
   },
   "mods": {
     "ban": {
+      "channotdefined": "Pensez a configurer un salon mod-logs via la commande `am!modlogs`.",
       "unotperm": "📛 Tu n'as pas la permission 📛",
       "bnotperm": "📛 Je n'ai pas la permission 📛",
       "noment": "**:x: Veuillez mentionner l'utilisateur que vous voulez ban**",
@@ -657,6 +658,7 @@
     },
     "kick": {
       "noreason": "Aucune raison",
+      "channotdefined": "Pensez a configurer un salon mod-logs via la commande `am!modlogs`.",
       "unotperm": "📛 Tu n'as pas la permission 📛",
       "bnotperm": "📛 Je n'ai pas la permission 📛",
       "noment": "**:x: Veuillez mentionner l'utilisateur que vous voulez kick**",

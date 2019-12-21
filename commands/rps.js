@@ -57,10 +57,10 @@ module.exports.run = async (bot, message, args, con) => {
     1: bot.lang.fun.rps.paper,
     2: bot.lang.fun.rps.scissors
   };
-  const tie = new Discord.RichEmbed()
+  const tie = new Discord.MessageEmbed()
     .setColor(color)
     .setTitle(`${bot.lang.fun.rps.winner} : ${winner}`)
-    .setAuthor(message.author.username, message.author.avatarURL)
+    .setAuthor(message.author.username, message.author.avatarURL())
     .addField(bot.lang.fun.rps.userchoice, choices[user_choice], true)
     .addField(bot.lang.fun.rps.botchoice, choices[computer_choice], true)
     .setTimestamp();

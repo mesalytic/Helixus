@@ -53,8 +53,8 @@ module.exports.run = async (bot, message, args, con) => {
               var ramarray = JSON.parse("[" + ramstr + "]");
               ramn += ramarray[m];
             }
-            const embedStats = new Discord.RichEmbed()
-              .setAuthor(bot.user.username, bot.user.avatarURL)
+            const embedStats = new Discord.MessageEmbed()
+              .setAuthor(bot.user.username, bot.user.avatarURL())
               .setColor("RANDOM")
               .addField(bot.lang.infos.botinfo.creator, "Alicia#7044", true)
               .addField(bot.lang.infos.botinfo.onlinesince, `${duration}`, true)

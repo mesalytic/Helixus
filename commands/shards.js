@@ -1,7 +1,7 @@
 module.exports.run = async (bot, message, args, con) => {
   bot.shard.broadcastEval("this.shard.id").then(u => {
     bot.shard.broadcastEval("this.guilds.size").then(sh => {
-      bot.shard.broadcastEval("this.status").then(st => {
+      bot.shard.broadcastEval("this.ws.status").then(st => {
         let stat;
         var ststr = String(st).split("\n");
         var starray = JSON.parse("[" + ststr + "]");

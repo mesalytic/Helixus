@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
           Date.now() -
           new Date(body.body.time[body.body["dist-tags"].latest]).getTime();
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
           .setTitle(body.body.name)
           .setColor(3066993)
           .addField(bot.lang.membres.npm.desc, body.body.description, true)

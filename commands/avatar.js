@@ -3,12 +3,12 @@ module.exports.run = async (bot, message, args, con) => {
 
   const defineduser = message.mentions.users.first();
 
-  var embed = new Discord.RichEmbed()
+  var embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
     .setDescription(
       defineduser ? bot.lang.membres.pp.hisavatar : bot.lang.membres.pp.youravatar
     )
-    .setImage(defineduser ? defineduser.avatarURL : message.author.avatarURL);
+    .setImage(defineduser ? defineduser.avatarURL() : message.author.avatarURL());
   return message.channel.send(embed);
 };
 module.exports.help = {

@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args, con) => {
     if (typeof evaled !== "string") {
       evaled = require("util").inspect(evaled);
     }
-    const evalembed = new Discord.RichEmbed()
+    const evalembed = new Discord.MessageEmbed()
       .setTitle("Eval")
       .addField("Entrée : ", `\`\`\`js\n ${code} \n\`\`\``)
       .addField("Sortie : ", `\`\`${clean(evaled)}\`\``)
@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args, con) => {
       .setColor("#47ff05");
     message.channel.send(evalembed);
   } catch (err) {
-    const evalembed = new Discord.RichEmbed()
+    const evalembed = new Discord.MessageEmbed()
       .setTitle("Eval")
       .addField("Entrée : ", `\`\`\`js\n ${code} \n\`\`\``)
       .addField("**Erreur :**", `\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``)

@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   const data = body[0];
 
-  const embed = new Discord.RichEmbed()
+  const embed = new Discord.MessageEmbed()
     .setAuthor(
       "osu!" + oArgs[1],
       "https://i.imgur.com/hWrw2Sv.png",

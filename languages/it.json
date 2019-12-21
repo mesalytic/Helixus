@@ -644,6 +644,7 @@
       "help_usage": "am!ban <tag> <ragione>"
     },
     "hackban": {
+      "channotdefined": "Bisogna definire il canale per i logs dei avvertimenti. (am!warn channel <Tag canale>)",
       "noid": "Indica l'ID di un'utilizzatore.",
       "noreason": "No ragione",
       "noperms": "Non ha il permesso.",
@@ -657,6 +658,7 @@
     },
     "kick": {
       "noreason": "No ragione",
+      "channotdefined": "Bisogna definire il canale per i logs dei avvertimenti. (am!warn channel <Tag canale>)",
       "unotperm": "📛 Non ha il permesso 📛",
       "bnotperm": "📛 Non ho il permesso 📛",
       "noment": "**:x: Tag l'utilizzatore da espellare**",

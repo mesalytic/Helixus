@@ -1,3 +1,9 @@
-const Discord = require("discord.js");
-const Manager = new Discord.ShardingManager("./index.js");
-Manager.spawn(2);
+const { ShardingManager } = require("discord.js");
+const config = require('./config.json');
+
+const Manager = new ShardingManager("./index.js", {
+    totalShards: 2,
+    token: config.token,
+    shardArgs: ['--trace-warnings']
+});
+Manager.spawn();

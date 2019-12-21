@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args, con) => {
   const m = await message.channel.send("Please wait...");
 
   get(
-    `https://hapi.helixus.fr/v1/steamplaying?user=${encodeURIComponent(message.author.username)}&game=${game}&url=${message.author.avatarURL}&`,
+    `https://hapi.helixus.fr/v1/steamplaying?user=${encodeURIComponent(message.author.username)}&game=${game}&url=${message.author.avatarURL()}&`,
     {
       headers: { Authorization: bot.config.helixusapi },
       responseType: "arraybuffer"

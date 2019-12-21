@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args, con) => {
     if (rmap.length < 1) rlist = "No role.";
     else rlist = rmap;
 
-    const nomentembed = new Discord.RichEmbed()
+    const nomentembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .addField(":page_with_curl: Tag", message.author.tag, true)
       .addField(":id: ID", message.author.id, true)
@@ -39,14 +39,14 @@ module.exports.run = async (bot, message, args, con) => {
       .addField(
         bot.lang.infos.userinfo.game,
         `${
-          message.author.presence.game
-            ? message.author.presence.game.name
+          message.author.presence.activity
+            ? message.author.presence.activity.name
             : bot.lang.infos.userinfo.none
         }`,
         true
       )
       .addField(bot.lang.infos.userinfo.roles, rlist, true)
-      .setThumbnail(message.author.avatarURL);
+      .setThumbnail(message.author.avatarURL());
     return message.channel.send(nomentembed);
   } else if (ment) {
     let rlist;
@@ -59,7 +59,7 @@ module.exports.run = async (bot, message, args, con) => {
     if (rmap.length < 1) rlist = "No role";
     if (rmap.length > 1000) rlist = `(${mentmember.roles.size} roles)`;
     else rlist = rmap;
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .addField(":page_with_curl: Tag", ment.tag, true)
       .addField(":id: ID", ment.id, true)
@@ -78,14 +78,14 @@ module.exports.run = async (bot, message, args, con) => {
       .addField(
         bot.lang.infos.userinfo.game,
         `${
-          ment.presence.game
-            ? ment.presence.game.name
+          ment.presence.activity
+            ? ment.presence.activity.name
             : bot.lang.infos.userinfo.none
         }`,
         true
       )
       .addField(bot.lang.infos.userinfo.roles, rlist, true)
-      .setThumbnail(ment.avatarURL);
+      .setThumbnail(ment.avatarURL());
     message.channel.send(embed);
   }
 };

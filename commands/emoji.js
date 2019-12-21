@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args, con) => {
         return message.reply(bot.lang.membres.emoji.add_both);
 
       message.guild
-        .createEmoji(message.attachments.first().url, args[1])
+        .emojis.create(message.attachments.first().url, args[1])
         .then(emote => {
           const str = bot.lang.membres.emoji.add_created.replace(
             "${emote.name}",
@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args, con) => {
 
       const url = `https://cdn.discordapp.com/emojis/${id}`;
 
-      message.guild.createEmoji(url, args[1]).then(emote => {
+      message.guild.emojis.create(url, args[1]).then(emote => {
         const str = bot.lang.membres.emoji.add_created.replace(
           "${emote.name}",
           emote.name
@@ -60,7 +60,7 @@ module.exports.run = async (bot, message, args, con) => {
 
       if (!emote) return message.reply(bot.lang.membres.emoji.notfound);
 
-      message.guild.deleteEmoji(emote).then(() => {
+      message.guild.emojis.resolve(emote).delete().then(() => {
         const str = bot.lang.membres.emoji.remove_success.replace(
           "${emote.name}",
           emote.name
@@ -73,7 +73,7 @@ module.exports.run = async (bot, message, args, con) => {
 
     if (!emote) return message.reply(bot.lang.membres.emoji.notfound);
 
-    message.guild.deleteEmoji(emote).then(() => {
+    message.guild.emojis.resolve(emote).delete().then(() => {
       const str = bot.lang.membres.emoji.remove_success.replace(
         "${emote.name}",
         emote.name

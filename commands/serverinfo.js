@@ -42,10 +42,10 @@ module.exports.run = async (bot, message, args, con) => {
   if (rmap.length > 1000) rlist = `(${message.guild.roles.size} roles)`;
   else rlist = rmap;
 
-  const serverembed = new Discord.RichEmbed()
-    .setAuthor(message.guild.name, message.guild.iconURL)
+  const serverembed = new Discord.MessageEmbed()
+    .setAuthor(message.guild.name, message.guild.iconURL())
     .setColor("RANDOM")
-    .setThumbnail(message.guild.iconURL)
+    .setThumbnail(message.guild.iconURL())
     .addField(bot.lang.infos.serverinfo.owner, message.guild.owner, true)
     .addField(bot.lang.infos.serverinfo.id, message.guild.id, true)
     .addField(bot.lang.infos.serverinfo.total, message.guild.memberCount, true)

@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (!args[0]) {
     const info = bot.lang.membres.help.info.replace("${prefix}", "am!");
 
-    const helpEmbed = new Discord.RichEmbed()
+    const helpEmbed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setDescription(info)
       .addField(
@@ -61,7 +61,7 @@ module.exports.run = async (bot, message, args, con) => {
         rcommand.help.name
       );
 
-      const embedcommand = new Discord.RichEmbed()
+      const embedcommand = new Discord.MessageEmbed()
         .setColor(0x3498db)
         .setTitle(str)
         .setDescription(bot.lang.membres.help.cmd_obligfalc)

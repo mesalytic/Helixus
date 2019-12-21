@@ -1,5 +1,6 @@
 {
   "token": "xxxxx",
+  "dbhost": "xxxxx",
   "dbpassword": "xxxxx",
   "webhook_status": {
     "id": "xxxxx",

@@ -1,7 +1,7 @@
 module.exports.run = async (bot, message, args, con) => {
   const Discord = require("discord.js");
 
-  const embed = new Discord.RichEmbed().setColor("RANDOM");
+  const embed = new Discord.MessageEmbed().setColor("RANDOM");
 
   if (isNaN(args[0]) || args[0] > 9999 || args[0] < 1) {
     embed.setFooter(bot.lang.membres.discrim.noargs);

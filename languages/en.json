@@ -647,6 +647,7 @@
     "ban": {
       "unotperm": "📛 You don't have the permission 📛",
       "bnotperm": "📛 I don't have the permission 📛",
+      "channotdefined": "Please consider defining the modlogs channel. (am!modlogs)",
       "noment": "**:x: Please mention the user you want to ban**",
       "notposs": "You cannot ban this person.",
       "noreason": "No reason",
@@ -669,6 +670,7 @@
     },
     "kick": {
       "noreason": "No reason",
+      "channotdefined": "Please consider defining the modlogs channel. (am!modlogs)",
       "unotperm": "📛 You don't have the permission 📛",
       "bnotperm": "📛 I don't have the permission 📛",
       "noment": "**:x: Please mention the user you want to kick**",

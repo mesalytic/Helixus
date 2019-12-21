@@ -13,9 +13,9 @@ module.exports.run = async (bot, message, args, con) => {
       const clvl = 5 * (rows[0].level ^ 2) + 50 * rows[0].level + 100;
 
       const difference = 5 * (rows[0].level ^ 2) + 50 * rows[0].level + 100 - rows[0].points;
-      const lvlEmbed = new Discord.RichEmbed()
+      const lvlEmbed = new Discord.MessageEmbed()
         .setColor("RANDOM")
-        .setThumbnail(message.author.avatarURL)
+        .setThumbnail(message.author.avatarURL())
         .setAuthor(message.author.username)
         .setDescription(
           `${bot.lang.levels.level.level

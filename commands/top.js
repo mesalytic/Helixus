@@ -99,11 +99,11 @@ module.exports.run = async (bot, message, args, con) => {
                   }
 
                   qbin(topall, 0, "none").then(m => {
-                    const embed = new Discord.RichEmbed()
+                    const embed = new Discord.MessageEmbed()
                       .setTitle(
                         `${bot.lang.levels.top.top10} **${message.guild.name}** !`
                       )
-                      .setAuthor(message.guild.name, message.guild.iconURL)
+                      .setAuthor(message.guild.name, message.guild.iconURL())
                       .setDescription(`${msgtop}\n[Guild Leaderboard](${m})`)
                       .setColor("RANDOM");
                     return message.channel.send({
