@@ -25,9 +25,9 @@ bot.on ('ready', async () => {
     config.webhook_status.id,
     config.webhook_status.password
   );
-  wb.send (`:white_check_mark: Shard ${bot.shard.id + 1} connecté !`);
+  wb.send (`:white_check_mark: Shard ${bot.shard.ids[0] + 1} connecté !`);
   console.log (
-    `[READY (Shard ${bot.shard.id + 1}/2)] Shard ${bot.shard.id + 1}/2 connecté avec ${bot.users.size} utilisateurs et ${bot.guilds.size} serveurs..`
+    `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] + 1}/2 connecté avec ${bot.users.size} utilisateurs et ${bot.guilds.size} serveurs..`
   );
   bot.shard.broadcastEval ('this.guilds.size').then (s => {
     bot.shard.broadcastEval ('this.users.size').then (u => {

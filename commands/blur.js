@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args, con) => {
     .then(res => {
       return message.channel
         .send("Generated with HelixusAPI (docs.helixus.fr)", {
-          file: { attachment: res.data, name: "blur.png" }
+          files: [{ attachment: res.data, name: "blur.png" }]
         })
         .then(() => m.delete());
     })

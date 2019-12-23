@@ -1,5 +1,5 @@
 module.exports.run = async (bot, message, args, con) => {
-  bot.shard.broadcastEval("this.shard.id").then(u => {
+  bot.shard.broadcastEval("this.shard.ids[0]").then(u => {
     bot.shard.broadcastEval("this.guilds.size").then(sh => {
       bot.shard.broadcastEval("this.ws.status").then(st => {
         let stat;

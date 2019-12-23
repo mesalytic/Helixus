@@ -81,7 +81,7 @@ module.exports.run = async (bot, message, args, con) => {
               )
               .addField(
                 bot.lang.infos.botinfo.shards,
-                `Shard **${bot.shard.id + 1}**/${bot.shard.count}`,
+                `Shard **${bot.shard.ids[0] + 1}**/${bot.shard.count}`,
                 true
               )
               .addField(
