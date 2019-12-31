@@ -29,22 +29,22 @@ bot.on ('ready', async () => {
   console.log (
     `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] + 1}/2 connecté avec ${bot.users.size} utilisateurs et ${bot.guilds.size} serveurs..`
   );
-  bot.shard.broadcastEval ('this.guilds.size').then (s => {
-    bot.shard.broadcastEval ('this.users.size').then (u => {
-      if (!u[0] || isNaN (u[0])) u[0] = 0;
-      if (!u[1] || isNaN (u[1])) u[1] = 0;
-      if (!s[0] || isNaN (u[0])) s[0] = 0;
-      if (!s[1] || isNaN (u[1])) s[1] = 0;
-      bot.shard.broadcastEval (`this.user.setActivity('cc c le test !')`);
-    });
+
+  const promises = [
+    bot.shard.fetchClientValues ('guilds.size'),
+    bot.shard.broadcastEval (
+      'this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'
+    ),
+  ];
+
+  Promise.all (promises).then (res => {
+    const guilds = res[0].reduce ((prev, guild) => prev + guild, 0);
+    const members = res[1].reduce ((prev, member) => prev + member, 0);
+    bot.user.setActivity (`ab!help | ${guilds} guilds | ${members} members`);
   });
-  bot.shard.broadcastEval ('this.guilds.size').then (sh => {
-    bot.shard.broadcastEval ('this.users.size').then (us => {
-      var shstr = String (sh).split ('\n');
-      var sharray = JSON.parse ('[' + shstr + ']');
-      var usstr = String (us).split ('\n');
-      var usarray = JSON.parse ('[' + usstr + ']');
-    });
+
+  bot.on ('guildCreate', guild => {
+    con.query (`INSERT INTO Cases (guildID) VALUES ('${message.guild.id}')`);
   });
 
   con.query (`SELECT * FROM LockdownChannels`, (err, rows) => {
@@ -146,7 +146,7 @@ bot.on ('channelCreate', channel => {
                       channel.id
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (channel.guild.name, channel.guild.iconURL())
+                      .setAuthor (channel.guild.name, channel.guild.iconURL ())
                       .setDescription (str)
                       .setFooter (`ID: ${channel.id}`)
                       .setTimestamp ()
@@ -190,7 +190,7 @@ bot.on ('channelDelete', channel => {
                       channel.name
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (channel.guild.name, channel.guild.iconURL())
+                      .setAuthor (channel.guild.name, channel.guild.iconURL ())
                       .setDescription (str)
                       .setFooter (`ID: ${channel.id}`)
                       .setTimestamp ()
@@ -233,7 +233,7 @@ bot.on ('emojiCreate', emoji => {
                       emoji.name
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (emoji.guild.name, emoji.guild.iconURL())
+                      .setAuthor (emoji.guild.name, emoji.guild.iconURL ())
                       .setDescription (str)
                       .setThumbnail (emoji.url)
                       .setFooter (`ID: ${emoji.id}`)
@@ -277,7 +277,7 @@ bot.on ('emojiDelete', emoji => {
                       emoji.name
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (emoji.guild.name, emoji.guild.iconURL())
+                      .setAuthor (emoji.guild.name, emoji.guild.iconURL ())
                       .setDescription (str)
                       .setFooter (`ID: ${emoji.id}`)
                       .setTimestamp ()
@@ -321,7 +321,10 @@ bot.on ('emojiUpdate', (oldEmoji, newEmoji) => {
                       oldEmoji.name
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (oldEmoji.guild.name, oldEmoji.guild.iconURL())
+                      .setAuthor (
+                        oldEmoji.guild.name,
+                        oldEmoji.guild.iconURL ()
+                      )
                       .addField (bot.lang.logs.emojiUpdate.old, oldEmoji.name)
                       .addField (bot.lang.logs.emojiUpdate.new, newEmoji.name)
                       .setDescription (str)
@@ -372,18 +375,18 @@ bot.on ('guildBanAdd', async (guild, user) => {
                       })
                       .then (audit => {
                         let reason;
-                        if (!audit.entries.first ().reason) {
+                        if (!audit.entries.first ()) {
                           reason = bot.lang.logs.guildBanAdd.noreason;
                         } else reason = audit.entries.first ().reason;
                         const chanCr = new Discord.MessageEmbed ()
-                          .setAuthor (guild.name, guild.iconURL())
+                          .setAuthor (guild.name, guild.iconURL ())
                           .setDescription (str)
                           .addField (
                             bot.lang.logs.guildBanAdd.bannedby,
                             audit.entries.first ().executor.tag
                           )
                           .addField (bot.lang.logs.guildBanAdd.reason, reason)
-                          .setThumbnail (user.avatarURL())
+                          .setThumbnail (user.avatarURL ())
                           .setFooter (`ID: ${user.id}`)
                           .setTimestamp ()
                           .setColor ('RANDOM');
@@ -431,11 +434,11 @@ bot.on ('guildBanRemove', async (guild, user) => {
                       })
                       .then (audit => {
                         let reason;
-                        if (!audit.entries.first ().reason) {
+                        if (!audit.entries.first ()) {
                           reason = bot.lang.logs.guildBanRemove.noreason;
                         } else reason = audit.entries.first ().reason;
                         const chanCr = new Discord.MessageEmbed ()
-                          .setAuthor (guild.name, guild.iconURL())
+                          .setAuthor (guild.name, guild.iconURL ())
                           .setDescription (str)
                           .addField (
                             bot.lang.logs.guildBanRemove.unbannedby,
@@ -445,7 +448,7 @@ bot.on ('guildBanRemove', async (guild, user) => {
                             bot.lang.logs.guildBanRemove.reason,
                             reason
                           )
-                          .setThumbnail (user.avatarURL())
+                          .setThumbnail (user.avatarURL ())
                           .setFooter (`ID: ${user.id}`)
                           .setTimestamp ()
                           .setColor ('RANDOM');
@@ -511,7 +514,7 @@ bot.on ('guildMemberUpdate', async (oldMember, newMember) => {
                           const nickEmbed = new Discord.MessageEmbed ()
                             .setAuthor (
                               newMember.user.tag,
-                              newMember.user.avatarURL()
+                              newMember.user.avatarURL ()
                             )
                             .setDescription (res)
                             .addField (
@@ -566,7 +569,7 @@ bot.on ('guildMemberUpdate', async (oldMember, newMember) => {
                           const nickEmbed = new Discord.MessageEmbed ()
                             .setAuthor (
                               newMember.user.username,
-                              newMember.user.avatarURL()
+                              newMember.user.avatarURL ()
                             )
                             .setDescription (res)
                             .addField (
@@ -595,7 +598,7 @@ bot.on ('guildMemberUpdate', async (oldMember, newMember) => {
                           const nickEmbed = new Discord.MessageEmbed ()
                             .setAuthor (
                               newMember.user.tag,
-                              newMember.user.avatarURL()
+                              newMember.user.avatarURL ()
                             )
                             .setDescription (res)
                             .addField (
@@ -676,9 +679,12 @@ bot.on ('guildMemberAdd', member => {
                       member.user.tag
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (member.user.username, member.user.avatarURL())
+                      .setAuthor (
+                        member.user.username,
+                        member.user.avatarURL ()
+                      )
                       .setDescription (str)
-                      .setThumbnail (member.user.avatarURL())
+                      .setThumbnail (member.user.avatarURL ())
                       .setFooter (`ID: ${member.id}`)
                       .setTimestamp ()
                       .setColor ('RANDOM');
@@ -735,9 +741,9 @@ bot.on ('guildMemberRemove', member => {
                       member.user.tag
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (member.user.tag, member.user.avatarURL())
+                      .setAuthor (member.user.tag, member.user.avatarURL ())
                       .setDescription (str)
-                      .setThumbnail (member.user.avatarURL())
+                      .setThumbnail (member.user.avatarURL ())
                       .setFooter (`ID: ${member.id}`)
                       .setTimestamp ()
                       .setColor ('RANDOM');
@@ -823,7 +829,7 @@ bot.on ('messageDelete', message => {
                               const chanCr = new Discord.MessageEmbed ()
                                 .setAuthor (
                                   message.author.tag,
-                                  message.author.avatarURL()
+                                  message.author.avatarURL ()
                                 )
                                 .setDescription (str)
                                 .addField (
@@ -1034,7 +1040,7 @@ bot.on ('messageUpdate', (oldMessage, newMessage) => {
                           const chanCr = new Discord.MessageEmbed ()
                             .setAuthor (
                               oldMessage.author.tag,
-                              oldMessage.author.avatarURL()
+                              oldMessage.author.avatarURL ()
                             )
                             .setDescription (str)
                             .addField (
@@ -1091,7 +1097,7 @@ bot.on ('roleCreate', role => {
                       role.name
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (role.guild.name, role.guild.iconURL())
+                      .setAuthor (role.guild.name, role.guild.iconURL ())
                       .setDescription (str)
                       .setTimestamp ()
                       .setFooter (`ID: ${role.id}`)
@@ -1134,7 +1140,7 @@ bot.on ('roleDelete', role => {
                       role.name
                     );
                     const chanCr = new Discord.MessageEmbed ()
-                      .setAuthor (role.guild.name, role.guild.iconURL())
+                      .setAuthor (role.guild.name, role.guild.iconURL ())
                       .setDescription (str)
                       .setTimestamp ()
                       .setFooter (`ID: ${role.id}`)
@@ -1181,7 +1187,7 @@ bot.on ('voiceStateUpdate', (voiceOld, voiceNew) => {
                       const chanCr = new Discord.MessageEmbed ()
                         .setAuthor (
                           voiceNew.user.tag,
-                          voiceNew.user.displayAvatarURL()
+                          voiceNew.user.displayAvatarURL ()
                         )
                         .setDescription (str)
                         .setTimestamp ()
@@ -1195,7 +1201,7 @@ bot.on ('voiceStateUpdate', (voiceOld, voiceNew) => {
                       const chanCr = new Discord.MessageEmbed ()
                         .setAuthor (
                           voiceNew.user.tag,
-                          voiceNew.user.displayAvatarURL()
+                          voiceNew.user.displayAvatarURL ()
                         )
                         .setDescription (str)
                         .setTimestamp ()
@@ -1210,7 +1216,7 @@ bot.on ('voiceStateUpdate', (voiceOld, voiceNew) => {
                       const chanCr = new Discord.MessageEmbed ()
                         .setAuthor (
                           voiceNew.user.tag,
-                          voiceNew.user.displayAvatarURL()
+                          voiceNew.user.displayAvatarURL ()
                         )
                         .setDescription (str)
                         .setTimestamp ()
@@ -1467,4 +1473,4 @@ function generateXP () {
   const max = 25;
   return Math.floor (Math.random () * (max - min + 1)) + min;
 }
-bot.login(config.token);
+bot.login (config.token);

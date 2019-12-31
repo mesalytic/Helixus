@@ -20,7 +20,10 @@ module.exports.run = async (bot, message, args, con) => {
       } else {
         await message.channel.bulkDelete (100);
       }
-    let str = bot.lang.mods.purge.purged.replace ('${deleteCount}', deleteCount);
+    let str = bot.lang.mods.purge.purged.replace (
+      '${deleteCount}',
+      deleteCount
+    );
     message.channel.send (str).then (m => {
       setTimeout (() => {
         m.delete ();

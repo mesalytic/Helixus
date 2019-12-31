@@ -12,8 +12,8 @@ module.exports.run = async (bot, message, args, con) => {
   if (!message.member.permissions.has ('BAN_MEMBERS'))
     return message.channel.send (bot.lang.mods.hackban.noperms);
 
-  bot
-    .users.fetch (mid)
+  bot.users
+    .fetch (mid)
     .then (user => {
       message.guild.members.ban (user, reason, 7).catch (err => {
         let str = bot.lang.mods.hackban.catch1.replace ('${id}', id);

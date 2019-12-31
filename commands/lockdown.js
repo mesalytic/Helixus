@@ -48,7 +48,6 @@ module.exports.run = async (bot, message, args, con) => {
             message.channel
               .send (res)
               .then (() => {
-                
                 lockit[message.channel.id] = setTimeout (() => {
                   message.channel
                     .overwritePermissions (message.guild.id, {
@@ -62,7 +61,6 @@ module.exports.run = async (bot, message, args, con) => {
                     `DELETE FROM LockdownChannels WHERE channelID='${message.channel.id}'`
                   );
                 }, ms (time));
-                
               })
               .catch (error => {
                 console.log (error);

@@ -8,18 +8,12 @@ module.exports.run = async (bot, message, args, con) => {
       if (!rows[0]) {
         message.channel.send (bot.lang.mods.ban.channotdefined);
         modlog = message.channel;
-      } else modlog = message.guild.channels.get(rows[0].channelID);
+      } else modlog = message.guild.channels.get (rows[0].channelID);
     }
   );
-  if (
-    !message.channel
-      .permissionsFor (message.author)
-      .has ('BAN_MEMBERS')
-  )
+  if (!message.channel.permissionsFor (message.author).has ('BAN_MEMBERS'))
     return message.channel.send (bot.lang.mods.ban.unotperm);
-  if (
-    !message.channel.permissionsFor (bot.user).has ('BAN_MEMBERS')
-  )
+  if (!message.channel.permissionsFor (bot.user).has ('BAN_MEMBERS'))
     return message.channel.send (bot.lang.mods.ban.bnotperm);
 
   if (message.mentions.users.size === 0)
@@ -33,7 +27,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (!reason) reason = bot.lang.mods.ban.noreason;
 
   member
-    .ban (reason, 7)
+    .ban ({days: 7, reason: reason})
     .then (member => {
       message.channel.bulkDelete (1);
       message.channel.send (
@@ -44,7 +38,7 @@ module.exports.run = async (bot, message, args, con) => {
       let e = new Discord.MessageEmbed ()
         .setColor ('#228569')
         .setTitle ('ModLogs Helixus')
-        .setThumbnail (member.user.avatarURL())
+        .setThumbnail (member.user.avatarURL ())
         .setTimestamp ()
         .addField (bot.lang.modlogs.type, bot.lang.modlogs.type_ban, true)
         .addField (bot.lang.modlogs.banned_user, member, true)

@@ -1,0 +1,1 @@
+yarn upgrade && node manager.js
