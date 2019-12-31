@@ -38,7 +38,7 @@ To invite the bot on your server :
 3. You need to execute these commands in the folder in which you cloned Helixus :
    * `$ sudo apt-get install build-essential`
    * `$ sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++`
-   * `$ yarn install`
+   * `$ npm yarn-install`
 4. You now have a folder called `node_modules`. This folder is where your packages are installed.
 5. Rename the `config.example.json` to `config.json` and replace every infos (your token, your db password, etc..)
 6. You can now run the bot by using the bash script `bash.sh`
