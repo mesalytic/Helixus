@@ -49,6 +49,20 @@ module.exports.run = async (bot, message, args, con) => {
           .map (cmd => `\`${cmd.help.name}\``)
           .join (', ')
       )
+      .addField (
+        `${bot.lang.membres.help.moderation}`,
+        bot.commands
+          .filter (cmd => cmd.help.catégorie === 'Modération')
+          .map (cmd => `\`${cmd.help.name}\``)
+          .join (', ')
+      )
+      .addField (
+        `${bot.lang.membres.help.music}`,
+        bot.commands
+          .filter (cmd => cmd.help.catégorie === 'Musique')
+          .map (cmd => `\`${cmd.help.name}\``)
+          .join (', ')
+      )
       .setTimestamp ();
     message.channel.send (helpEmbed);
   } else {

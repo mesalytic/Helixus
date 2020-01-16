@@ -1,13 +1,19 @@
-const Discord = require ('discord.js');
-const mysql = require ('mysql');
-const fs = require ('fs');
-const config = require ('./config.json');
+require('./util/xrequire'); // xrequire, better version of xrequire
+
+const Discord = xrequire ('discord.js');
+const mysql = xrequire ('mysql');
+const fs = xrequire ('fs');
+const config = xrequire ('./config.json');
+
 
 const bot = new Discord.Client ();
 bot.commands = new Discord.Collection ();
 bot.aliases = new Discord.Collection ();
 bot.lang;
 bot.config = config;
+bot.queue = new Map();
+bot.skipVotes = new Map();
+
 
 var con = mysql.createConnection ({
   host: config.dbhost,
@@ -40,7 +46,7 @@ bot.on ('ready', async () => {
   Promise.all (promises).then (res => {
     const guilds = res[0].reduce ((prev, guild) => prev + guild, 0);
     const members = res[1].reduce ((prev, member) => prev + member, 0);
-    bot.user.setActivity (`ab!help | ${guilds} guilds | ${members} members`);
+    bot.shard.broadcastEval(`this.user.setActivity ('ab!help | ${guilds} guilds | ${members} members')`)
   });
 
   bot.on ('guildCreate', guild => {
@@ -790,7 +796,7 @@ bot.on ('messageDelete', message => {
                             })
                             .then (audit => {
                               const entry = audit.entries.first ();
-                              const fetch = require ('node-fetch');
+                              const fetch = xrequire ('node-fetch');
                               const qbin = (q, e, s) =>
                                 fetch ('https://qbin.io', {
                                   method: 'PUT',
@@ -930,7 +936,7 @@ bot.on ('messageDeleteBulk', messages => {
                     if (!ignore[0] || ignore[0].ignored === 'false') {
                       const logsChan = bot.channels.get (rows[0].channelID);
                       if (logsChan) {
-                        const fetch = require ('node-fetch');
+                        const fetch = xrequire ('node-fetch');
                         const qbin = (q, e, s) =>
                           fetch ('https://qbin.io', {
                             method: 'PUT',
@@ -965,7 +971,7 @@ bot.on ('messageDeleteBulk', messages => {
                           } else if (m.content) content = m.content;
                           else
                             content = bot.lang.logs.messageDeleteBulk.nocontent;
-                          const moment = require ('moment');
+                          const moment = xrequire ('moment');
                           moment.locale ('fr');
                           const m_time = moment (m.createdAt).format (
                             bot.lang.logs.messageDeleteBulk.timeformat
@@ -1242,7 +1248,7 @@ fs.readdir ('./commands/', (err, files) => {
     return console.log ("[COMMANDES] - Aucune commande n'a été trouvée.");
   }
   jsfile.forEach ((f, i) => {
-    const props = require (`./commands/${f}`);
+    const props = xrequire (`./commands/${f}`);
     console.log (`[COMMANDES] - ${f} a été lancé.`);
     bot.commands.set (props.help.name, props);
     if (props.help.aliases) {
