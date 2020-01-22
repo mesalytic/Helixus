@@ -70,6 +70,13 @@ module.exports.run = async (bot, message, args, con) => {
           .map (cmd => `\`${cmd.help.name}\``)
           .join (', ')
       )
+      .addField (
+        `🛂 RP`,
+        bot.commands
+          .filter (cmd => cmd.help.catégorie === 'RP')
+          .map (cmd => `\`${cmd.help.name}\``)
+          .join (', ')
+      )
       .setTimestamp ();
     message.channel.send (helpEmbed);
   } else {
