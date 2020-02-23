@@ -1,10 +1,10 @@
 module.exports.run = async (bot, message, args, con) => {
-  if (!message.channel.permissionsFor (message.author).has ('MANAGE_ROLES'))
+  /*if (!message.channel.permissionsFor (message.author).has ('MANAGE_ROLES'))
     return message.channel.send (bot.lang.mods.mute.unotperm);
   if (!message.channel.permissionsFor (bot.user).has ('MANAGE_ROLES'))
     return message.channel.send (bot.lang.mods.mute.bnotperm);
 
-  var muteRole = message.guild.roles.find (r => r.name === 'HelixusBeta_Muted');
+  var muteRole = message.guild.roles.find (r => r.name === 'HMuted');
 
   let member = message.mentions.members.first ();
   if (!member) return message.channel.send (bot.lang.mods.mute.noment);
@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, con) => {
     message.guild.roles
       .create ({
         data: {
-          name: 'HelixusBeta_Muted',
+          name: 'HMuted',
           permissions: 0,
         },
       })
@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args, con) => {
     );
   });
   member.roles.remove (rolearray).then (() => {
-    var mRole = message.guild.roles.find (r => r.name === 'HelixusBeta_Muted');
+    var mRole = message.guild.roles.find (r => r.name === 'HMuted');
     member.roles.add (mRole.id, 'Mute Helixus');
     let str = bot.lang.mods.mute.muted
       .replace ('${member.user.tag}', member.user.tag)
@@ -78,7 +78,7 @@ module.exports.run = async (bot, message, args, con) => {
       .replace ('${message.author.tag}', message.author.tag)
       .replace ('${message.author.id}', message.author.id);
     message.channel.send (str);
-  });
+  });*/
 };
 module.exports.help = {
   name: 'mute',

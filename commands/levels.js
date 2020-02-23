@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args, con) => {
       if (
         !message.channel
           .permissionsFor (message.author)
-          .hasPermission ('BAN_MEMBERS')
+          .has ('BAN_MEMBERS')
       )
         return message.reply (bot.lang.levels.levels.nopermission);
       if (!args[0]) return message.reply (bot.lang.levels.levels.noargs);

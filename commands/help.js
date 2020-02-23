@@ -63,7 +63,10 @@ module.exports.run = async (bot, message, args, con) => {
           .map (cmd => `\`${cmd.help.name}\``)
           .join (', ')
       )
-      .setTimestamp ();
+      .addField(`${bot.lang.membres.help.nsfw}`, bot.commands.filter(cmd => cmd.help.catégorie === 'NSFW').map(cmd => `\`${cmd.help.name}\``).join(
+				", "))
+			.addField(`🛂 RP`, bot.commands.filter(cmd => cmd.help.catégorie === 'RP').map(cmd => `\`${cmd.help.name}\``).join(", "))
+			.setTimestamp ();
     message.channel.send (helpEmbed);
   } else {
     const command = args[0];

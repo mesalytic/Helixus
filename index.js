@@ -4,7 +4,9 @@ const Discord = xrequire ('discord.js');
 const mysql = xrequire ('mysql');
 const fs = xrequire ('fs');
 const config = xrequire ('./config.json');
-
+let initialMessage = `**Un rôle que vous souhaitez obtenir ? Cliquez sur la réaction du message correspondant !**`;
+const roles = ["Jeux de camion", "Jeux ferroviaires", "Jeux de bus/car", "Jeux agricoles", "Concours/Events"];
+const reactions = ["🚚", "🚋", "🚌", "🚜", "⏰"];
 
 const bot = new Discord.Client ();
 bot.commands = new Discord.Collection ();
@@ -49,7 +51,7 @@ bot.on ('ready', async () => {
   Promise.all (promises).then (res => {
     const guilds = res[0].reduce ((prev, guild) => prev + guild, 0);
     const members = res[1].reduce ((prev, member) => prev + member, 0);
-    bot.shard.broadcastEval(`this.user.setActivity ('ab!help | ${guilds} guilds | ${members} members')`)
+    bot.shard.broadcastEval(`this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`)
   });
 
   bot.on ('guildCreate', guild => {
@@ -131,7 +133,7 @@ bot.on ('ready', async () => {
                 con.query (
                   `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`
                 );
-                console.log ('unlocked because timer');
+                
               })
               .catch (error => {
                 throw error;
@@ -142,7 +144,7 @@ bot.on ('ready', async () => {
                 SEND_MESSAGES: false,
               })
               .then (() => {
-                console.log ('started');
+                
                 setTimeout (() => {
                   channel
                     .overwritePermissions (channel.guild.id, {
@@ -153,7 +155,7 @@ bot.on ('ready', async () => {
                   con.query (
                     `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`
                   );
-                  console.log ('deleted');
+                  
                 }, Number (r.time - new Date ().getTime ()));
               })
               .catch (error => {
@@ -344,6 +346,50 @@ bot.on ('emojiCreate', emoji => {
       );
     }
   );
+});
+
+bot.on('raw', event =>
+{
+
+	if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE")
+	{
+    if (event.d.guild_id === "355765654894411777") {
+      console.log("reaction spotted chez zenix");
+      let channel = bot.channels.get(event.d.channel_id);
+      if (channel) {
+        if (channel.id === "488038141467557889") {
+          console.log("reaction spotted sur atrrib roles")
+          let message = channel.messages.fetch(event.d.message_id).then(msg =>
+            {
+              let user = msg.guild.members.get(event.d.user_id);
+              if (msg.author.id == bot.user.id && msg.content != initialMessage)
+              {
+                console.log("oui")
+                var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+                var role = msg.content.match(re)[1];
+                console.log(role);
+                if (user.id != bot.user.id)
+                {
+                  var roleObj = msg.guild.roles.find(u => u.name === role);
+                  var memberObj = msg.guild.members.get(user.id);
+                  if (event.t === "MESSAGE_REACTION_ADD")
+                  {
+                    memberObj.roles.add(roleObj);
+                  }
+                  else
+                  {
+                    memberObj.roles.remove(roleObj);
+                  }
+                }
+              }
+            });
+        }
+        
+      }
+    }
+		
+		
+	}
 });
 
 bot.on ('emojiDelete', emoji => {
@@ -741,7 +787,7 @@ bot.on ('guildMemberAdd', member => {
     (err, rows) => {
       if (rows[0]) {
         const role = member.guild.roles.get (rows[0].roleID);
-        // console.log(`Debug : ${role.id}`)
+        
         member.roles.add (role).catch (err => {
           throw new Error (err);
         });
@@ -934,8 +980,7 @@ bot.on ('messageDelete', message => {
                                 .setFooter (`ID: ${message.id}`)
                                 .setTimestamp ()
                                 .setColor ('RANDOM');
-                              // console.log(message.content.length);
-                              // console.log(message.content);
+                              
                               const msg = `${message.content}`;
                               qbin (msg, 0, 'none')
                                 .then (m => {
@@ -947,7 +992,7 @@ bot.on ('messageDelete', message => {
                                       );
                                     } else {
                                       if (message.content.length > 1023) {
-                                        console.log (m);
+                                        
                                         chanCr.addField (
                                           bot.lang.logs.messageDelete.message,
                                           m
@@ -971,7 +1016,7 @@ bot.on ('messageDelete', message => {
                                     }
                                   } else {
                                     if (message.content.length > 1023) {
-                                      console.log (m);
+                                      
                                       chanCr.addField (
                                         bot.lang.logs.messageDelete.message,
                                         m
@@ -1381,11 +1426,11 @@ bot.on ('message', async message => {
       var mprefix;
       var prefix;
 
-      if (!prefix[0]) prefix = 'ab!';
+      if (!prefix[0]) prefix = 'am!';
       else prefix = prefix[0].prefix;
 
-      if (message.content.startsWith ('ab!')) mprefix = 'ab!';
-      if (message.content.startsWith ('helixusdev>')) mprefix = 'helixusdev>';
+      if (message.content.startsWith ('am!')) mprefix = 'am!';
+      if (message.content.startsWith ('helixus>')) mprefix = 'helixus>';
       if (message.content.startsWith (prefix)) mprefix = prefix;
 
       const args = message.content.split (' ').slice (1);
@@ -1421,7 +1466,7 @@ bot.on ('message', async message => {
             bot.commands.get (cmd.slice (mprefix.length)) ||
             bot.aliases.get (cmd.slice (mprefix.length));
           if (commandfile) {
-            console.log (auth);
+            
             if (auth === false) return;
             const wb = new Discord.WebhookClient (
               config.webhook.commands.id,
