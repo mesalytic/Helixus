@@ -8,6 +8,11 @@ CREATE TABLE IF NOT EXISTS `Autorole` (
   `guildID` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `Cases` (
+  `guildID` varchar(50) DEFAULT NULL,
+  `caseN` int(11) unsigned DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `Cooldowns` (
   `userID` varchar(50) DEFAULT NULL,
   `active` varchar(5) DEFAULT NULL
@@ -41,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `Levels` (
   `user` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `guild` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `points` int(11) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `LevelsConfig` (
@@ -55,6 +60,11 @@ CREATE TABLE IF NOT EXISTS `LevelsRewards` (
   `guildID` varchar(50) DEFAULT NULL,
   `roleID` varchar(50) DEFAULT NULL,
   `level` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `LockdownChannels` (
+  `channelID` varchar(50) DEFAULT NULL,
+  `time` varchar(50) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `Logs` (
@@ -90,7 +100,28 @@ CREATE TABLE IF NOT EXISTS `ModlogsChannel` (
   `channelID` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `MuteRoles` (
+  `roleID` varchar(50) DEFAULT NULL,
+  `mutedID` varchar(50) DEFAULT NULL,
+  `guildID` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `Prefixes` (
   `guildID` varchar(50) DEFAULT NULL,
   `prefix` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `WarnConfig` (
+  `guildID` varchar(50) DEFAULT NULL,
+  `kicks` int(11) DEFAULT NULL,
+  `bans` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `Warns` (
+  `number` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `guildID` varchar(50) DEFAULT '',
+  `memberID` varchar(50) DEFAULT '',
+  `reason` varchar(2000) DEFAULT '',
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`number`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;

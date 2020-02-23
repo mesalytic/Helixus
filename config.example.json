@@ -1,10 +1,26 @@
 {
-  "token": "xxxxx",
-  "dbhost": "xxxxx",
-  "dbpassword": "xxxxx",
-  "webhook_status": {
-    "id": "xxxxx",
-    "password": "xxxxx"
+  "token": "xx",
+  "dbhost": "xx",
+  "dbpassword": "xx",
+  "webhook": {
+    "status": {
+      "id": "xx",
+      "password": "xx"
+    },
+    "joinleaves": {
+      "id": "xx",
+      "password": "xx"
+    },
+    "error": {
+      "id": "xx",
+      "password": "xx"
+    },
+    "commands": {
+      "id": "xx",
+      "password": "xx"
+    }
   },
-  "helixusapi": "xxxxx"
+  "helixusapi": "xx",
+  "osu": "xx",
+  "googlekey": "xx"
 }

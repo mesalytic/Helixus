@@ -28,12 +28,15 @@ con.connect (err => {
 
 bot.on ('ready', async () => {
   const wb = new Discord.WebhookClient (
-    config.webhook_status.id,
-    config.webhook_status.password
+    config.webhook.status.id,
+    config.webhook.status.password
   );
-  wb.send (`:white_check_mark: Shard ${bot.shard.ids[0] + 1} connecté !`);
+  let e = new Discord.MessageEmbed()
+    .setColor("#32CD32")
+    .setTitle(`:white_check_mark: Shard ${bot.shard.ids[0] + 1} is connected!`)
+  wb.send (e);
   console.log (
-    `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] + 1}/2 connecté avec ${bot.users.size} utilisateurs et ${bot.guilds.size} serveurs..`
+    `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] + 1}/2 connected with ${bot.users.size} users and ${bot.guilds.size} guilds.`
   );
 
   const promises = [
@@ -50,9 +53,55 @@ bot.on ('ready', async () => {
   });
 
   bot.on ('guildCreate', guild => {
-    con.query (`INSERT INTO Cases (guildID) VALUES ('${message.guild.id}')`);
+    // con.query (`INSERT INTO Cases (guildID) VALUES ('${guild.id}')`);
+
+    const wb = new Discord.WebhookClient (
+      config.webhook.joinleaves.id,
+      config.webhook.joinleaves.password
+    );
+
+    const promises = [
+      bot.shard.fetchClientValues ('guilds.size')
+    ];
+  
+    Promise.all (promises).then (res => {
+      const guilds = res[0].reduce ((prev, guild) => prev + guild, 0);
+
+       let e = new Discord.MessageEmbed()
+      .setColor("#40E0D0")
+      .setTitle(`**A server added the bot!**`)
+      .setDescription(`Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in **${guilds}** guilds!`)
+      .setThumbnail(guild.iconURL({ size: 256 }))
+      .setTimestamp();
+    wb.send (e);
+    });
   });
 
+  bot.on ('guildDelete', guild => {
+    const wb = new Discord.WebhookClient (
+      config.webhook.joinleaves.id,
+      config.webhook.joinleaves.password
+    );
+
+    const promises = [
+      bot.shard.fetchClientValues ('guilds.size')
+    ];
+  
+    Promise.all (promises).then (res => {
+      const guilds = res[0].reduce ((prev, guild) => prev + guild, 0);
+
+       let e = new Discord.MessageEmbed()
+      .setColor("#008080")
+      .setTitle(`**A server removed the bot!**`)
+      .setDescription(`Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in ${guilds} guilds`)
+      .setThumbnail(guild.iconURL({ size: 256 }))
+      .setTimestamp();
+      wb.send (e);
+    });
+  });
+
+
+  bot.on("error", err => { throw err; })
   con.query (`SELECT * FROM LockdownChannels`, (err, rows) => {
     if (rows) {
       rows.forEach (r => {
@@ -119,10 +168,50 @@ bot.on ('ready', async () => {
 
 bot.on ('shardReconnecting', id => {
   const wb = new Discord.WebhookClient (
-    config.webhook_status.id,
-    config.webhook_status.password
+    config.webhook.status.id,
+    config.webhook.status.password
   );
-  wb.send (`:warning: Le shard ${id} se reconnecte !`); // must see if it's id or id+1
+  let e = new Discord.MessageEmbed()
+    .setColor("#FFA500")
+    .setTitle(`:warning: Shard ${bot.shard.ids[0] + 1} is reconnecting..`)
+  wb.send (e);
+   // must see if it's id or id+1
+});
+
+bot.on ('shardDisconnect', (event, id) => {
+  const wb = new Discord.WebhookClient (
+    config.webhook.status.id,
+    config.webhook.status.password
+  );
+  let e = new Discord.MessageEmbed()
+    .setColor("#FF0000")
+    .setTitle(`:warning: Shard ${bot.shard.ids[0] + 1} is disconnected !`)
+  wb.send (e);
+   // must see if it's id or id+1
+});
+
+bot.on ('shardResumed', (id, events) => {
+  const wb = new Discord.WebhookClient (
+    config.webhook.status.id,
+    config.webhook.status.password
+  );
+  let e = new Discord.MessageEmbed()
+    .setColor("#008080")
+    .setTitle(`:warning: Shard ${bot.shard.ids[0] + 1} has resumed with ${events} resumed events!`)
+  wb.send (e);
+   // must see if it's id or id+1
+});
+
+bot.on ('shardResumed', (id, events) => {
+  const wb = new Discord.WebhookClient (
+    config.webhook.status.id,
+    config.webhook.status.password
+  );
+  let e = new Discord.MessageEmbed()
+    .setColor("#008080")
+    .setTitle(`:warning: Shard ${bot.shard.ids[0] + 1} has resumed with ${events} resumed events!`)
+  wb.send (e);
+   // must see if it's id or id+1
 });
 
 bot.on ('channelCreate', channel => {
@@ -1334,7 +1423,24 @@ bot.on ('message', async message => {
           if (commandfile) {
             console.log (auth);
             if (auth === false) return;
-            commandfile.run (bot, message, args, con);
+            const wb = new Discord.WebhookClient (
+              config.webhook.commands.id,
+              config.webhook.commands.password
+            );
+            wb.send(`\`\`\`${message.author.tag} - ${message.content} (${message.guild.name})\`\`\``)
+            commandfile.run (bot, message, args, con).catch(err => {
+              message.reply("Oops, an error has been triggered, sorry for that! Our team will resolve this issue as quick as possible!")
+              const wb = new Discord.WebhookClient (
+                config.webhook.error.id,
+                config.webhook.error.password
+              );
+
+              const e = new Discord.MessageEmbed()
+                .setColor("RANDOM")
+                .setDescription(`Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${commandfile.help.name}**\nMessage content: **${message.content}**\n\nError:\n\`${err.stack}\``)
+
+              wb.send(e);
+            })
           }
         }
       );
