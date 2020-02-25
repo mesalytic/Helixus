@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args, con) => {
         : bot.lang.membres.pp.youravatar
     )
     .setImage (
-      defineduser ? defineduser.avatarURL () : message.author.avatarURL ()
+      defineduser ? defineduser.avatarURL ({ dynamic: true, size: 512 }) : message.author.avatarURL ({ dynamic: true, size: 512 })
     );
   return message.channel.send (embed);
 };

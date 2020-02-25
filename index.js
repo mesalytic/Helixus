@@ -766,6 +766,9 @@ bot.on ('guildMemberUpdate', async (oldMember, newMember) => {
 });
 
 bot.on ('guildMemberAdd', member => {
+  if (member.guild.id === "355765654894411777") {
+    member.send(`Salut ${member}, et **bienvenue sur le serveur Discord de Zenix <:zenix:397818655829917698> !**\n\n__**Pour le moment, tu ne peux parler que dans le salon <#471368841247588363>, c'est normal ! Pour accéder au reste du serveur et rencontrer les autres membres, tu dois :**__\n● **Nous envoyer rapidement** quelques infos de base sur toi : Nom ou pseudo, âge, jeux que tu aimes, etc...\n● Avoir un pseudo lisible et mentionnable facilement (doit commencer par au moins 3 lettres de la typographie de base) et personnel\n\n__**Veille aussi à :**__\n● Éviter de mentionner les modos/admins pour qu'ils voient ta présentation : ils la verront quand ils seront dispo.\n● Ne fais pas de pub ou tu seras automatiquement kick, ce n'est pas le but du serveur ;)\n\nQuand ta présentation aura été validée, tu pourras t'attribuer les rôles de ton choix dans le salon <#488038141467557889>.\n\nTu as 72h pour envoyer ta présentation, sinon on considèrera que tu n'es plus intéressé et tu seras kick du serveur ;)\n\nCordialement,\nL'équipe de modération du Discord de Zenix`)
+  }
   con.query (
     `SELECT * FROM JoinMessages WHERE guildID=${member.guild.id}`,
     (err, rows) => {
@@ -1151,6 +1154,9 @@ bot.on ('messageUpdate', (oldMessage, newMessage) => {
       con.query (
         `SELECT * FROM Langs WHERE guildID='${oldMessage.guild.id}'`,
         (err, langs) => {
+          con.query (
+            `SELECT * FROM LogsIgnore WHERE guildID='${oldMessage.guild.id}'`,
+            (err, ignore) => {
           if (!langs[0])
             bot.lang = JSON.parse (
               fs.readFileSync (`./languages/en.json`, 'utf8')
@@ -1163,44 +1169,48 @@ bot.on ('messageUpdate', (oldMessage, newMessage) => {
             if (rows[0].channelID) {
               if (rows[0].activated === 'true') {
                 if (rows[0].messageupdate === 'true') {
-                  const logsChan = bot.channels.get (rows[0].channelID);
-                  if (logsChan) {
-                    if (oldMessage.content !== newMessage.content) {
-                      if (oldMessage.content.length !== 0) {
-                        if (!oldMessage.author.bot) {
-                          const str = bot.lang.logs.messageUpdate.desc
-                            .replace (
-                              '${oldMessage.author.tag}',
-                              oldMessage.author.tag
-                            )
-                            .replace (
-                              '${oldMessage.channel.id}',
-                              oldMessage.channel.id
-                            );
-                          const chanCr = new Discord.MessageEmbed ()
-                            .setAuthor (
-                              oldMessage.author.tag,
-                              oldMessage.author.avatarURL ()
-                            )
-                            .setDescription (str)
-                            .addField (
-                              bot.lang.logs.messageUpdate.old,
-                              oldMessage.content
-                            )
-                            .addField (
-                              bot.lang.logs.messageUpdate.new,
-                              newMessage.content
-                            )
-                            .setTimestamp ()
-                            .setFooter (
-                              `ID user : ${oldMessage.author.id} | ID msg : ${oldMessage.id}`
-                            )
-                            .setColor ('RANDOM');
-                          logsChan.send (chanCr);
+                  if (!ignore[0] || ignore[0].ignored === 'false') {
+                    const logsChan = bot.channels.get (rows[0].channelID);
+                    if (logsChan) {
+                      if (oldMessage.content !== newMessage.content) {
+                        if (oldMessage.content.length !== 0) {
+                          if (!oldMessage.author.bot) {
+                            const str = bot.lang.logs.messageUpdate.desc
+                              .replace (
+                                '${oldMessage.author.tag}',
+                                oldMessage.author.tag
+                              )
+                              .replace (
+                                '${oldMessage.channel.id}',
+                                oldMessage.channel.id
+                              );
+                            const chanCr = new Discord.MessageEmbed ()
+                              .setAuthor (
+                                oldMessage.author.tag,
+                                oldMessage.author.avatarURL ()
+                              )
+                              .setDescription (str)
+                              .addField (
+                                bot.lang.logs.messageUpdate.old,
+                                oldMessage.content
+                              )
+                              .addField (
+                                bot.lang.logs.messageUpdate.new,
+                                newMessage.content
+                              )
+                              .setTimestamp ()
+                              .setFooter (
+                                `ID user : ${oldMessage.author.id} | ID msg : ${oldMessage.id}`
+                              )
+                              .setColor ('RANDOM');
+                            logsChan.send (chanCr);
+                          }
                         }
                       }
                     }
                   }
+                  
+                //}
                 }
               }
             }
@@ -1209,6 +1219,7 @@ bot.on ('messageUpdate', (oldMessage, newMessage) => {
       );
     }
   );
+    });
 });
 
 bot.on ('roleCreate', role => {
