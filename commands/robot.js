@@ -1,44 +1,44 @@
-const request = require ('request-promise-native');
+const request = require("request-promise-native");
 module.exports.run = async (bot, message, args, con) => {
   try {
-    message.channel.startTyping ();
+    message.channel.startTyping();
     let string;
     if (args.length < 1) {
       string = message.author.tag;
     } else {
-      string = args.join (' ');
+      string = args.join(" ");
     }
     const options = {
-      url: `https://robohash.org/${encodeURIComponent (string)}`,
-      encoding: null,
+      url: `https://robohash.org/${encodeURIComponent(string)}`,
+      encoding: null
     };
-    const response = await request (options);
+    const response = await request(options);
     message.channel
-      .send ({
+      .send({
         files: [
           {
-            attachment: response,
-          },
-        ],
+            attachment: response
+          }
+        ]
       })
-      .catch (e => {
+      .catch(e => {
         throw e;
       });
-    message.channel.stopTyping ();
+    message.channel.stopTyping();
   } catch (e) {
     if (e.reponse) {
-      return bot.emit (
-        'error',
+      return bot.emit(
+        "error",
         e.response.statusCode,
         e.response.statusMessage,
         message.channel
       );
     }
-    console.log (e);
+    console.log(e);
   }
 };
 module.exports.help = {
-  name: 'robot',
-  catégorie: 'Images',
-  helpcaté: 'images',
+  name: "robot",
+  catégorie: "Images",
+  helpcaté: "images"
 };

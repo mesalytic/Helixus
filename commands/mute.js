@@ -81,7 +81,7 @@ module.exports.run = async (bot, message, args, con) => {
   });*/
 };
 module.exports.help = {
-  name: 'mute',
-  catégorie: 'Modération',
-  helpcaté: 'mods',
+  name: "mute",
+  catégorie: "Modération",
+  helpcaté: "mods"
 };

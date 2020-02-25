@@ -1,28 +1,28 @@
 module.exports.run = async (bot, message, args, con) => {
-  const {get} = require ('axios');
+  const { get } = require("axios");
 
-  if (message.attachments.first ()) url = message.attachments.first ().url;
-  else if (message.mentions.users.first ())
-    url = message.mentions.users.first ().avatarURL ();
-  else url = args[0] ? args[0] : message.author.avatarURL ();
+  if (message.attachments.first()) url = message.attachments.first().url;
+  else if (message.mentions.users.first())
+    url = message.mentions.users.first().avatarURL();
+  else url = args[0] ? args[0] : message.author.avatarURL();
 
-  const m = await message.channel.send ('Please wait...');
+  const m = await message.channel.send("Please wait...");
 
-  get (`https://hapi.helixus.fr/v1/bobross?url=${url}`, {
-    headers: {Authorization: bot.config.helixusapi},
-    responseType: 'arraybuffer',
+  get(`https://helixus-api.glitch.me/v1/bobross?url=${url}`, {
+    headers: { Authorization: bot.config.helixusapi },
+    responseType: "arraybuffer"
   })
-    .then (res => {
+    .then(res => {
       return message.channel
-        .send ('Generated with HelixusAPI (docs.helixus.fr)', {
-          files: [{attachment: res.data, name: 'bobross.png'}],
+        .send("Generated with HelixusAPI (docs.helixus.fr)", {
+          files: [{ attachment: res.data, name: "bobross.png" }]
         })
-        .then (() => m.delete ());
+        .then(() => m.delete());
     })
-    .catch (err => message.reply (err.message));
+    .catch(err => message.reply(err.message));
 };
 module.exports.help = {
-  name: 'bobross',
-  catégorie: 'Images',
-  helpcaté: 'images',
+  name: "bobross",
+  catégorie: "Images",
+  helpcaté: "images"
 };
