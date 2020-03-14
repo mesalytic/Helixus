@@ -35,145 +35,146 @@ con.connect(err => {
 
 bot.on("ready", async () => {
   const wb = new Discord.WebhookClient(
-    config.webhook.status.id,
-    config.webhook.status.password
-  );
-  let e = new Discord.MessageEmbed()
-    .setColor("#32CD32")
-    .setTitle(`:white_check_mark: Shard ${bot.shard.ids[0] + 1} is connected!`);
-  wb.send(e);
-  console.log(
-    `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] +
-      1}/2 connected with ${bot.users.size} users and ${
-      bot.guilds.size
-    } guilds.`
+      config.webhook.status.id,
+      config.webhook.status.password
+    );
+    let e = new Discord.MessageEmbed()
+      .setColor("#32CD32")
+      .setTitle(
+        `:white_check_mark: Shard ${bot.shard.ids[0] + 1} is connected!`
+      );
+    wb.send(e);
+    console.log(
+      `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] +
+        1}/2 connected with ${bot.users.size} users and ${
+        bot.guilds.size
+      } guilds.`
+    );
+    const promises = [
+      bot.shard.fetchClientValues("guilds.size"),
+      bot.shard.broadcastEval(
+        "this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)"
+      )
+    ];
+
+    Promise.all(promises).then(res => {
+      const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
+      const members = res[1].reduce((prev, member) => prev + member, 0);
+      bot.shard.broadcastEval(
+        `this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`
+      );
+    });
+})
+
+bot.on("guildCreate", guild => {
+  // con.query (`INSERT INTO Cases (guildID) VALUES ('${guild.id}')`);
+
+  const wb = new Discord.WebhookClient(
+    config.webhook.joinleaves.id,
+    config.webhook.joinleaves.password
   );
 
-  const promises = [
-    bot.shard.fetchClientValues("guilds.size"),
-    bot.shard.broadcastEval(
-      "this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)"
-    )
-  ];
+  const promises = [bot.shard.fetchClientValues("guilds.size")];
 
   Promise.all(promises).then(res => {
     const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
-    const members = res[1].reduce((prev, member) => prev + member, 0);
-    bot.shard.broadcastEval(
-      `this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`
-    );
+
+    let e = new Discord.MessageEmbed()
+      .setColor("#40E0D0")
+      .setTitle(`**A server added the bot!**`)
+      .setDescription(
+        `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in **${guilds}** guilds!`
+      )
+      .setThumbnail(guild.iconURL({ size: 256 }))
+      .setTimestamp();
+    wb.send(e);
   });
+});
 
-  bot.on("guildCreate", guild => {
-    // con.query (`INSERT INTO Cases (guildID) VALUES ('${guild.id}')`);
+bot.on("guildDelete", guild => {
+  const wb = new Discord.WebhookClient(
+    config.webhook.joinleaves.id,
+    config.webhook.joinleaves.password
+  );
 
-    const wb = new Discord.WebhookClient(
-      config.webhook.joinleaves.id,
-      config.webhook.joinleaves.password
-    );
+  const promises = [bot.shard.fetchClientValues("guilds.size")];
 
-    const promises = [bot.shard.fetchClientValues("guilds.size")];
+  Promise.all(promises).then(res => {
+    const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
 
-    Promise.all(promises).then(res => {
-      const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
-
-      let e = new Discord.MessageEmbed()
-        .setColor("#40E0D0")
-        .setTitle(`**A server added the bot!**`)
-        .setDescription(
-          `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in **${guilds}** guilds!`
-        )
-        .setThumbnail(guild.iconURL({ size: 256 }))
-        .setTimestamp();
-      wb.send(e);
-    });
+    let e = new Discord.MessageEmbed()
+      .setColor("#008080")
+      .setTitle(`**A server removed the bot!**`)
+      .setDescription(
+        `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in ${guilds} guilds`
+      )
+      .setThumbnail(guild.iconURL({ size: 256 }))
+      .setTimestamp();
+    wb.send(e);
   });
+});
 
-  bot.on("guildDelete", guild => {
-    const wb = new Discord.WebhookClient(
-      config.webhook.joinleaves.id,
-      config.webhook.joinleaves.password
-    );
+bot.on("error", err => {
+  throw err;
+});
+con.query(`SELECT * FROM LockdownChannels`, (err, rows) => {
+  if (rows) {
+    rows.forEach(r => {
+      let channel = bot.channels.get(r.channelID);
+      if (channel) {
+        con.query(
+          `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
+          (err, langs) => {
+            if (!langs[0])
+              bot.lang = JSON.parse(
+                fs.readFileSync(`./languages/en.json`, "utf8")
+              );
+            else
+              bot.lang = JSON.parse(
+                fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+              );
+          }
+        );
+        if (Number(r.time - new Date().getTime()) <= 0) {
+          channel
+            .createOverwrite(channel.guild.id, {
+              SEND_MESSAGES: null
+            })
+            .then(() => {
+              channel.send(bot.lang.mods.lockdown.unlocked);
 
-    const promises = [bot.shard.fetchClientValues("guilds.size")];
-
-    Promise.all(promises).then(res => {
-      const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
-
-      let e = new Discord.MessageEmbed()
-        .setColor("#008080")
-        .setTitle(`**A server removed the bot!**`)
-        .setDescription(
-          `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in ${guilds} guilds`
-        )
-        .setThumbnail(guild.iconURL({ size: 256 }))
-        .setTimestamp();
-      wb.send(e);
-    });
-  });
-
-  bot.on("error", err => {
-    throw err;
-  });
-  con.query(`SELECT * FROM LockdownChannels`, (err, rows) => {
-    if (rows) {
-      rows.forEach(r => {
-        let channel = bot.channels.get(r.channelID);
-        if (channel) {
-          con.query(
-            `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
-            (err, langs) => {
-              if (!langs[0])
-                bot.lang = JSON.parse(
-                  fs.readFileSync(`./languages/en.json`, "utf8")
-                );
-              else
-                bot.lang = JSON.parse(
-                  fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
-                );
-            }
-          );
-          if (Number(r.time - new Date().getTime()) <= 0) {
-            channel
-              .overwritePermissions(channel.guild.id, {
-                SEND_MESSAGES: null
-              })
-              .then(() => {
-                channel.send(bot.lang.mods.lockdown.unlocked);
-
+              con.query(
+                `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`
+              );
+            })
+            .catch(error => {
+              throw error;
+            });
+        } else {
+          channel
+            .createOverwrite(channel.guild.id, {
+              SEND_MESSAGES: false
+            })
+            .then(() => {
+              setTimeout(() => {
+                channel
+                  .createOverwrite(channel.guild.id, {
+                    SEND_MESSAGES: null
+                  })
+                  .then(channel.send(bot.lang.mods.lockdown.unlocked))
+                  .catch(console.error);
                 con.query(
                   `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`
                 );
-              })
-              .catch(error => {
-                throw error;
-              });
-          } else {
-            channel
-              .overwritePermissions(channel.guild.id, {
-                SEND_MESSAGES: false
-              })
-              .then(() => {
-                setTimeout(() => {
-                  channel
-                    .overwritePermissions(channel.guild.id, {
-                      SEND_MESSAGES: null
-                    })
-                    .then(channel.send(bot.lang.mods.lockdown.unlocked))
-                    .catch(console.error);
-                  con.query(
-                    `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`
-                  );
-                }, Number(r.time - new Date().getTime()));
-              })
-              .catch(error => {
-                console.log(error);
-              });
-          }
+              }, Number(r.time - new Date().getTime()));
+            })
+            .catch(error => {
+              console.log(error);
+            });
         }
-      });
-    }
-  });
+      }
+    });
+  }
 });
 
 bot.on("shardReconnecting", id => {
@@ -917,7 +918,7 @@ bot.on("messageDelete", message => {
               fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
             );
           con.query(
-            `SELECT * FROM LogsIgnore WHERE guildID='${message.guild.id}'`,
+            `SELECT * FROM LogsIgnore WHERE guildID='${message.guild.id}' AND channelID='${message.channel.id}'`,
             (err, ignore) => {
               if (rows[0]) {
                 if (rows[0].channelID) {
@@ -1058,7 +1059,7 @@ bot.on("messageDeleteBulk", messages => {
             fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
           );
         con.query(
-          `SELECT * FROM LogsIgnore WHERE guildID='${guild.id}'`,
+          `SELECT * FROM LogsIgnore WHERE guildID='${guild.id}' AND channelID='${channel.id}'`,
           (err, ignore) => {
             if (rows[0]) {
               if (rows[0].channelID) {
@@ -1149,7 +1150,7 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
         `SELECT * FROM Langs WHERE guildID='${oldMessage.guild.id}'`,
         (err, langs) => {
           con.query(
-            `SELECT * FROM LogsIgnore WHERE guildID='${oldMessage.guild.id}'`,
+            `SELECT * FROM LogsIgnore WHERE guildID='${oldMessage.guild.id}' AND channelID='${oldMessage.channel.id}'`,
             (err, ignore) => {
               if (!langs[0])
                 bot.lang = JSON.parse(

@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, con) => {
       if (validUnlocks.includes(time)) {
         if (!rows[0]) return message.reply("bot.lang.mods.lockdown.notlocked");
         message.channel
-          .overwritePermissions(message.guild.id, {
+          .createOverwrite(message.guild.id, {
             SEND_MESSAGES: null
           })
           .then(() => {
@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args, con) => {
           });
       } else {
         message.channel
-          .overwritePermissions(message.guild.id, {
+          .createOverwrite(message.guild.id, {
             SEND_MESSAGES: false
           })
           .then(() => {
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args, con) => {
               .then(() => {
                 lockit[message.channel.id] = setTimeout(() => {
                   message.channel
-                    .overwritePermissions(message.guild.id, {
+                    .createOverwrite(message.guild.id, {
                       SEND_MESSAGES: null
                     })
                     .then(message.channel.send(bot.lang.mods.lockdown.unlocked))

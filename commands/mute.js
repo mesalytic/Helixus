@@ -1,5 +1,5 @@
 module.exports.run = async (bot, message, args, con) => {
-  /*if (!message.channel.permissionsFor (message.author).has ('MANAGE_ROLES'))
+  if (!message.channel.permissionsFor (message.author).has ('MANAGE_ROLES'))
     return message.channel.send (bot.lang.mods.mute.unotperm);
   if (!message.channel.permissionsFor (bot.user).has ('MANAGE_ROLES'))
     return message.channel.send (bot.lang.mods.mute.bnotperm);
@@ -31,23 +31,13 @@ module.exports.run = async (bot, message, args, con) => {
           )
             return;
           if (chan.type === 'voice') {
-            chan.overwritePermissions ({
-              permissionOverwrites: [
-                {
-                  id: role.id,
-                  deny: ['SPEAK'],
-                },
-              ],
+            chan.createOverwrite (role.id, {
+              SPEAK: false
             });
           }
           if (chan.type === 'text') {
-            chan.overwritePermissions ({
-              permissionOverwrites: [
-                {
-                  id: role.id,
-                  deny: ['ADD_REACTIONS', 'SEND_MESSAGES', 'SEND_TTS_MESSAGES'],
-                },
-              ],
+            chan.createOverwrite (role.id, {
+              SEND_MESSAGES: false
             });
           }
         });
@@ -78,7 +68,7 @@ module.exports.run = async (bot, message, args, con) => {
       .replace ('${message.author.tag}', message.author.tag)
       .replace ('${message.author.id}', message.author.id);
     message.channel.send (str);
-  });*/
+  });
 };
 module.exports.help = {
   name: "mute",
