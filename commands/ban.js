@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args, con) => {
       if (!rows[0]) {
         message.channel.send(bot.lang.mods.ban.channotdefined);
         modlog = message.channel;
-      } else modlog = message.guild.channels.get(rows[0].channelID);
+      } else modlog = message.guild.channels.resolve(rows[0].channelID);
     }
   );
   if (!message.channel.permissionsFor(message.author).has("BAN_MEMBERS"))

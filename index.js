@@ -35,36 +35,34 @@ con.connect(err => {
 
 bot.on("ready", async () => {
   const wb = new Discord.WebhookClient(
-      config.webhook.status.id,
-      config.webhook.status.password
-    );
-    let e = new Discord.MessageEmbed()
-      .setColor("#32CD32")
-      .setTitle(
-        `:white_check_mark: Shard ${bot.shard.ids[0] + 1} is connected!`
-      );
-    wb.send(e);
-    console.log(
-      `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] +
-        1}/2 connected with ${bot.users.size} users and ${
-        bot.guilds.size
-      } guilds.`
-    );
-    const promises = [
-      bot.shard.fetchClientValues("guilds.size"),
-      bot.shard.broadcastEval(
-        "this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)"
-      )
-    ];
+    config.webhook.status.id,
+    config.webhook.status.password
+  );
+  let e = new Discord.MessageEmbed()
+    .setColor("#32CD32")
+    .setTitle(`:white_check_mark: Shard ${bot.shard.ids[0] + 1} is connected!`);
+  wb.send(e);
+  console.log(
+    `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] +
+      1}/2 connected with ${bot.users.cache.size} users and ${
+      bot.guilds.cache.size
+    } guilds.`
+  );
+  const promises = [
+    bot.shard.fetchClientValues("guilds.cache.size"),
+    bot.shard.broadcastEval(
+      "this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)"
+    )
+  ];
 
-    Promise.all(promises).then(res => {
-      const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
-      const members = res[1].reduce((prev, member) => prev + member, 0);
-      bot.shard.broadcastEval(
-        `this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`
-      );
-    });
-})
+  Promise.all(promises).then(res => {
+    const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
+    const members = res[1].reduce((prev, member) => prev + member, 0);
+    bot.shard.broadcastEval(
+      `this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`
+    );
+  });
+});
 
 bot.on("guildCreate", guild => {
   // con.query (`INSERT INTO Cases (guildID) VALUES ('${guild.id}')`);
@@ -74,7 +72,7 @@ bot.on("guildCreate", guild => {
     config.webhook.joinleaves.password
   );
 
-  const promises = [bot.shard.fetchClientValues("guilds.size")];
+  const promises = [bot.shard.fetchClientValues("guilds.cache.size")];
 
   Promise.all(promises).then(res => {
     const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
@@ -97,7 +95,7 @@ bot.on("guildDelete", guild => {
     config.webhook.joinleaves.password
   );
 
-  const promises = [bot.shard.fetchClientValues("guilds.size")];
+  const promises = [bot.shard.fetchClientValues("guilds.cache.size")];
 
   Promise.all(promises).then(res => {
     const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
@@ -120,7 +118,7 @@ bot.on("error", err => {
 con.query(`SELECT * FROM LockdownChannels`, (err, rows) => {
   if (rows) {
     rows.forEach(r => {
-      let channel = bot.channels.get(r.channelID);
+      let channel = bot.channels.resolve(r.channelID);
       if (channel) {
         con.query(
           `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
@@ -251,7 +249,7 @@ bot.on("channelCreate", channel => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].channelcreate === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.channelCreate.replace(
                       "${channel.id}",
@@ -295,7 +293,7 @@ bot.on("channelDelete", channel => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].channeldelete === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.channelDelete.replace(
                       "${channel.name}",
@@ -338,7 +336,7 @@ bot.on("emojiCreate", emoji => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].emojicreate === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.emojiCreate.replace(
                       "${emoji.name}",
@@ -370,20 +368,20 @@ bot.on("raw", event => {
   ) {
     if (event.d.guild_id === "355765654894411777") {
       console.log("reaction spotted chez zenix");
-      let channel = bot.channels.get(event.d.channel_id);
+      let channel = bot.channels.resolve(event.d.channel_id);
       if (channel) {
         if (channel.id === "488038141467557889") {
           console.log("reaction spotted sur atrrib roles");
           let message = channel.messages.fetch(event.d.message_id).then(msg => {
-            let user = msg.guild.members.get(event.d.user_id);
+            let user = msg.guild.members.resolve(event.d.user_id);
             if (msg.author.id == bot.user.id && msg.content != initialMessage) {
               console.log("oui");
               var re = `\\*\\*"(.+)?(?="\\*\\*)`;
               var role = msg.content.match(re)[1];
               console.log(role);
               if (user.id != bot.user.id) {
-                var roleObj = msg.guild.roles.find(u => u.name === role);
-                var memberObj = msg.guild.members.get(user.id);
+                var roleObj = msg.guild.roles.cache.find(u => u.name === role);
+                var memberObj = msg.guild.members.resolve(user.id);
                 if (event.t === "MESSAGE_REACTION_ADD") {
                   memberObj.roles.add(roleObj);
                 } else {
@@ -417,7 +415,7 @@ bot.on("emojiDelete", emoji => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].emojidelete === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.emojiDelete.replace(
                       "${emoji.name}",
@@ -460,7 +458,7 @@ bot.on("emojiUpdate", (oldEmoji, newEmoji) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].emojiupdate === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     if (oldEmoji.name === newEmoji.name) return;
                     const str = bot.lang.logs.emojiUpdate.desc.replace(
@@ -506,7 +504,7 @@ bot.on("guildBanAdd", async (guild, user) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildbanadd === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     if (!guild.me.permissions.has("VIEW_AUDIT_LOG")) return;
                     const str = bot.lang.logs.guildBanAdd.desc.replace(
@@ -566,7 +564,7 @@ bot.on("guildBanRemove", async (guild, user) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildbanremove === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.guildBanRemove.desc.replace(
                       "${user.tag}",
@@ -625,7 +623,7 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildmemberupdate === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     if (oldMember.nickname !== newMember.nickname) {
                       let oMemberNick;
@@ -783,7 +781,7 @@ bot.on("guildMemberAdd", member => {
           .replace(userregex, member)
           .replace(usernameregex, member.user.username)
           .replace(guildregex, member.guild.name);
-        member.guild.channels.get(rows[0].channelID).send(res);
+        member.guild.channels.resolve(rows[0].channelID).send(res);
       }
     }
   );
@@ -791,7 +789,7 @@ bot.on("guildMemberAdd", member => {
     `SELECT * FROM Autorole WHERE guildId=${member.guild.id}`,
     (err, rows) => {
       if (rows[0]) {
-        const role = member.guild.roles.get(rows[0].roleID);
+        const role = member.guild.roles.resolve(rows[0].roleID);
 
         member.roles.add(role).catch(err => {
           throw new Error(err);
@@ -818,7 +816,7 @@ bot.on("guildMemberAdd", member => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildmemberadd === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.guildMemberAdd.desc.replace(
                       "${member.user.tag}",
@@ -854,7 +852,7 @@ bot.on("guildMemberRemove", member => {
         const res = str
           .replace(usernameregex, member.user.username)
           .replace(guildregex, member.guild.name);
-        member.guild.channels.get(rows[0].channelID).send(res);
+        member.guild.channels.resolve(rows[0].channelID).send(res);
       }
     }
   );
@@ -877,7 +875,7 @@ bot.on("guildMemberRemove", member => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildmemberremove === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.guildMemberRemove.replace(
                       "${member.user.tag}",
@@ -925,7 +923,7 @@ bot.on("messageDelete", message => {
                   if (rows[0].activated === "true") {
                     if (rows[0].messagedelete === "true") {
                       if (!ignore[0] || ignore[0].ignored === "false") {
-                        const logsChan = bot.channels.get(rows[0].channelID);
+                        const logsChan = bot.channels.resolve(rows[0].channelID);
                         if (logsChan) {
                           message.guild
                             .fetchAuditLogs({
@@ -1066,7 +1064,7 @@ bot.on("messageDeleteBulk", messages => {
                 if (rows[0].activated === "true") {
                   if (rows[0].messagedeletebulk === "true") {
                     if (!ignore[0] || ignore[0].ignored === "false") {
-                      const logsChan = bot.channels.get(rows[0].channelID);
+                      const logsChan = bot.channels.resolve(rows[0].channelID);
                       if (logsChan) {
                         const fetch = xrequire("node-fetch");
                         const qbin = (q, e, s) =>
@@ -1165,7 +1163,7 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
                   if (rows[0].activated === "true") {
                     if (rows[0].messageupdate === "true") {
                       if (!ignore[0] || ignore[0].ignored === "false") {
-                        const logsChan = bot.channels.get(rows[0].channelID);
+                        const logsChan = bot.channels.resolve(rows[0].channelID);
                         if (logsChan) {
                           if (oldMessage.content !== newMessage.content) {
                             if (oldMessage.content.length !== 0) {
@@ -1237,7 +1235,7 @@ bot.on("roleCreate", role => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].rolecreate === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.roleCreate.replace(
                       "${role.name}",
@@ -1280,7 +1278,7 @@ bot.on("roleDelete", role => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].roledelete === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
                     const str = bot.lang.logs.roleDelete.replace(
                       "${role.name}",
@@ -1304,12 +1302,12 @@ bot.on("roleDelete", role => {
   );
 });
 
-bot.on("voiceStateUpdate", (voiceOld, voiceNew) => {
+bot.on("voiceStateUpdate", (oldState, newState) => {
   con.query(
-    `SELECT * FROM Logs WHERE guildID='${voiceNew.guild.id}'`,
+    `SELECT * FROM Logs WHERE guildID='${newState.guild.id}'`,
     (err, rows) => {
       con.query(
-        `SELECT * FROM Langs WHERE guildID='${voiceNew.guild.id}'`,
+        `SELECT * FROM Langs WHERE guildID='${newState.guild.id}'`,
         (err, langs) => {
           if (!langs[0])
             bot.lang = JSON.parse(
@@ -1322,52 +1320,65 @@ bot.on("voiceStateUpdate", (voiceOld, voiceNew) => {
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
-                if (rows[0].voicestateupdate === "true") {
-                  const logsChan = bot.channels.get(rows[0].channelID);
+                if (rows[0].voicestates === "true") {
+                  const logsChan = bot.channels.resolve(rows[0].channelID);
                   if (logsChan) {
-                    const vcOld = voiceOld.voiceChannel;
-                    const vcNew = voiceNew.voiceChannel;
-                    if (!vcOld && vcNew) {
+                    if (!oldState.channel && newState.channel) {
                       const str = bot.lang.logs.voiceStateUpdate.joined
-                        .replace("${voiceNew.user.tag}", voiceNew.user.tag)
-                        .replace("${vcNew.name}", vcNew.name);
+                        .replace(
+                          "${voiceNew.user.tag}",
+                          newState.member.user.tag
+                        )
+                        .replace("${vcNew.name}", newState.channel.name);
                       const chanCr = new Discord.MessageEmbed()
                         .setAuthor(
-                          voiceNew.user.tag,
-                          voiceNew.user.displayAvatarURL()
+                          newState.member.user.tag,
+                          newState.member.user.displayAvatarURL()
                         )
                         .setDescription(str)
                         .setTimestamp()
-                        .setFooter(`ID: ${vcNew.id}`)
+                        .setFooter(`ID: ${newState.channel.id}`)
                         .setColor("RANDOM");
                       logsChan.send(chanCr);
-                    } else if (vcOld && !vcNew) {
+                    } else if (oldState.channel && !newState.channel) {
                       const str = bot.lang.logs.voiceStateUpdate.leaved
-                        .replace("${voiceNew.user.tag}", voiceNew.user.tag)
-                        .replace("${vcOld.name}", vcOld.name);
+                        .replace(
+                          "${voiceNew.user.tag}",
+                          newState.member.user.tag
+                        )
+                        .replace("${vcOld.name}", oldState.channel.name);
                       const chanCr = new Discord.MessageEmbed()
                         .setAuthor(
-                          voiceNew.user.tag,
-                          voiceNew.user.displayAvatarURL()
+                          newState.member.user.tag,
+                          newState.member.user.displayAvatarURL()
                         )
                         .setDescription(str)
                         .setTimestamp()
-                        .setFooter(`ID: ${vcOld.id}`)
+                        .setFooter(`ID: ${oldState.channel.id}`)
                         .setColor("RANDOM");
                       logsChan.send(chanCr);
-                    } else if (vcOld && vcNew && vcOld.id != vcNew.id) {
+                    } else if (
+                      oldState.channel &&
+                      newState.channel &&
+                      oldState.channel.id != newState.channel.id
+                    ) {
                       const str = bot.lang.logs.voiceStateUpdate.switch
-                        .replace("${voiceNew.user.tag}", voiceNew.user.tag)
-                        .replace("${vcOld.name}", vcOld.name)
-                        .replace("${vcNew.name}", vcNew.name);
+                        .replace(
+                          "${voiceNew.user.tag}",
+                          newState.member.user.tag
+                        )
+                        .replace("${vcOld.name}", oldState.channel.name)
+                        .replace("${vcNew.name}", newState.channel.name);
                       const chanCr = new Discord.MessageEmbed()
                         .setAuthor(
-                          voiceNew.user.tag,
-                          voiceNew.user.displayAvatarURL()
+                          newState.member.user.tag,
+                          newState.member.user.displayAvatarURL()
                         )
                         .setDescription(str)
                         .setTimestamp()
-                        .setFooter(`ID: ${vcOld.id} -> ${vcNew.id}`)
+                        .setFooter(
+                          `ID: ${oldState.channel.id} -> ${newState.channel.id}`
+                        )
                         .setColor("RANDOM");
                       logsChan.send(chanCr);
                     }
@@ -1568,7 +1579,7 @@ bot.on("message", message => {
                   }' AND level='${lRows[0].level + 1}'`,
                   (err, rRows) => {
                     if (rRows[0]) {
-                      const role = message.guild.roles.get(rRows[0].roleID);
+                      const role = message.guild.roles.resolve(rRows[0].roleID);
                       if (!message.member.roles.has(role))
                         message.member.roles.add(role);
                     }
@@ -1581,7 +1592,7 @@ bot.on("message", message => {
                     }' AND level='${i + 1}'`,
                     (err, rRows) => {
                       if (rRows[0]) {
-                        const role = message.guild.roles.get(rRows[0].roleID);
+                        const role = message.guild.roles.resolve(rRows[0].roleID);
                         if (!message.member.roles.has(role))
                           message.member.roles.add(role);
                       }
@@ -1593,7 +1604,7 @@ bot.on("message", message => {
                   .replace(userregex, message.author)
                   .replace(levelregex, Number(lRows[0].level + 1));
                 bot.channels
-                  .get(fetchchan)
+                  .resolve(fetchchan)
                   .send(res)
                   .catch(() => {});
               }

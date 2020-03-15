@@ -28,9 +28,9 @@ module.exports.run = async (bot, message, args, con) => {
       .format("D [d], H[h] m[m] s[s]");
 
     const promises = [
-      bot.shard.fetchClientValues("guilds.size"),
+      bot.shard.fetchClientValues("guilds.cache.size"),
       bot.shard.broadcastEval(
-        "this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)"
+        "this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)"
       ),
       bot.shard.broadcastEval("process.memoryUsage().rss")
     ];
@@ -97,7 +97,7 @@ module.exports.run = async (bot, message, args, con) => {
             "https://is.gd/LienHelixus",
             true
           )
-          .addField(bot.lang.infos.botinfo.website, "https://helixus.fr", true);
+          .addField(bot.lang.infos.botinfo.website, "https://aliceraina.moe/helixus/", true);
         message.channel.send(embedStats);
       });
     });

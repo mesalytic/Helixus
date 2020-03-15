@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, con) => {
     });
     rmap = rmap.slice(0, -1);
 
-    if (rmap.length > 1000) rlist = `(${member.roles.size} roles)`;
+    if (rmap.length > 1000) rlist = `(${member.roles.cache.size} roles)`;
     if (rmap.length < 1) rlist = "No role.";
     else rlist = rmap;
 
@@ -57,7 +57,7 @@ module.exports.run = async (bot, message, args, con) => {
     });
     rmap = rmap.slice(0, -1);
     if (rmap.length < 1) rlist = "No role";
-    if (rmap.length > 1000) rlist = `(${mentmember.roles.size} roles)`;
+    if (rmap.length > 1000) rlist = `(${mentmember.roles.cache.size} roles)`;
     else rlist = rmap;
     const embed = new Discord.MessageEmbed()
       .setColor("RANDOM")

@@ -3,9 +3,9 @@ module.exports.run = async (bot, message, args, con) => {
   const Discord = require("discord.js");
 
   const emojis = [];
-  if (message.guild.emojis.size !== 0) {
+  if (message.guild.emojis.cache.size !== 0) {
     message.guild.emojis.forEach(r => {
-      const emoji = bot.emojis.get(r.id);
+      const emoji = bot.emojis.resolve(r.id);
       emojis.push(emoji);
     });
   }
@@ -39,7 +39,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   rmap = rmap.slice(0, -1);
   if (rmap.length < 1) rlist = "No role";
-  if (rmap.length > 1000) rlist = `(${message.guild.roles.size} roles)`;
+  if (rmap.length > 1000) rlist = `(${message.guild.roles.cache.size} roles)`;
   else rlist = rmap;
 
   const serverembed = new Discord.MessageEmbed()
@@ -51,15 +51,15 @@ module.exports.run = async (bot, message, args, con) => {
     .addField(bot.lang.infos.serverinfo.total, message.guild.memberCount, true)
     .addField(
       "Bots",
-      message.guild.members.filter(member => member.user.bot).size,
+      message.guild.members.cache.filter(member => member.user.bot).size,
       true
     )
     .addField(
       bot.lang.infos.serverinfo.channels,
-      message.guild.channels.size,
+      message.guild.channels.cache.size,
       true
     )
-    .addField(bot.lang.infos.serverinfo.roles, message.guild.roles.size, true)
+    .addField(bot.lang.infos.serverinfo.roles, message.guild.roles.cache.size, true)
     .addField(bot.lang.infos.serverinfo.rolelist, rlist, true)
     .addField(
       bot.lang.infos.serverinfo.createdat,

@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args, con) => {
         return message.reply(bot.lang.membres.emoji.unicode);
 
       const id = parseEmoji(args[2]).id;
-      if (message.guild.emojis.get(id))
+      if (message.guild.emojis.resolve(id))
         return message.reply(bot.lang.membres.emoji.add_already);
 
       const url = `https://cdn.discordapp.com/emojis/${id}`;
@@ -56,7 +56,7 @@ module.exports.run = async (bot, message, args, con) => {
 
     if (args[1].match("<")) {
       const name = parseEmoji(args[1]).name;
-      const emote = message.guild.emojis.find(u => u.name === name);
+      const emote = message.guild.emojis.cache.find(u => u.name === name);
 
       if (!emote) return message.reply(bot.lang.membres.emoji.notfound);
 
@@ -71,7 +71,7 @@ module.exports.run = async (bot, message, args, con) => {
           return message.channel.send(str);
         });
     } else {
-      const emote = message.guild.emojis.find(u => u.name === args[1]);
+      const emote = message.guild.emojis.cache.find(u => u.name === args[1]);
 
       if (!emote) return message.reply(bot.lang.membres.emoji.notfound);
 
@@ -92,7 +92,7 @@ module.exports.run = async (bot, message, args, con) => {
 
     if (args[1].match("<")) {
       const name = parseEmoji(args[1]).name;
-      const emote = message.guild.emojis.find(u => u.name === name);
+      const emote = message.guild.emojis.cache.find(u => u.name === name);
 
       if (!emote) return message.reply(bot.lang.membres.emoji.notfound);
 
@@ -108,7 +108,7 @@ module.exports.run = async (bot, message, args, con) => {
           return message.channel.send(str);
         });
     }
-    const emote = message.guild.emojis.find(u => u.name === args[1]);
+    const emote = message.guild.emojis.cache.find(u => u.name === args[1]);
 
     if (!emote) return message.reply(bot.lang.membres.emoji.notfound);
 
@@ -127,7 +127,7 @@ module.exports.run = async (bot, message, args, con) => {
     if (args[0].match("<")) {
       const name = parseEmoji(args[0]).name;
       const animated = parseEmoji(args[0]).animated;
-      const emote = message.guild.emojis.find(u => u.name === name);
+      const emote = message.guild.emojis.cache.find(u => u.name === name);
       if (emote) {
         const id = emote.id;
         const created = emote.createdAt.getTime();
@@ -182,7 +182,7 @@ module.exports.run = async (bot, message, args, con) => {
       if (args[0].match("<")) {
         const name = parseEmoji(args[0]).name;
         const animated = parseEmoji(args[0]).animated;
-        const emote = message.guild.emojis.find(u => u.name === name);
+        const emote = message.guild.emojis.cache.find(u => u.name === name);
         if (emote) {
           const id = emote.id;
           const created = emote.createdAt.getTime();
@@ -236,7 +236,7 @@ module.exports.run = async (bot, message, args, con) => {
         if (regex.test(args[0]) === true)
           return message.reply(bot.lang.membres.emoji.unicode);
 
-        const emote = message.guild.emojis.find(u => u.name === args[0]);
+        const emote = message.guild.emojis.cache.find(u => u.name === args[0]);
         if (emote) {
           const id = emote.id;
           const name = emote.name;

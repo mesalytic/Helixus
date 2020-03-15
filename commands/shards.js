@@ -1,6 +1,6 @@
 module.exports.run = async (bot, message, args, con) => {
   const promises = [
-    bot.shard.fetchClientValues("guilds.size"),
+    bot.shard.fetchClientValues("guilds.cache.size"),
     bot.shard.broadcastEval("this.ws.status")
   ];
 

@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args, con) => {
 
               for (let i = 0; i < rows.length; i++) {
                 const diff = 5 * (rows[i].level ^ 2) + 50 * rows[i].level + 100;
-                const u = bot.users.get(rows[i].user);
+                const u = bot.users.resolve(rows[i].user);
                 if (i == 0) {
                   if (!u)
                     msgtop += `[${i + 1}] :first_place: **${
@@ -85,7 +85,7 @@ module.exports.run = async (bot, message, args, con) => {
                   for (let k = 0; k < top.length; k++) {
                     const topDiff =
                       5 * (top[k].level ^ 2) + 50 * top[k].level + 100;
-                    const user = bot.users.get(top[k].user);
+                    const user = bot.users.resolve(top[k].user);
                     if (!user)
                       topall += `[${k + 1}] ${
                         bot.lang.levels.top.notfound

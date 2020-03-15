@@ -110,8 +110,8 @@ module.exports.run = async (bot, message, args, con) => {
                 );
             }
             const role =
-              message.guild.roles.get(oArgs[0]) ||
-              message.guild.roles.find(r => r.name === oArgs[0]) ||
+              message.guild.roles.resolve(oArgs[0]) ||
+              message.guild.roles.cache.find(r => r.name === oArgs[0]) ||
               message.mentions.roles.first();
             if (!role)
               return message.reply(bot.lang.levels.levels.rewards_notfound);

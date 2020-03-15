@@ -17,8 +17,8 @@ module.exports.run = async (bot, message, args, con) => {
 
       const rArgs = args.join(" ");
       const role =
-        message.guild.roles.get(rArgs) ||
-        message.guild.roles.find(r => r.name === rArgs) ||
+        message.guild.roles.resolve(rArgs) ||
+        message.guild.roles.cache.find(r => r.name === rArgs) ||
         message.mentions.roles.first();
       if (role) {
         con.query(

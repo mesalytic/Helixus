@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args, con) => {
   let member = message.mentions.members.first();
   if (!member) return message.channel.send(bot.lang.mods.unmute.noment);
 
-  let muteRole = message.guild.roles.find(u => u.name === "HMuted");
+  let muteRole = message.guild.roles.cache.find(u => u.name === "HMuted");
   if (!muteRole) return message.reply(bot.lang.mods.unmute.nobodymuted);
   if (!member.roles.has(muteRole.id))
     return message.reply(bot.lang.mods.unmute.notmuted);

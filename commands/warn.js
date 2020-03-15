@@ -98,7 +98,7 @@ module.exports.run = async (bot, message, args, con) => {
                   let chan;
 
                   if (!chans) chan = message.channel;
-                  else chan = message.guild.channels.get(chans);
+                  else chan = message.guild.channels.resolve(chans);
 
                   let caseNumber;
                   if (!cases[0]) caseNumber = 0;
