@@ -24,7 +24,7 @@
     "moment-duration-format": "^2.3.2",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.0",
-    "node-gyp": "^5.1.0",
+    "node-gyp": "^6.1.0",
     "node-opus": "^0.3.3",
     "node-superfetch": "^0.1.10",
     "os": "^0.1.1",
