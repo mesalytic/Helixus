@@ -488,8 +488,8 @@ detect-libc@^1.0.2:
 
 discord.js@discordjs/discord.js:
   version "12.0.2"
-  uid f2fdb9331895da59546107efe245a2e0137ef2e7
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/f2fdb9331895da59546107efe245a2e0137ef2e7"
+  uid "65e8c92d7c107fb9a3b3ff8fef5f896113508675"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/65e8c92d7c107fb9a3b3ff8fef5f896113508675"
   dependencies:
     "@discordjs/collection" "^0.1.5"
     abort-controller "^3.0.0"
