@@ -1,4 +1,4 @@
-# Helixus (Beta V2)
+# Helixus
 
 > Helixus is a multifunction bot available in some languages !
 
@@ -8,7 +8,9 @@ Since the bot is open-source, you can have your own instance of Helixus.
 
 You must have **Yarn (or NPM, which will soon __not__ be used by the bot anymore), NodeJS, Git, MySQL (or MariaDB) and FFmpeg** installed on your system.
 
-**DISCLAIMER** : This repository contains code for a sharded bot. If you want to remove every sharded part of the bot, you'll need to modify it yourself.
+**DISCLAIMER** : You must have at least some knowledge of **JavaScript, NodeJS and MariaDB** to understand the code. If you don't have  any knowledge of what this code is for, or what it does, the code is not for you.
+
+This repository contains code for a sharded bot. If you want to remove every sharded part of the bot, you'll need to modify it yourself.
 
 ### Windows
 
