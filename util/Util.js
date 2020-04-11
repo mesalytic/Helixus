@@ -45,6 +45,6 @@ module.exports = class Util {
   }
   
   static eURL(title, url, display = url) {
-    return `[${title}](${url.replace(/\)/g, '%27')}, "${display}")`;
+    return `[${title}](${url.replace(/\)/g, '%27')})`;
   }
 };
