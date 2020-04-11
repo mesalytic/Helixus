@@ -1702,7 +1702,7 @@ bot.on("message", message => {
                   } else {
                     let xp;
                     if (!lRows[0].points) xp = 0;
-                    else xp = Number(lrows[0].points);
+                    else xp = Number(lRows[0].points);
                     con.query(
                       `UPDATE Levels SET points = '${lRows[0].points +
                         generateXP()}' WHERE id = '${message.guild.id}-${

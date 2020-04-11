@@ -92,7 +92,9 @@ CREATE TABLE IF NOT EXISTS `Logs` (
   `messageupdate` varchar(5) DEFAULT 'true',
   `rolecreate` varchar(5) DEFAULT 'true',
   `roledelete` varchar(5) DEFAULT 'true',
-  `voicestates` varchar(5) DEFAULT 'true'
+  `voicestates` varchar(5) DEFAULT 'true',
+  `webhookID` varchar(150) DEFAULT NULL,
+  `webhookToken` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `LogsIgnore` (
@@ -117,6 +119,14 @@ CREATE TABLE IF NOT EXISTS `Prefixes` (
   `prefix` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `ReactionRole` (
+  `guildID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channelID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `messageID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `roleID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `emojiID` blob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `WarnConfig` (
   `guildID` varchar(50) DEFAULT NULL,
   `kicks` int(11) DEFAULT NULL,
@@ -128,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `Warns` (
   `guildID` varchar(50) DEFAULT '',
   `memberID` varchar(50) DEFAULT '',
   `reason` varchar(2000) DEFAULT '',
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 

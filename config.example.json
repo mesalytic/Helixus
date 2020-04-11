@@ -22,5 +22,11 @@
   },
   "helixusapi": "xx",
   "osu": "xx",
-  "googlekey": "xx"
+  "googlekey": "xx",
+  "github": {
+    "repo_username": "xx",
+    "repo_name": "xx",
+    "username": "xx",
+    "password": "xx"
+  }
 }
