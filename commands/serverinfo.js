@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   const emojis = [];
   if (message.guild.emojis.cache.size !== 0) {
-    message.guild.emojis.forEach(r => {
+    message.guild.emojis.cache.forEach(r => {
       const emoji = bot.emojis.resolve(r.id);
       emojis.push(emoji);
     });
@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args, con) => {
   let rlist;
   let rmap = "";
 
-  message.guild.roles.map(role => {
+  message.guild.roles.cache.map(role => {
     if (role.id === message.guild.id) return;
     rmap += `${role.name}, `;
   });

@@ -33,11 +33,12 @@ module.exports.run = async (bot, message, args, con) => {
 
     const dispatcher = await serverQueue.connection
       .play(stream)
-      .on("end", async reason => {
+      .on("finish", async reason => {
         if (reason === "Stream is not generating quickly enough.")
           serverQueue.songs.shift("Stream is not generating quickly enough");
-
+        console.log("END EVENT");
         if (!serverQueue.loop) serverQueue.songs.shift();
+        
         await play(guild, serverQueue.songs[0]);
       })
       .on("error", error => console.error(error));

@@ -91,13 +91,18 @@ module.exports.run = async (bot, message, args, con) => {
         else if (rows[0].activated === "false")
           return message.reply(bot.lang.admin.logs.channel_["not-activated"]);
         else {
-          con.query(
-            `UPDATE Logs SET channelID = '${channel.id}' WHERE guildID = '${message.guild.id}'`
-          );
-          const str = bot.lang.admin.logs.channel_success
-            .replace("${channel.id}", channel.id)
-            .replace("${channel.id}", channel.id);
-          message.channel.send(str);
+          channel.createWebhook('Helixus Logger', {
+            reason: "Logging activation."
+          }).then(wb => {
+            con.query(
+              `UPDATE Logs SET channelID = '${channel.id}', webhookID='${wb.id}', webhookToken='${wb.token}' WHERE guildID = '${message.guild.id}'`
+            );
+            const str = bot.lang.admin.logs.channel_success
+              .replace("${channel.id}", channel.id)
+              .replace("${channel.id}", channel.id);
+            message.channel.send(str);
+          })
+          
         }
       } else if (args[0] === "mods") {
         if (!rows[0])

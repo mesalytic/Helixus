@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   const m = await message.channel.send("Please wait...");
 
-  get(`https://helixus-api.glitch.me/v1/glitch?url=${url}`, {
+  get(`api.aliceraina.moe/v1/glitch?url=${url}`, {
     headers: { Authorization: bot.config.helixusapi },
     responseType: "arraybuffer"
   })

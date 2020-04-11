@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args, con) => {
   const m = await message.channel.send("Please wait...");
 
   get(
-    `https://helixus-api.glitch.me/v1/steamplaying?user=${encodeURIComponent(
+    `api.aliceraina.moe/v1/steamplaying?user=${encodeURIComponent(
       message.author.username
     )}&game=${game}&url=${message.author.avatarURL()}&`,
     {

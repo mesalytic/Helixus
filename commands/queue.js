@@ -5,6 +5,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   const { oneLine, stripIndents } = require("common-tags");
   const currentSong = serverQueue.songs[0];
+//  if (!currentSong) return message.channel.send(bot.lang.musique.queue.nomusic);
   const currentTime = serverQueue.connection.dispatcher
     ? serverQueue.connection.dispatcher.streamTime / 1000
     : 0;

@@ -249,11 +249,14 @@ bot.on("channelCreate", channel => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].channelcreate === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
                     const str = bot.lang.logs.channelCreate.replace(
                       "${channel.id}",
                       channel.id
+                    );
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(channel.guild.name, channel.guild.iconURL())
@@ -261,7 +264,7 @@ bot.on("channelCreate", channel => {
                       .setFooter(`ID: ${channel.id}`)
                       .setTimestamp()
                       .setColor("#c2a6eb");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -293,11 +296,14 @@ bot.on("channelDelete", channel => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].channeldelete === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
                     const str = bot.lang.logs.channelDelete.replace(
                       "${channel.name}",
                       channel.name
+                    );
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(channel.guild.name, channel.guild.iconURL())
@@ -305,7 +311,7 @@ bot.on("channelDelete", channel => {
                       .setFooter(`ID: ${channel.id}`)
                       .setTimestamp()
                       .setColor("#e7cd67");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -336,11 +342,14 @@ bot.on("emojiCreate", emoji => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].emojicreate === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
                     const str = bot.lang.logs.emojiCreate.replace(
                       "${emoji.name}",
                       emoji.name
+                    );
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(emoji.guild.name, emoji.guild.iconURL())
@@ -349,7 +358,7 @@ bot.on("emojiCreate", emoji => {
                       .setFooter(`ID: ${emoji.id}`)
                       .setTimestamp()
                       .setColor("RANDOM");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -415,8 +424,11 @@ bot.on("emojiDelete", emoji => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].emojidelete === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     const str = bot.lang.logs.emojiDelete.replace(
                       "${emoji.name}",
                       emoji.name
@@ -427,7 +439,7 @@ bot.on("emojiDelete", emoji => {
                       .setFooter(`ID: ${emoji.id}`)
                       .setTimestamp()
                       .setColor("RANDOM");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -458,8 +470,11 @@ bot.on("emojiUpdate", (oldEmoji, newEmoji) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].emojiupdate === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     if (oldEmoji.name === newEmoji.name) return;
                     const str = bot.lang.logs.emojiUpdate.desc.replace(
                       "${oldEmoji.name}",
@@ -473,7 +488,7 @@ bot.on("emojiUpdate", (oldEmoji, newEmoji) => {
                       .setFooter(`ID: ${oldEmoji.id}`)
                       .setTimestamp()
                       .setColor("RANDOM");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -504,8 +519,11 @@ bot.on("guildBanAdd", async (guild, user) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildbanadd === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     if (!guild.me.permissions.has("VIEW_AUDIT_LOG")) return;
                     const str = bot.lang.logs.guildBanAdd.desc.replace(
                       "${user.tag}",
@@ -532,7 +550,7 @@ bot.on("guildBanAdd", async (guild, user) => {
                           .setFooter(`ID: ${user.id}`)
                           .setTimestamp()
                           .setColor("RANDOM");
-                        logsChan.send(chanCr);
+                        wb.send(chanCr);
                       });
                   }
                 }
@@ -564,8 +582,11 @@ bot.on("guildBanRemove", async (guild, user) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildbanremove === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     const str = bot.lang.logs.guildBanRemove.desc.replace(
                       "${user.tag}",
                       user.tag
@@ -591,7 +612,7 @@ bot.on("guildBanRemove", async (guild, user) => {
                           .setFooter(`ID: ${user.id}`)
                           .setTimestamp()
                           .setColor("RANDOM");
-                        logsChan.send(chanCr);
+                        wb.send(chanCr);
                       });
                   }
                 }
@@ -623,8 +644,11 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildmemberupdate === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     if (oldMember.nickname !== newMember.nickname) {
                       let oMemberNick;
                       if (oldMember.nickname === null) {
@@ -669,16 +693,16 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
                               audit.entries.first().executor.tag
                             )
                             .setColor("RANDOM");
-                          logsChan.send(nickEmbed);
+                          wb.send(nickEmbed);
                         });
                     }
                     var newrole =
                       "`" +
-                      newMember.roles
+                      newMember.roles.cache
                         .filter(
                           r =>
                             oldMember.roles
-                              .map(r => r.id)
+                              .cache.map(r => r.id)
                               .join(", ")
                               .indexOf(r.id) == -1
                         )
@@ -686,10 +710,10 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
                       "`";
                     var oldrole =
                       "`" +
-                      oldMember.roles
+                      oldMember.roles.cache
                         .filter(
                           r =>
-                            newMember.roles.map(r => r.id).indexOf(r.id) == -1
+                            newMember.roles.cache.map(r => r.id).indexOf(r.id) == -1
                         )
                         .map(r => r.name) +
                       "`";
@@ -720,7 +744,7 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
                               audit.entries.first().executor.tag
                             )
                             .setColor("RANDOM");
-                          logsChan.send(nickEmbed);
+                          wb.send(nickEmbed);
                         });
                     }
                     if (oldrole !== "``") {
@@ -749,7 +773,7 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
                               audit.entries.first().executor.tag
                             )
                             .setColor("RANDOM");
-                          logsChan.send(nickEmbed);
+                          wb.send(nickEmbed);
                         });
                     }
                   }
@@ -766,7 +790,7 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
 bot.on("guildMemberAdd", member => {
   if (member.guild.id === "355765654894411777") {
     member.send(
-      `Salut ${member}, et **bienvenue sur le serveur Discord de Zenix <:zenix:397818655829917698> !**\n\n__**Pour le moment, tu ne peux parler que dans le salon <#471368841247588363>, c'est normal ! Pour accéder au reste du serveur et rencontrer les autres membres, tu dois :**__\n● **Nous envoyer rapidement** quelques infos de base sur toi : Nom ou pseudo, âge, jeux que tu aimes, etc...\n● Avoir un pseudo lisible et mentionnable facilement (doit commencer par au moins 3 lettres de la typographie de base) et personnel\n\n__**Veille aussi à :**__\n● Éviter de mentionner les modos/admins pour qu'ils voient ta présentation : ils la verront quand ils seront dispo.\n● Ne fais pas de pub ou tu seras automatiquement kick, ce n'est pas le but du serveur ;)\n\nQuand ta présentation aura été validée, tu pourras t'attribuer les rôles de ton choix dans le salon <#488038141467557889>.\n\nTu as 72h pour envoyer ta présentation, sinon on considèrera que tu n'es plus intéressé et tu seras kick du serveur ;)\n\nCordialement,\nL'équipe de modération du Discord de Zenix`
+      `Salut ${member}, et **bienvenue sur le serveur Discord de Zenix <:zenix:397818655829917698> !**\n\n__**Pour le moment, tu ne peux parler que dans le salon <#471368841247588363>, c'est normal ! Pour accéder au reste du serveur et rencontrer les autres membres, tu dois :**__\n● **Nous envoyer rapidement** quelques infos de base sur toi : Nom ou pseudo, âge, jeux que tu aimes, etc...\n● Avoir un pseudo lisible et mentionnable facilement (doit commencer par au moins 3 lettres de la typographie de base) et personnel\n\n__**Veille aussi à :**__\n● Éviter de mentionner les modos/admins pour qu'ils voient ta présentation : ils la verront quand ils seront dispo.\n● Ne fais pas de pub ou tu seras automatiquement kick, ce n'est pas le but du serveur ;)\n\nQuand ta présentation aura été validée, tu pourras t'attribuer les rôles de ton choix dans le salon <#488038141467557889>.\n\nTu as 72h pour envoyer ta présentation, sinon on considèrera que tu n'es plus intéressé et tu seras kick du serveur ;)\n\n️️️️️️⚠️ **Envoyez votre présentation dans le chat <#471368841247588363> du serveur, et pas directement à moi (je ne suis qu'un bot ! Un bot particulièrement BG, mais un bot quand même...)**\n\nCordialement,\nL'équipe de modération du Discord de Zenix`
     );
   }
   con.query(
@@ -816,8 +840,11 @@ bot.on("guildMemberAdd", member => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildmemberadd === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     const str = bot.lang.logs.guildMemberAdd.desc.replace(
                       "${member.user.tag}",
                       member.user.tag
@@ -829,7 +856,7 @@ bot.on("guildMemberAdd", member => {
                       .setFooter(`ID: ${member.id}`)
                       .setTimestamp()
                       .setColor("RANDOM");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -875,8 +902,11 @@ bot.on("guildMemberRemove", member => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].guildmemberremove === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     const str = bot.lang.logs.guildMemberRemove.replace(
                       "${member.user.tag}",
                       member.user.tag
@@ -888,7 +918,7 @@ bot.on("guildMemberRemove", member => {
                       .setFooter(`ID: ${member.id}`)
                       .setTimestamp()
                       .setColor("RANDOM");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -923,8 +953,11 @@ bot.on("messageDelete", message => {
                   if (rows[0].activated === "true") {
                     if (rows[0].messagedelete === "true") {
                       if (!ignore[0] || ignore[0].ignored === "false") {
-                        const logsChan = bot.channels.resolve(rows[0].channelID);
-                        if (logsChan) {
+                        if (rows[0].webhookID && rows[0].webhookToken) {
+                          const wb = new Discord.WebhookClient(
+                            rows[0].webhookID,
+                            rows[0].webhookToken
+                          );
                           message.guild
                             .fetchAuditLogs({
                               type: "MESSAGE_DELETE"
@@ -1027,7 +1060,7 @@ bot.on("messageDelete", message => {
                                     }
                                   }
                                 })
-                                .then(() => logsChan.send(chanCr));
+                                .then(() => wb.send(chanCr));
                             });
                         }
                       }
@@ -1064,8 +1097,11 @@ bot.on("messageDeleteBulk", messages => {
                 if (rows[0].activated === "true") {
                   if (rows[0].messagedeletebulk === "true") {
                     if (!ignore[0] || ignore[0].ignored === "false") {
-                      const logsChan = bot.channels.resolve(rows[0].channelID);
-                      if (logsChan) {
+                      if (rows[0].webhookID && rows[0].webhookToken) {
+                        const wb = new Discord.WebhookClient(
+                          rows[0].webhookID,
+                          rows[0].webhookToken
+                        );
                         const fetch = xrequire("node-fetch");
                         const qbin = (q, e, s) =>
                           fetch("https://qbin.io", {
@@ -1125,7 +1161,7 @@ bot.on("messageDeleteBulk", messages => {
                             .setTimestamp()
                             .setFooter(messages.first().id)
                             .setColor("RANDOM");
-                          logsChan.send(chanCr);
+                          wb.send(chanCr);
                         });
                       }
                     }
@@ -1163,8 +1199,11 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
                   if (rows[0].activated === "true") {
                     if (rows[0].messageupdate === "true") {
                       if (!ignore[0] || ignore[0].ignored === "false") {
-                        const logsChan = bot.channels.resolve(rows[0].channelID);
-                        if (logsChan) {
+                        if (rows[0].webhookID && rows[0].webhookToken) {
+                          const wb = new Discord.WebhookClient(
+                            rows[0].webhookID,
+                            rows[0].webhookToken
+                          );
                           if (oldMessage.content !== newMessage.content) {
                             if (oldMessage.content.length !== 0) {
                               if (!oldMessage.author.bot) {
@@ -1196,7 +1235,7 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
                                     `ID user : ${oldMessage.author.id} | ID msg : ${oldMessage.id}`
                                   )
                                   .setColor("RANDOM");
-                                logsChan.send(chanCr);
+                                wb.send(chanCr);
                               }
                             }
                           }
@@ -1235,8 +1274,11 @@ bot.on("roleCreate", role => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].rolecreate === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     const str = bot.lang.logs.roleCreate.replace(
                       "${role.name}",
                       role.name
@@ -1247,7 +1289,7 @@ bot.on("roleCreate", role => {
                       .setTimestamp()
                       .setFooter(`ID: ${role.id}`)
                       .setColor("RANDOM");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -1278,8 +1320,11 @@ bot.on("roleDelete", role => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].roledelete === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     const str = bot.lang.logs.roleDelete.replace(
                       "${role.name}",
                       role.name
@@ -1290,7 +1335,7 @@ bot.on("roleDelete", role => {
                       .setTimestamp()
                       .setFooter(`ID: ${role.id}`)
                       .setColor("RANDOM");
-                    logsChan.send(chanCr);
+                    wb.send(chanCr);
                   }
                 }
               }
@@ -1321,8 +1366,11 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
                 if (rows[0].voicestates === "true") {
-                  const logsChan = bot.channels.resolve(rows[0].channelID);
-                  if (logsChan) {
+                  if (rows[0].webhookID && rows[0].webhookToken) {
+                    const wb = new Discord.WebhookClient(
+                      rows[0].webhookID,
+                      rows[0].webhookToken
+                    );
                     if (!oldState.channel && newState.channel) {
                       const str = bot.lang.logs.voiceStateUpdate.joined
                         .replace(
@@ -1339,7 +1387,7 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                         .setTimestamp()
                         .setFooter(`ID: ${newState.channel.id}`)
                         .setColor("RANDOM");
-                      logsChan.send(chanCr);
+                      wb.send(chanCr);
                     } else if (oldState.channel && !newState.channel) {
                       const str = bot.lang.logs.voiceStateUpdate.leaved
                         .replace(
@@ -1356,7 +1404,7 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                         .setTimestamp()
                         .setFooter(`ID: ${oldState.channel.id}`)
                         .setColor("RANDOM");
-                      logsChan.send(chanCr);
+                      wb.send(chanCr);
                     } else if (
                       oldState.channel &&
                       newState.channel &&
@@ -1380,7 +1428,7 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                           `ID: ${oldState.channel.id} -> ${newState.channel.id}`
                         )
                         .setColor("RANDOM");
-                      logsChan.send(chanCr);
+                      wb.send(chanCr);
                     }
                   }
                 }
@@ -1600,9 +1648,14 @@ bot.on("message", message => {
                   );
                 }
 
+                if (!fetchchan) fetchchan = message.channel.id;
+                  if (!fetchstr) fetchstr = bot.lang.levelup;
+
                 const res = fetchstr
                   .replace(userregex, message.author)
                   .replace(levelregex, Number(lRows[0].level + 1));
+
+                  
                 bot.channels
                   .resolve(fetchchan)
                   .send(res)
@@ -1647,7 +1700,9 @@ bot.on("message", message => {
                       }', '${generateXP()}', '1')`
                     );
                   } else {
-                    const xp = Number(lRows[0].points);
+                    let xp;
+                    if (!lRows[0].points) xp = 0;
+                    else xp = Number(lrows[0].points);
                     con.query(
                       `UPDATE Levels SET points = '${lRows[0].points +
                         generateXP()}' WHERE id = '${message.guild.id}-${
