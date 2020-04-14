@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args, con) => {
     var rlist;
     var rmap = "";
 
-    member.roles.map(role => {
+    member.roles.cache.map(role => {
       if (role.id === message.guild.id) return;
       rmap += `<@&${role.id}>, `;
     });
@@ -19,6 +19,13 @@ module.exports.run = async (bot, message, args, con) => {
     if (rmap.length > 1000) rlist = `(${member.roles.cache.size} roles)`;
     if (rmap.length < 1) rlist = "No role.";
     else rlist = rmap;
+
+    let uPresence;
+    if (message.author.presence.activities[0]) {
+      if (message.author.presence.activities[0].type === "CUSTOM_STATUS") {
+        uPresence = `Custom Status: ${message.author.presence.activities[0].state}`
+      } else uPresence = message.author.presence.activities[0].name
+    } else uPresence = bot.lang.infos.userinfo.none
 
     const nomentembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
@@ -39,9 +46,7 @@ module.exports.run = async (bot, message, args, con) => {
       .addField(
         bot.lang.infos.userinfo.game,
         `${
-          message.author.presence.activity
-            ? message.author.presence.activity.name
-            : bot.lang.infos.userinfo.none
+          uPresence
         }`,
         true
       )
@@ -51,7 +56,7 @@ module.exports.run = async (bot, message, args, con) => {
   } else if (ment) {
     let rlist;
     let rmap = "";
-    mentmember.roles.map(role => {
+    mentmember.roles.cache.map(role => {
       if (role.id === message.guild.id) return;
       rmap += `<@&${role.id}>, `;
     });
