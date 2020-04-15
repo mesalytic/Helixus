@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (!message.channel.permissionsFor (bot.user).has ('MANAGE_ROLES'))
     return message.channel.send (bot.lang.mods.mute.bnotperm);
 
-  var muteRole = message.guild.roles.cache.cache.find (r => r.name === 'HMuted');
+  var muteRole = message.guild.roles.cache.find (r => r.name === 'HMuted');
 
   let member = message.mentions.members.first ();
   if (!member) return message.channel.send (bot.lang.mods.mute.noment);
