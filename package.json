@@ -21,7 +21,7 @@
     "libsodium-wrappers": "^0.7.6",
     "mathjs": "^6.6.4",
     "memejs": "^1.2.3",
-    "moment": "^2.24.0",
+    "moment": "^2.25.2",
     "moment-duration-format": "^2.3.2",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.0",
