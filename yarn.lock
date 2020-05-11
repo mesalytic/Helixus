@@ -521,8 +521,8 @@ detect-libc@^1.0.3:
 
 discord.js@discordjs/discord.js:
   version "12.2.0"
-  uid "67a74c33e1b124d609bee65f82656e7bf5b09764"
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/67a74c33e1b124d609bee65f82656e7bf5b09764"
+  uid "2583ad5da7db5ab92dfa357909f9c713db0a2981"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/2583ad5da7db5ab92dfa357909f9c713db0a2981"
   dependencies:
     "@discordjs/collection" "^0.1.5"
     "@discordjs/form-data" "^3.0.1"
