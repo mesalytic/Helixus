@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
   }
 
   let resp = "";
-  bot.users.cache.map(function(user) {
+  bot.users.cache.map(user => {
     if (user.discriminator == args[0]) return resp += `${user.username}\n`;
     else return;
   });
@@ -21,5 +21,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "discrim",
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

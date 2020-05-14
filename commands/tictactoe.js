@@ -6,10 +6,8 @@ module.exports.run = async (bot, message, args, con) => {
   const opponent = message.mentions.users.first();
   if (!opponent) return message.reply(bot.lang.fun.tictactoe.noplayer);
   if (opponent.bot) return message.reply(bot.lang.fun.tictactoe.bot);
-  if (opponent.id === message.author.id)
-    return message.reply(bot.lang.fun.tictactoe.yourself);
-  if (playing.has(message.channel.id))
-    return message.reply(bot.lang.fun.tictactoe.alreadyplaying);
+  if (opponent.id === message.author.id) return message.reply(bot.lang.fun.tictactoe.yourself);
+  if (playing.has(message.channel.id)) return message.reply(bot.lang.fun.tictactoe.alreadyplaying);
   playing.add(message.channel.id);
   try {
     const str = bot.lang.fun.tictactoe.asking;
@@ -49,7 +47,7 @@ module.exports.run = async (bot, message, args, con) => {
       };
       const turn = await message.channel.awaitMessages(filter, {
         max: 1,
-        time: 30000
+        time: 30000,
       });
       if (!turn.size) {
         await message.channel.send(bot.lang.fun.tictactoe.timesup);
@@ -64,15 +62,15 @@ module.exports.run = async (bot, message, args, con) => {
     }
     playing.delete(message.channel.id);
     return message.channel.send(
-      winner
-        ? `${bot.lang.fun.tictactoe.win}${winner} !\`\`\`
+      winner ?
+        `${bot.lang.fun.tictactoe.win}${winner} !\`\`\`
         ${sides[0]} | ${sides[1]} | ${sides[2]}
         —————————
         ${sides[3]} | ${sides[4]} | ${sides[5]}
         —————————
         ${sides[6]} | ${sides[7]} | ${sides[8]}
-        \`\`\``
-        : bot.lang.fun.tictactoe.tie
+        \`\`\`` :
+        bot.lang.fun.tictactoe.tie,
     );
   } catch (err) {
     playing.delete(message.channel.id);
@@ -95,5 +93,5 @@ function verifyWin(sides) {
 module.exports.help = {
   name: "tictactoe",
   catégorie: "Fun",
-  helpcaté: "fun"
+  helpcaté: "fun",
 };

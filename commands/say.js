@@ -6,13 +6,12 @@ module.exports.run = async (bot, message, args, con) => {
     .slice(" ");
   if (!saymess) return message.reply(bot.lang.admin.say.noargs);
   if (message.author === bot.user) return;
-  if (!message.channel.permissionsFor(message.author).has("ADMINISTRATOR")) return message.reply("You don't have the permission.")
+  if (!message.channel.permissionsFor(message.author).has("ADMINISTRATOR")) return message.reply("You don't have the permission.");
     message.delete({ timeout: 30 });
     message.channel.send(saymess);
-
 };
 module.exports.help = {
   name: "say",
   catégorie: "Administration",
-  helpcaté: "admin"
+  helpcaté: "admin",
 };

@@ -4,8 +4,7 @@ module.exports.run = async (bot, message, args, con) => {
   const map = bot.skipVotes;
   const mapload = map.get(message.guild.id);
 
-  if (!message.member.voice.channel)
-    return message.channel.send(bot.lang.musique.skip.nochannel);
+  if (!message.member.voice.channel) return message.channel.send(bot.lang.musique.skip.nochannel);
   if (!serverQueue) return message.channel.send(bot.lang.musique.skip.nomusic);
 
   if (message.member.voice.channel.members.size === 3) {
@@ -13,8 +12,7 @@ module.exports.run = async (bot, message, args, con) => {
     return await serverQueue.connection.dispatcher.end();
   }
 
-  if (mapload.users.includes(message.author.id))
-    return message.channel.send(bot.lang.musique.skip.alrvoted);
+  if (mapload.users.includes(message.author.id)) return message.channel.send(bot.lang.musique.skip.alrvoted);
 
   mapload.users.push(message.author.id);
   await map.set(message.guild.id, mapload);
@@ -24,7 +22,7 @@ module.exports.run = async (bot, message, args, con) => {
       .replace("${message.author}", message.author)
       .replace(
         "${message.guild.me.voiceChannel.members.size / 2}",
-        parseInt(message.guild.me.voice.channel.members.size / 2, 10)
+        parseInt(message.guild.me.voice.channel.members.size / 2, 10),
       );
     message.channel.send(newvstr);
   }
@@ -33,7 +31,7 @@ module.exports.run = async (bot, message, args, con) => {
       .replace("${message.author}", message.author)
       .replace(
         "${message.guild.me.voiceChannel.members.size / 2}",
-        parseInt(message.guild.me.voice.channel.members.size / 2, 10)
+        parseInt(message.guild.me.voice.channel.members.size / 2, 10),
       )
       .replace("${mapload.users.length}", mapload.users.length);
     message.channel.send(vstr);
@@ -46,5 +44,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "skip",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

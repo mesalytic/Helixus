@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "reverse",
   catégorie: "Fun",
-  helpcaté: "fun"
+  helpcaté: "fun",
 };
 function reverseString(str) {
   return str

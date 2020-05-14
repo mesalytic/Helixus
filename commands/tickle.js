@@ -10,17 +10,17 @@ module.exports.run = async (bot, message, args, con) => {
   const embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
     .setDescription(
-      member
-        ? bot.lang.rp.tickle.ment
+      member ?
+        bot.lang.rp.tickle.ment
             .replace(
               "${message.member.user.username}",
-              message.member.user.username
+              message.member.user.username,
             )
-            .replace("${member.user.username}", member.user.username)
-        : bot.lang.rp.tickle.noment.replace(
+            .replace("${member.user.username}", member.user.username) :
+        bot.lang.rp.tickle.noment.replace(
             "${message.member.user.username}",
-            message.member.user.username
-          )
+            message.member.user.username,
+          ),
     )
     .setImage(image.url)
     .setFooter("Tickle - Helixus")
@@ -30,5 +30,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "tickle",
   catégorie: "RP",
-  helpcaté: "rp"
+  helpcaté: "rp",
 };

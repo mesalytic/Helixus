@@ -5,20 +5,20 @@ module.exports.run = async (bot, message, args, con) => {
     const { body } = await request
       .get("https://api.qrserver.com/v1/create-qr-code/")
       .query({
-        data: args.join(" ")
+        data: args.join(" "),
       });
     return message.channel.send({
       files: [
         {
           attachment: body,
-          name: "qr-code.png"
-        }
-      ]
+          name: "qr-code.png",
+        },
+      ],
     });
   } catch (err) {
     const str = bot.lang.images.qrcode.error.replace(
       "${err.message}",
-      err.message
+      err.message,
     );
     return message.reply(str);
   }
@@ -26,5 +26,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "qrcode",
   catégorie: "Images",
-  helpcaté: "images"
+  helpcaté: "images",
 };

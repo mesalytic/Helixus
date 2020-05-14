@@ -22,17 +22,17 @@ module.exports.run = async (bot, message, args, con) => {
           `${bot.lang.levels.level.level
             .replace("${lvl}", lvl)
             .replace("${xp}", xp)
-            .replace("${diffenrece}", clvl)}`
+            .replace("${diffenrece}", clvl)}`,
         )
         .setFooter(
-          bot.lang.levels.level.difference.replace("${difference}", difference)
+          bot.lang.levels.level.difference.replace("${difference}", difference),
         );
       message.channel.send(lvlEmbed);
-    }
+    },
   );
 };
 module.exports.help = {
   name: "level",
   catégorie: "Levels",
-  helpcaté: "levels"
+  helpcaté: "levels",
 };

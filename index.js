@@ -1,4 +1,4 @@
-require("./util/xrequire"); // xrequire, better version of xrequire
+require("./util/xrequire"); // Xrequire, better version of xrequire
 
 const Discord = xrequire("discord.js");
 const mysql = xrequire("mysql");
@@ -10,7 +10,7 @@ const roles = [
   "Jeux ferroviaires",
   "Jeux de bus/car",
   "Jeux agricoles",
-  "Concours/Events"
+  "Concours/Events",
 ];
 const reactions = ["🚚", "🚋", "🚌", "🚜", "⏰"];
 
@@ -26,7 +26,7 @@ var con = mysql.createConnection({
   host: config.dbhost,
   user: "root",
   password: config.dbpassword,
-  database: "HelixusV2"
+  database: "HelixusV2",
 });
 con.connect(err => {
   if (err) throw err;
@@ -36,7 +36,7 @@ con.connect(err => {
 bot.on("ready", async () => {
   const wb = new Discord.WebhookClient(
     config.webhook.status.id,
-    config.webhook.status.password
+    config.webhook.status.password,
   );
   let e = new Discord.MessageEmbed()
     .setColor("#32CD32")
@@ -46,30 +46,30 @@ bot.on("ready", async () => {
     `[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] +
       1}/2 connected with ${bot.users.cache.size} users and ${
       bot.guilds.cache.size
-    } guilds.`
+    } guilds.`,
   );
   const promises = [
     bot.shard.fetchClientValues("guilds.cache.size"),
     bot.shard.broadcastEval(
-      "this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)"
-    )
+      "this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)",
+    ),
   ];
 
   Promise.all(promises).then(res => {
     const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
     const members = res[1].reduce((prev, member) => prev + member, 0);
     bot.shard.broadcastEval(
-      `this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`
+      `this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`,
     );
   });
 });
 
 bot.on("guildCreate", guild => {
-  // con.query (`INSERT INTO Cases (guildID) VALUES ('${guild.id}')`);
+  // Con.query (`INSERT INTO Cases (guildID) VALUES ('${guild.id}')`);
 
   const wb = new Discord.WebhookClient(
     config.webhook.joinleaves.id,
-    config.webhook.joinleaves.password
+    config.webhook.joinleaves.password,
   );
 
   const promises = [bot.shard.fetchClientValues("guilds.cache.size")];
@@ -81,7 +81,7 @@ bot.on("guildCreate", guild => {
       .setColor("#40E0D0")
       .setTitle(`**A server added the bot!**`)
       .setDescription(
-        `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in **${guilds}** guilds!`
+        `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in **${guilds}** guilds!`,
       )
       .setThumbnail(guild.iconURL({ size: 256 }))
       .setTimestamp();
@@ -92,7 +92,7 @@ bot.on("guildCreate", guild => {
 bot.on("guildDelete", guild => {
   const wb = new Discord.WebhookClient(
     config.webhook.joinleaves.id,
-    config.webhook.joinleaves.password
+    config.webhook.joinleaves.password,
   );
 
   const promises = [bot.shard.fetchClientValues("guilds.cache.size")];
@@ -104,7 +104,7 @@ bot.on("guildDelete", guild => {
       .setColor("#008080")
       .setTitle(`**A server removed the bot!**`)
       .setDescription(
-        `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in ${guilds} guilds`
+        `Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in ${guilds} guilds`,
       )
       .setThumbnail(guild.iconURL({ size: 256 }))
       .setTimestamp();
@@ -123,26 +123,27 @@ con.query(`SELECT * FROM LockdownChannels`, (err, rows) => {
         con.query(
           `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
           (err, langs) => {
-            if (!langs[0])
-              bot.lang = JSON.parse(
-                fs.readFileSync(`./languages/en.json`, "utf8")
+            if (!langs[0]) {
+ bot.lang = JSON.parse(
+                fs.readFileSync(`./languages/en.json`, "utf8"),
               );
-            else
-              bot.lang = JSON.parse(
-                fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+                fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
               );
-          }
+}
+          },
         );
         if (Number(r.time - new Date().getTime()) <= 0) {
           channel
             .createOverwrite(channel.guild.id, {
-              SEND_MESSAGES: null
+              SEND_MESSAGES: null,
             })
             .then(() => {
               channel.send(bot.lang.mods.lockdown.unlocked);
 
               con.query(
-                `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`
+                `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`,
               );
             })
             .catch(error => {
@@ -151,18 +152,18 @@ con.query(`SELECT * FROM LockdownChannels`, (err, rows) => {
         } else {
           channel
             .createOverwrite(channel.guild.id, {
-              SEND_MESSAGES: false
+              SEND_MESSAGES: false,
             })
             .then(() => {
               setTimeout(() => {
                 channel
                   .createOverwrite(channel.guild.id, {
-                    SEND_MESSAGES: null
+                    SEND_MESSAGES: null,
                   })
                   .then(channel.send(bot.lang.mods.lockdown.unlocked))
                   .catch(console.error);
                 con.query(
-                  `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`
+                  `DELETE FROM LockdownChannels WHERE channelID='${r.channelID}'`,
                 );
               }, Number(r.time - new Date().getTime()));
             })
@@ -178,55 +179,55 @@ con.query(`SELECT * FROM LockdownChannels`, (err, rows) => {
 bot.on("shardReconnecting", id => {
   const wb = new Discord.WebhookClient(
     config.webhook.status.id,
-    config.webhook.status.password
+    config.webhook.status.password,
   );
   let e = new Discord.MessageEmbed()
     .setColor("#FFA500")
     .setTitle(`:warning: Shard ${bot.shard.ids[0] + 1} is reconnecting..`);
   wb.send(e);
-  // must see if it's id or id+1
+  // Must see if it's id or id+1
 });
 
 bot.on("shardDisconnect", (event, id) => {
   const wb = new Discord.WebhookClient(
     config.webhook.status.id,
-    config.webhook.status.password
+    config.webhook.status.password,
   );
   let e = new Discord.MessageEmbed()
     .setColor("#FF0000")
     .setTitle(`:warning: Shard ${bot.shard.ids[0] + 1} is disconnected !`);
   wb.send(e);
-  // must see if it's id or id+1
+  // Must see if it's id or id+1
 });
 
 bot.on("shardResumed", (id, events) => {
   const wb = new Discord.WebhookClient(
     config.webhook.status.id,
-    config.webhook.status.password
+    config.webhook.status.password,
   );
   let e = new Discord.MessageEmbed()
     .setColor("#008080")
     .setTitle(
       `:warning: Shard ${bot.shard.ids[0] +
-        1} has resumed with ${events} resumed events!`
+        1} has resumed with ${events} resumed events!`,
     );
   wb.send(e);
-  // must see if it's id or id+1
+  // Must see if it's id or id+1
 });
 
 bot.on("shardResumed", (id, events) => {
   const wb = new Discord.WebhookClient(
     config.webhook.status.id,
-    config.webhook.status.password
+    config.webhook.status.password,
   );
   let e = new Discord.MessageEmbed()
     .setColor("#008080")
     .setTitle(
       `:warning: Shard ${bot.shard.ids[0] +
-        1} has resumed with ${events} resumed events!`
+        1} has resumed with ${events} resumed events!`,
     );
   wb.send(e);
-  // must see if it's id or id+1
+  // Must see if it's id or id+1
 });
 
 bot.on("channelCreate", channel => {
@@ -237,14 +238,15 @@ bot.on("channelCreate", channel => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -252,11 +254,11 @@ bot.on("channelCreate", channel => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const str = bot.lang.logs.channelCreate.replace(
                       "${channel.id}",
-                      channel.id
+                      channel.id,
                     );
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(channel.guild.name, channel.guild.iconURL())
@@ -270,9 +272,9 @@ bot.on("channelCreate", channel => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -284,14 +286,15 @@ bot.on("channelDelete", channel => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -299,11 +302,11 @@ bot.on("channelDelete", channel => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const str = bot.lang.logs.channelDelete.replace(
                       "${channel.name}",
-                      channel.name
+                      channel.name,
                     );
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(channel.guild.name, channel.guild.iconURL())
@@ -317,9 +320,9 @@ bot.on("channelDelete", channel => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -330,14 +333,15 @@ bot.on("emojiCreate", emoji => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${emoji.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -345,11 +349,11 @@ bot.on("emojiCreate", emoji => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const str = bot.lang.logs.emojiCreate.replace(
                       "${emoji.name}",
-                      emoji.name
+                      emoji.name,
                     );
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(emoji.guild.name, emoji.guild.iconURL())
@@ -364,9 +368,9 @@ bot.on("emojiCreate", emoji => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -412,14 +416,15 @@ bot.on("emojiDelete", emoji => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${emoji.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -427,11 +432,11 @@ bot.on("emojiDelete", emoji => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const str = bot.lang.logs.emojiDelete.replace(
                       "${emoji.name}",
-                      emoji.name
+                      emoji.name,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(emoji.guild.name, emoji.guild.iconURL())
@@ -445,9 +450,9 @@ bot.on("emojiDelete", emoji => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -458,14 +463,15 @@ bot.on("emojiUpdate", (oldEmoji, newEmoji) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${oldEmoji.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -473,12 +479,12 @@ bot.on("emojiUpdate", (oldEmoji, newEmoji) => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     if (oldEmoji.name === newEmoji.name) return;
                     const str = bot.lang.logs.emojiUpdate.desc.replace(
                       "${oldEmoji.name}",
-                      oldEmoji.name
+                      oldEmoji.name,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(oldEmoji.guild.name, oldEmoji.guild.iconURL())
@@ -494,9 +500,9 @@ bot.on("emojiUpdate", (oldEmoji, newEmoji) => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -507,14 +513,15 @@ bot.on("guildBanAdd", async (guild, user) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${guild.id}'`,
         async (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -522,28 +529,28 @@ bot.on("guildBanAdd", async (guild, user) => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     if (!guild.me.permissions.has("VIEW_AUDIT_LOG")) return;
                     const str = bot.lang.logs.guildBanAdd.desc.replace(
                       "${user.tag}",
-                      user.tag
+                      user.tag,
                     );
                     let entries = await guild
                       .fetchAuditLogs({
-                        type: "MEMBER_BAN_ADD"
+                        type: "MEMBER_BAN_ADD",
                       })
                       .then(audit => {
                         let reason;
                         if (!audit.entries.first()) {
                           reason = bot.lang.logs.guildBanAdd.noreason;
-                        } else reason = audit.entries.first().reason;
+                        } else { reason = audit.entries.first().reason; }
                         const chanCr = new Discord.MessageEmbed()
                           .setAuthor(guild.name, guild.iconURL())
                           .setDescription(str)
                           .addField(
                             bot.lang.logs.guildBanAdd.bannedby,
-                            audit.entries.first().executor.tag
+                            audit.entries.first().executor.tag,
                           )
                           .addField(bot.lang.logs.guildBanAdd.reason, reason)
                           .setThumbnail(user.avatarURL())
@@ -557,9 +564,9 @@ bot.on("guildBanAdd", async (guild, user) => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -570,14 +577,15 @@ bot.on("guildBanRemove", async (guild, user) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${guild.id}'`,
         async (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -585,27 +593,27 @@ bot.on("guildBanRemove", async (guild, user) => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const str = bot.lang.logs.guildBanRemove.desc.replace(
                       "${user.tag}",
-                      user.tag
+                      user.tag,
                     );
                     const entry = await guild
                       .fetchAuditLogs({
-                        type: "MEMBER_BAN_REMOVE"
+                        type: "MEMBER_BAN_REMOVE",
                       })
                       .then(audit => {
                         let reason;
                         if (!audit.entries.first()) {
                           reason = bot.lang.logs.guildBanRemove.noreason;
-                        } else reason = audit.entries.first().reason;
+                        } else { reason = audit.entries.first().reason; }
                         const chanCr = new Discord.MessageEmbed()
                           .setAuthor(guild.name, guild.iconURL())
                           .setDescription(str)
                           .addField(
                             bot.lang.logs.guildBanRemove.unbannedby,
-                            audit.entries.first().executor.tag
+                            audit.entries.first().executor.tag,
                           )
                           .addField(bot.lang.logs.guildBanRemove.reason, reason)
                           .setThumbnail(user.avatarURL())
@@ -619,9 +627,9 @@ bot.on("guildBanRemove", async (guild, user) => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -632,14 +640,15 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${oldMember.guild.id}'`,
         async (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -647,7 +656,7 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     if (oldMember.nickname !== newMember.nickname) {
                       let oMemberNick;
@@ -666,82 +675,82 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
                       }
                       const entry = await newMember.guild
                         .fetchAuditLogs({
-                          type: "MEMBER_UPDATE"
+                          type: "MEMBER_UPDATE",
                         })
                         .then(audit => {
                           const str = bot.lang.logs.guildMemberUpdate.desc1;
                           const res = str.replace(
                             "${newMember.user.tag}",
-                            newMember.user.tag
+                            newMember.user.tag,
                           );
                           const nickEmbed = new Discord.MessageEmbed()
                             .setAuthor(
                               newMember.user.tag,
-                              newMember.user.avatarURL()
+                              newMember.user.avatarURL(),
                             )
                             .setDescription(res)
                             .addField(
                               bot.lang.logs.guildMemberUpdate.oldnickname,
-                              oMemberNick
+                              oMemberNick,
                             )
                             .addField(
                               bot.lang.logs.guildMemberUpdate.newnickname,
-                              nMemberNick
+                              nMemberNick,
                             )
                             .addField(
                               bot.lang.logs.guildMemberUpdate.changedby,
-                              audit.entries.first().executor.tag
+                              audit.entries.first().executor.tag,
                             )
                             .setColor("RANDOM");
                           wb.send(nickEmbed);
                         });
                     }
                     var newrole =
-                      "`" +
+                      `\`${
                       newMember.roles.cache
                         .filter(
                           r =>
                             oldMember.roles
                               .cache.map(r => r.id)
                               .join(", ")
-                              .indexOf(r.id) == -1
+                              .indexOf(r.id) == -1,
                         )
-                        .map(r => r.name) +
-                      "`";
+                        .map(r => r.name)
+                      }\``;
                     var oldrole =
-                      "`" +
+                      `\`${
                       oldMember.roles.cache
                         .filter(
                           r =>
-                            newMember.roles.cache.map(r => r.id).indexOf(r.id) == -1
+                            newMember.roles.cache.map(r => r.id).indexOf(r.id) == -1,
                         )
-                        .map(r => r.name) +
-                      "`";
+                        .map(r => r.name)
+                      }\``;
                     if (newrole !== "``") {
                       //
                       const entry = await newMember.guild
                         .fetchAuditLogs({
-                          type: "MEMBER_ROLE_UPDATE"
+                          type: "MEMBER_ROLE_UPDATE",
                         })
                         .then(audit => {
                           const str = bot.lang.logs.guildMemberUpdate.desc2;
                           const res = str.replace(
                             "${newMember.user.tag}",
-                            newMember.user.tag
+                            newMember.user.tag,
                           );
                           const nickEmbed = new Discord.MessageEmbed()
                             .setAuthor(
                               newMember.user.username,
-                              newMember.user.avatarURL()
+                              newMember.user.avatarURL(),
                             )
                             .setDescription(res)
                             .addField(
                               bot.lang.logs.guildMemberUpdate.roleobtained,
-                              newrole
+                              newrole,
                             )
                             .addField(
                               bot.lang.logs.guildMemberUpdate.givenby,
-                              audit.entries.first().executor.tag
+                              audit.entries.first().executor.tag,
                             )
                             .setColor("RANDOM");
                           wb.send(nickEmbed);
@@ -750,27 +759,27 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
                     if (oldrole !== "``") {
                       const entry = await newMember.guild
                         .fetchAuditLogs({
-                          type: "MEMBER_ROLE_UPDATE"
+                          type: "MEMBER_ROLE_UPDATE",
                         })
                         .then(audit => {
                           const str = bot.lang.logs.guildMemberUpdate.desc3;
                           const res = str.replace(
                             "${newMember.user.tag}",
-                            newMember.user.tag
+                            newMember.user.tag,
                           );
                           const nickEmbed = new Discord.MessageEmbed()
                             .setAuthor(
                               newMember.user.tag,
-                              newMember.user.avatarURL()
+                              newMember.user.avatarURL(),
                             )
                             .setDescription(res)
                             .addField(
                               bot.lang.logs.guildMemberUpdate.lostrole,
-                              oldrole
+                              oldrole,
                             )
                             .addField(
                               bot.lang.logs.guildMemberUpdate.removedby,
-                              audit.entries.first().executor.tag
+                              audit.entries.first().executor.tag,
                             )
                             .setColor("RANDOM");
                           wb.send(nickEmbed);
@@ -781,16 +790,16 @@ bot.on("guildMemberUpdate", async (oldMember, newMember) => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
 bot.on("guildMemberAdd", member => {
   if (member.guild.id === "355765654894411777") {
     member.send(
-      `Salut ${member}, et **bienvenue sur le serveur Discord de Zenix <:zenix:397818655829917698> !**\n\n__**Pour le moment, tu ne peux parler que dans le salon <#471368841247588363>, c'est normal ! Pour accéder au reste du serveur et rencontrer les autres membres, tu dois :**__\n● **Nous envoyer rapidement** quelques infos de base sur toi : Nom ou pseudo, âge, jeux que tu aimes, etc...\n● Avoir un pseudo lisible et mentionnable facilement (doit commencer par au moins 3 lettres de la typographie de base) et personnel\n\n__**Veille aussi à :**__\n● Éviter de mentionner les modos/admins pour qu'ils voient ta présentation : ils la verront quand ils seront dispo.\n● Ne fais pas de pub ou tu seras automatiquement kick, ce n'est pas le but du serveur ;)\n\nQuand ta présentation aura été validée, tu pourras t'attribuer les rôles de ton choix dans le salon <#488038141467557889>.\n\nTu as 72h pour envoyer ta présentation, sinon on considèrera que tu n'es plus intéressé et tu seras kick du serveur ;)\n\n️️️️️️⚠️ **Envoyez votre présentation dans le chat <#471368841247588363> du serveur, et pas directement à moi (je ne suis qu'un bot ! Un bot particulièrement BG, mais un bot quand même...)**\n\nCordialement,\nL'équipe de modération du Discord de Zenix`
+      `Salut ${member}, et **bienvenue sur le serveur Discord de Zenix <:zenix:397818655829917698> !**\n\n__**Pour le moment, tu ne peux parler que dans le salon <#471368841247588363>, c'est normal ! Pour accéder au reste du serveur et rencontrer les autres membres, tu dois :**__\n● **Nous envoyer rapidement** quelques infos de base sur toi : Nom ou pseudo, âge, jeux que tu aimes, etc...\n● Avoir un pseudo lisible et mentionnable facilement (doit commencer par au moins 3 lettres de la typographie de base) et personnel\n\n__**Veille aussi à :**__\n● Éviter de mentionner les modos/admins pour qu'ils voient ta présentation : ils la verront quand ils seront dispo.\n● Ne fais pas de pub ou tu seras automatiquement kick, ce n'est pas le but du serveur ;)\n\nQuand ta présentation aura été validée, tu pourras t'attribuer les rôles de ton choix dans le salon <#488038141467557889>.\n\nTu as 72h pour envoyer ta présentation, sinon on considèrera que tu n'es plus intéressé et tu seras kick du serveur ;)\n\n️️️️️️⚠️ **Envoyez votre présentation dans le chat <#471368841247588363> du serveur, et pas directement à moi (je ne suis qu'un bot ! Un bot particulièrement BG, mais un bot quand même...)**\n\nCordialement,\nL'équipe de modération du Discord de Zenix`,
     );
   }
   con.query(
@@ -807,7 +816,7 @@ bot.on("guildMemberAdd", member => {
           .replace(guildregex, member.guild.name);
         member.guild.channels.resolve(rows[0].channelID).send(res);
       }
-    }
+    },
   );
   con.query(
     `SELECT * FROM Autorole WHERE guildId=${member.guild.id}`,
@@ -819,7 +828,7 @@ bot.on("guildMemberAdd", member => {
           throw new Error(err);
         });
       }
-    }
+    },
   );
 
   con.query(
@@ -828,14 +837,15 @@ bot.on("guildMemberAdd", member => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${member.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -843,11 +853,11 @@ bot.on("guildMemberAdd", member => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const str = bot.lang.logs.guildMemberAdd.desc.replace(
                       "${member.user.tag}",
-                      member.user.tag
+                      member.user.tag,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(member.user.username, member.user.avatarURL())
@@ -862,9 +872,9 @@ bot.on("guildMemberAdd", member => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -881,7 +891,7 @@ bot.on("guildMemberRemove", member => {
           .replace(guildregex, member.guild.name);
         member.guild.channels.resolve(rows[0].channelID).send(res);
       }
-    }
+    },
   );
 
   con.query(
@@ -890,14 +900,15 @@ bot.on("guildMemberRemove", member => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${member.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -905,11 +916,11 @@ bot.on("guildMemberRemove", member => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const str = bot.lang.logs.guildMemberRemove.replace(
                       "${member.user.tag}",
-                      member.user.tag
+                      member.user.tag,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(member.user.tag, member.user.avatarURL())
@@ -924,9 +935,9 @@ bot.on("guildMemberRemove", member => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -937,14 +948,15 @@ bot.on("messageDelete", message => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${message.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           con.query(
             `SELECT * FROM LogsIgnore WHERE guildID='${message.guild.id}' AND channelID='${message.channel.id}'`,
             (err, ignore) => {
@@ -956,11 +968,11 @@ bot.on("messageDelete", message => {
                         if (rows[0].webhookID && rows[0].webhookToken) {
                           const wb = new Discord.WebhookClient(
                             rows[0].webhookID,
-                            rows[0].webhookToken
+                            rows[0].webhookToken,
                           );
                           message.guild
                             .fetchAuditLogs({
-                              type: "MESSAGE_DELETE"
+                              type: "MESSAGE_DELETE",
                             })
                             .then(audit => {
                               const entry = audit.entries.first();
@@ -971,14 +983,13 @@ bot.on("messageDelete", message => {
                                   body: q,
                                   headers: {
                                     e,
-                                    s
-                                  }
+                                    s,
+                                  },
                                 }).then(y => y.text());
                               if (
                                 !message.attachments.first() &&
                                 !message.content
-                              )
-                                return;
+                              ) return;
                               if (message.author.bot) return;
                               let author;
                               if (
@@ -994,21 +1005,21 @@ bot.on("messageDelete", message => {
                               const str = bot.lang.logs.messageDelete.desc
                                 .replace(
                                   "${message.author.tag}",
-                                  message.author.tag
+                                  message.author.tag,
                                 )
                                 .replace(
                                   "${message.channel.id}",
-                                  message.channel.id
+                                  message.channel.id,
                                 );
                               const chanCr = new Discord.MessageEmbed()
                                 .setAuthor(
                                   message.author.tag,
-                                  message.author.avatarURL()
+                                  message.author.avatarURL(),
                                 )
                                 .setDescription(str)
                                 .addField(
                                   bot.lang.logs.messageDelete.deletedby,
-                                  author
+                                  author,
                                 )
                                 .setFooter(`ID: ${message.id}`)
                                 .setTimestamp()
@@ -1021,44 +1032,40 @@ bot.on("messageDelete", message => {
                                     if (!message.content) {
                                       chanCr.addField(
                                         bot.lang.logs.messageDelete.attachment,
-                                        message.attachments.first().proxyURL
+                                        message.attachments.first().proxyURL,
                                       );
-                                    } else {
-                                      if (message.content.length > 1023) {
+                                    } else if (message.content.length > 1023) {
                                         chanCr.addField(
                                           bot.lang.logs.messageDelete.message,
-                                          m
+                                          m,
                                         );
                                         chanCr.addField(
                                           bot.lang.logs.messageDelete
                                             .attachment,
-                                          message.attachments.first().proxyURL
+                                          message.attachments.first().proxyURL,
                                         );
                                       } else {
                                         chanCr.addField(
                                           bot.lang.logs.messageDelete.message,
-                                          message.content
+                                          message.content,
                                         );
                                         chanCr.addField(
                                           bot.lang.logs.messageDelete
                                             .attachment,
-                                          message.attachments.first().proxyURL
+                                          message.attachments.first().proxyURL,
                                         );
                                       }
-                                    }
-                                  } else {
-                                    if (message.content.length > 1023) {
+                                  } else if (message.content.length > 1023) {
                                       chanCr.addField(
                                         bot.lang.logs.messageDelete.message,
-                                        m
+                                        m,
                                       );
                                     } else {
                                       chanCr.addField(
                                         bot.lang.logs.messageDelete.message,
-                                        message.content
+                                        message.content,
                                       );
                                     }
-                                  }
                                 })
                                 .then(() => wb.send(chanCr));
                             });
@@ -1068,11 +1075,11 @@ bot.on("messageDelete", message => {
                   }
                 }
               }
-            }
+            },
           );
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -1083,12 +1090,11 @@ bot.on("messageDeleteBulk", messages => {
     con.query(
       `SELECT * FROM Langs WHERE guildID='${guild.id}'`,
       (err, langs) => {
-        if (!langs[0])
-          bot.lang = JSON.parse(fs.readFileSync(`./languages/en.json`, "utf8"));
-        else
-          bot.lang = JSON.parse(
-            fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+        if (!langs[0]) { bot.lang = JSON.parse(fs.readFileSync(`./languages/en.json`, "utf8")); } else {
+ bot.lang = JSON.parse(
+            fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
           );
+}
         con.query(
           `SELECT * FROM LogsIgnore WHERE guildID='${guild.id}' AND channelID='${channel.id}'`,
           (err, ignore) => {
@@ -1100,7 +1106,7 @@ bot.on("messageDeleteBulk", messages => {
                       if (rows[0].webhookID && rows[0].webhookToken) {
                         const wb = new Discord.WebhookClient(
                           rows[0].webhookID,
-                          rows[0].webhookToken
+                          rows[0].webhookToken,
                         );
                         const fetch = xrequire("node-fetch");
                         const qbin = (q, e, s) =>
@@ -1109,8 +1115,8 @@ bot.on("messageDeleteBulk", messages => {
                             body: q,
                             headers: {
                               e,
-                              s
-                            }
+                              s,
+                            },
                           }).then(y => y.text());
                         let haste;
                         let msg = bot.lang.logs.messageDeleteBulk.msg;
@@ -1121,7 +1127,7 @@ bot.on("messageDeleteBulk", messages => {
                               bot.lang.logs.messageDeleteBulk.attachment;
                             const res = str.replace(
                               "${m.attachments.first().url}",
-                              m.attachments.first().proxyURL
+                              m.attachments.first().proxyURL,
                             );
                             content = res;
                           } else if (m.attachments.first() && m.content) {
@@ -1130,17 +1136,15 @@ bot.on("messageDeleteBulk", messages => {
                             const res = str
                               .replace(
                                 "${m.attachments.first().url}",
-                                m.attachments.first().proxyURL
+                                m.attachments.first().proxyURL,
                               )
                               .replace("${m.content}", m.content);
                             content = res;
-                          } else if (m.content) content = m.content;
-                          else
-                            content = bot.lang.logs.messageDeleteBulk.nocontent;
+                          } else if (m.content) { content = m.content; } else { content = bot.lang.logs.messageDeleteBulk.nocontent; }
                           const moment = xrequire("moment");
                           moment.locale("fr");
                           const m_time = moment(m.createdAt).format(
-                            bot.lang.logs.messageDeleteBulk.timeformat
+                            bot.lang.logs.messageDeleteBulk.timeformat,
                           );
                           msg += `${m.author.tag} (${m.author.id}) | ${m.id} | ${m_time} | ${content}\n`;
                         });
@@ -1149,14 +1153,14 @@ bot.on("messageDeleteBulk", messages => {
                             .replace("${messages.size}", messages.size)
                             .replace(
                               "${messages.first().channel.id}",
-                              messages.first().channel.id
+                              messages.first().channel.id,
                             );
                           const chanCr = new Discord.MessageEmbed()
                             .setAuthor(bot.lang.logs.messageDeleteBulk.mass)
                             .setDescription(str)
                             .addField(
                               bot.lang.logs.messageDeleteBulk.deleted,
-                              newGist
+                              newGist,
                             )
                             .setTimestamp()
                             .setFooter(messages.first().id)
@@ -1169,9 +1173,9 @@ bot.on("messageDeleteBulk", messages => {
                 }
               }
             }
-          }
+          },
         );
-      }
+      },
     );
   });
 });
@@ -1186,14 +1190,15 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
           con.query(
             `SELECT * FROM LogsIgnore WHERE guildID='${oldMessage.guild.id}' AND channelID='${oldMessage.channel.id}'`,
             (err, ignore) => {
-              if (!langs[0])
-                bot.lang = JSON.parse(
-                  fs.readFileSync(`./languages/en.json`, "utf8")
+              if (!langs[0]) {
+ bot.lang = JSON.parse(
+                  fs.readFileSync(`./languages/en.json`, "utf8"),
                 );
-              else
-                bot.lang = JSON.parse(
-                  fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+                  fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
                 );
+}
               if (rows[0]) {
                 if (rows[0].channelID) {
                   if (rows[0].activated === "true") {
@@ -1202,7 +1207,7 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
                         if (rows[0].webhookID && rows[0].webhookToken) {
                           const wb = new Discord.WebhookClient(
                             rows[0].webhookID,
-                            rows[0].webhookToken
+                            rows[0].webhookToken,
                           );
                           if (oldMessage.content !== newMessage.content) {
                             if (oldMessage.content.length !== 0) {
@@ -1210,29 +1215,29 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
                                 const str = bot.lang.logs.messageUpdate.desc
                                   .replace(
                                     "${oldMessage.author.tag}",
-                                    oldMessage.author.tag
+                                    oldMessage.author.tag,
                                   )
                                   .replace(
                                     "${oldMessage.channel.id}",
-                                    oldMessage.channel.id
+                                    oldMessage.channel.id,
                                   );
                                 const chanCr = new Discord.MessageEmbed()
                                   .setAuthor(
                                     oldMessage.author.tag,
-                                    oldMessage.author.avatarURL()
+                                    oldMessage.author.avatarURL(),
                                   )
                                   .setDescription(str)
                                   .addField(
                                     bot.lang.logs.messageUpdate.old,
-                                    oldMessage.content
+                                    oldMessage.content,
                                   )
                                   .addField(
                                     bot.lang.logs.messageUpdate.new,
-                                    newMessage.content
+                                    newMessage.content,
                                   )
                                   .setTimestamp()
                                   .setFooter(
-                                    `ID user : ${oldMessage.author.id} | ID msg : ${oldMessage.id}`
+                                    `ID user : ${oldMessage.author.id} | ID msg : ${oldMessage.id}`,
                                   )
                                   .setColor("RANDOM");
                                 wb.send(chanCr);
@@ -1242,16 +1247,16 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
                         }
                       }
 
-                      //}
+                      // }
                     }
                   }
                 }
               }
-            }
+            },
           );
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -1262,14 +1267,15 @@ bot.on("roleCreate", role => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${role.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -1277,11 +1283,11 @@ bot.on("roleCreate", role => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const str = bot.lang.logs.roleCreate.replace(
                       "${role.name}",
-                      role.name
+                      role.name,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(role.guild.name, role.guild.iconURL())
@@ -1295,9 +1301,9 @@ bot.on("roleCreate", role => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -1308,14 +1314,15 @@ bot.on("roleDelete", role => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${role.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -1323,11 +1330,11 @@ bot.on("roleDelete", role => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     const str = bot.lang.logs.roleDelete.replace(
                       "${role.name}",
-                      role.name
+                      role.name,
                     );
                     const chanCr = new Discord.MessageEmbed()
                       .setAuthor(role.guild.name, role.guild.iconURL())
@@ -1341,9 +1348,9 @@ bot.on("roleDelete", role => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -1354,14 +1361,15 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${newState.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
+}
           if (rows[0]) {
             if (rows[0].channelID) {
               if (rows[0].activated === "true") {
@@ -1369,19 +1377,19 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                   if (rows[0].webhookID && rows[0].webhookToken) {
                     const wb = new Discord.WebhookClient(
                       rows[0].webhookID,
-                      rows[0].webhookToken
+                      rows[0].webhookToken,
                     );
                     if (!oldState.channel && newState.channel) {
                       const str = bot.lang.logs.voiceStateUpdate.joined
                         .replace(
                           "${voiceNew.user.tag}",
-                          newState.member.user.tag
+                          newState.member.user.tag,
                         )
                         .replace("${vcNew.name}", newState.channel.name);
                       const chanCr = new Discord.MessageEmbed()
                         .setAuthor(
                           newState.member.user.tag,
-                          newState.member.user.displayAvatarURL()
+                          newState.member.user.displayAvatarURL(),
                         )
                         .setDescription(str)
                         .setTimestamp()
@@ -1392,13 +1400,13 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                       const str = bot.lang.logs.voiceStateUpdate.leaved
                         .replace(
                           "${voiceNew.user.tag}",
-                          newState.member.user.tag
+                          newState.member.user.tag,
                         )
                         .replace("${vcOld.name}", oldState.channel.name);
                       const chanCr = new Discord.MessageEmbed()
                         .setAuthor(
                           newState.member.user.tag,
-                          newState.member.user.displayAvatarURL()
+                          newState.member.user.displayAvatarURL(),
                         )
                         .setDescription(str)
                         .setTimestamp()
@@ -1413,19 +1421,19 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                       const str = bot.lang.logs.voiceStateUpdate.switch
                         .replace(
                           "${voiceNew.user.tag}",
-                          newState.member.user.tag
+                          newState.member.user.tag,
                         )
                         .replace("${vcOld.name}", oldState.channel.name)
                         .replace("${vcNew.name}", newState.channel.name);
                       const chanCr = new Discord.MessageEmbed()
                         .setAuthor(
                           newState.member.user.tag,
-                          newState.member.user.displayAvatarURL()
+                          newState.member.user.displayAvatarURL(),
                         )
                         .setDescription(str)
                         .setTimestamp()
                         .setFooter(
-                          `ID: ${oldState.channel.id} -> ${newState.channel.id}`
+                          `ID: ${oldState.channel.id} -> ${newState.channel.id}`,
                         )
                         .setColor("RANDOM");
                       wb.send(chanCr);
@@ -1435,9 +1443,9 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
               }
             }
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -1469,7 +1477,7 @@ bot.on("message", async message => {
         message.reply("You are not AFK anymore.");
         con.query(`DELETE FROM Afk WHERE userID='${message.author.id}'`);
       }
-    }
+    },
   );
 
   const mentioned = message.mentions.members.first();
@@ -1479,10 +1487,10 @@ bot.on("message", async message => {
       (err, rows) => {
         if (rows[0]) {
           message.channel.send(
-            `${mentioned.user.tag} is afk : ${rows[0].reason}`
+            `${mentioned.user.tag} is afk : ${rows[0].reason}`,
           );
         }
-      }
+      },
     );
   }
 
@@ -1504,15 +1512,16 @@ bot.on("message", async message => {
       con.query(
         `SELECT * FROM Langs WHERE guildID='${message.guild.id}'`,
         (err, langs) => {
-          if (!langs[0])
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/en.json`, "utf8")
+          if (!langs[0]) {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/en.json`, "utf8"),
             );
-          else
-            bot.lang = JSON.parse(
-              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8")
+} else {
+ bot.lang = JSON.parse(
+              fs.readFileSync(`./languages/${langs[0].lang}.json`, "utf8"),
             );
-        }
+}
+        },
       );
 
       con.query(
@@ -1520,9 +1529,7 @@ bot.on("message", async message => {
         (err, rows) => {
           let auth;
 
-          if (!rows[0]) auth = true;
-          else if (rows[0].ignored === "false") auth = true;
-          else if (rows[0].ignored === "true") {
+          if (!rows[0]) { auth = true; } else if (rows[0].ignored === "false") { auth = true; } else if (rows[0].ignored === "true") {
             if (message.member.permissions.has("MANAGE_CHANNELS")) auth = true;
             else auth = false;
           }
@@ -1535,32 +1542,32 @@ bot.on("message", async message => {
             if (auth === false) return;
             const wb = new Discord.WebhookClient(
               config.webhook.commands.id,
-              config.webhook.commands.password
+              config.webhook.commands.password,
             );
             wb.send(
-              `\`\`\`${message.author.tag} - ${message.content} (${message.guild.name})\`\`\``
+              `\`\`\`${message.author.tag} - ${message.content} (${message.guild.name})\`\`\``,
             );
             commandfile.run(bot, message, args, con).catch(err => {
               message.reply(
-                "Oops, an error has been triggered, sorry for that! Our team will resolve this issue as quick as possible!"
+                "Oops, an error has been triggered, sorry for that! Our team will resolve this issue as quick as possible!",
               );
               const wb = new Discord.WebhookClient(
                 config.webhook.error.id,
-                config.webhook.error.password
+                config.webhook.error.password,
               );
 
               const e = new Discord.MessageEmbed()
                 .setColor("RANDOM")
                 .setDescription(
-                  `Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${commandfile.help.name}**\nMessage content: **${message.content}**\n\nError:\n\`${err.stack}\``
+                  `Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${commandfile.help.name}**\nMessage content: **${message.content}**\n\nError:\n\`${err.stack}\``,
                 );
 
               wb.send(e);
             });
           }
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -1579,20 +1586,21 @@ bot.on("message", message => {
     (err, rows) => {
       if (rows[0]) {
         if (rows[0].activated === "true") {
-          //begin
+          // Begin
           con.query(
             `SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`,
             (err, cRows) => {
-              if (!cRows[0])
-                con.query(
-                  `INSERT INTO Cooldowns (userID, active) VALUES ('${message.author.id}', 'true')`
+              if (!cRows[0]) {
+ con.query(
+                  `INSERT INTO Cooldowns (userID, active) VALUES ('${message.author.id}', 'true')`,
                 );
+}
               setTimeout(() => {
                 con.query(
-                  `DELETE FROM Cooldowns WHERE userID='${message.author.id}'`
+                  `DELETE FROM Cooldowns WHERE userID='${message.author.id}'`,
                 );
               }, 60 * 1000);
-            }
+            },
           );
 
           con.query(
@@ -1608,15 +1616,13 @@ bot.on("message", message => {
                   `UPDATE Levels SET level = '${Number(lRows[0].level) +
                     1}', points = '0' WHERE id = '${message.guild.id}-${
                     message.author.id
-                  }'`
+                  }'`,
                 );
 
                 if (
                   !rows[0].lvlupChannelID ||
                   rows[0].lvlupChannelID === "msgChannel"
-                )
-                  fetchchan = message.channel.id;
-                else fetchchan = rows[0].lvlupChannelID;
+                ) { fetchchan = message.channel.id; } else { fetchchan = rows[0].lvlupChannelID; }
 
                 if (!rows[0].lvlupMessage) fetchstr = bot.lang.levelup;
                 else fetchstr = rows[0].lvlupMessage;
@@ -1628,10 +1634,9 @@ bot.on("message", message => {
                   (err, rRows) => {
                     if (rRows[0]) {
                       const role = message.guild.roles.resolve(rRows[0].roleID);
-                      if (!message.member.roles.has(role))
-                        message.member.roles.add(role);
+                      if (!message.member.roles.has(role)) message.member.roles.add(role);
                     }
-                  }
+                  },
                 );
                 for (let i = 0; i < Number(lRows[0].level); i++) {
                   con.query(
@@ -1641,10 +1646,9 @@ bot.on("message", message => {
                     (err, rRows) => {
                       if (rRows[0]) {
                         const role = message.guild.roles.resolve(rRows[0].roleID);
-                        if (!message.member.roles.has(role))
-                          message.member.roles.add(role);
+                        if (!message.member.roles.has(role)) message.member.roles.add(role);
                       }
-                    }
+                    },
                   );
                 }
 
@@ -1655,17 +1659,17 @@ bot.on("message", message => {
                   .replace(userregex, message.author)
                   .replace(levelregex, Number(lRows[0].level + 1));
 
-                  
+
                 bot.channels
                   .resolve(fetchchan)
                   .send(res)
                   .catch(() => {});
               }
-            }
+            },
           );
-        } //end
+        } // End
       }
-    }
+    },
   );
 });
 
@@ -1681,7 +1685,7 @@ bot.on("message", message => {
     (err, rows) => {
       if (rows[0]) {
         if (rows[0].activated === "true") {
-          //begin
+          // Begin
           con.query(
             `SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`,
             (err, cRows) => {
@@ -1697,7 +1701,7 @@ bot.on("message", message => {
                         message.guild.id
                       }-${message.author.id}', '${message.author.id}', '${
                         message.guild.id
-                      }', '${generateXP()}', '1')`
+                      }', '${generateXP()}', '1')`,
                     );
                   } else {
                     let xp;
@@ -1707,16 +1711,16 @@ bot.on("message", message => {
                       `UPDATE Levels SET points = '${lRows[0].points +
                         generateXP()}' WHERE id = '${message.guild.id}-${
                         message.author.id
-                      }'`
+                      }'`,
                     );
                   }
-                }
+                },
               );
-            }
+            },
           );
-        } //end
+        } // End
       }
-    }
+    },
   );
 });
 

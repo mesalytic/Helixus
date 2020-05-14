@@ -1,8 +1,6 @@
 module.exports.run = async (bot, message, args, con) => {
-  if (!message.channel.permissionsFor(message.author).has("BAN_MEMBERS"))
-    return message.reply(bot.lang.mods.softban.unotperm);
-  if (!message.mentions.users.first())
-    return message.channel.send(bot.lang.mods.softban.noment);
+  if (!message.channel.permissionsFor(message.author).has("BAN_MEMBERS")) return message.reply(bot.lang.mods.softban.unotperm);
+  if (!message.mentions.users.first()) return message.channel.send(bot.lang.mods.softban.noment);
 
   let ment = message.mentions.members;
   let text = [];
@@ -11,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
     if (!m.bannable) {
       let str = bot.lang.mods.softban.err1.replace(
         "${m.username}",
-        m.user.username
+        m.user.username,
       );
       return message.channel.send(str);
     } else {
@@ -21,7 +19,7 @@ module.exports.run = async (bot, message, args, con) => {
           message.guild.members.unban(id).then(() => {
             let str = bot.lang.mods.softban.softban.replace(
               "${m.tag}",
-              m.user.tag
+              m.user.tag,
             );
             message.channel.send(str);
           });
@@ -35,5 +33,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "softban",
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

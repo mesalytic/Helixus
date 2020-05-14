@@ -7,11 +7,11 @@ module.exports.run = async (bot, message, args, con) => {
   const { body } = await get("https://nekobot.xyz/api/image?type=4k");
   let astr = bot.lang.nsfw["4k"].request.replace(
     "${message.author.tag}",
-    message.author.tag
+    message.author.tag,
   );
   let bstr = bot.lang.nsfw["4k"].notdisplay.replace(
     "${body.message}",
-    body.message
+    body.message,
   );
   let embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
@@ -19,11 +19,11 @@ module.exports.run = async (bot, message, args, con) => {
     .setDescription(bstr)
     .setImage(body.message)
     .setFooter(bot.lang.nsfw["4k"].serviceby);
-  // console.log(body)
+  // Console.log(body)
   m.edit(embed);
 };
 module.exports.help = {
   name: "4k",
   catégorie: "NSFW",
-  helpcaté: "nsfw"
+  helpcaté: "nsfw",
 };
