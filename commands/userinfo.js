@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args, con) => {
       .addField(":id: ID", message.author.id, true)
       .addField(
         bot.lang.infos.userinfo.status,
-        (status = bot.lang.infos.userinfo[message.author.presence.status]),
+        status = bot.lang.infos.userinfo[message.author.presence.status],
         true
       )
       .addField(
