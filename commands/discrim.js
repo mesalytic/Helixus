@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   let resp = "";
   bot.users.cache.map(function(user) {
-    if (user.discriminator == args[0]) return (resp += `${user.username}\n`);
+    if (user.discriminator == args[0]) return resp += `${user.username}\n`;
     else return;
   });
 
