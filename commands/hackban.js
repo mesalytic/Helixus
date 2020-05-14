@@ -5,12 +5,10 @@ module.exports.run = async (bot, message, args, con) => {
   if (!mid) return message.channel.send(bot.lang.mods.hackban.noid);
   if (reason.length < 1) reason = bot.lang.mods.hackban.noreason;
 
-  if (mid === message.author.id)
-    return message.reply(bot.lang.mods.hackban.nobanyou);
+  if (mid === message.author.id) return message.reply(bot.lang.mods.hackban.nobanyou);
   if (mid === bot.user.id) return message.reply(bot.lang.mods.hackban.nobanme);
 
-  if (!message.member.permissions.has("BAN_MEMBERS"))
-    return message.channel.send(bot.lang.mods.hackban.noperms);
+  if (!message.member.permissions.has("BAN_MEMBERS")) return message.channel.send(bot.lang.mods.hackban.noperms);
 
   bot.users
     .fetch(mid)
@@ -35,5 +33,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "hackban",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

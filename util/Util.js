@@ -11,7 +11,7 @@ module.exports = class Util {
     };
     const verify = await channel.awaitMessages(filter, {
       max: 1,
-      time
+      time,
     });
     if (!verify.size) return 0;
     const choice = verify.first().content.toLowerCase();
@@ -30,7 +30,7 @@ module.exports = class Util {
 
   static formatNumber(number) {
     return Number.parseFloat(number).toLocaleString(undefined, {
-      maximumFractionDigits: 2
+      maximumFractionDigits: 2,
     });
   }
 
@@ -39,11 +39,11 @@ module.exports = class Util {
 		if (mode === 'decode') return Buffer.from(text, 'base64').toString('utf8') || null;
 		throw new TypeError(`${mode} is not a supported base64 mode.`);
   }
-  
+
   static shorten(text, maxLen = 2000) {
     return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
   }
-  
+
   static eURL(title, url, display = url) {
     return `[${title}](${url.replace(/\)/g, '%27')})`;
   }

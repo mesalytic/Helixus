@@ -10,17 +10,17 @@ module.exports.run = async (bot, message, args, con) => {
   const embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
     .setDescription(
-      member
-        ? bot.lang.rp.pat.ment
+      member ?
+        bot.lang.rp.pat.ment
             .replace(
               "${message.member.user.username}",
-              message.member.user.username
+              message.member.user.username,
             )
-            .replace("${member.user.username}", member.user.username)
-        : bot.lang.rp.pat.noment.replace(
+            .replace("${member.user.username}", member.user.username) :
+        bot.lang.rp.pat.noment.replace(
             "${message.member.user.username}",
-            message.member.user.username
-          )
+            message.member.user.username,
+          ),
     )
     .setImage(image.url)
     .setFooter("Pat - Helixus")
@@ -30,5 +30,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "pat",
   catégorie: "RP",
-  helpcaté: "rp"
+  helpcaté: "rp",
 };

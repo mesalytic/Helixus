@@ -3,8 +3,7 @@ module.exports.run = async (bot, message, args, con) => {
   const { get } = require("node-superfetch");
   const moment = require("moment");
 
-  if (!message.channel.nsfw)
-    return message.reply(bot.lang.nsfw.gelbooru.nonsfw);
+  if (!message.channel.nsfw) return message.reply(bot.lang.nsfw.gelbooru.nonsfw);
 
   const query = args.join(" ");
   const random = str => Math.floor(Math.random() * str.length);
@@ -18,7 +17,7 @@ module.exports.run = async (bot, message, args, con) => {
       q: "index",
       json: 1,
       tags: query,
-      limit: 200
+      limit: 200,
     });
     if (!body) return message.reply(bot.lang.nsfw.gelbooru.noresults);
     let data = body[random(body)];
@@ -37,11 +36,11 @@ module.exports.run = async (bot, message, args, con) => {
 
     moment.locale("fr");
     const duration = moment(new Date(data.created_at).getTime()).format(
-      "D MM YYYY [a] H:mm:s"
+      "D MM YYYY [a] H:mm:s",
     );
     let astr = bot.lang.nsfw.gelbooru.request.replace(
       "${message.author.tag}",
-      message.author.tag
+      message.author.tag,
     );
     let bstr = bot.lang.nsfw.gelbooru.result
       .replace("${data.owner}", data.owner)
@@ -63,5 +62,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "gelbooru",
   catégorie: "NSFW",
-  helpcaté: "nsfw"
+  helpcaté: "nsfw",
 };

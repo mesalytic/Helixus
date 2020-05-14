@@ -22,10 +22,8 @@ module.exports.run = async (bot, message, args, con) => {
   const { queue } = bot;
   const serverQueue = queue.get(message.guild.id);
 
-  if (!message.member.voice.channel)
-    return message.reply("You're not in a voice channel !");
-  if (!serverQueue || !serverQueue.songs.length)
-    return message.reply(bot.lang.musique.shuffle.nomusic);
+  if (!message.member.voice.channel) return message.reply("You're not in a voice channel !");
+  if (!serverQueue || !serverQueue.songs.length) return message.reply(bot.lang.musique.shuffle.nomusic);
 
   serverQueue.songs = fixedShuffle(serverQueue.songs, [true]);
 
@@ -34,5 +32,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "shuffle",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

@@ -12,10 +12,8 @@ module.exports.run = async (bot, message, args, con) => {
             (err, cases) => {
               if (
                 !message.member.permissions.has(["KICK_MEMBERS", "BAN_MEMBERS"])
-              )
-                return message.reply(bot.lang.mods.warn.notperm);
-              if (["remove", "mods"].includes(args[0]))
-                return message.reply("Not available yet.");
+              ) return message.reply(bot.lang.mods.warn.notperm);
+              if (["remove", "mods"].includes(args[0])) return message.reply("Not available yet.");
               if (args[0] === "list") {
                 let u = message.mentions.members.first();
                 if (u) {
@@ -28,56 +26,55 @@ module.exports.run = async (bot, message, args, con) => {
                           m += `[${r.number}] - \`Reason: ${
                             r.reason
                           }\` - ${moment(r.date).format(
-                            "DD-MM-Y [at] h:mm:SS A"
+                            "DD-MM-Y [at] h:mm:SS A",
                           )}\n`;
                         });
                         return message.channel.send(m);
-                      } else
-                        return message.reply("This user has no active warns.");
-                    }
+                      } else { return message.reply("This user has no active warns."); }
+                    },
                   );
                 } else {
-                  // server warns, will come soon.
+                  // Server warns, will come soon.
                   return message.reply(
-                    "Listing server warns is not available for now."
+                    "Listing server warns is not available for now.",
                   );
                 }
               } else if (args[0] === "config") {
                 if (args[1] === "kick") {
-                  if (!args[2] || isNaN(args[2]))
-                    return message.reply("Please specify a number.");
-                  if (!config[0])
-                    con.query(
-                      `INSERT INTO WarnConfig (guildID, kicks, bans) VALUES ('${message.guild.id}', '${args[2]}', '6')`
+                  if (!args[2] || isNaN(args[2])) return message.reply("Please specify a number.");
+                  if (!config[0]) {
+con.query(
+                      `INSERT INTO WarnConfig (guildID, kicks, bans) VALUES ('${message.guild.id}', '${args[2]}', '6')`,
                     );
-                  else
-                    con.query(
-                      `UPDATE WarnConfig SET kicks='${args[2]}' WHERE guildID='${message.guild.id}'`
+} else {
+con.query(
+                      `UPDATE WarnConfig SET kicks='${args[2]}' WHERE guildID='${message.guild.id}'`,
                     );
+}
 
                   return message.channel.send(
                     bot.lang.mods.warn.kick_success.replace(
                       "${kicks.fetch(`kicks_${message.guild.id}`)}",
-                      args[2]
-                    )
+                      args[2],
+                    ),
                   );
                 } else if (args[1] === "ban") {
-                  if (!args[2] || isNaN(args[2]))
-                    return message.reply("Please specify a number.");
-                  if (!config[0])
-                    con.query(
-                      `INSERT INTO WarnConfig (guildID, kicks, bans) VALUES ('${message.guild.id}', '3', '${args[2]}')`
+                  if (!args[2] || isNaN(args[2])) return message.reply("Please specify a number.");
+                  if (!config[0]) {
+con.query(
+                      `INSERT INTO WarnConfig (guildID, kicks, bans) VALUES ('${message.guild.id}', '3', '${args[2]}')`,
                     );
-                  else
-                    con.query(
-                      `UPDATE WarnConfig SET bans='${args[2]}' WHERE guildID='${message.guild.id}'`
+} else {
+con.query(
+                      `UPDATE WarnConfig SET bans='${args[2]}' WHERE guildID='${message.guild.id}'`,
                     );
+}
 
                   return message.channel.send(
                     bot.lang.mods.warn.ban_success.replace(
                       "${bans.fetch(`bans_${message.guild.id}`)}",
-                      args[2]
-                    )
+                      args[2],
+                    ),
                   );
                 }
               } else {
@@ -90,8 +87,7 @@ module.exports.run = async (bot, message, args, con) => {
                     .split(" ")
                     .slice(2)
                     .join(" ");
-                  if (!reason)
-                    return message.reply(bot.lang.mods.warn.noreason);
+                  if (!reason) return message.reply(bot.lang.mods.warn.noreason);
                   let bansn = config[0] ? config[0].bans : 6;
                   let kicksn = config[0] ? config[0].kicks : 3;
                   let chans = modlogs[0].channelID;
@@ -115,20 +111,21 @@ module.exports.run = async (bot, message, args, con) => {
 
                       con.query(
                         `INSERT INTO Warns (number, guildID, memberID, reason, date) VALUES ('${Number(
-                          id
+                          id,
                         )}', '${message.guild.id}', '${
                           user.id
-                        }', '${reason}', '${new Date().getTime()}')`
+                        }', '${reason}', '${new Date().getTime()}')`,
                       );
 
-                      if (!cases[0])
-                        con.query(
-                          `INSERT INTO Cases (guildID, caseN) VALUES ('${message.guild.id}', '${caseGuild}')`
+                      if (!cases[0]) {
+ con.query(
+                          `INSERT INTO Cases (guildID, caseN) VALUES ('${message.guild.id}', '${caseGuild}')`,
                         );
-                      else
-                        con.query(
-                          `UPDATE Cases SET caseN = '${caseGuild}' WHERE guildID='${message.guild.id}'`
+} else {
+con.query(
+                          `UPDATE Cases SET caseN = '${caseGuild}' WHERE guildID='${message.guild.id}'`,
                         );
+}
 
                       if (id == kicksn) {
                         let str = bot.lang.mods.warn.warn1
@@ -142,7 +139,7 @@ module.exports.run = async (bot, message, args, con) => {
 
                         let sstr = bot.lang.mods.warn.warn1_success.replace(
                           "${user.user.tag}",
-                          user.user.tag
+                          user.user.tag,
                         );
                         let astr = bot.lang.mods.warn.warn1_mp
                           .replace("${message.guild.name}", message.guild.name)
@@ -171,7 +168,7 @@ module.exports.run = async (bot, message, args, con) => {
                           .replace("${mod.tag}", mod.tag);
                         let sstr = bot.lang.mods.warn.warn2_success.replace(
                           "${user.user.tag}",
-                          user.user.tag
+                          user.user.tag,
                         );
                         let astr = bot.lang.mods.warn.warn2_mp
                           .replace("${message.guild.name}", message.guild.name)
@@ -190,7 +187,7 @@ module.exports.run = async (bot, message, args, con) => {
                         user
                           .ban({ days: 7, reason: reason })
                           .catch(() =>
-                            message.reply(bot.lang.mods.warn.warn2_fail)
+                            message.reply(bot.lang.mods.warn.warn2_fail),
                           );
                         chan.send(banEmbed);
                         user.send(astr);
@@ -206,7 +203,7 @@ module.exports.run = async (bot, message, args, con) => {
                           .replace("${mod.tag}", mod.tag);
                         let sstr = bot.lang.mods.warn.warn3_success.replace(
                           "${user.user.tag}",
-                          user.user.tag
+                          user.user.tag,
                         );
                         let astr = bot.lang.mods.warn.warn3_mp
                           .replace("${message.guild.name}", message.guild.name)
@@ -225,21 +222,21 @@ module.exports.run = async (bot, message, args, con) => {
 
                         user.send(astr);
                       }
-                    }
+                    },
                   );
                 } catch (e) {
                   throw e;
                 }
               }
-            }
+            },
           );
-        }
+        },
       );
-    }
+    },
   );
 };
 module.exports.help = {
   name: "warn",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

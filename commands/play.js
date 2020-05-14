@@ -14,8 +14,7 @@ module.exports.run = async (bot, message, args, con) => {
   const url = input[1] ? input[1].replace(/<(.+)>/g, "$1") : "";
 
   const voiceChannel = message.member.voice.channel;
-  if (!voiceChannel)
-    return message.channel.send(bot.lang.musique.play.nochannel);
+  if (!voiceChannel) return message.channel.send(bot.lang.musique.play.nochannel);
 
   async function play(guild, song) {
     const serverQueue = await queue.get(guild.id);
@@ -28,30 +27,29 @@ module.exports.run = async (bot, message, args, con) => {
 
     const stream = await ytdl(song.url, {
       filter: "audioonly",
-      volume: 0.125
+      volume: 0.125,
     });
 
     const dispatcher = await serverQueue.connection
       .play(stream)
       .on("finish", async reason => {
-        if (reason === "Stream is not generating quickly enough.")
-          serverQueue.songs.shift("Stream is not generating quickly enough");
+        if (reason === "Stream is not generating quickly enough.") serverQueue.songs.shift("Stream is not generating quickly enough");
         console.log("END EVENT");
         if (!serverQueue.loop) serverQueue.songs.shift();
-        
+
         await play(guild, serverQueue.songs[0]);
       })
       .on("error", error => console.error(error));
     dispatcher.setVolume(serverQueue.volume / 120);
 
     const vote = {
-      users: []
+      users: [],
     };
     skipVotes.set(message.guild.id, vote);
 
     let duration = bot.lang.musique.play.duration.replace(
       "${song.duration}",
-      song.duration
+      song.duration,
     );
     const embed = new Discord.MessageEmbed()
       .setAuthor(bot.lang.musique.play.starts)
@@ -73,7 +71,7 @@ module.exports.run = async (bot, message, args, con) => {
         .format(`d[d], h[h], m[mins], s[s] `),
       videoduration: video.duration,
       duration_unformated: Math.round(
-        video.durationSeconds ? video.durationSeconds : video.duration / 1000
+        video.durationSeconds ? video.durationSeconds : video.duration / 1000,
       ),
       duration_length: moment.duration(video.duration).format(`d[:]h[:]m[:]ss`),
       thumbnail: video.thumbnails.default.url,
@@ -110,9 +108,9 @@ module.exports.run = async (bot, message, args, con) => {
           .replace(/&copy;/g, "©")
           .replace(/&trade;/g, "™")
           .replace(/&reg;/g, "®")
-          .replace(/&nbsp;/g, " ")
+          .replace(/&nbsp;/g, " "),
       ),
-      url: `https://www.youtube.com/watch?v=${video.id}`
+      url: `https://www.youtube.com/watch?v=${video.id}`,
     };
 
     if (serverQueue) {
@@ -120,7 +118,7 @@ module.exports.run = async (bot, message, args, con) => {
       if (playlist) return;
       let duration = bot.lang.musique.play.duration.replace(
         "${song.duration}",
-        song.duration
+        song.duration,
       );
       const embed = new Discord.MessageEmbed()
         .setAuthor(bot.lang.musique.play.newqueue)
@@ -138,14 +136,14 @@ module.exports.run = async (bot, message, args, con) => {
         songs: [],
         volume: 10,
         playing: true,
-        loop: false
+        loop: false,
       };
       await queue.set(message.guild.id, queueConstruct);
 
       await queueConstruct.songs.push(song);
 
       const vote = {
-        users: []
+        users: [],
       };
 
       skipVotes.set(message.guild.id, vote);
@@ -168,7 +166,7 @@ module.exports.run = async (bot, message, args, con) => {
     const serverQueue = queue.get(message.guild.id);
 
     message.channel.send(
-      "The playlist is being added, please wait, the first song is gonna be played."
+      "The playlist is being added, please wait, the first song is gonna be played.",
     );
     for (const video of Object.values(videos)) {
       const video2 = await youtube.getVideoByID(video.id);
@@ -176,7 +174,7 @@ module.exports.run = async (bot, message, args, con) => {
     }
     const playlistadded = bot.lang.musique.play.playlistadded.replace(
       "${playlist.title}",
-      playlist.title
+      playlist.title,
     );
     return message.channel.send(playlistadded);
   }
@@ -224,13 +222,13 @@ module.exports.run = async (bot, message, args, con) => {
                   .replace(/&copy;/g, "©")
                   .replace(/&trade;/g, "™")
                   .replace(/&reg;/g, "®")
-                  .replace(/&nbsp;/g, " ")}`
+                  .replace(/&nbsp;/g, " ")}`,
             )
-            .join("\n")}`
+            .join("\n")}`,
         )
         .setAuthor(
           "Song selection",
-          "https://cdn.discordapp.com/attachments/355972323590930432/357097120580501504/unnamed.jpg"
+          "https://cdn.discordapp.com/attachments/355972323590930432/357097120580501504/unnamed.jpg",
         );
 
       message.channel.send({ embed });
@@ -245,12 +243,12 @@ module.exports.run = async (bot, message, args, con) => {
           {
             max: 1,
             time: 20000,
-            errors: ["time"]
-          }
+            errors: ["time"],
+          },
         );
       } catch (err) {
         return message.channel.send(
-          "No or invalid value entered, cancelling video selection."
+          "No or invalid value entered, cancelling video selection.",
         );
       }
       const videoIndex = parseInt(response.first().content, 10);
@@ -266,5 +264,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "play",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

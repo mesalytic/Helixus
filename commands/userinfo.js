@@ -23,9 +23,9 @@ module.exports.run = async (bot, message, args, con) => {
     let uPresence;
     if (message.author.presence.activities[0]) {
       if (message.author.presence.activities[0].type === "CUSTOM_STATUS") {
-        uPresence = `Custom Status: ${message.author.presence.activities[0].state}`
-      } else uPresence = message.author.presence.activities[0].name
-    } else uPresence = bot.lang.infos.userinfo.none
+        uPresence = `Custom Status: ${message.author.presence.activities[0].state}`;
+      } else { uPresence = message.author.presence.activities[0].name; }
+    } else { uPresence = bot.lang.infos.userinfo.none; }
 
     const nomentembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
@@ -34,21 +34,21 @@ module.exports.run = async (bot, message, args, con) => {
       .addField(
         bot.lang.infos.userinfo.status,
         status = bot.lang.infos.userinfo[message.author.presence.status],
-        true
+        true,
       )
       .addField(
         bot.lang.infos.userinfo.createdthe,
         `${moment(message.author.createdAt).format(
-          bot.lang.infos.userinfo.createddate
+          bot.lang.infos.userinfo.createddate,
         )}`,
-        true
+        true,
       )
       .addField(
         bot.lang.infos.userinfo.game,
         `${
           uPresence
         }`,
-        true
+        true,
       )
       .addField(bot.lang.infos.userinfo.roles, rlist, true)
       .setThumbnail(message.author.avatarURL());
@@ -71,23 +71,23 @@ module.exports.run = async (bot, message, args, con) => {
       .addField(
         bot.lang.infos.userinfo.status,
         bot.lang.infos.userinfo[message.author.presence.status],
-        true
+        true,
       )
       .addField(
         bot.lang.infos.userinfo.createdthe,
         `${moment(message.author.createdAt).format(
-          bot.lang.infos.userinfo.createddate
+          bot.lang.infos.userinfo.createddate,
         )}`,
-        true
+        true,
       )
       .addField(
         bot.lang.infos.userinfo.game,
         `${
-          ment.presence.activity
-            ? ment.presence.activity.name
-            : bot.lang.infos.userinfo.none
+          ment.presence.activity ?
+            ment.presence.activity.name :
+            bot.lang.infos.userinfo.none
         }`,
-        true
+        true,
       )
       .addField(bot.lang.infos.userinfo.roles, rlist, true)
       .setThumbnail(ment.avatarURL());
@@ -97,5 +97,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "userinfo",
   catégorie: "Infos",
-  helpcaté: "infos"
+  helpcaté: "infos",
 };

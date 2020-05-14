@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "dice",
   catégorie: "Fun",
-  helpcaté: "fun"
+  helpcaté: "fun",
 };
 function rand(low, high) {
   return (Math.random() * (high + 1 - low) + low) | 0;

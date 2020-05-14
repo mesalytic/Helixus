@@ -5,10 +5,10 @@ module.exports.run = async (bot, message, args, con) => {
 
   const { oneLine, stripIndents } = require("common-tags");
   const currentSong = serverQueue.songs[0];
-//  if (!currentSong) return message.channel.send(bot.lang.musique.queue.nomusic);
-  const currentTime = serverQueue.connection.dispatcher
-    ? serverQueue.connection.dispatcher.streamTime / 1000
-    : 0;
+//  If (!currentSong) return message.channel.send(bot.lang.musique.queue.nomusic);
+  const currentTime = serverQueue.connection.dispatcher ?
+    serverQueue.connection.dispatcher.streamTime / 1000 :
+    0;
   const paginated = paginate(serverQueue.songs, args[0], 10);
   var totalTime = 0;
   for (let i = 0; i < serverQueue.songs.length; i++) {
@@ -24,26 +24,26 @@ module.exports.run = async (bot, message, args, con) => {
       title: embedtitle,
       author: {
         name: message.author.tag,
-        iconURL: message.author.displayAvatarURL
+        iconURL: message.author.displayAvatarURL,
       },
       description: stripIndents`
             ${paginated.items
               .map(
                 song =>
                   `**-** ${
-                    !isNaN(song.id)
-                      ? `${song.title} (${song.duration_length})`
-                      : `[${
+                    !isNaN(song.id) ?
+                      `${song.title} (${song.duration_length})` :
+                      `[${
                           song.title
                         }](${`https://www.youtube.com/watch?v=${song.id}`})`
-                  } (${song.duration_length})`
+                  } (${song.duration_length})`,
               )
               .join("\n")}
             ${paginated.maxPage > 1 ? `\n${bot.lang.musique.queue.usage}` : ""}
             ${bot.lang.musique.queue.progress} ${
-        !isNaN(currentSong.id)
-          ? `${currentSong.title}`
-          : `[${
+        !isNaN(currentSong.id) ?
+          `${currentSong.title}` :
+          `[${
               currentSong.title
             }](${`https://www.youtube.com/watch?v=${currentSong.id}`})`
       }
@@ -54,8 +54,8 @@ module.exports.run = async (bot, message, args, con) => {
 				(${timeLeft(currentTime)} ${bot.lang.musique.queue.left})
 			`}
 			${bot.lang.musique.queue.totaltime} ${timeString(totalTime - currentTime)}
-        `
-    }
+        `,
+    },
   });
 
   function timeString(seconds, forceHours = false) {
@@ -78,16 +78,16 @@ function paginate(items, page = 1, pageLength = 10) {
   const startIndex = (page - 1) * pageLength;
   return {
     items:
-      items.length > pageLength
-        ? items.slice(startIndex, startIndex + pageLength)
-        : items,
+      items.length > pageLength ?
+        items.slice(startIndex, startIndex + pageLength) :
+        items,
     page,
     maxPage,
-    pageLength
+    pageLength,
   };
 }
 module.exports.help = {
   name: "queue",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

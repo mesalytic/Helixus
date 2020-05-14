@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args, con) => {
     "young",
     "loli",
     "shota",
-    "cub"
+    "cub",
   ];
   var url = "https://yande.re/post.json?limit=100&tags=";
   if (!args) {
@@ -31,8 +31,8 @@ module.exports.run = async (bot, message, args, con) => {
         message.channel.send(
           `${bot.lang.nsfw.yandere.real_size} <${post.file_url}>`,
           {
-            files: [post.preview_url]
-          }
+            files: [post.preview_url],
+          },
         );
       } else {
         return message.channel.send(bot.lang.nsfw.yandere.noresults);
@@ -42,5 +42,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "yandere",
   catégorie: "NSFW",
-  helpcaté: "nsfw"
+  helpcaté: "nsfw",
 };

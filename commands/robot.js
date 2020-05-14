@@ -10,16 +10,16 @@ module.exports.run = async (bot, message, args, con) => {
     }
     const options = {
       url: `https://robohash.org/${encodeURIComponent(string)}`,
-      encoding: null
+      encoding: null,
     };
     const response = await request(options);
     message.channel
       .send({
         files: [
           {
-            attachment: response
-          }
-        ]
+            attachment: response,
+          },
+        ],
       })
       .catch(e => {
         throw e;
@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args, con) => {
         "error",
         e.response.statusCode,
         e.response.statusMessage,
-        message.channel
+        message.channel,
       );
     }
     console.log(e);
@@ -40,5 +40,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "robot",
   catégorie: "Images",
-  helpcaté: "images"
+  helpcaté: "images",
 };

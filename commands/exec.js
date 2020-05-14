@@ -8,12 +8,12 @@ module.exports.run = async (bot, message, args) => {
     message.channel
       .send(`Executé: ${args.join(" ")}\n${response}`, {
         code: "asciidoc",
-        split: "\n"
+        split: "\n",
       })
       .catch(console.error);
   });
 };
 module.exports.help = {
   name: "exec",
-  catégorie: "Gestion Bot"
+  catégorie: "Gestion Bot",
 };

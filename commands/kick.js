@@ -8,20 +8,16 @@ module.exports.run = async (bot, message, args, con) => {
       if (!rows[0]) {
         message.channel.send(bot.lang.mods.kick.channotdefined);
         modlog = message.channel;
-      } else modlog = message.guild.channels.resolve(rows[0].channelID);
-    }
+      } else { modlog = message.guild.channels.resolve(rows[0].channelID); }
+    },
   );
-  if (!message.channel.permissionsFor(message.author).has("KICK_MEMBERS"))
-    return message.channel.send(bot.lang.mods.kick.unotperm);
-  if (!message.channel.permissionsFor(bot.user).has("KICK_MEMBERS"))
-    return message.channel.send(bot.lang.mods.kick.bnotperm);
+  if (!message.channel.permissionsFor(message.author).has("KICK_MEMBERS")) return message.channel.send(bot.lang.mods.kick.unotperm);
+  if (!message.channel.permissionsFor(bot.user).has("KICK_MEMBERS")) return message.channel.send(bot.lang.mods.kick.bnotperm);
 
-  if (message.mentions.users.size === 0)
-    return message.channel.send(bot.lang.mods.kick.noment);
+  if (message.mentions.users.size === 0) return message.channel.send(bot.lang.mods.kick.noment);
 
   var member = message.mentions.members.first();
-  if (member.permissions.has("KICK_MEMBERS"))
-    return message.reply(bot.lang.mods.kick.notposs);
+  if (member.permissions.has("KICK_MEMBERS")) return message.reply(bot.lang.mods.kick.notposs);
 
   let reason = args.slice(1).join(" ");
   if (!reason) reason = bot.lang.mods.kick.noreason;
@@ -33,7 +29,7 @@ module.exports.run = async (bot, message, args, con) => {
       message.channel.send(
         bot.lang.mods.kick.kick
           .replace("${member.displayName}", member.displayName)
-          .replace("${breason}", reason)
+          .replace("${breason}", reason),
       );
       let e = new Discord.MessageEmbed()
         .setColor("#DE2F42")
@@ -53,5 +49,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "kick",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };
