@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (!args[0]) {
     const str = bot.lang.fun.select.noargs.replace(
       "${randommember}",
-      randommember
+      randommember,
     );
     message.channel.send(str);
   } else {
@@ -17,5 +17,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "select",
   catégorie: "Fun",
-  helpcaté: "fun"
+  helpcaté: "fun",
 };

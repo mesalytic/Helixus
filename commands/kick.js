@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
         message.channel.send(bot.lang.mods.kick.channotdefined);
         modlog = message.channel;
       } else modlog = message.guild.channels.resolve(rows[0].channelID);
-    }
+    },
   );
   if (!message.channel.permissionsFor(message.author).has("KICK_MEMBERS"))
     return message.channel.send(bot.lang.mods.kick.unotperm);
@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args, con) => {
       message.channel.send(
         bot.lang.mods.kick.kick
           .replace("${member.displayName}", member.displayName)
-          .replace("${breason}", reason)
+          .replace("${breason}", reason),
       );
       let e = new Discord.MessageEmbed()
         .setColor("#DE2F42")
@@ -53,5 +53,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "kick",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

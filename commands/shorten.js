@@ -23,5 +23,5 @@ module.exports.help = {
   name: "shorten",
   aliases: ["short"],
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

@@ -13,21 +13,21 @@ module.exports.run = async (bot, message, args, con) => {
           con.query(
             `INSERT INTO Langs (guildID, lang) VALUES ('${
               message.guild.id
-            }', '${args[0].toLowerCase()}')`
+            }', '${args[0].toLowerCase()}')`,
           );
         else
           con.query(
             `UPDATE Langs SET lang = '${args[0].toLowerCase()}' WHERE guildID='${
               message.guild.id
-            }'`
+            }'`,
           );
         message.channel.send(bot.lang.admin.lang[args[0].toLowerCase()]);
-      }
+      },
     );
   } else return message.reply(bot.lang.admin.lang.noargs);
 };
 module.exports.help = {
   name: "lang",
   catégorie: "Administration",
-  helpcaté: "admin"
+  helpcaté: "admin",
 };

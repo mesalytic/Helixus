@@ -18,19 +18,19 @@ module.exports.run = async (bot, message, args, con) => {
   const code = args.join(" ");
   if (message.author.id !== "604779545018761237")
     return message.channel.send(
-      ":no_entry_sign: Accès refusé. :no_entry_sign:"
+      ":no_entry_sign: Accès refusé. :no_entry_sign:",
     );
   if (code.match("process.env.DISCORD_TOKEN"))
     return message.channel.send(
-      ":no_entry_sign: Tentative de vol de token détecté. :no_entry_sign:"
+      ":no_entry_sign: Tentative de vol de token détecté. :no_entry_sign:",
     );
   if (code.match("discordtoken"))
     return message.channel.send(
-      ":no_entry_sign: Tentative de vol de token détecté. :no_entry_sign:"
+      ":no_entry_sign: Tentative de vol de token détecté. :no_entry_sign:",
     );
   if (code.match("bot.token"))
     return message.channel.send(
-      ":no_entry_sign: Tentative de vol de token détecté. :no_entry_sign:"
+      ":no_entry_sign: Tentative de vol de token détecté. :no_entry_sign:",
     );
   try {
     let evaled = eval(code);
@@ -51,7 +51,7 @@ module.exports.run = async (bot, message, args, con) => {
       .addField("**Erreur :**", `\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``)
       .addField(
         "Erreur !",
-        "Une erreur a eu lieue, la commande n'a pas été éxécutée."
+        "Une erreur a eu lieue, la commande n'a pas été éxécutée.",
       )
       .setColor("#ff0505");
     message.channel.send(evalembed);
@@ -59,5 +59,5 @@ module.exports.run = async (bot, message, args, con) => {
 };
 module.exports.help = {
   name: "eval",
-  catégorie: "Gestion Bot"
+  catégorie: "Gestion Bot",
 };

@@ -10,19 +10,19 @@ module.exports.run = async (bot, message, args, con) => {
         if (!rows[0] || rows[0].activated === "false")
           return message.reply(bot.lang.levels.levels.off_alrdisabled);
         con.query(
-          `UPDATE LevelsConfig SET activated = "false" WHERE guildID='${message.guild.id}'`
+          `UPDATE LevelsConfig SET activated = "false" WHERE guildID='${message.guild.id}'`,
         );
         message.channel.send(bot.lang.levels.levels.off_disabled);
       } else if (args[0] === "on") {
         if (!rows[0]) {
           con.query(
-            `INSERT INTO LevelsConfig (activated, guildID, lvlupChannelID) VALUES ('true', '${message.guild.id}', 'msgChannel')`
+            `INSERT INTO LevelsConfig (activated, guildID, lvlupChannelID) VALUES ('true', '${message.guild.id}', 'msgChannel')`,
           );
           message.channel.send(bot.lang.levels.levels.on_enabled);
         } else {
           if (rows[0].activated === "false") {
             con.query(
-              `UPDATE LevelsConfig SET activated = "true" WHERE guildID='${message.guild.id}'`
+              `UPDATE LevelsConfig SET activated = "true" WHERE guildID='${message.guild.id}'`,
             );
             message.channel.send(bot.lang.levels.levels.on_enabled);
           } else return message.reply(bot.lang.levels.levels.on_alrenabled);
@@ -35,41 +35,41 @@ module.exports.run = async (bot, message, args, con) => {
         message.channel.awaitMessages(filter, { max: 1 }).then(collected => {
           if (collected.first().content === "msgChannel") {
             con.query(
-              `UPDATE LevelsConfig SET lvlupChannelID='msgChannel' WHERE guildID='${message.guild.id}'`
+              `UPDATE LevelsConfig SET lvlupChannelID='msgChannel' WHERE guildID='${message.guild.id}'`,
             );
             message.channel.send(bot.lang.levels.levels.message_message);
             message.channel
               .awaitMessages(filter, {
-                max: 1
+                max: 1,
               })
               .then(collected => {
                 con.query(
                   `UPDATE LevelsConfig SET lvlupMessage='${
                     collected.first().content
-                  }' WHERE guildID='${message.guild.id}'`
+                  }' WHERE guildID='${message.guild.id}'`,
                 );
                 return message.channel.send(
-                  bot.lang.levels.levels.message_finished
+                  bot.lang.levels.levels.message_finished,
                 );
               });
           } else if (collected.first().mentions.channels) {
             const chan = collected.first().mentions.channels.first();
             con.query(
-              `UPDATE LevelsConfig SET lvlupChannelID='${chan.id}' WHERE guildID='${message.guild.id}'`
+              `UPDATE LevelsConfig SET lvlupChannelID='${chan.id}' WHERE guildID='${message.guild.id}'`,
             );
             message.channel.send(bot.lang.levels.levels.message_message);
             message.channel
               .awaitMessages(filter, {
-                max: 1
+                max: 1,
               })
               .then(collected => {
                 con.query(
                   `UPDATE LevelsConfig SET lvlupMessage='${
                     collected.first().content
-                  }' WHERE guildID='${message.guild.id}'`
+                  }' WHERE guildID='${message.guild.id}'`,
                 );
                 return message.channel.send(
-                  bot.lang.levels.levels.message_finished
+                  bot.lang.levels.levels.message_finished,
                 );
               });
           } else return message.reply(bot.lang.levels.levels.message_error);
@@ -93,20 +93,20 @@ module.exports.run = async (bot, message, args, con) => {
             if (oArgs[0] === "reset") {
               if (rRows[0]) {
                 con.query(
-                  `DELETE FROM LevelsRewards WHERE guildId='${message.guild.id}' AND level='${niveau}'`
+                  `DELETE FROM LevelsRewards WHERE guildId='${message.guild.id}' AND level='${niveau}'`,
                 );
                 return message.channel.send(
                   bot.lang.levels.levels.rewards_reset_deleted.replace(
                     "${niveau}",
-                    niveau
-                  )
+                    niveau,
+                  ),
                 );
               } else
                 return message.reply(
                   bot.lang.levels.levels.rewards_reset_notfound.replace(
                     "${niveau}",
-                    niveau
-                  )
+                    niveau,
+                  ),
                 );
             }
             const role =
@@ -118,19 +118,19 @@ module.exports.run = async (bot, message, args, con) => {
 
             if (!rRows[0])
               con.query(
-                `INSERT INTO LevelsRewards (guildID, roleID, level) VALUES ('${message.guild.id}', '${role.id}', '${niveau}')`
+                `INSERT INTO LevelsRewards (guildID, roleID, level) VALUES ('${message.guild.id}', '${role.id}', '${niveau}')`,
               );
             else
               con.query(
-                `UPDATE LevelsRewards SET roleID='${role.id}' WHERE guildID='${message.guild.id}' AND level='${niveau}'`
+                `UPDATE LevelsRewards SET roleID='${role.id}' WHERE guildID='${message.guild.id}' AND level='${niveau}'`,
               );
 
             message.channel.send(
               bot.lang.levels.levels.rewards_added
                 .replace("${role}", role)
-                .replace("${niveau}", niveau)
+                .replace("${niveau}", niveau),
             );
-          }
+          },
         );
       } else if (args[0] === "modify") {
         const u = message.mentions.users.first();
@@ -147,24 +147,24 @@ module.exports.run = async (bot, message, args, con) => {
               if (args[2] === "add") {
                 con.query(
                   `UPDATE Levels SET points='${Number(lrows[0].points) +
-                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`
+                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`,
                 );
                 message.channel.send(
                   bot.lang.levels.levels.modify_xpadded
                     .replace("${args[3]}", args[4])
-                    .replace("${u}", u)
+                    .replace("${u}", u),
                 );
               }
 
               if (args[2] === "remove") {
                 con.query(
                   `UPDATE Levels SET points = '${Number(lrows[0].points) -
-                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`
+                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`,
                 );
                 message.channel.send(
                   bot.lang.levels.levels.modify_xpremoved
                     .replace("${args[3]}", args[4])
-                    .replace("${u}", u)
+                    .replace("${u}", u),
                 );
               } else
                 return message.reply(bot.lang.levels.levels.modify_noargs1);
@@ -172,27 +172,27 @@ module.exports.run = async (bot, message, args, con) => {
               if (args[2] === "add") {
                 con.query(
                   `UPDATE Levels SET level='${Number(lrows[0].level) +
-                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`
+                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`,
                 );
                 message.channel.send(
                   bot.lang.levels.levels.modify_xpadded
                     .replace("${args[3]}", args[4])
-                    .replace("${u}", u)
+                    .replace("${u}", u),
                 );
               } else if (args[2] === "remove") {
                 con.query(
                   `UPDATE Levels SET level = '${Number(lrows[0].level) -
-                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`
+                    Number(args[4])}' WHERE id='${message.guild.id}-${u.id}'`,
                 );
                 message.channel.send(
                   bot.lang.levels.levels.modify_xpremoved
                     .replace("${args[3]}", args[4])
-                    .replace("${u}", u)
+                    .replace("${u}", u),
                 );
               } else
                 return message.reply(bot.lang.levels.levels.modify_noargs1);
             } else return message.reply(bot.lang.levels.levels.modify_noargs);
-          }
+          },
         );
       } else if (args[0] === "reset") {
         con.query(
@@ -202,18 +202,18 @@ module.exports.run = async (bot, message, args, con) => {
             if (!u) return message.reply(bot.lang.levels.levels.reset_nouser);
             if (!lrows[0])
               return message.reply(bot.lang.levels.levels.reset_norows);
-          }
+          },
         );
 
         message.channel.send(
-          bot.lang.levels.levels.reset_resetted.replace("${u}", u)
+          bot.lang.levels.levels.reset_resetted.replace("${u}", u),
         );
       } else return message.reply(bot.lang.levels.levels.noargs);
-    }
+    },
   );
 };
 module.exports.help = {
   name: "levels",
   catégorie: "Levels",
-  helpcaté: "levels"
+  helpcaté: "levels",
 };

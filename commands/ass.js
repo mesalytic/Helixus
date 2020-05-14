@@ -7,16 +7,16 @@ module.exports.run = async (bot, message, args, con) => {
   const g = require("superagent")
     .get(`https://nekobot.xyz/api/image`)
     .query({
-      type: "ass"
+      type: "ass",
     })
     .end((err, res) => {
       let astr = bot.lang.nsfw.ass.request.replace(
         "${message.author.tag}",
-        message.author.tag
+        message.author.tag,
       );
       let bstr = bot.lang.nsfw.ass.notdisplay.replace(
         "${res.body.message}",
-        res.body.message
+        res.body.message,
       );
       const result = new Discord.MessageEmbed()
         .setTitle(astr)
@@ -29,5 +29,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "ass",
   catégorie: "NSFW",
-  helpcaté: "nsfw"
+  helpcaté: "nsfw",
 };

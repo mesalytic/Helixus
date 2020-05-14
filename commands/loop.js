@@ -12,5 +12,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "loop",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

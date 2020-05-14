@@ -32,12 +32,12 @@ module.exports.run = async (bot, message, args, con) => {
             return;
           if (chan.type === 'voice') {
             chan.createOverwrite (role.id, {
-              SPEAK: false
+              SPEAK: false,
             });
           }
           if (chan.type === 'text') {
             chan.createOverwrite (role.id, {
-              SEND_MESSAGES: false
+              SEND_MESSAGES: false,
             });
           }
         });
@@ -54,9 +54,9 @@ module.exports.run = async (bot, message, args, con) => {
       (err, rows) => {
         if (!rows[0])
           con.query (
-            `INSERT INTO MuteRoles (roleID, mutedID, guildID) VALUES ('${roles.id}', '${member.id}', '${message.guild.id}')`
+            `INSERT INTO MuteRoles (roleID, mutedID, guildID) VALUES ('${roles.id}', '${member.id}', '${message.guild.id}')`,
           );
-      }
+      },
     );
   });
   member.roles.remove (rolearray).then (() => {
@@ -73,5 +73,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "mute",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

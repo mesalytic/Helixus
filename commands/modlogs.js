@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
       if (args[0] === "reset") {
         if (rows[0]) {
           con.query(
-            `DELETE FROM ModlogsChannel WHERE guildID='${message.guild.id}'`
+            `DELETE FROM ModlogsChannel WHERE guildID='${message.guild.id}'`,
           );
           return message.channel.send(bot.lang.admin.modlogs.reset_success);
         } else return message.reply(bot.lang.admin.modlogs.reset_notattributed);
@@ -18,17 +18,17 @@ module.exports.run = async (bot, message, args, con) => {
       if (!chan) return message.reply(bot.lang.admin.modlogs.nochans);
       if (!rows[0])
         con.query(
-          `INSERT INTO ModlogsChannel (guildID, channelID) VALUES ('${message.guild.id}', '${chan.id}')`
+          `INSERT INTO ModlogsChannel (guildID, channelID) VALUES ('${message.guild.id}', '${chan.id}')`,
         );
       else con.query(`UPDATE ModlogsChannel SET channelID='${chan.id}'`);
       message.channel.send(
-        bot.lang.admin.modlogs.success.replace("${chan}", chan)
+        bot.lang.admin.modlogs.success.replace("${chan}", chan),
       );
-    }
+    },
   );
 };
 module.exports.help = {
   name: "modlogs",
   catégorie: "Administration",
-  helpcaté: "admin"
+  helpcaté: "admin",
 };

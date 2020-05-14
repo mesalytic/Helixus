@@ -26,25 +26,25 @@ module.exports.run = async (bot, message, args, con) => {
           (err, rows) => {
             if (!rows[0])
               con.query(
-                `INSERT INTO Autorole (roleID, guildID) VALUES ('${role.id}', '${message.guild.id}')`
+                `INSERT INTO Autorole (roleID, guildID) VALUES ('${role.id}', '${message.guild.id}')`,
               );
             else
               con.query(
-                `UPDATE Autorole SET roleID='${role.id}' WHERE guildID='${message.guild.id}'`
+                `UPDATE Autorole SET roleID='${role.id}' WHERE guildID='${message.guild.id}'`,
               );
             const str = bot.lang.admin.autorole.roleAdd_success;
             const res = str.replace("${role.name}", role.name);
             return message.reply(res);
-          }
+          },
         );
       } else {
         return message.reply(bot.lang.admin.autorole.roleAdd_failure);
       }
-    }
+    },
   );
 };
 module.exports.help = {
   name: "autorole",
   catégorie: "Administration",
-  helpcaté: "admin"
+  helpcaté: "admin",
 };

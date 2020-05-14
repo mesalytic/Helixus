@@ -32,11 +32,11 @@ module.exports.run = async (bot, message, args, con) => {
           .replace("${message.author.id}", message.author.id);
         message.channel.send(str);
       });
-    }
+    },
   );
 };
 module.exports.help = {
   name: "unmute",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

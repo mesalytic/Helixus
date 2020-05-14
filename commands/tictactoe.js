@@ -49,7 +49,7 @@ module.exports.run = async (bot, message, args, con) => {
       };
       const turn = await message.channel.awaitMessages(filter, {
         max: 1,
-        time: 30000
+        time: 30000,
       });
       if (!turn.size) {
         await message.channel.send(bot.lang.fun.tictactoe.timesup);
@@ -72,7 +72,7 @@ module.exports.run = async (bot, message, args, con) => {
         —————————
         ${sides[6]} | ${sides[7]} | ${sides[8]}
         \`\`\``
-        : bot.lang.fun.tictactoe.tie
+        : bot.lang.fun.tictactoe.tie,
     );
   } catch (err) {
     playing.delete(message.channel.id);
@@ -95,5 +95,5 @@ function verifyWin(sides) {
 module.exports.help = {
   name: "tictactoe",
   catégorie: "Fun",
-  helpcaté: "fun"
+  helpcaté: "fun",
 };

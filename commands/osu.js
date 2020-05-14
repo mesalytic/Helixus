@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args, con) => {
     k: bot.config.osu,
     u: user,
     m: mode,
-    type: "string"
+    type: "string",
   });
 
   if (!body.length) return message.channel.send(bot.lang.membres.osu["404"]);
@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args, con) => {
     .setAuthor(
       "osu!" + oArgs[1],
       "https://i.imgur.com/hWrw2Sv.png",
-      "https://osu.ppy.sh/"
+      "https://osu.ppy.sh/",
     )
     .setColor("RANDOM")
     .addField(bot.lang.membres.osu.username, data.username, true)
@@ -40,54 +40,54 @@ module.exports.run = async (bot, message, args, con) => {
     .addField(
       bot.lang.membres.osu.accuracy,
       data.accuracy ? `${Math.round(data.accuracy)}%` : "???",
-      true
+      true,
     )
     .addField(
       bot.lang.membres.osu.rank,
       data.pp_rank ? formatNumber(data.pp_rank) : "???",
-      true
+      true,
     )
     .addField("PP", data.pp_raw ? formatNumber(data.pp_raw) : "???", true)
     .addField(
       bot.lang.membres.osu.totalgames,
       data.playcount ? formatNumber(data.playcount) : "???",
-      true
+      true,
     )
     .addField(bot.lang.membres.osu.country, data.country || "???", true)
     .addField(
       bot.lang.membres.osu.rankedscore,
       data.ranked_score ? formatNumber(data.ranked_score) : "???",
-      true
+      true,
     )
     .addField(
       bot.lang.membres.osu.totalscore,
       data.total_score ? formatNumber(data.total_score) : "???",
-      true
+      true,
     )
     .addField(
       "SSH",
       data.count_rank_ssh ? formatNumber(data.count_rank_ssh) : "???",
-      true
+      true,
     )
     .addField(
       "SS",
       data.count_rank_ss ? formatNumber(data.count_rank_ss) : "???",
-      true
+      true,
     )
     .addField(
       "SH",
       data.count_rank_ssh ? formatNumber(data.count_rank_sh) : "???",
-      true
+      true,
     )
     .addField(
       "S",
       data.count_rank_s ? formatNumber(data.count_rank_s) : "???",
-      true
+      true,
     )
     .addField(
       "A",
       data.count_rank_a ? formatNumber(data.count_rank_a) : "???",
-      true
+      true,
     );
 
   return message.reply(embed);
@@ -95,5 +95,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "osu",
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

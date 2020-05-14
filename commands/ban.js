@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
         message.channel.send(bot.lang.mods.ban.channotdefined);
         modlog = message.channel;
       } else modlog = message.guild.channels.resolve(rows[0].channelID);
-    }
+    },
   );
   if (!message.channel.permissionsFor(message.author).has("BAN_MEMBERS"))
     return message.channel.send(bot.lang.mods.ban.unotperm);
@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args, con) => {
       message.channel.send(
         bot.lang.mods.ban.banned
           .replace("${member.displayName}", member.displayName)
-          .replace("${breason}", reason)
+          .replace("${breason}", reason),
       );
       let e = new Discord.MessageEmbed()
         .setColor("#228569")
@@ -53,5 +53,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "ban",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

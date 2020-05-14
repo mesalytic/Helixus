@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args, con) => {
           .addField(
             bot.lang.membres.npm.latest,
             body.body["dist-tags"].latest,
-            true
+            true,
           )
           .addField(
             bot.lang.membres.npm.github,
@@ -28,23 +28,23 @@ module.exports.run = async (bot, message, args, con) => {
                   .replace("git://", "https://")
                   .replace("git@github.com:", "https://github.com/")
               : "No Repository",
-            true
+            true,
           )
           .addField(
             bot.lang.membres.npm.maintenors,
             body.body.maintainers.map(m => m.name).join(", "),
-            true
+            true,
           );
 
         message.channel.send(embed).catch(error => {
           const str = bot.lang.membres.npm.notfound.replace(
             "${args[0]}",
-            args[0].toLowerCase()
+            args[0].toLowerCase(),
           );
           if (error.status === 404) return message.reply(str);
           console.error(
             "Erreur pendant la récupération du package NPM",
-            error.message
+            error.message,
           );
         });
       });
@@ -53,5 +53,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "npm",
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

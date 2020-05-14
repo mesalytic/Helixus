@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args, con) => {
       title: embedtitle,
       author: {
         name: message.author.tag,
-        iconURL: message.author.displayAvatarURL
+        iconURL: message.author.displayAvatarURL,
       },
       description: stripIndents`
             ${paginated.items
@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args, con) => {
                       : `[${
                           song.title
                         }](${`https://www.youtube.com/watch?v=${song.id}`})`
-                  } (${song.duration_length})`
+                  } (${song.duration_length})`,
               )
               .join("\n")}
             ${paginated.maxPage > 1 ? `\n${bot.lang.musique.queue.usage}` : ""}
@@ -54,8 +54,8 @@ module.exports.run = async (bot, message, args, con) => {
 				(${timeLeft(currentTime)} ${bot.lang.musique.queue.left})
 			`}
 			${bot.lang.musique.queue.totaltime} ${timeString(totalTime - currentTime)}
-        `
-    }
+        `,
+    },
   });
 
   function timeString(seconds, forceHours = false) {
@@ -83,11 +83,11 @@ function paginate(items, page = 1, pageLength = 10) {
         : items,
     page,
     maxPage,
-    pageLength
+    pageLength,
   };
 }
 module.exports.help = {
   name: "queue",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

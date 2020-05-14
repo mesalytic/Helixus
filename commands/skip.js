@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args, con) => {
       .replace("${message.author}", message.author)
       .replace(
         "${message.guild.me.voiceChannel.members.size / 2}",
-        parseInt(message.guild.me.voice.channel.members.size / 2, 10)
+        parseInt(message.guild.me.voice.channel.members.size / 2, 10),
       );
     message.channel.send(newvstr);
   }
@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args, con) => {
       .replace("${message.author}", message.author)
       .replace(
         "${message.guild.me.voiceChannel.members.size / 2}",
-        parseInt(message.guild.me.voice.channel.members.size / 2, 10)
+        parseInt(message.guild.me.voice.channel.members.size / 2, 10),
       )
       .replace("${mapload.users.length}", mapload.users.length);
     message.channel.send(vstr);
@@ -46,5 +46,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "skip",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

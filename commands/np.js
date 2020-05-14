@@ -15,14 +15,14 @@ module.exports.run = async (bot, message, args, con) => {
       } ${timeString(
         serverQueue.connection.dispatcher
           ? serverQueue.connection.dispatcher.streamTime / 1000
-          : 0
+          : 0,
       )} / ${serverQueue.songs[0].duration_length} (${timeLeft(
         serverQueue.connection.dispatcher
           ? serverQueue.connection.dispatcher.streamTime / 1000
-          : 0
+          : 0,
       )} ${bot.lang.musique.np.left})\n\n${bot.lang.musique.np.addedby} ${
         serverQueue.songs[0].requestedby
-      }`
+      }`,
     );
 
   function timeString(seconds, forceHours = false) {
@@ -41,5 +41,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "np",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

@@ -7,8 +7,8 @@ module.exports.run = async (bot, message, args, con) => {
       body: q,
       headers: {
         e,
-        s
-      }
+        s,
+      },
     }).then(y => y.text());
 
   con.query(
@@ -101,27 +101,27 @@ module.exports.run = async (bot, message, args, con) => {
                   qbin(topall, 0, "none").then(m => {
                     const embed = new Discord.MessageEmbed()
                       .setTitle(
-                        `${bot.lang.levels.top.top10} **${message.guild.name}** !`
+                        `${bot.lang.levels.top.top10} **${message.guild.name}** !`,
                       )
                       .setAuthor(message.guild.name, message.guild.iconURL())
                       .setDescription(`${msgtop}\n[Guild Leaderboard](${m})`)
                       .setColor("RANDOM");
                     return message.channel.send({
-                      embed
+                      embed,
                     });
                   });
-                }
+                },
               );
-            }
+            },
           );
-        }
+        },
       );
-    }
+    },
   );
 };
 
 module.exports.help = {
   name: "top",
   catégorie: "Levels",
-  helpcaté: "levels"
+  helpcaté: "levels",
 };

@@ -12,17 +12,17 @@ module.exports.run = async (bot, message, args, con) => {
 
   get(
     `api.aliceraina.moe/v1/steamplaying?user=${encodeURIComponent(
-      message.author.username
+      message.author.username,
     )}&game=${game}&url=${message.author.avatarURL()}&`,
     {
       headers: { Authorization: bot.config.helixusapi },
-      responseType: "arraybuffer"
-    }
+      responseType: "arraybuffer",
+    },
   )
     .then(res => {
       return message.channel
         .send("Generated with HelixusAPI (docs.helixus.fr)", {
-          files: [{ attachment: res.data, name: "steamplaying.png" }]
+          files: [{ attachment: res.data, name: "steamplaying.png" }],
         })
         .then(() => m.delete());
     })
@@ -31,5 +31,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "steamplaying",
   catégorie: "Images",
-  helpcaté: "images"
+  helpcaté: "images",
 };

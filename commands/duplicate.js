@@ -19,18 +19,18 @@ module.exports.run = async (bot, message, args, con) => {
         .replace("${Number(args[0])}", Math.round(Number(args[0])))
         .replace(
           "${Number(args[0]) === 1 ? 'time': 'times'}",
-          Math.round(Number(args[0])) === 1 ? "time" : "times"
-        )
+          Math.round(Number(args[0])) === 1 ? "time" : "times",
+        ),
     );
   else if (lang === "fr")
     message.channel.send(
       str
         .replace("${Number(args[0])}", Math.round(Number(args[0])))
-        .replace("${Number(args[0]) === 1 ? 'foi': 'fois'}", "fois")
+        .replace("${Number(args[0]) === 1 ? 'foi': 'fois'}", "fois"),
     );
 };
 module.exports.help = {
   name: "duplicate",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

@@ -1,7 +1,7 @@
 module.exports.run = async (bot, message, args, con) => {
   const promises = [
     bot.shard.fetchClientValues("guilds.cache.size"),
-    bot.shard.broadcastEval("this.ws.status")
+    bot.shard.broadcastEval("this.ws.status"),
   ];
 
   Promise.all(promises).then(res => {
@@ -39,5 +39,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "shards",
   catégorie: "Infos",
-  helpcaté: "infos"
+  helpcaté: "infos",
 };

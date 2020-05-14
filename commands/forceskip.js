@@ -16,5 +16,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "forceskip",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

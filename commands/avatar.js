@@ -8,12 +8,12 @@ module.exports.run = async (bot, message, args, con) => {
     .setDescription(
       defineduser
         ? bot.lang.membres.pp.hisavatar
-        : bot.lang.membres.pp.youravatar
+        : bot.lang.membres.pp.youravatar,
     )
     .setImage(
       defineduser
         ? defineduser.avatarURL({ dynamic: true, size: 512, format: "png" })
-        : message.author.avatarURL({ dynamic: true, size: 512, format: "png" })
+        : message.author.avatarURL({ dynamic: true, size: 512, format: "png" }),
     );
   return message.channel.send(embed);
 };
@@ -21,5 +21,5 @@ module.exports.help = {
   name: "avatar",
   aliases: ["pp"],
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

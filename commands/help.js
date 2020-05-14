@@ -12,70 +12,70 @@ module.exports.run = async (bot, message, args, con) => {
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Administration")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.fun}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Fun")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.images}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Images")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.infos}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Infos")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.levels}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Levels")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.members}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Membres")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.moderation}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Modération")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.music}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Musique")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `${bot.lang.membres.help.nsfw}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "NSFW")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .addField(
         `🛂 RP`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "RP")
           .map(cmd => `\`${cmd.help.name}\``)
-          .join(", ")
+          .join(", "),
       )
       .setTimestamp();
     message.channel.send(helpEmbed);
@@ -86,7 +86,7 @@ module.exports.run = async (bot, message, args, con) => {
 
       const str = bot.lang.membres.help.cmd_help.replace(
         "${command.help.name}",
-        rcommand.help.name
+        rcommand.help.name,
       );
 
       const embedcommand = new Discord.MessageEmbed()
@@ -95,11 +95,11 @@ module.exports.run = async (bot, message, args, con) => {
         .setDescription(bot.lang.membres.help.cmd_obligfalc)
         .addField(
           bot.lang.membres.help.cmd_desc,
-          bot.lang[rcommand.help.helpcaté][rcommand.help.name].help_description
+          bot.lang[rcommand.help.helpcaté][rcommand.help.name].help_description,
         )
         .addField(
           bot.lang.membres.help.cmd_usage,
-          bot.lang[rcommand.help.helpcaté][rcommand.help.name].help_usage
+          bot.lang[rcommand.help.helpcaté][rcommand.help.name].help_usage,
         );
       if (rcommand.help.aliases)
         embedcommand.addField("Aliases", rcommand.help.aliases[0]);
@@ -111,5 +111,5 @@ module.exports.help = {
   name: "help",
   aliases: ["h"],
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

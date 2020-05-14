@@ -29,5 +29,5 @@ module.exports.help = {
   name: "purge",
   aliases: ["clear"],
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

@@ -14,12 +14,12 @@ module.exports.run = async (bot, message, args, con) => {
       throw err;
     }
     message.channel.send(`${data}`, {
-      code: "AsciiArt"
+      code: "AsciiArt",
     });
   });
 };
 module.exports.help = {
   name: "ascii",
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };

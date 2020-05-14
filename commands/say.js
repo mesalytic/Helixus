@@ -14,5 +14,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "say",
   catégorie: "Administration",
-  helpcaté: "admin"
+  helpcaté: "admin",
 };

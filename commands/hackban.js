@@ -35,5 +35,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "hackban",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

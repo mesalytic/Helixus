@@ -14,13 +14,13 @@ module.exports.run = async (bot, message, args, con) => {
         ? bot.lang.rp.slap.ment
             .replace(
               "${message.member.user.username}",
-              message.member.user.username
+              message.member.user.username,
             )
             .replace("${member.user.username}", member.user.username)
         : bot.lang.rp.slap.noment.replace(
             "${message.member.user.username}",
-            message.member.user.username
-          )
+            message.member.user.username,
+          ),
     )
     .setImage(image.url)
     .setFooter("Slap - Helixus")
@@ -30,5 +30,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "slap",
   catégorie: "RP",
-  helpcaté: "rp"
+  helpcaté: "rp",
 };

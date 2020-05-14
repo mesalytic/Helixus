@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
   const cvstr = bot.lang.musique.volume.currentvolume;
   const currentvolume = cvstr.replace(
     "${serverQueue.volume}",
-    serverQueue.volume
+    serverQueue.volume,
   );
   if (!args[0] || isNaN(args[0])) return message.channel.send(currentvolume);
   if (args[0] > 100)
@@ -24,5 +24,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "volume",
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

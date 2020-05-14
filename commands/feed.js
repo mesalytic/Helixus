@@ -14,13 +14,13 @@ module.exports.run = async (bot, message, args, con) => {
         ? bot.lang.rp.feed.ment
             .replace(
               "${message.member.user.username}",
-              message.member.user.username
+              message.member.user.username,
             )
             .replace("${member.user.username}", member.user.username)
         : bot.lang.rp.feed.noment.replace(
             "${message.member.user.username}",
-            message.member.user.username
-          )
+            message.member.user.username,
+          ),
     )
     .setImage(image.url)
     .setFooter("Feed - Helixus")
@@ -30,5 +30,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "feed",
   catégorie: "RP",
-  helpcaté: "rp"
+  helpcaté: "rp",
 };

@@ -14,13 +14,13 @@ module.exports.run = async (bot, message, args, con) => {
         ? bot.lang.rp.tickle.ment
             .replace(
               "${message.member.user.username}",
-              message.member.user.username
+              message.member.user.username,
             )
             .replace("${member.user.username}", member.user.username)
         : bot.lang.rp.tickle.noment.replace(
             "${message.member.user.username}",
-            message.member.user.username
-          )
+            message.member.user.username,
+          ),
     )
     .setImage(image.url)
     .setFooter("Tickle - Helixus")
@@ -30,5 +30,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "tickle",
   catégorie: "RP",
-  helpcaté: "rp"
+  helpcaté: "rp",
 };

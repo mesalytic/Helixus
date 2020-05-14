@@ -13,12 +13,12 @@ module.exports.run = async (bot, message, args, con) => {
       method: "patch",
       url: `https://discordapp.com/api/v6/channels/${message.channel.id}`,
       headers: {
-        Authorization: `Bot ${bot.token}`
+        Authorization: `Bot ${bot.token}`,
       },
       data: {
         rate_limit_per_user: s,
-        reason: args.slice(1).join(" ")
-      }
+        reason: args.slice(1).join(" "),
+      },
     })
       .then(msg.edit(m))
       .catch(() => {
@@ -42,5 +42,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "slowmode",
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

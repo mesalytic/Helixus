@@ -11,7 +11,7 @@ module.exports = class Util {
     };
     const verify = await channel.awaitMessages(filter, {
       max: 1,
-      time
+      time,
     });
     if (!verify.size) return 0;
     const choice = verify.first().content.toLowerCase();
@@ -30,7 +30,7 @@ module.exports = class Util {
 
   static formatNumber(number) {
     return Number.parseFloat(number).toLocaleString(undefined, {
-      maximumFractionDigits: 2
+      maximumFractionDigits: 2,
     });
   }
 

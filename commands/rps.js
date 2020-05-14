@@ -53,7 +53,7 @@ module.exports.run = async (bot, message, args, con) => {
   const choices = {
     0: bot.lang.fun.rps.rock,
     1: bot.lang.fun.rps.paper,
-    2: bot.lang.fun.rps.scissors
+    2: bot.lang.fun.rps.scissors,
   };
   const tie = new Discord.MessageEmbed()
     .setColor(color)
@@ -68,7 +68,7 @@ module.exports.help = {
   name: "rps",
   aliases: ["pfc"],
   catégorie: "Fun",
-  helpcaté: "fun"
+  helpcaté: "fun",
 };
 function rand(low, high) {
   return (Math.random() * (high + 1 - low) + low) | 0;

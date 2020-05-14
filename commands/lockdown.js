@@ -17,13 +17,13 @@ module.exports.run = async (bot, message, args, con) => {
         if (!rows[0]) return message.reply("bot.lang.mods.lockdown.notlocked");
         message.channel
           .createOverwrite(message.guild.id, {
-            SEND_MESSAGES: null
+            SEND_MESSAGES: null,
           })
           .then(() => {
             message.channel.send(bot.lang.mods.lockdown.unlocked);
             clearTimeout(lockit[message.channel.id]);
             con.query(
-              `DELETE FROM LockdownChannels WHERE channelID='${message.channel.id}'`
+              `DELETE FROM LockdownChannels WHERE channelID='${message.channel.id}'`,
             );
           })
           .catch(error => {
@@ -32,20 +32,20 @@ module.exports.run = async (bot, message, args, con) => {
       } else {
         message.channel
           .createOverwrite(message.guild.id, {
-            SEND_MESSAGES: false
+            SEND_MESSAGES: false,
           })
           .then(() => {
             let str = bot.lang.mods.lockdown.locked;
             let res = str.replace(
               "${ms(ms(time), { long:true })}",
               ms(ms(time), {
-                long: true
-              })
+                long: true,
+              }),
             );
             con.query(
               `INSERT INTO LockdownChannels (channelID, time) VALUES ('${
                 message.channel.id
-              }', '${Number(new Date().getTime()) + Number(ms(time))}')`
+              }', '${Number(new Date().getTime()) + Number(ms(time))}')`,
             );
             message.channel
               .send(res)
@@ -53,12 +53,12 @@ module.exports.run = async (bot, message, args, con) => {
                 lockit[message.channel.id] = setTimeout(() => {
                   message.channel
                     .createOverwrite(message.guild.id, {
-                      SEND_MESSAGES: null
+                      SEND_MESSAGES: null,
                     })
                     .then(message.channel.send(bot.lang.mods.lockdown.unlocked))
                     .catch(console.error);
                   con.query(
-                    `DELETE FROM LockdownChannels WHERE channelID='${message.channel.id}'`
+                    `DELETE FROM LockdownChannels WHERE channelID='${message.channel.id}'`,
                   );
                 }, ms(time));
               })
@@ -67,12 +67,12 @@ module.exports.run = async (bot, message, args, con) => {
               });
           });
       }
-    }
+    },
   );
 };
 module.exports.help = {
   name: "lockdown",
   aliases: ["lock"],
   catégorie: "Modération",
-  helpcaté: "mods"
+  helpcaté: "mods",
 };

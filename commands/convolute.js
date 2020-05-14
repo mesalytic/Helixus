@@ -10,12 +10,12 @@ module.exports.run = async (bot, message, args, con) => {
 
   get(`api.aliceraina.moe/v1/convolute?url=${url}`, {
     headers: { Authorization: bot.config.helixusapi },
-    responseType: "arraybuffer"
+    responseType: "arraybuffer",
   })
     .then(res => {
       return message.channel
         .send("Generated with HelixusAPI (docs.helixus.fr)", {
-          file: { attachment: res.data, name: "convolute.png" }
+          file: { attachment: res.data, name: "convolute.png" },
         })
         .then(() => m.delete());
     })
@@ -24,5 +24,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "convolute",
   catégorie: "Images",
-  helpcaté: "images"
+  helpcaté: "images",
 };

@@ -18,5 +18,5 @@ module.exports.help = {
   name: "stop",
   aliases: ["leave"],
   catégorie: "Musique",
-  helpcaté: "musique"
+  helpcaté: "musique",
 };

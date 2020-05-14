@@ -10,12 +10,12 @@ module.exports.run = async (bot, message, args, con) => {
 
   get(`api.aliceraina.moe/v1/distort?url=${url}`, {
     headers: { Authorization: bot.config.helixusapi },
-    responseType: "arraybuffer"
+    responseType: "arraybuffer",
   })
     .then(res => {
       return message.channel
         .send("Generated with HelixusAPI (docs.helixus.fr)", {
-          files: [{ attachment: res.data, name: "distort.png" }]
+          files: [{ attachment: res.data, name: "distort.png" }],
         })
         .then(() => m.delete());
     })
@@ -24,5 +24,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "distort",
   catégorie: "Images",
-  helpcaté: "images"
+  helpcaté: "images",
 };

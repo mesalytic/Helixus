@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args, con) => {
     .setTitle("Ping")
     .addField(
       bot.lang.membres.ping.latency,
-      `${m.createdTimestamp - message.createdTimestamp}ms`
+      `${m.createdTimestamp - message.createdTimestamp}ms`,
     )
     .addField(bot.lang.membres.ping.api, `${Math.round(bot.ws.ping)}ms`)
     .setTimestamp();
@@ -16,5 +16,5 @@ module.exports.run = async (bot, message, args, con) => {
 module.exports.help = {
   name: "ping",
   catégorie: "Membres",
-  helpcaté: "membres"
+  helpcaté: "membres",
 };
