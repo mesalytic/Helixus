@@ -13,7 +13,8 @@ Helixus is a multi-function Discord bot coded in Javascript using [discord.js](h
 - [Installation](#installation)
     - [Before you begin](#before-you-begin)
     - [Windows](#windows)
-    - [Ubuntu/Debian based](#ubuntu-debian-based)
+    - [Ubuntu/Debian based](#ubuntudebian-based)
+- [Config File](#config-file)
 
 ## Permissions
 
@@ -37,7 +38,7 @@ If you want you have the ability to give the **Administrator [ADMINISTRATOR]** p
 - You will need [NodeJS (v12)](https://nodejs.org), [Git](https://git-scm.com/) and a database server using either [MariaDB](https://mariadb.org/) or [MySQL](https://www.mysql.com/).
 - Clone this repository using `git clone https://github.com/chocololat/HelixusV2.git`
 - Access the created folder using `cd HelixusV2` with either **PowerShell [recommended]** or the **Command Prompt**.
-- Fill the config.json file. (See [Config File]().) 
+- Fill the config.json file. (See [Config File](#config-file).) 
 
 ### Windows
 
