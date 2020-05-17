@@ -27,6 +27,7 @@ Helixus needs several permissions. You might lose the ability to use commands if
 - **View Audit Logs [VIEW_AUDIT_LOGS]**
 - **Manage Messages [MANAGE_MESSAGES]**
 - **Manage Channels [MANAGE_CHANNELS]**
+- **Attach Files [ATTACH_FILES] [EMBED_LINKS]**
 
 If you want you have the ability to give the **Administrator [ADMINISTRATOR]** permissions to the bot, but is not recommended in case of any hacks or anything of some sorts.
 
