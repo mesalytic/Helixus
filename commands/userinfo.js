@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args, con) => {
   const moment = require("moment");
 
   const Timestamp = require('../util/Timestamp'),
-  timestamp = new Timestamp("DD MMMM YYYY, HH:MM");
+  timestamp = new Timestamp("DD/MM/YYYY, HH:MM");
 
   let user = message.member;
   if (message.mentions.members.first()) user = message.mentions.members.first();
@@ -21,14 +21,14 @@ module.exports.run = async (bot, message, args, con) => {
     .setColor(user.displayHexColor ? user.displayHexColor : "RANDOM")
     .setTimestamp()
     .setThumbnail(user.user.displayAvatarURL())
-    .addField("Name", user.user.tag, true)
+    .addField(bot.lang.infos.userinfo.name, user.user.tag, true)
     .addField("ID", user.id, true)
-    .addField("Discord Join Date", timestamp.display(user.user.createdAt), true)
-    .addField("Server Join Date", user.joinedTimestamp ? timestamp.display(user.joinedTimestamp) : "Unknown", true)
-    .addField("Nickname", user.nickname || "None", true)
+    .addField(bot.lang.infos.userinfo.discordjoindate, timestamp.display(user.user.createdAt), true)
+    .addField(bot.lang.infos.userinfo.serverjoindate, user.joinedTimestamp ? timestamp.display(user.joinedTimestamp) : bot.lang.infos.userinfo.unknown, true)
+    .addField(bot.lang.infos.userinfo.nickname, user.nickname || "None", true)
     .addField("Bot ?", user.bot ? "Yes" : "No", true)
-    .addField("Activity", uPresence)
-    .addField(`Roles (${user.roles.cache.size})`, user.roles.cache.size ? `<@&${user.roles.cache.map(r => r.id).filter(r => r !== message.guild.roles.everyone.id).join(">, <@&")}>` : "None");
+    .addField(bot.lang.infos.userinfo.activity, uPresence)
+    .addField(`${bot.lang.infos.userinfo.roles} (${user.roles.cache.size})`, user.roles.cache.size ? `<@&${user.roles.cache.map(r => r.id).filter(r => r !== message.guild.roles.everyone.id).join(">, <@&")}>` : bot.lang.infos.userinfo.none);
   
     message.channel.send(embed)
 };

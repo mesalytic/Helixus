@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports.run = (bot, message, args, con) => {
+module.exports.run = async (bot, message, args, con) => {
   const Discord = require('discord.js')
   const fetch = require('node-fetch')
   const qbin = (q, e, s) =>
