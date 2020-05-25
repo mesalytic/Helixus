@@ -40,6 +40,7 @@ module.exports.run = async (bot, message, args, con) => {
 };
 module.exports.help = {
   name: "np",
+  aliases: ["nowplaying", "playing"],
   catégorie: "Musique",
   helpcaté: "musique",
 };

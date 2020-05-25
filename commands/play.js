@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, con) => {
   const voiceChannel = message.member.voice.channel;
   if (!voiceChannel) return message.channel.send(bot.lang.musique.play.nochannel);
 
-  async function play(guild, song) {
+  async function play(guild, song, seek = 0) {
     const serverQueue = await queue.get(guild.id);
 
     if (!song) {
@@ -27,15 +27,23 @@ module.exports.run = async (bot, message, args, con) => {
 
     const stream = await ytdl(song.url, {
       filter: "audioonly",
+      quality: "highestaudio",
       volume: 0.125,
     });
 
     const dispatcher = await serverQueue.connection
-      .play(stream)
+      .play(stream, { seek: seek, highWaterMark: 2000 })
       .on("finish", async reason => {
+        if (!reason) return;
         if (reason === "Stream is not generating quickly enough.") serverQueue.songs.shift("Stream is not generating quickly enough");
         console.log("END EVENT");
         if (!serverQueue.loop) serverQueue.songs.shift();
+
+        if (reason.match("seek")) {
+          const seekTo = parseInt(reason.split(" ")[1], 10);
+          serverQueue.songs.shift();
+          await play(guild, serverQueue.songs[0], seekTo);
+        }
 
         await play(guild, serverQueue.songs[0]);
       })

@@ -29,6 +29,7 @@ message.channel.send(
 };
 module.exports.help = {
   name: "duplicate",
+  aliases: ["dupe"],
   catégorie: "Musique",
   helpcaté: "musique",
 };

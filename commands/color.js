@@ -9,6 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
 };
 module.exports.help = {
   name: "color",
+  aliases: ["randomcolor"],
   catégorie: "Membres",
   helpcaté: "membres",
 };

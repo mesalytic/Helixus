@@ -103,7 +103,7 @@ module.exports.run = async (bot, message, args, con) => {
 };
 module.exports.help = {
   name: "botinfo",
-  aliases: ["infos"],
+  aliases: ["info", "infos", "stats"],
   catégorie: "Infos",
   helpcaté: "infos",
 };
