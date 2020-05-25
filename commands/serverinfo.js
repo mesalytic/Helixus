@@ -79,5 +79,6 @@ module.exports.run = async (bot, message, args, con) => {
 };
 module.exports.help = {
   name: "serverinfo",
+  aliases: ["si"],
   catégorie: "Infos",
 };
