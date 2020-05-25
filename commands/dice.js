@@ -26,6 +26,7 @@ module.exports.run = async (bot, message, args, con) => {
 };
 module.exports.help = {
   name: "dice",
+  aliases: ["rolll"],
   catégorie: "Fun",
   helpcaté: "fun",
 };

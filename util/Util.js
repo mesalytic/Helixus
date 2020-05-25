@@ -2,6 +2,10 @@ const yes = ["o", "oui", "yep", " yes", "y", "ye", "yeah", "yup", "yea", "ya"];
 const no = ["non", "nan", "nn", "no", "n", "nah", "nope", "nop"];
 
 module.exports = class Util {
+  static random(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
   static async verify(channel, user, time = 30000) {
     const filter = res => {
       const value = res.content.toLowerCase();

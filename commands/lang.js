@@ -28,6 +28,7 @@ con.query(
 };
 module.exports.help = {
   name: "lang",
+  aliases: ["language"],
   catégorie: "Administration",
   helpcaté: "admin",
 };
