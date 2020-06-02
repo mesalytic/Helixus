@@ -1217,10 +1217,15 @@ mimic-response@^3.1.0:
   resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-3.1.0.tgz#2d1d59af9c1b129815accc2c46a022a5ce1fa3c9"
   integrity sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==
 
-miniget@^1.6.0, miniget@^1.6.1, miniget@^1.7.2:
+miniget@^1.6.0, miniget@^1.6.1:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/miniget/-/miniget-1.7.2.tgz#f95eff50b78d798dddee2460c4aa3c72db1aa23a"
   integrity sha512-USPNNK2bnHLOplX8BZVMehUkyQizS/DFpBdoH0TS+fM+hQoLNg9tWg4MeY9wE8gfY0pbzmx5UBEODujt3Lz8AA==
+
+miniget@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/miniget/-/miniget-2.0.0.tgz#5792519173a56e9e79e144e7cfcb5d2c1312f361"
+  integrity sha512-JAHY/3Dv673TFDmYcpF3yo755ViTy0fU2L0j9y+5bobs6+fbnX4k8UkmCqC8mwwgYUNDOEgHrN1P/oO+rQNxjw==
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -2149,14 +2154,14 @@ ytdl-core@^1.0.5:
     miniget "^1.6.0"
     sax "^1.1.3"
 
-ytdl-core@^2.1.5:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-2.1.5.tgz#295a284a381d5dd2fd813f44c3d335aff0d94a7d"
-  integrity sha512-6iDMndnf9/zxUaDYw8MjK4kie/wp7LqJ9nwBsrP3GvyNL3nZcnaiQi957YPBncUzmGZZUNUqA1gRNieYl+z6Fg==
+ytdl-core@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-3.1.0.tgz#129cfa8612972e02ad542e58f4c22764ae1e31d4"
+  integrity sha512-3dDIugHLusJ5vXnII4bYrSWLwKPVxPL+nvVl2YS7Jgi0ui6I9RBODKXSu6Xttysvc0HN60QOcDeDFTKmUs92Bg==
   dependencies:
     html-entities "^1.3.1"
     m3u8stream "^0.7.1"
-    miniget "^1.7.2"
+    miniget "^2.0.0"
     sax "^1.1.3"
 
 zlib-sync@^0.1.6:
