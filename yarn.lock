@@ -1148,10 +1148,10 @@ m3u8stream@^0.7.1:
     miniget "^1.6.1"
     sax "^1.2.4"
 
-mathjs@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-7.0.0.tgz#eff3034f1a6b73984e595861a6bf9646d7b7d522"
-  integrity sha512-pe2hgDAHSfPRtuwIjNbL6fCKiHZYKKv45PusNfK3JDeVpVmHG1Pdig2vq62svsj2iKZO37tvLAjPUnrz6w+X9w==
+mathjs@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-7.0.1.tgz#63f5499cf2fd90b613a1649aa1830ebafecc5c10"
+  integrity sha512-ikFnvtvui8EA1KC+RsF7Sse34WA7EGsKnwwv7/lTRx04t25JtWpVWrs0ZcNKxygZVrOIpU9MRgbvXEFYFV3pOQ==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.0"
