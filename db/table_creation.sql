@@ -24,6 +24,21 @@ CREATE TABLE IF NOT EXISTS `Cooldowns` (
   `active` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `Economy` (
+  `id` varchar(50) DEFAULT NULL,
+  `xp` bigint(20) DEFAULT NULL,
+  `level` bigint(20) DEFAULT 0,
+  `balance` bigint(20) DEFAULT 0,
+  `dailyCooldown` bigint(20) DEFAULT 0,
+  `fishJunk` bigint(20) DEFAULT 0,
+  `fishCommon` bigint(20) DEFAULT 0,
+  `fishUncommon` bigint(20) DEFAULT 0,
+  `fishRare` bigint(20) DEFAULT 0,
+  `fishLegendary` bigint(20) DEFAULT 0,
+  `reps` bigint(20) DEFAULT 0,
+  `repCooldown` bigint(20) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `IgnoreChannels` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,

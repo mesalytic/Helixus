@@ -28,5 +28,12 @@
     "repo_name": "xx",
     "username": "xx",
     "password": "xx"
+  },
+  "dbl": {
+    "token": "xx",
+    "webhookPass": "xx",
+    "authorization": "xx",
+	  "wbID": "xx",
+	  "wbPass": "xx"
   }
 }

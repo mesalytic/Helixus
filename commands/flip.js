@@ -5,8 +5,9 @@ module.exports.run = async (bot, message, args, con) => {
   var res = flips[Math.floor(Math.random() * flips.length)];
 
   message.channel.send(bot.lang.fun.flip.launched).then(m => {
-    sleep(2000);
-    m.edit(`${bot.lang.fun.flip.result} ${res} !`);
+    setTimeout(() => {
+      m.edit(`${bot.lang.fun.flip.result} ${res} !`);
+    }, 2000);
   });
 };
 module.exports.help = {

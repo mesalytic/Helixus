@@ -1,9 +1,17 @@
-const yes = ["o", "oui", "yep", " yes", "y", "ye", "yeah", "yup", "yea", "ya"];
-const no = ["non", "nan", "nn", "no", "n", "nah", "nope", "nop"];
+const yes = ["yes", "oui", "yep", "o", "y", "ye", "yeah", "yup", "yea", "ya"];
+const no = ["no", "non", "nan", "nn", "n", "nah", "nope", "nop"];
 
 module.exports = class Util {
   static random(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  static async getWrapText(text, length) {
+    const temp = [];
+    for (let i = 0; i < text.length; i += length) {
+      temp.push(text.slice(i, i + length));
+    }
+    return temp.map(x => x.trim());
   }
 
   static async verify(channel, user, time = 30000) {
@@ -39,9 +47,9 @@ module.exports = class Util {
   }
 
   static base64(text, mode = 'encode') {
-		if (mode === 'encode') return Buffer.from(text).toString('base64');
-		if (mode === 'decode') return Buffer.from(text, 'base64').toString('utf8') || null;
-		throw new TypeError(`${mode} is not a supported base64 mode.`);
+    if (mode === 'encode') return Buffer.from(text).toString('base64');
+    if (mode === 'decode') return Buffer.from(text, 'base64').toString('utf8') || null;
+    throw new TypeError(`${mode} is not a supported base64 mode.`);
   }
 
   static shorten(text, maxLen = 2000) {
@@ -50,5 +58,16 @@ module.exports = class Util {
 
   static eURL(title, url, display = url) {
     return `[${title}](${url.replace(/\)/g, '%27')})`;
+  }
+
+  static shuffle(array) {
+    const arr = array.slice(0);
+    for (let i = arr.length - 1; i >= 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+    return arr;
   }
 };

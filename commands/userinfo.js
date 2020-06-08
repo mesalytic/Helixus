@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args, con) => {
   const moment = require("moment");
 
   const Timestamp = require('../util/Timestamp'),
-  timestamp = new Timestamp("DD/MM/YYYY, HH:MM");
+  timestamp = new Timestamp("DD/MM/YYYY, HH:MM:SS");
 
   let user = message.member;
   if (message.mentions.members.first()) user = message.mentions.members.first();
