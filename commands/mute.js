@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args, con) => {
     m.edit(bot.lang.mods.mute.first3);
   }
   let rolearray = [];
-  member.roles.map(roles => {
+  member.roles.cache.map(roles => {
     if (roles.managed) return;
     if (roles.id === message.guild.id) return;
     rolearray.push(roles.id);

@@ -7,21 +7,32 @@ module.exports.run = async (bot, message, args, con) => {
 
   const m = await message.channel.send("Please wait...");
 
-  get(
-    `api.aliceraina.moe/v1/steamplaying?user=${encodeURIComponent(
-      message.author.username,
-    )}&game=${game}&url=${message.author.avatarURL()}&`,
-    {
-      headers: { Authorization: bot.config.helixusapi },
-      responseType: "arraybuffer",
-    },
-  )
-    .then(res => message.channel
-        .send("Generated with HelixusAPI (docs.helixus.fr)", {
-          files: [{ attachment: res.data, name: "steamplaying.png" }],
-        })
-        .then(() => m.delete()))
-    .catch(err => message.reply(err.message));
+  const Canvas = require('canvas');
+  const request = require('node-superfetch');
+  const path = require('path');
+  const { shortenText } = require('../util/Util')
+
+  Canvas.registerFont(`${process.cwd()}/assets/fonts/Noto-Regular.ttf`, { family: 'Noto' });
+  Canvas.registerFont(`${process.cwd()}/assets/fonts/Noto-CJK.otf`, { family: 'Noto' });
+  Canvas.registerFont(`${process.cwd()}/assets/fonts/Noto-Emoji.ttf`, { family: 'Noto' });
+
+  const base = await Canvas.loadImage(`${process.cwd()}/assets/images/steam-now-playing-classic.png`);
+
+  const { body } = await request.get(message.author.avatarURL({ format: "png", size: 512 }));
+  const data = await Canvas.loadImage(body);
+  const canvas = Canvas.createCanvas(base.width, base.height);
+  const ctx = canvas.getContext('2d');
+
+  ctx.drawImage(base, 0, 0);
+  ctx.drawImage(data, 21, 21, 32, 32);
+  ctx.fillStyle = '#90ba3c';
+  ctx.font = '10px Noto';
+  ctx.fillText(message.author.username, 63, 26);
+  ctx.fillText(shortenText(ctx, game, 160), 63, 54);
+
+  const attachment = canvas.toBuffer();
+
+  message.channel.send({ files: [{ attachment: attachment, name: "steamplaying.png" }] })
 };
 module.exports.help = {
   name: "steamplaying",
