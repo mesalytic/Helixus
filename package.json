@@ -43,6 +43,6 @@
     "utf-8-validate": "^5.0.2",
     "util": "^0.12.2",
     "ytdl-core": "^3.1.1",
-    "zlib-sync": "^0.1.6"
+    "zlib-sync": "^0.1.7"
   }
 }
