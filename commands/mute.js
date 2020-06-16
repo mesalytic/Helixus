@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args, con) => {
       })
       .then(role => {
         m.edit(bot.lang.mods.mute.first2);
-        message.guild.channels.forEach(chan => {
+        message.guild.channels.cache.forEach(chan => {
           if (
             chan.type === 'dm' ||
             chan.type === 'group' ||
