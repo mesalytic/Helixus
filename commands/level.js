@@ -30,10 +30,11 @@ module.exports.run = async (bot, message, args, con) => {
       message.channel.send(lvlEmbed);
     },
   );
+
 };
 module.exports.help = {
   name: "level",
-  aliases: ["rank", "lvl"],
+  aliases: ["lvl", "rank"],
   catégorie: "Levels",
   helpcaté: "levels",
 };

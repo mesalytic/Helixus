@@ -1,5 +1,5 @@
 module.exports.run = async (bot, message, args, con) => {
-  const randommember = message.guild.members.random(1)[0].user.username;
+  const randommember = message.guild.members.cache.random(1)[0].user.username;
   if (!args[0]) {
     const str = bot.lang.fun.select.noargs.replace(
       "${randommember}",

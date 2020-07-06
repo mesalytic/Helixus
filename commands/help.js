@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args, con) => {
           .join(", "),
       )
       .addField(
-        `${bot.lang.membres.help.moderation}`,
+        `${bot.lang.membres.help.mods}`,
         bot.commands
           .filter(cmd => cmd.help.catégorie === "Modération")
           .map(cmd => `\`${cmd.help.name}\``)

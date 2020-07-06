@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args, con) => {
 
               for (let i = 0; i < rows.length; i++) {
                 const diff = 5 * (rows[i].level ^ 2) + 50 * rows[i].level + 100
-                const u = bot.users.resolve(rows[i].user)
+                const u = message.guild.members.resolve(rows[i].user)
                 if (i === 0) {
                   if (!u) {
                     msgtop += `[${i + 1}] :first_place: **${
@@ -39,7 +39,7 @@ module.exports.run = async (bot, message, args, con) => {
                       rows[i].points
                     }/${diff} XP)\n`
                   } else {
-                    msgtop += `[${i + 1}] :first_place: **${u.tag}** - Level ${
+                    msgtop += `[${i + 1}] :first_place: **${u.user.tag}** - Level ${
                       rows[i].level
                     } | (${rows[i].points}/${diff} XP)\n`
                   }
@@ -51,7 +51,7 @@ module.exports.run = async (bot, message, args, con) => {
                       rows[i].points
                     }/${diff} XP)\n`
                   } else {
-                    msgtop += `[${i + 1}] :second_place: **${u.tag}** - Level ${
+                    msgtop += `[${i + 1}] :second_place: **${u.user.tag}** - Level ${
                       rows[i].level
                     } | (${rows[i].points}/${diff} XP)\n`
                   }
@@ -63,7 +63,7 @@ module.exports.run = async (bot, message, args, con) => {
                       rows[i].points
                     }/${diff} XP)\n`
                   } else {
-                    msgtop += `[${i + 1}] :third_place: **${u.tag}** - Level ${
+                    msgtop += `[${i + 1}] :third_place: **${u.user.tag}** - Level ${
                       rows[i].level
                     } | (${rows[i].points}/${diff} XP)\n`
                   }
@@ -75,7 +75,7 @@ module.exports.run = async (bot, message, args, con) => {
                     }/${diff} XP) \n`
                 } else {
                   msgtop += `[${i + 1}] :military_medal: **${
-                      u.tag
+                      u.user.tag
                     }** - Level ${rows[i].level} | (${
                       rows[i].points
                     }/${diff} XP)\n`
@@ -91,11 +91,11 @@ module.exports.run = async (bot, message, args, con) => {
                   for (let k = 0; k < top.length; k++) {
                     const topDiff =
                       5 * (top[k].level ^ 2) + 50 * top[k].level + 100
-                    const user = bot.users.resolve(top[k].user)
+                    const user = message.guild.members.resolve(top[k].user)
                     if (!user) {
                       topall += `[${k + 1}] ${bot.lang.levels.top.notfound} - Level ${top[k].level} | (${top[k].points}/${topDiff} XP)\n`
                     } else {
-                      topall += `[${k + 1}] ${user.tag} - Level ${
+                      topall += `[${k + 1}] ${user.user.tag} - Level ${
                         top[k].level
                       } | (${top[k].points}/${topDiff} XP)\n`
                     }

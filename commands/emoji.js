@@ -241,6 +241,7 @@ module.exports.run = async (bot, message, args, con) => {
           const id = emote.id;
           const name = emote.name;
           const created = emote.createdAt.getTime();
+          const animated = emote.animated;
           const duration = moment(created).format(
             bot.lang.membres.emoji.duration
           );

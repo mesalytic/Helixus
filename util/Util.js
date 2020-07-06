@@ -6,12 +6,12 @@ module.exports = class Util {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
-  static async getWrapText(text, length) {
-    const temp = [];
-    for (let i = 0; i < text.length; i += length) {
-      temp.push(text.slice(i, i + length));
-    }
-    return temp.map(x => x.trim());
+  static async insertChar(str, char, length) {
+    var split = str.split(char),
+        regex = RegExp('(.{' + length + '})','g');
+
+    split[split.length-1] = split[split.length - 1].replace(regex, '$1' + char);
+    return split.join(char);
   }
 
   static async verify(channel, user, time = 30000) {
@@ -56,6 +56,15 @@ module.exports = class Util {
     return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
   }
 
+  static shortenText(ctx, text, maxWidth) {
+    let shorten = false;
+    while (ctx.measureText(`${text}...`).width > maxWidth) {
+      if (!shorten) shorten = true;
+      text = text.substr(0, text.length - 1);
+    }
+    return shorten ? `${text}...` : text;
+  }
+
   static eURL(title, url, display = url) {
     return `[${title}](${url.replace(/\)/g, '%27')})`;
   }
@@ -69,5 +78,44 @@ module.exports = class Util {
       arr[j] = temp;
     }
     return arr;
+  }
+
+  static streamToArray(stream) {
+    if (!stream.readable) return Promise.resolve([]);
+    return new Promise((resolve, reject) => {
+      const array = [];
+      function onData(data) {
+        array.push(data);
+      }
+      function onEnd(error) {
+        if (error) reject(error);
+        else resolve(array);
+        cleanup();
+      }
+      function onClose() {
+        resolve(array);
+        cleanup();
+      }
+      function cleanup() {
+        stream.removeListener('data', onData);
+        stream.removeListener('end', onEnd);
+        stream.removeListener('error', onEnd);
+        stream.removeListener('close', onClose);
+      }
+      stream.on('data', onData);
+      stream.on('end', onEnd);
+      stream.on('error', onEnd);
+      stream.on('close', onClose);
+    })
+  }
+
+  static drawImageWithTint(ctx, image, color, x, y, width, height) {
+    const { fillStyle, globalAlpha } = ctx;
+    ctx.fillStyle = color;
+    ctx.drawImage(image, x, y, width, height);
+    ctx.globalAlpha = 0.5;
+    ctx.fillRect(x, y, width, height);
+    ctx.fillStyle = fillStyle
+    ctx.globalAlpha = globalAlpha;
   }
 };

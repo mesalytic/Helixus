@@ -32,6 +32,6 @@ module.exports.run = async (bot, message, args, con) => {
 };
 module.exports.help = {
   name: "softban",
-  catégorie: "Membres",
-  helpcaté: "membres",
+  catégorie: "Modération",
+  helpcaté: "mods",
 };
