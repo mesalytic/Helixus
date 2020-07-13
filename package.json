@@ -17,7 +17,7 @@
     "discord.js": "github:discordjs/discord.js",
     "erlpack": "github:discordapp/erlpack",
     "express": "^4.17.1",
-    "figlet": "^1.4.0",
+    "figlet": "^1.5.0",
     "fs-nextra": "^0.3.5",
     "gifencoder": "^2.0.1",
     "got": "^11.5.0",
