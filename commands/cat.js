@@ -2,13 +2,18 @@ module.exports.run = async (bot, message, args, con) => {
   const fetch = require("node-fetch");
   const Discord = require("discord.js");
 
-  const imageFetch = await fetch("https://nekos.life/api/v2/img/meow");
-  const image = await imageFetch.json();
-  const catembed = new Discord.MessageEmbed()
-    .setColor("#B9121B")
-    .setTitle("Meow ! 🐱")
-    .setImage(image.url);
-  message.channel.send(catembed);
+  try {
+
+    const imageFetch = await fetch("https://nekos.life/api/v2/img/meow");
+    const image = await imageFetch.json();
+    const catembed = new Discord.MessageEmbed()
+      .setColor("#B9121B")
+      .setTitle("Meow ! 🐱")
+      .setImage(image.url);
+    message.channel.send(catembed);
+  } catch (e) {
+    throw e;
+  }
 };
 module.exports.help = {
   name: "cat",

@@ -8,15 +8,20 @@ module.exports.run = async (bot, message, args, con) => {
     return message.channel.send(embed);
   }
 
-  let resp = "";
-  bot.users.cache.map(user => {
-    if (user.discriminator == args[0]) return resp += `${user.username}\n`;
-    else return;
-  });
+  try {
+    let resp = "";
+    bot.users.cache.map(user => {
+      if (user.discriminator == args[0]) return resp += `${user.username}\n`;
+      else return;
+    });
+  
+    embed.setTitle(`Discrim: ${args[0]}`).setDescription(resp);
+  
+    message.channel.send(embed);    
+  } catch (e) {
+    throw e;
+  }
 
-  embed.setTitle(`Discrim: ${args[0]}`).setDescription(resp);
-
-  message.channel.send(embed);
 };
 module.exports.help = {
   name: "discrim",

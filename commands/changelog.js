@@ -4,7 +4,8 @@ module.exports.run = async (bot, message, args, con) => {
   const { shorten, base64, eURL } = require('../util/Util');
   const config = require('../config.json');
 
-  const { body } = await request
+  try {
+    const { body } = await request
     .get(`https://api.github.com/repos/${config.github.repo_username}/${config.github.repo_name}/commits`)
     .set({ Authorization: `Basic ${base64(`${config.github.username}:${config.github.password}`)}` });
 
@@ -19,6 +20,9 @@ module.exports.run = async (bot, message, args, con) => {
     }).join('\n'));
 
     return message.channel.send(embed);
+  } catch (e) {
+    throw e;
+  }
 };
 module.exports.help = {
   name: "changelog",

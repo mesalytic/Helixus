@@ -2,7 +2,8 @@ module.exports.run = async (bot, message, args, con) => {
   const fetch = require("node-fetch");
   const Discord = require("discord.js");
 
-  let member = message.mentions.members.first() || message.member;
+  try {
+    let member = message.mentions.members.first() || message.member;
 
   const imageFetch = await fetch("https://nekos.life/api/v2/img/feed");
   const image = await imageFetch.json();
@@ -26,6 +27,9 @@ module.exports.run = async (bot, message, args, con) => {
     .setFooter("Feed - Helixus")
     .setTimestamp();
   message.channel.send(embed);
+  } catch (e) {
+    throw e;
+  }
 };
 module.exports.help = {
   name: "feed",

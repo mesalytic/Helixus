@@ -1,12 +1,12 @@
 const { MessageEmbed } = require('discord.js');
-const { setUnionDependencies } = require('mathjs');
 
 module.exports.run = async (bot, message, args, con) => {
-  const axios = require('axios');
-  var color = Math.random()
-    .toString(16)
-    .slice(2, 8)
-    .toUpperCase();
+  try {
+    const axios = require('axios');
+    var color = Math.random()
+      .toString(16)
+      .slice(2, 8)
+      .toUpperCase();
 
     axios({
       method: 'get',
@@ -27,10 +27,9 @@ module.exports.run = async (bot, message, args, con) => {
       message.channel.send(e);
     })
 
-
-/*  const regex = /\${color}/g;
-  const str = bot.lang.membres.randomhexcolor.res.replace(regex, color);
-  message.channel.send(str);*/
+  } catch (e) {
+    throw err;
+  }
 };
 module.exports.help = {
   name: "color",

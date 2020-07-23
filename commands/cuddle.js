@@ -4,28 +4,33 @@ module.exports.run = async (bot, message, args, con) => {
 
   let member = message.mentions.members.first() || message.member;
 
-  const imageFetch = await fetch("https://nekos.life/api/v2/img/cuddle");
-  const image = await imageFetch.json();
-  if (member.id === message.member.id) member = null;
-  const embed = new Discord.MessageEmbed()
-    .setColor("RANDOM")
-    .setDescription(
-      member ?
-        bot.lang.rp.cuddle.ment
+  try {
+
+    const imageFetch = await fetch("https://nekos.life/api/v2/img/cuddle");
+    const image = await imageFetch.json();
+    if (member.id === message.member.id) member = null;
+    const embed = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setDescription(
+        member ?
+          bot.lang.rp.cuddle.ment
             .replace(
               "${message.member.user.username}",
               message.member.user.username,
             )
             .replace("${member.user.username}", member.user.username) :
-        bot.lang.rp.cuddle.noment.replace(
+          bot.lang.rp.cuddle.noment.replace(
             "${message.member.user.username}",
             message.member.user.username,
           ),
-    )
-    .setImage(image.url)
-    .setFooter("Cuddle - Helixus")
-    .setTimestamp();
-  message.channel.send(embed);
+      )
+      .setImage(image.url)
+      .setFooter("Cuddle - Helixus")
+      .setTimestamp();
+    message.channel.send(embed);
+  } catch (e) {
+    throw e;
+  }
 };
 module.exports.help = {
   name: "cuddle",

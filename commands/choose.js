@@ -1,5 +1,6 @@
 module.exports.run = async (bot, message, args, con) => {
-  const chooseoption = args
+  try {
+    const chooseoption = args
     .slice(0)
     .join(" ")
     .split(" | ");
@@ -9,6 +10,9 @@ module.exports.run = async (bot, message, args, con) => {
     chooseoption[Math.floor(Math.random() * chooseoption.length)],
   );
   message.channel.send(str);
+  } catch (e) {
+    throw e;
+  }
 };
 module.exports.help = {
   name: "choose",
