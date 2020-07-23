@@ -593,9 +593,9 @@
       "help_usage": "am!pp [tag]"
     },
     "randomhexcolor": {
-      "res": "https://www.colorhexa.com/${color}\nCodice HEX : #${color}",
+      "link": "Link al colore",
       "help_description": "Ottenere un colore casuale",
-      "help_usage": "am!randomhexcolor"
+      "help_usage": "am!color"
     },
     "serverinvite": {
       "res": "Per entrare sul Server di assistenza di Helixus, clic qui ! :wink: https://discord.gg/UKQNxzu",

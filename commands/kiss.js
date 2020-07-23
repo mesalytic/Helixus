@@ -4,6 +4,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   let member = message.mentions.members.first() || message.member;
 
+  
   const imageFetch = await fetch("https://nekos.life/api/v2/img/kiss");
   const image = await imageFetch.json();
   if (member.id === message.member.id) member = null;

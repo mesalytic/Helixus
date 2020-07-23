@@ -3,7 +3,8 @@ module.exports.run = async (bot, message, args, con) => {
 
   const defineduser = message.mentions.users.first();
 
-  var embed = new Discord.MessageEmbed()
+  try {
+    var embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
     .setDescription(
       defineduser ?
@@ -16,6 +17,10 @@ module.exports.run = async (bot, message, args, con) => {
         message.author.avatarURL({ dynamic: true, size: 512, format: "png" }),
     );
   return message.channel.send(embed);
+  } catch (err) {
+    throw err;
+  }
+  
 };
 module.exports.help = {
   name: "avatar",

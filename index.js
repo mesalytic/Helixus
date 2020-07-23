@@ -57,32 +57,12 @@ app.post("/voted", async (req, res) => {
       bot.shard
         .broadcastEval(`this.users.cache.get('${req.body.user}')`)
         .then((res) => {
-          if (res[0] && res[1])
-            bot.users.cache
-              .get(req.body.user)
-              .send(
-                "Thank you for your vote! You have been rewarded with 450 coins. Come back in 12 hours!"
-              );
-          else if ((res[0] && !res[1]) || (!res[0] && res[1]))
-            bot.shard.broadcastEval(
-              `if (this.users.cache.get('${req.body.user}')) this.users.cache.get('${req.body.user}').send("Thank you for your vote! You have been rewarded with 450 coins. Come back in 12 hours!")`
-            );
-
-          con.query(
-            `SELECT * FROM Economy WHERE id="${req.body.user}"`,
-            (err, rows) => {
-              if (!rows[0])
-                con.query(
-                  `INSERT INTO Economy (id, balance) VALUES ('${req.body.user}', '450')`
-                );
-              else
-                con.query(
-                  `UPDATE Economy SET balance = "${Number(
-                    rows[0].balance + 450
-                  )}" WHERE id="${req.body.user}"`
-                );
-            }
-          );
+          if (res[0] && res[1]) {
+            // doSomething
+          }
+          else if ((res[0] && !res[1]) || (!res[0] && res[1])) {
+            // doSomething
+          }
           let wb = new Discord.WebhookClient(
             bot.config.dbl.wbID,
             bot.config.dbl.wbPass
@@ -1531,22 +1511,6 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
-fs.readdir("./commands/economy", (err, files) => {
-  if (err) throw err;
-  const jsfile = files.filter((f) => f.split(".").pop() === "js");
-  if (jsfile.length <= 0) {
-    return console.log("[COMMANDES] - Aucune commande n'a été trouvée.");
-  }
-  jsfile.forEach((f, i) => {
-    const props = xrequire(`./commands/economy/${f}`);
-    console.log(`[COMMANDES] - ${f} a été lancé.`);
-    bot.commands.set(props.help.name, props);
-    if (props.help.aliases) {
-      props.help.aliases.forEach((alias) => bot.aliases.set(alias, props));
-    }
-  });
-});
-
 bot.on("message", async (message) => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
@@ -1631,9 +1595,7 @@ bot.on("message", async (message) => {
               `\`\`\`${message.author.tag} - ${message.content} (${message.guild.name})\`\`\``
             );
             commandfile.run(bot, message, args, con).catch((err) => {
-              message.reply(
-                "Oops, an error has been triggered, sorry for that! Our team will resolve this issue as quick as possible!"
-              );
+              message.reply(`Oops, an error has been triggered, sorry for that! Our team will resolve this issue as quick as possible!\nError: ${err.message}`);
               const wb = new Discord.WebhookClient(
                 config.webhook.error.id,
                 config.webhook.error.password
@@ -1760,55 +1722,6 @@ bot.on("message", (message) => {
   );
 });
 
-const talkedRecently = [];
-bot.on("message", (message) => {
-  if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
-  if (message.system) return;
-
-  const xpAdd = Math.floor(Math.random() * (26 - 5 + 1) + 5);
-
-  con.query(`SELECT * FROM Economy WHERE id='${message.author.id}'`, (err, lRows) => {
-      if (!lRows[0]) return;
-      if (talkedRecently.indexOf(message.author.id) !== -1) return;
-      
-      if (!Number(lRows[0].xp)) return;
-
-      const clvl = 5 * (lRows[0].level ^ 2) + 50 * lRows[0].level + 100;
-
-      if (Number(lRows[0].xp) > clvl) {
-        con.query(`UPDATE Economy SET level = '${Number(lRows[0].level) + 1}', xp = '0' WHERE id = '${message.author.id}'`);
-        message.channel.send(`[GLOBAL] - GG, you leveled up to level ${lRows[0].level + 1} !`);
-        talkedRecently.push(message.author.id);
-        setTimeout(() => {
-          talkedRecently.splice(talkedRecently.indexOf(message.author.id), 1);
-        }, 60000);
-      }
-    }
-  );
-});
-
-bot.on("message", (message) => {
-  if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
-  if (message.system) return;
-
-  const xpAdd = Math.floor(Math.random() * (26 - 5 + 1) + 5);
-
-  con.query(`SELECT * FROM Economy WHERE id='${message.author.id}'`, (err, cRows) => {
-      if (talkedRecently.indexOf(message.author.id) !== -1) return;
-
-      talkedRecently.push(message.author.id);
-      setTimeout(() => {
-          talkedRecently.splice(talkedRecently.indexOf(message.author.id), 1);
-      }, 60000);
-
-      if (!cRows[0]) { return con.query(`INSERT INTO Economy (id, xp) VALUES ('${message.author.id}', '${generateXP()}')`); }
-      con.query(`UPDATE Economy SET xp ='${cRows[0].xp + generateXP()}' WHERE id = '${message.author.id}'`);
-    
-  }
-  );
-});
 
 bot.on("message", (message) => {
   if (message.author.bot) return;

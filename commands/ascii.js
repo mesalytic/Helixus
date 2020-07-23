@@ -9,14 +9,19 @@ module.exports.run = async (bot, message, args, con) => {
   if (!args[0]) {
     return message.channel.send(bot.lang.membres.ascii.noargs);
   }
-  figlet(`${args.join(" ")}`, (err, data) => {
-    if (err) {
-      throw err;
-    }
-    message.channel.send(`${data}`, {
-      code: "AsciiArt",
+  try {
+    figlet(`${args.join(" ")}`, (err, data) => {
+      if (err) {
+        throw err;
+      }
+      message.channel.send(`${data}`, {
+        code: "AsciiArt",
+      });
     });
-  });
+  } catch (err) {
+    throw err;
+  }
+
 };
 module.exports.help = {
   name: "ascii",

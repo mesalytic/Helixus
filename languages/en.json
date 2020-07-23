@@ -605,9 +605,9 @@
       "help_usage": "am!pp [mention]"
     },
     "randomhexcolor": {
-      "res": "https://www.colorhexa.com/${color}\nCode HEX : #${color}",
+      "link": "Link to color",
       "help_description": "Generates a random color",
-      "help_usage": "am!randomhexcolor"
+      "help_usage": "am!color"
     },
     "serverinvite": {
       "res": "To join the support server of Helixus, click here ! :wink: https://discord.gg/UKQNxzu",
