@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args, con) => {
   con.query(
     `SELECT * FROM ModlogsChannel WHERE guildID='${message.guild.id}'`,
     (err, rows) => {
-      if (!message.member.permissions.has("ADMINISTRATOR")) return message.reply(bot.lang.admin.modlogs.noperms);
+      if (!message.member.permissions.has("MANAGE_CHANNELS")) return message.reply(bot.lang.admin.modlogs.noperms);
       if (args[0] === "reset") {
         if (rows[0]) {
           con.query(

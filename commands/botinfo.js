@@ -43,7 +43,7 @@ module.exports.run = async (bot, message, args, con) => {
         const embedStats = new Discord.MessageEmbed()
           .setAuthor(bot.user.username, bot.user.avatarURL())
           .setColor("RANDOM")
-          .addField(bot.lang.infos.botinfo.creator, "Alicia#7044", true)
+          .addField(bot.lang.infos.botinfo.creator, bot.users.cache.get("604779545018761237").tag, true)
           .addField(bot.lang.infos.botinfo.onlinesince, `${duration}`, true)
           .addField(
             bot.lang.infos.botinfo.langage,
