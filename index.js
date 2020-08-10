@@ -874,6 +874,8 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                                         .setColor("RANDOM");
                                     wb.send(chanCr);
                                 } else if (oldState.channel && !newState.channel) {
+
+                                    if (oldState.member.id === bot.user.id) bot.queue = new Map();
                                     const str = bot.lang.logs.voiceStateUpdate.leaved.replace("${voiceNew.user.tag}", newState.member.user.tag).replace("${vcOld.name}", oldState.channel.name);
                                     const chanCr = new Discord.MessageEmbed()
                                         .setAuthor(newState.member.user.tag, newState.member.user.displayAvatarURL())
