@@ -72,7 +72,6 @@ In order for the bot to run properly, you need to fill a JSON config file.
     - **joinleaves**: Used to display if the bot has been added or removed from a server. [_**optional**_]
     - **errors**: Used to display errors if any. [_**required**_]
     -**commands**: Used to log commands. Recommended if spam abuse. [_**optional**_]
-- **helixusapi**: API used by Image Manipulation commands. Please DM chocolola 💞#0101 on Discord (or [join the Helixus server]()) [_**optional**_]
 - **osu**: API used by the osu! command. Consult the [osu! website](https://osu.ppy.sh/p/api) and the [docs](https://github.com/ppy/osu-api/wiki). [_**optional**_]
 - **googlekey**: API used for the YouTube search feature. [_**optional**_]
 - **GitHub**: (if you have a public repository and want to use the changelog command)

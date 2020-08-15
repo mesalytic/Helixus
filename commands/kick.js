@@ -22,7 +22,8 @@ module.exports.run = async (bot, message, args, con) => {
   let reason = args.slice(1).join(" ");
   if (!reason) reason = bot.lang.mods.kick.noreason;
 
-  member
+  message.reply(`You have been **kicked** from __**${message.guild.name}**__.\nReason: **${reason}**`).then(() => {
+    member
     .kick(reason)
     .then(member => {
       message.channel.bulkDelete(1);
@@ -42,9 +43,9 @@ module.exports.run = async (bot, message, args, con) => {
         .addField(bot.lang.modlogs.reason, reason, true);
       modlog.send(e);
     })
-    .catch(err => {
-      throw err;
-    });
+  })
+
+  
 };
 module.exports.help = {
   name: "kick",

@@ -69,6 +69,7 @@ app.post("/voted", async (req, res) => {
 });
 
 bot.on("ready", async () => {
+    console.log(process.argv);
     const wb = new Discord.WebhookClient(config.webhook.status.id, config.webhook.status.password);
     let e = new Discord.MessageEmbed()
         .setColor("#32CD32")
@@ -944,10 +945,10 @@ bot.on("message", async (message) => {
         var mprefix;
         var prefix;
 
-        if (!prefix[0]) prefix = "am!";
+        if (!prefix[0]) prefix = (process.argv[2] === "dev" ? "ab!" : "am!");
         else prefix = prefix[0].prefix;
 
-        if (message.content.startsWith("am!")) mprefix = "am!";
+        if (message.content.startsWith(process.argv[2] === "dev" ? "ab!" : "am!")) mprefix = (process.argv[2] === "dev" ? "ab!" : "am!");
         if (message.content.startsWith("helixus>")) mprefix = "helixus>";
         if (message.content.startsWith(prefix)) mprefix = prefix;
 

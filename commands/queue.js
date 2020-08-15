@@ -5,19 +5,19 @@ module.exports.run = async (bot, message, args, con) => {
 
   const { oneLine, stripIndents } = require("common-tags");
   const currentSong = serverQueue.songs[0];
-//  If (!currentSong) return message.channel.send(bot.lang.musique.queue.nomusic);
-  const currentTime = serverQueue.connection.dispatcher ?
-    serverQueue.connection.dispatcher.streamTime / 1000 :
-    0;
-  const paginated = paginate(serverQueue.songs, args[0], 10);
+  const currentTime = serverQueue.connection.dispatcher ? serverQueue.connection.dispatcher.streamTime / 1000 : 0;
+  const paginated = paginate(serverQueue.songs, args[0] ? args[0] : 1, 10);
+
   var totalTime = 0;
   for (let i = 0; i < serverQueue.songs.length; i++) {
     let q = serverQueue.songs[i];
     totalTime += q.duration_unformated;
   }
+
   let embedtitle = bot.lang.musique.queue.embedtitle
     .replace("${paginated.page}", paginated.page)
     .replace("${paginated.maxPage}", paginated.maxPage);
+
   return message.channel.send({
     embed: {
       color: 0xcd6e57,
@@ -27,17 +27,7 @@ module.exports.run = async (bot, message, args, con) => {
         iconURL: message.author.displayAvatarURL,
       },
       description: stripIndents`
-            ${paginated.items
-              .map(
-                song =>
-                  `**-** ${
-                    !isNaN(song.id) ?
-                      `${song.title} (${song.duration_length})` :
-                      `[${
-                          song.title
-                        }](${`https://www.youtube.com/watch?v=${song.id}`})`
-                  } (${song.duration_length})`,
-              )
+            ${paginated.items.map(song =>`**-** ${!isNaN(song.id) ?`${song.title} (${song.duration_length})` :`[${song.title}](${`https://www.youtube.com/watch?v=${song.id}`})`} (${song.duration_length})`,)
               .join("\n")}
             ${paginated.maxPage > 1 ? `\n${bot.lang.musique.queue.usage}` : ""}
             ${bot.lang.musique.queue.progress} ${

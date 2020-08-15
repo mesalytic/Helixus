@@ -3,7 +3,8 @@ module.exports.run = async (bot, message, args, con) => {
 
   if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().avatarURL({ format: "png", size: 512 }); } else { url = args[0] ? args[0] : message.author.avatarURL({ format: "png", size: 512 }); }
 
-  const m = await message.channel.send("Please wait...");
+  try {
+    const m = await message.channel.send("Please wait...");
 
   const Canvas = require('canvas');
   const request = require('node-superfetch');
@@ -18,6 +19,9 @@ module.exports.run = async (bot, message, args, con) => {
   const attachment = canvas.toBuffer();
 
   message.channel.send({ files: [{ attachment: attachment, name: "glitch.png" }] })
+  } catch (e) {
+    throw e;
+  }
 };
 module.exports.help = {
   name: "glitch",
