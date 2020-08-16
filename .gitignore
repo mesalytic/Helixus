@@ -89,3 +89,6 @@ typings/
 
 # Config JSON
 config.json
+
+# Commands in development
+commands/dev
