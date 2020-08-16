@@ -898,7 +898,7 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                                     wb.send(chanCr);
                                 }
 
-                                if (oldState.deaf === true && newState.deaf === false) {
+                                if ((oldState.deaf === true && oldState.member.id === bot.user.id) && (newState.deaf === false && newState.member.id === bot.user.id)) {
                                     newState.setDeaf(true, "Helixus Music Optimization");
                                 }
                             }
