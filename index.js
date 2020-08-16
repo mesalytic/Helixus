@@ -866,6 +866,8 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                             if (rows[0].webhookID && rows[0].webhookToken) {
                                 const wb = new Discord.WebhookClient(rows[0].webhookID, rows[0].webhookToken);
                                 if (!oldState.channel && newState.channel) {
+
+                                    if (newState.member.id === bot.user.id) newState.setDeaf(true, "Helixus Music Optimization");
                                     const str = bot.lang.logs.voiceStateUpdate.joined.replace("${voiceNew.user.tag}", newState.member.user.tag).replace("${vcNew.name}", newState.channel.name);
                                     const chanCr = new Discord.MessageEmbed()
                                         .setAuthor(newState.member.user.tag, newState.member.user.displayAvatarURL())
@@ -894,6 +896,10 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                                         .setFooter(`ID: ${oldState.channel.id} -> ${newState.channel.id}`)
                                         .setColor("RANDOM");
                                     wb.send(chanCr);
+                                }
+
+                                if (oldState.deaf === true && newState.deaf === false) {
+                                    newState.setDeaf(true, "Helixus Music Optimization");
                                 }
                             }
                         }

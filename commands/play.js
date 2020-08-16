@@ -39,11 +39,11 @@ module.exports.run = async (bot, message, args, con) => {
         console.log("END EVENT");
         if (!serverQueue.loop) serverQueue.songs.shift();
 
-        if (reason.match("seek")) {
+        /*if (reason.match("seek")) {
           const seekTo = parseInt(reason.split(" ")[1], 10);
-          serverQueue.songs.shift();
+          //serverQueue.songs.unshift(serverQueue.songs[0]);
           await play(guild, serverQueue.songs[0], seekTo);
-        }
+        }*/
 
         await play(guild, serverQueue.songs[0]);
       })
@@ -66,7 +66,8 @@ module.exports.run = async (bot, message, args, con) => {
       .setColor("RANDOM")
       .setURL(song.url)
       .addField(bot.lang.musique.play.requestedby, song.requestedby, true)
-      .setTitle(song.title);
+      .setTitle(song.title)
+      .setFooter("The bot is deaf for optimization reasons. Do not undeaf it.")
 
     return message.channel.send({ embed });
   }
@@ -145,7 +146,8 @@ module.exports.run = async (bot, message, args, con) => {
         volume: 10,
         playing: true,
         loop: false,
-      };
+//      seek: false
+       };
       await queue.set(message.guild.id, queueConstruct);
 
       await queueConstruct.songs.push(song);
