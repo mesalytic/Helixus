@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (message.guild.me.voice.channel.members.size === 1) await message.guild.me.voice.channel.leave();
   if (!serverQueue) return message.channel.send(bot.lang.musique.stop.nomusic);
   serverQueue.songs = [];
-  await serverQueue.connection.dispatcher.end();
+  await serverQueue.connection.dispatcher.emit('finish', "stop cmd");
 //  If (message.guild.me.voice.channel) await message.guild.me.voice.channel.leave();
 
   return message.channel.send(bot.lang.musique.stop.stopped);

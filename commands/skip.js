@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   if (message.member.voice.channel.members.size === 3) {
     message.channel.send(bot.lang.musique.skip.skipped);
-    return await serverQueue.connection.dispatcher.end();
+    return await serverQueue.connection.dispatcher.emit('finish', "skip cmd");
   }
 
   if (mapload.users.includes(message.author.id)) return message.channel.send(bot.lang.musique.skip.alrvoted);
@@ -39,7 +39,7 @@ module.exports.run = async (bot, message, args, con) => {
   const number = parseInt(message.guild.me.voice.channel.members.size / 2, 10);
   if (mapload.users.length !== number) return;
   message.channel.send(bot.lang.musique.skip.skipped);
-  await serverQueue.connection.dispatcher.end();
+  await await serverQueue.connection.dispatcher.emit('finish', "skip cmd");
 };
 module.exports.help = {
   name: "skip",
