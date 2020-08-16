@@ -13,7 +13,7 @@
     "child_process": "^1.0.2",
     "common-tags": "^1.8.0",
     "cpu-stat": "^2.0.1",
-    "dblapi.js": "^2.4.0",
+    "dblapi.js": "^2.4.1",
     "discord.js": "github:discordjs/discord.js",
     "erlpack": "github:discordapp/erlpack",
     "express": "^4.17.1",
