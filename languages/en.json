@@ -106,6 +106,20 @@
     "music": "🎶 Music : **${song.title}**"
   },
   "admin": {
+    "reactionrole": {
+      "no_channel": "You have not specified a channel. (You must specify it by mentionning it, by its name or its ID.",
+      "no_message": "You have not specified a (valid) message ID.",
+      "no_role": "You have not specified a (valid) role.",
+      "no_emote": "You have not specified an emote. (It must be a formatted unicode or guild emoji.)",
+      "not_emote": "You have not specified a valid emote.",
+      "emote_in_use": "This emoji is already used in this message for a reaction role. Please use the REMOVE subcommand to remove a reaction role.",
+      "role_in_use": "This role is already used in this message for a reaction role. Please use the REMOVE subcommand to remove a reaction role.",
+      "not_found": "No reaction role has been found.",
+      "added": "The reaction role has been added.",
+      "removed": "The reaction role has been removed.",
+      "help_description": "Lets you configure reaction roles.\nIf a user adds a reaction on a reaction role, the role linked to the reaction will be given to the user.",
+      "help_usage": "am!reactionrole <channel tag/name/ID> <message ID> <role tag/name/ID> <emoji>\nam!reactionrole remove <channel tag/name/ID> <message ID> <emoji>"
+    },
     "modlogs": {
       "noperms": "You don't have permissions.",
       "reset_success": "The modlog channel has been resetted.",
@@ -114,19 +128,6 @@
       "success": "The ${chan} channel will now display warns, kicks and bans made by the bot.",
       "help_description": "Configure the modlogs channel that will display warns, kicks and bans made by the bot.",
       "help_usage": "am!modlogs #salon"
-    },
-    "antiraid": {
-      "noargs": "Please specify `suggest` or `check`",
-      "suggest_no-id": "Please specify.",
-      "suggest_no-proof": "Please attach an image as a proof.",
-      "suggest_success": "Thank you for your report. If this report isn't a serious report, you will be blacklisted from this command.",
-      "suggest_failure": "There's no user with the ID ${args[1]}",
-      "verification_await": "Verification in progress, please wait...",
-      "verification_success": "Verification succeed.",
-      "verification_notFound": "No user registered in the antiraid list has been found on your server.",
-      "verification_found": "User registered in the antiraid list have been found on your server.\n${us}",
-      "verification_onceAWeek": "It is recommended to do a check once a week.",
-      "verification_noAccess": "You don't have the permission to use this command !"
     },
     "autorole": {
       "off_not-activated": "No role has been added to the autorole.",
@@ -179,12 +180,11 @@
     },
     "lang": {
       "noperms": "You don't have the permission",
-      "noargs": "Please choose between `FR` or `EN` or `IT`",
+      "noargs": "Please choose between `FR` or `EN`",
       "en": "Language succesfully changed to `EN`",
       "fr": "Langue changée en `FR`",
-      "it": "Lingua modificata in `IT`",
       "help_description": "Lets you configure the bot's language on your server",
-      "help_usage": "am!lang <fr/en/it>"
+      "help_usage": "am!lang <fr/en>"
     },
     "joinmsg": {
       "noperms": "You don't have permissions.",
@@ -981,10 +981,11 @@
   },
   "levels": {
     "top": {
-      "disabled": "Levelling is disabled, to enable it, please type `am!levels on`",
-      "notfound": "???? (this user leaved the server)",
-      "top10": "TOP 10 of the server",
-      "help_description": "Shows the top 10 users of the server",
+      "please_wait": "Please wait.",
+      "closed": "Paginator closed.",
+      "embed_title": "XP Leaderboard",
+      "embed_footer": "Use the reactions to navigate!",
+      "help_description": "Displays the XP leaderboard of the server.",
       "help_usage": "am!top"
     },
     "levels": {
@@ -1079,64 +1080,6 @@
       "noment": "**${message.member.user.username}** cuddles **Helixus**.",
       "help_description": "Cuddle someone.",
       "help_usage": "am!cuddle\nam!cuddle @user"
-    }
-  },
-  "rpg": {
-    "backpack": {
-      "help_description": "Lets you see the content of your backpack",
-      "help_usage": "am!backpack\nam!backpack drop"
-    },
-    "crafting": {
-      "help_description": "Lets you craft items",
-      "help_usage": "am!crafting\nam!crafting <amount> <item>"
-    },
-    "dungeon": {
-      "help_description": "Lets you fight in dungeons",
-      "help_usage": "am!dungeon <dungeon name>"
-    },
-    "dungeoninfo": {
-      "help_description": "Gives you informations about dungeons",
-      "help_usage": "am!dungeoninfo\nam!dungeoninfo <dungeon name>"
-    },
-    "fishing": {
-      "help_description": "Lets you fish",
-      "help_usage": "am!fishing"
-    },
-    "idle": {
-      "help_description": "Stops any tasks.",
-      "help_usage": "am!idle"
-    },
-    "info": {
-      "help_description": "Gives you informations about your profile",
-      "help_usage": "am!info"
-    },
-    "inventory": {
-      "help_description": "Lets you see your inventory",
-      "help_usage": "am!inventory\nam!inventory use <item name>\nam!inventory unequip <item type>"
-    },
-    "iteminfo": {
-      "help_description": "Gives you informations about an item",
-      "help_usage": "am!iteminfo <item name>"
-    },
-    "mining": {
-      "help_description": "Lets you mine.",
-      "help_usage": "am!mining"
-    },
-    "shop": {
-      "help_description": "Lets you shop",
-      "help_usage": "am!shop\nam!shop buy <amount> <item name>\nam!shop sell <amount> <item name>"
-    },
-    "start": {
-      "help_description": "Lets you start or reset the game.",
-      "help_usage": "am!start"
-    },
-    "tutorial": {
-      "help_description": "Shows the tutorial of the game",
-      "help_usage": "am!tutorial"
-    },
-    "woodcutting": {
-      "help_description": "Lets you go woodcutting.",
-      "help_usage": "am!woodcutting"
     }
   }
 }

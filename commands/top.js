@@ -1,6 +1,6 @@
 'use strict'
 
-const { ReactionCollector, MessageEmbed } = require("discord.js")
+const { ReactionCollector, MessageEmbed, Util } = require("discord.js")
 const { query } = require("express")
 
 module.exports.run = async (bot, message, args, con) => {
@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args, con) => {
 
     let page = 0
     const pages = Math.ceil(Number(Number(count) / 10)) - 1
-    let m = await message.channel.send(`Please wait...`)
+    let m = await message.channel.send(bot.lang.levels.top.please_wait)
 
     m.react('⏮️').then(() => {
       m.react('⬅️').then(() => {
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args, con) => {
               })
 
               reactionCollector.on('end', () => {
-                m.edit("Paginator closed.", { embed: null })
+                m.edit(bot.lang.levels.top.closed, { embed: null })
               })
             })
           })
@@ -69,17 +69,17 @@ module.exports.run = async (bot, message, args, con) => {
           let currentRank = rows.indexOf(rows[i]) + 1 + page * 10
           let diff = 5 * (rows[i].level ^ 2) + 50 * rows[i].level + 100
 
-          if (u) output += `[${(i + 1) + (page * 10)}] ${u.user.tag} - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
+          if (u) output += `[${(i + 1) + (page * 10)}] __**${Util.escapeMarkdown(u.user.tag)}**__ - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
           else output += `[${(i + 1) + (page * 10)}] ???? - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
 
         }
 
         const embed = new MessageEmbed()
           .setColor("RANDOM")
-          .setAuthor(`${message.guild.name} - XP Leaderboard`, message.guild.iconURL())
+          .setAuthor(`${message.guild.name} - ${bot.lang.levels.top.embed_title}`, message.guild.iconURL())
           .setTitle(`Page ${page + 1}/${pages + 1}`)
           .setDescription(output)
-          .setFooter("Use reactions to change pages!")
+          .setFooter(bot.lang.levels.top.embed_footer)
         await m.edit("", { embed: embed })
       })
     }

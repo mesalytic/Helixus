@@ -29,6 +29,7 @@
     "memejs": "^1.2.3",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
+    "moment-timezone": "^0.5.31",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.0",
     "node-gyp": "^7.1.0",

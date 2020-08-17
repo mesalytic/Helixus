@@ -105,6 +105,20 @@
   },
   "levelup": "Félicitations {user}, tu es passé niveau **{level}** !",
   "admin": {
+    "reactionrole": {
+      "no_channel": "Vous n'avez pas spécifié de salon. (Vous devez le spécifier soit en le mentionnant, ou en utilisant son nom ou son ID.)",
+      "no_message": "Vous n'avez pas spécifié un ID de message (valide).",
+      "no_role": "Vous n'avez pas spécifié de rôle (valide).",
+      "no_emote": "Vous n'avez pas spécifié d'emoji. (L'emoji doit être formatté, et peut être unicode ou custom).",
+      "not_emote": "Vous n'avez pas spécifié un emoji valide.",
+      "emote_in_use": "Cet emoji est déjà utilisé pour attribuer un autre rôle. Utilisez la sous-commande `remove` pour le retirer.",
+      "role_in_use": "Cet role est déjà utilisé pour attribuer un autre rôle. Utilisez la sous-commande `remove` pour le retirer.",
+      "not_found": "Aucun reaction role n'a été trouvé.",
+      "added": "Le reaction role a été ajouté.",
+      "removed": "Le reaction role a été retiré.",
+      "help_description": "Vous permet de configurer les reaction roles.\nSi un membre ajoute une réaction a un reaction role, le rôle lié lui sera attribué.",
+      "help_usage": "am!reactionrole <tag/nom/ID du salon> <ID message> <tag/nom/ID du role> <emoji>\nam!reactionrole remove <tag/nom/ID du salon> <ID message> <emoji>"
+    },
     "modlogs": {
       "noperms": "Tu n'as pas la permission.",
       "reset_success": "Le salon modlogs a été réinitialisé.",
@@ -165,12 +179,11 @@
     },
     "lang": {
       "noperms": "Vous n'avez pas les permissions nécéssaires.",
-      "noargs": "Veuillez choisir entre `FR` ou `EN` ou `IT`",
+      "noargs": "Veuillez choisir entre `FR` ou `EN`",
       "en": "Language succesfully changed to `EN`",
       "fr": "Langue changée en `FR`",
-      "it": "Lingua modificata in `IT`",
       "help_description": "Permet de changer la langue du bot sur votre serveur",
-      "help_usage": "am!lang <fr/en/it>"
+      "help_usage": "am!lang <fr/en>"
     },
     "joinmsg": {
       "noperms": "Vous n'avez pas la permission.",
@@ -969,10 +982,11 @@
   },
   "levels": {
     "top": {
-      "disabled": "Le système de niveau est désactivé, pour l'activer veuillez faire `am!levels on`",
-      "notfound": "???? (utilisateur ayant quitté le serveur)",
-      "top10": "TOP 10 du serveur",
-      "help_description": "Affiche le top 10 des membres du serveur.",
+      "please_wait": "Veuillez patienter...",
+      "closed": "Paginateur fermé.",
+      "embed_title": "Top XP",
+      "embed_footer": "Utilisez les réactions pour naviguer!",
+      "help_description": "Affiche le top XP des membres du serveur.",
       "help_usage": "am!top"
     },
     "levels": {
@@ -1067,64 +1081,6 @@
       "noment": "**${message.member.user.username}** cajole **Helixus**.",
       "help_description": "Cajole quelqu'un.",
       "help_usage": "am!cuddle\nam!cuddle @user"
-    }
-  },
-  "rpg": {
-    "backpack": {
-      "help_description": "Permet de voir le contenu de votre backpack",
-      "help_usage": "am!backpack\nam!backpack drop"
-    },
-    "crafting": {
-      "help_description": "Permet de craft des items",
-      "help_usage": "am!crafting craft <montant> <item>"
-    },
-    "dungeon": {
-      "help_description": "Permet d'aller dans un donjon",
-      "help_usage": "am!dungeon <nom du donjon>"
-    },
-    "dungeoninfo": {
-      "help_description": "Permet de lister les donjons / de voir les infos d'un donjon.",
-      "help_usage": "am!dungeoninfo\nam!dungeoninfo <donjon>"
-    },
-    "fishing": {
-      "help_description": "Permet de pêcher.",
-      "help_usage": "am!fishing"
-    },
-    "idle": {
-      "help_description": "Permet d'annuler toute tache.",
-      "help_usage": "am!idle"
-    },
-    "info": {
-      "help_description": "Permet de voir les infos de votre compte",
-      "help_usage": "am!info"
-    },
-    "inventory": {
-      "help_description": "Permet de voir votre inventaire / d'utiliser ou d'unéquiper un item de votre inventaire",
-      "help_usage": "am!inventory\nam!inventory use <nom d'item>\nam!inventory unequip <nom d'item>"
-    },
-    "iteminfo": {
-      "help_description": "Permet d'avoir des informations sur un item",
-      "help_usage": "am!iteminfo"
-    },
-    "mining": {
-      "help_description": "Permet de miner.",
-      "help_usage": "am!mining"
-    },
-    "shop": {
-      "help_description": "Permet de voir la boutique / d'acheter un item dans la boutique / de vendre un item.",
-      "help_usage": "am!shop\nam!shop buy <nom d'item>\nam!shop sell <nom d'item>"
-    },
-    "start": {
-      "help_description": "Permet de commencer votre aventure",
-      "help_usage": "am!start"
-    },
-    "tutorial": {
-      "help_description": "Permet de voir le tutoriel",
-      "help_usage": "am!tutorial"
-    },
-    "woodcutting": {
-      "help_description": "Permet de couper du bois",
-      "help_usage": "am!woodcutting"
     }
   }
 }

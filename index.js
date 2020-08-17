@@ -26,6 +26,7 @@ const express = require("express");
 const app = express();
 
 var bodyParser = require("body-parser");
+const { base64 } = require("./util/Util");
 app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(
     bodyParser.urlencoded({
@@ -878,7 +879,7 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
                                     wb.send(chanCr);
                                 } else if (oldState.channel && !newState.channel) {
 
-                                    if (oldState.member.id === bot.user.id) bot.queue = new Map();
+                                    if (oldState.member.id === bot.user.id) bot.queue.delete(oldState.channel.guild.id);
                                     const str = bot.lang.logs.voiceStateUpdate.leaved.replace("${voiceNew.user.tag}", newState.member.user.tag).replace("${vcOld.name}", oldState.channel.name);
                                     const chanCr = new Discord.MessageEmbed()
                                         .setAuthor(newState.member.user.tag, newState.member.user.displayAvatarURL())
@@ -909,6 +910,65 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
         });
     });
 });
+
+bot.on('raw', event => {
+    // TODO: add unicode + remove custom & unicode
+    if (event.t === "MESSAGE_REACTION_ADD") {
+        if (event.d.guild_id) {
+            if (event.d.emoji.id !== null) {
+                let guild = bot.guilds.cache.get(event.d.guild_id);
+                let member = guild.members.cache.get(event.d.user_id);
+                if (member.user.bot) return;
+
+                con.query(`SELECT * FROM ReactionRole WHERE guildID='${event.d.guild_id}' AND channelID='${event.d.channel_id}' AND emojiID='${event.d.emoji.id}'`, (err, rows) => {
+                    if (rows[0]) {
+                        let role = guild.roles.cache.get(rows[0].roleID);
+                        member.roles.add(role);
+                    }
+                })
+            } else {
+                let emoji = base64(event.d.emoji.name, "encode");
+                let guild = bot.guilds.cache.get(event.d.guild_id);
+                let member = guild.members.cache.get(event.d.user_id);
+                if (member.user.bot) return;
+
+                con.query(`SELECT * FROM ReactionRole WHERE guildID='${event.d.guild_id}' AND channelID='${event.d.channel_id}' AND emojiID='${emoji}'`, (err, rows) => {
+                    if (rows[0]) {
+                        let role = guild.roles.cache.get(rows[0].roleID);
+                        member.roles.add(role);
+                    }
+                })
+            }
+        }
+    } else if (event.t === "MESSAGE_REACTION_REMOVE") {
+        if (event.d.guild_id) {
+            if (event.d.emoji.id !== null) {
+                let guild = bot.guilds.cache.get(event.d.guild_id);
+                let member = guild.members.cache.get(event.d.user_id);
+                if (member.user.bot) return;
+
+                con.query(`SELECT * FROM ReactionRole WHERE guildID='${event.d.guild_id}' AND channelID='${event.d.channel_id}' AND emojiID='${event.d.emoji.id}'`, (err, rows) => {
+                    if (rows[0]) {
+                        let role = guild.roles.cache.get(rows[0].roleID);
+                        member.roles.remove(role);
+                    }
+                })
+            } else {
+                let emoji = base64(event.d.emoji.name, "encode");
+                let guild = bot.guilds.cache.get(event.d.guild_id);
+                let member = guild.members.cache.get(event.d.user_id);
+                if (member.user.bot) return;
+
+                con.query(`SELECT * FROM ReactionRole WHERE guildID='${event.d.guild_id}' AND channelID='${event.d.channel_id}' AND emojiID='${emoji}'`, (err, rows) => {
+                    if (rows[0]) {
+                        let role = guild.roles.cache.get(rows[0].roleID);
+                        member.roles.remove(role);
+                    }
+                })
+            }
+        }
+    }
+})
 
 fs.readdir("./commands/", (err, files) => {
     if (err) throw err;
