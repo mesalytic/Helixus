@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const fs = require("fs");
 const config = require("./config.json");
 const hastebin = require("hastebin-gen");
+const dbl = require('dblapi.js');
 
 let initialMessage = `**Un rôle que vous souhaitez obtenir ? Cliquez sur la réaction du message correspondant !**`;
 const roles = [
@@ -70,24 +71,35 @@ app.post("/voted", async (req, res) => {
 });
 
 bot.on("ready", async () => {
-    console.log(process.argv);
     const wb = new Discord.WebhookClient(config.webhook.status.id, config.webhook.status.password);
     let e = new Discord.MessageEmbed()
         .setColor("#32CD32")
         .setTitle(`:white_check_mark: Shard ${bot.shard.ids[0] + 1} is connected!`);
     wb.send(e);
     console.log(`[READY (Shard ${bot.shard.ids[0] + 1}/2)] Shard ${bot.shard.ids[0] + 1}/2 connected with ${bot.users.cache.size} users and ${bot.guilds.cache.size} guilds.`);
-    const promises = [
-        bot.shard.fetchClientValues("guilds.cache.size"),
-        bot.shard.broadcastEval("this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)")
-    ];
+    if (bot.shard.count === 2) {
+        const promises = [
+            bot.shard.fetchClientValues("guilds.cache.size"),
+            bot.shard.broadcastEval("this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)")
+        ];
 
-    Promise.all(promises).then((res) => {
-        const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
-        const members = res[1].reduce((prev, member) => prev + member, 0);
-        bot.shard.broadcastEval(`this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`);
-    });
+        Promise.all(promises).then((res) => {
+            const guilds = res[0].reduce((prev, guild) => prev + guild, 0);
+            const members = res[1].reduce((prev, member) => prev + member, 0);
+            bot.shard.broadcastEval(`this.user.setActivity ('am!help | ${guilds} guilds | ${members} members')`);
+        });
+    }
 });
+
+const postStats = new dbl(bot.config.dbl.token, bot);
+
+postStats.on('posted', () => {
+    console.log('Server count posted!');
+})
+
+postStats.on('error', e => {
+    console.log(`Oops! ${e}`);
+})
 
 bot.on("guildCreate", (guild) => {
     const wb = new Discord.WebhookClient(config.webhook.joinleaves.id, config.webhook.joinleaves.password);
@@ -912,7 +924,6 @@ bot.on("voiceStateUpdate", (oldState, newState) => {
 });
 
 bot.on('raw', event => {
-    // TODO: add unicode + remove custom & unicode
     if (event.t === "MESSAGE_REACTION_ADD") {
         if (event.d.guild_id) {
             if (event.d.emoji.id !== null) {
