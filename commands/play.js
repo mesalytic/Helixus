@@ -34,7 +34,6 @@ module.exports.run = async (bot, message, args, con) => {
     const dispatcher = await serverQueue.connection
       .play(stream, { seek: seek, highWaterMark: 2000 })
       .on("finish", async reason => {
-        // if (!reason) return;
         if (reason === "Stream is not generating quickly enough.") serverQueue.songs.shift("Stream is not generating quickly enough");
         console.log("END EVENT");
         if (!serverQueue.loop) serverQueue.songs.shift();
