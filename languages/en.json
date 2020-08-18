@@ -333,85 +333,105 @@
   },
   "images": {
     "steamplaying": {
+      "wait": "Please wait...",
       "nogame": "Please specify an argument (a game title for example) !",
       "toolong": "Please specify an argument that is less than or equal to 20 caracters.",
       "help_description": "Lets you create a custom `Steam Playing` card.",
       "help_usage": "am!steamplaying <game>"
     },
     "glitch": {
+      "wait": "Please wait...",
       "help_description": "Glitches your image.",
       "help_usage": "am!glitch [@user]"
     },
     "frame": {
+      "wait": "Please wait...",
       "help_description": "Frames your image.",
       "help_usage": "am!frame [@user]"
     },
     "distort": {
+      "wait": "Please wait...",
       "help_description": "Distorts your image.",
       "help_usage": "am!distort [@user]"
     },
     "circle": {
+      "wait": "Please wait...",
       "help_description": "Makes your image into a circle.",
       "help_usage": "am!circle [@user]"
     },
     "3000years": {
+      "wait": "Please wait...",
       "help_description": "Add's your (or someone elses) profile pic to the Pokemon Meme `It's been 3000 years...`",
       "help_usage": "am!3000years [@user]"
     },
     "blur": {
+      "wait": "Please wait...",
       "help_description": "Blurs your image",
       "help_usage": "am!blur [mention]"
     },
     "bobross": {
+      "wait": "Please wait...",
       "help_description": "Bobross is painting your image",
       "help_usage": "am!bobross [mention]"
     },
     "contrast": {
+      "wait": "Please wait...",
       "help_description": "Contrast your image",
       "help_usage": "am!contrast [mention]"
     },
     "convolute": {
+      "wait": "Please wait...",
       "help_description": "Convolutes your image",
       "help_usage": "am!convolute [mention]"
     },
     "grayscale": {
+      "wait": "Please wait...",
       "help_description": "Grayscales your image",
       "help_usage": "am!grayscale [mention]"
     },
     "invert": {
+      "wait": "Please wait...",
       "help_description": "Inverts the colors of your image",
       "help_usage": "am!invert [mention]"
     },
     "pixel": {
+      "wait": "Please wait...",
       "help_description": "Pixelates your image",
       "help_usage": "am!pixel [mention]"
     },
     "rainbow": {
+      "wait": "Please wait...",
       "help_description": "Adds an rainbow filter to your image",
       "help_usage": "am!rainbow [mention]"
     },
     "sepia": {
+      "wait": "Please wait...",
       "help_description": "Adds an sepia filter to your image",
       "help_usage": "am!sepia [mention]"
     },
     "urss": {
+      "wait": "Please wait...",
       "help_description": "Adds an URSS filter to your image",
       "help_usage": "am!urss [mention]"
     },
     "brazzers": {
+      "wait": "Please wait...",
       "help_description": "Adds a Brazzers logo to your profile picture (or to the pfp of the mentionned user)",
       "help_usage": "am!brazzers\nam!brazzers @user"
     },
     "robot": {
+      "wait": "Please wait...",
       "help_description": "Show a picture of a robot that is unique for you (or for the text that goes with the command)",
       "help_usage": "am!robot [arguments]"
     },
     "beautiful": {
+      "wait": "Please wait...",
       "botnopermission": "I don't have the permission to post images.",
       "help_description": "U see this ? Beautiful.",
       "help_usage": "am!beautiful [mention]"
     },
     "qrcode": {
+      "wait": "Please wait...",
       "error": "ERROR : `${err.message}`. Please try later !",
       "help_description": "Creates a QR-Code of a link or a text",
       "help_usage": "am!qrcode <link>\nam!qrcode <text>"
@@ -646,6 +666,7 @@
       "notposs": "You cannot ban this person.",
       "noreason": "No reason",
       "banned": "${member.displayName} has been successfully banned. :wink: (reason : ${breason})",
+      "dm_reason": "You have been **banned** from the server __**${message.guild.name}**__.\nReason: **${reason}**",
       "catchban": "An error has occured : ${err.message}",
       "help_description": "Bans someone",
       "help_usage": "am!ban <user> <reason>"
@@ -670,6 +691,7 @@
       "noment": "**:x: Please mention the user you want to kick**",
       "notposs": "You cannot kick this member.",
       "kick": "👋 ${member.displayName} has been kicked ! 💫",
+      "dm_reason": "You have been **kicked** from __**${message.guild.name}**__.\nReason: **${reason}**",
       "catch": "Error : The member role is superior to mine ! (If the problem persists : contact the support with ${prefix}support !",
       "help_description": "Kick someone",
       "help_usage": "am!kick <mention> [reason]"
@@ -770,6 +792,7 @@
       "warn3_footer": "ID MOD ${mod.id} | Moderator ${mod.tag}",
       "warn3_success": "${user.user.tag} has been warned.",
       "warn3_mp": "You've been warned from the server ${message.guild.name} for ${reason}.",
+      "specify_number": "Please specify a number",
       "help_description": "Lets you warn someone",
       "help_usage": "am!warn <@mention> <reason>\nam!warn delete <number> <@user>\nam!warn channel <#mention>\nam!warn ban <number>\nam!warn kick <number>"
     }
@@ -782,6 +805,8 @@
       "playing": "**Playing:**",
       "progress": "**Progress:**",
       "left": "left",
+      "not_voice_channel": "You're not in a voice channel !",
+      "shuffled": "Shuffled !",
       "help_description": "Shuffles the queue.",
       "help_usage": "am!shuffle"
     },
@@ -830,6 +855,8 @@
       "select": "Song selection :",
       "search": "Please specify a value to indicate one of the search results between 1 to 10.",
       "cancel": "No value or non-correct value, cancelling song selection.",
+      "deaf": "The bot is deaf for optimization reasons. Do not undeaf it.",
+      "playlist_being_added": "The playlist is being added, please wait, the first song is gonna be played.",
       "help_description": "Lets you play a music via a video link, tags or a playlist link.",
       "help_usage": "am!play <video link>\nam!play <tags>\nam!play <playlist link>"
     },

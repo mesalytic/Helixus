@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args, con) => {
         message.channel.send(embed).catch(error => {
           const str = bot.lang.membres.npm.notfound.replace("${args[0]}", args[0].toLowerCase());
           if (error.status === 404) return message.reply(str);
-          console.error("Erreur pendant la récupération du package NPM", error.message);
+          console.error("npm package error", error.message);
         });
       });
   } else { return message.channel.send(bot.lang.membres.npm.noargs); }

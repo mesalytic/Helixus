@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   if (!saymess) return message.reply(bot.lang.admin.say.noargs);
   if (message.author === bot.user) return;
-  if (!message.channel.permissionsFor(message.author).has("ADMINISTRATOR")) return message.reply("You don't have the permission.");
+  if (!message.channel.permissionsFor(message.author).has("ADMINISTRATOR")) return message.reply(bot.lang.admin.say.nopermission);
   message.delete({ timeout: 30 });
   message.channel.send(saymess);
 };

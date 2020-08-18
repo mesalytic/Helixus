@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args, con) => {
     let reason = args.slice(1).join(" ");
     if (!reason) reason = bot.lang.mods.ban.noreason;
 
-    member.send(`You have been **banned** from the server __**${message.guild.name}**__.\nReason: **${reason}**`).then(() => {
+    member.send(bot.lang.mods.ban.dm_reason.replace("${message.guild.name}", message.guild.name).replace("${reason}", reason)).then(() => {
       member
         .ban({ days: 7, reason: reason })
         .then(member => {

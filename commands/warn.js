@@ -16,14 +16,14 @@ module.exports.run = async (bot, message, args, con) => {
                   m += `[${r.number}] - \`Reason: ${r.reason}\` - ${moment(r.date).format("DD-MM-Y [at] h:mm:SS A",)}\n`;
                 });
                 return message.channel.send(m);
-              } else { return message.reply("This user has no active warns."); }
+              } else { return message.reply(bot.lang.mods.warn.delete_nowarns); }
             });
           } else {
             return message.reply("Listing server warns is not available for now.");
           }
         } else if (args[0] === "config") {
           if (args[1] === "kick") {
-            if (!args[2] || isNaN(args[2])) return message.reply("Please specify a number.");
+            if (!args[2] || isNaN(args[2])) return message.reply(bot.lang.mods.warn.specify_number);
             if (!config[0]) {
               con.query(`INSERT INTO WarnConfig (guildID, kicks, bans) VALUES ('${message.guild.id}', '${args[2]}', '6')`);
             } else {
@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args, con) => {
 
             return message.channel.send(bot.lang.mods.warn.kick_success.replace("${kicks.fetch(`kicks_${message.guild.id}`)}", args[2]));
           } else if (args[1] === "ban") {
-            if (!args[2] || isNaN(args[2])) return message.reply("Please specify a number.");
+            if (!args[2] || isNaN(args[2])) return message.reply(bot.lang.mods.warn.specify_number);
             if (!config[0]) {
               con.query(`INSERT INTO WarnConfig (guildID, kicks, bans) VALUES ('${message.guild.id}', '3', '${args[2]}')`);
             } else {

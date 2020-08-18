@@ -22,12 +22,12 @@ module.exports.run = async (bot, message, args, con) => {
   const { queue } = bot;
   const serverQueue = queue.get(message.guild.id);
 
-  if (!message.member.voice.channel) return message.reply("You're not in a voice channel !");
+  if (!message.member.voice.channel) return message.reply();
   if (!serverQueue || !serverQueue.songs.length) return message.reply(bot.lang.musique.shuffle.nomusic);
 
   serverQueue.songs = fixedShuffle(serverQueue.songs, [true]);
 
-  message.channel.send("Shuffled !");
+  message.channel.send(bot.lang.musique.shuffle.shuffled);
 };
 module.exports.help = {
   name: "shuffle",

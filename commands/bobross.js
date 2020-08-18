@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().avatarURL({ format: "png" }); } else { url = args[0] ? args[0] : message.author.avatarURL({ format: "png" }); }
 
-  const m = await message.channel.send("Please wait...");
+  const m = await message.channel.send(bot.lang.images.bobross.wait);
 
   try {
     const { createCanvas, loadImage } = require('canvas');

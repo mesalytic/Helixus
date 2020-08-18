@@ -334,85 +334,105 @@
   },
   "images": {
     "steamplaying": {
+      "wait": "Veuillez patienter...",
       "nogame": "Veuillez indiquer un argument (un titre de jeu par exemple) !",
       "toolong": "Veuillez indiquer un texte inférieur ou égal a 20 caractères.",
       "help_description": "Vous permet de creer une carte `Steam Playing` customisée.",
       "help_usage": "am!steamplaying <game>"
     },
     "glitch": {
+      "wait": "Veuillez patienter...",
       "help_description": "Permet d'ajouter un effet de glitch a votre image.",
       "help_usage": "am!glitch [@user]"
     },
     "frame": {
+      "wait": "Veuillez patienter...",
       "help_description": "Rajoute un cadre a votre image.",
       "help_usage": "am!frame [@user]"
     },
     "distort": {
+      "wait": "Veuillez patienter...",
       "help_description": "Permet de distordre votre image.",
       "help_usage": "am!distort [@user]"
     },
     "circle": {
+      "wait": "Veuillez patienter...",
       "help_description": "Permet d'encercler votre image.",
       "help_usage": "am!circle [@user]"
     },
     "3000years": {
+      "wait": "Veuillez patienter...",
       "help_description": "Ajoute votre image sur le meme Pokémon `It's been 3000 years...`",
       "help_usage": "am!3000years [mention]"
     },
     "blur": {
+      "wait": "Veuillez patienter...",
       "help_description": "Floute votre image",
       "help_usage": "am!blur [mention]"
     },
     "bobross": {
+      "wait": "Veuillez patienter...",
       "help_description": "Bobross peint votre image",
       "help_usage": "am!bobross [mention]"
     },
     "contrast": {
+      "wait": "Veuillez patienter...",
       "help_description": "Contraste votre image",
       "help_usage": "am!contrast [mention]"
     },
     "convolute": {
+      "wait": "Veuillez patienter...",
       "help_description": "Applique des napes de courants sur votre image",
       "help_usage": "am!convolute [mention]"
     },
     "grayscale": {
+      "wait": "Veuillez patienter...",
       "help_description": "Met votre image en noir et blanc",
       "help_usage": "am!grayscale [mention]"
     },
     "invert": {
+      "wait": "Veuillez patienter...",
       "help_description": "Inverse les couleurs de votre image",
       "help_usage": "am!invert [mention]"
     },
     "pixel": {
+      "wait": "Veuillez patienter...",
       "help_description": "Pixélise votre image",
       "help_usage": "am!pixel [mention]"
     },
     "rainbow": {
+      "wait": "Veuillez patienter...",
       "help_description": "Ajoute un filtre arc-en-ciel sur votre image",
       "help_usage": "am!rainbow [mention]"
     },
     "sepia": {
+      "wait": "Veuillez patienter...",
       "help_description": "Ajoute un filtre sépia a votre image",
       "help_usage": "am!sepia [mention]"
     },
     "urss": {
+      "wait": "Veuillez patienter...",
       "help_description": "Ajoute un filtre URSS a votre image",
       "help_usage": "am!urss [mention]"
     },
     "brazzers": {
+      "wait": "Veuillez patienter...",
       "help_description": "Ajoute un logo Brazzers a votre image",
       "help_usage": "am!brazzers\nam!brazzers @mention"
     },
     "robot": {
+      "wait": "Veuillez patienter...",
       "help_description": "Montre une photo de robot unique a vous (ou au texte indiqué)",
       "help_usage": "am!robot [arguments]"
     },
     "beautiful": {
       "botnopermission": "Je n'ai pas la permission d'attacher des images.",
+      "wait": "Veuillez patienter...",
       "help_description": "U see this ? Beautiful.",
       "help_usage": "am!beautiful [mention]"
     },
     "qrcode": {
+      "wait": "Veuillez patienter...",
       "error": "Une erreur est survenue : `${err.message}`. Veuillez réessayer plus tard !",
       "help_description": "Créé un QR-Code d'un lien ou d'un texte",
       "help_usage": "am!qrcode <lien>\nam!qrcode <texte>"
@@ -647,6 +667,7 @@
       "notposs": "Vous ne pouvez pas bannir cette personne.",
       "noreason": "Aucune raison",
       "banned": "${member.displayName} a bien été ban :wink: (raison : ${breason})",
+      "dm_reason": "Vous avez été **banni** du serveur __**${message.guild.name}**__.\nRaison: **${reason}**",
       "catchban": "Une erreur est survenue: ${err.message}",
       "help_description": "Permet de bannir quelqu'un",
       "help_usage": "am!ban <mention> <raison>"
@@ -671,6 +692,7 @@
       "noment": "**:x: Veuillez mentionner l'utilisateur que vous voulez kick**",
       "notposs": "Vous ne pouvez pas kick cette personne.",
       "kick": "👋 ${member.displayName} à été bel et bien kick 💫",
+      "dm_reason": "Tu as été **kick** du serveur __**${message.guild.name}**__.\nRaison: **${reason}**",
       "catch": "Erreur : Le role du membre est supérieur au mien ! (Si le problème persiste toujours : contactez ${prefix}support !",
       "help_description": "Kick quelqu'un du serveur.",
       "help_usage": "am!kick <mention> [raison]"
@@ -771,6 +793,7 @@
       "warn3_footer": "ID MOD ${mod.id} | Modérateur ${mod.tag}",
       "warn3_success": "${user.user.tag} a été averti.",
       "warn3_mp": "Vous avez été averti sur le serveur ${message.guild.name} pour ${reason}.",
+      "specify_number": "Veuillez indiquer un nombre.",
       "help_description": "Permet d'avertir quelqu'un",
       "help_usage": "am!warn <@mention> <raison>\nam!warn delete <nombre> <@user>\nam!warn channel <#mention>\nam!warn ban <nombre>\nam!warn kick <nombre>"
     }
@@ -783,6 +806,8 @@
       "playing": "**En cours:**",
       "progress": "**Progression:**",
       "left": "restant",
+      "not_voice_channel": "Tu n'es pas dans un salon vocal !",
+      "shuffled": "La queue a été mélangée !",
       "help_description": "Permet de mélanger les musiques des salons",
       "help_usage": "am!shuffle"
     },
@@ -831,6 +856,7 @@
       "select": "Sélection de chanson :",
       "search": "Veuillez indiquer une valeur afin d'indiquer l'un des résultats de recherche compris entre 1 et 10.",
       "cancel": "Aucune valeur ou une valeur non valide saisie, annulation de la sélection vidéo.",
+      "deaf": "Le bot est en sourdine pour des raisons de confidentialité. N'enlevez pas la sourdine.",
       "help_description": "Permet de lancer une musique via un lien vidéo, des tags ou un lien de playlist.",
       "help_usage": "am!play <lien vidéo>\nam!play <tags>\nam!play <lien playlist>"
     },

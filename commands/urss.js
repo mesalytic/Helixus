@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, con) => {
   ctx.drawImage(base, 0, 0, data.width, data.height);
   const attachment = canvas.toBuffer();
 
-  const m = await message.channel.send("Please wait...");
+  const m = await message.channel.send(bot.lang.images.urss.wait);
 
   message.channel.send({ files: [{ attachment: attachment, name: "urss.png" }] })
 }

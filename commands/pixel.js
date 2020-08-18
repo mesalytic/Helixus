@@ -3,7 +3,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().avatarURL({ format: "png", size: 512 }); } else { url = args[0] ? args[0] : message.author.avatarURL({ format: "png", size: 512 }); }
 
-  const m = await message.channel.send("Please wait...");
+  const m = await message.channel.send(bot.lang.images.pixel.wait);
 
   const jimp = require('jimp');
   jimp.read(url).then(img => {

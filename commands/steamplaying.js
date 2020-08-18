@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args, con) => {
   var game;
   if (!gameA) { return message.reply(bot.lang.images.steamplaying.nogame); } else if (gameA.length > 20) { return message.reply(bot.lang.images.steamplaying.toolong); } else { game = gameA; }
 
-  const m = await message.channel.send("Please wait...");
+  const m = await message.channel.send(bot.lang.images.steamplaying.wait);
 
   const Canvas = require('canvas');
   const request = require('node-superfetch');

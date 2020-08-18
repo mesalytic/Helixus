@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args, con) => {
   let reason = args.slice(1).join(" ");
   if (!reason) reason = bot.lang.mods.kick.noreason;
 
-  message.reply(`You have been **kicked** from __**${message.guild.name}**__.\nReason: **${reason}**`).then(() => {
+  message.reply(bot.lang.mods.kick.dm_reason.replace("${message.guild.name}", message.guild.name).replace("${reason}", reason)).then(() => {
     member.kick(reason)
     .then(member => {
       message.channel.bulkDelete(1);

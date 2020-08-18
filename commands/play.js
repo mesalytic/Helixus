@@ -64,7 +64,7 @@ module.exports.run = async (bot, message, args, con) => {
       .setURL(song.url)
       .addField(bot.lang.musique.play.requestedby, song.requestedby, true)
       .setTitle(song.title)
-      .setFooter("The bot is deaf for optimization reasons. Do not undeaf it.")
+      .setFooter(bot.lang.musique.play.deaf)
 
     return message.channel.send({ embed });
   }
@@ -134,7 +134,7 @@ module.exports.run = async (bot, message, args, con) => {
     const videos = await playlist.getVideos();
     const serverQueue = queue.get(message.guild.id);
 
-    message.channel.send("The playlist is being added, please wait, the first song is gonna be played.");
+    message.channel.send(bot.lang.musique.play.playlist_being_added);
     for (const video of Object.values(videos)) {
       const video2 = await youtube.getVideoByID(video.id);
       await handleVideo(video2, true);
@@ -166,12 +166,12 @@ module.exports.run = async (bot, message, args, con) => {
           errors: ["time"],
         });
       } catch (err) {
-        return message.channel.send("No or invalid value entered, cancelling video selection.");
+        return message.channel.send(bot.lang.musique.play.cancel);
       }
       const videoIndex = parseInt(response.first().content, 10);
       video = await youtube.getVideoByID(videos[videoIndex - 1].id);
     } catch (err) {
-      return message.channel.send("I could not obtain any search results.");
+      return message.channel.send(bot.lang.musique.play.noresults);
     }
   }
   handleVideo(video, false);

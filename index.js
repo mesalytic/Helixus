@@ -90,16 +90,17 @@ bot.on("ready", async () => {
         });
     }
 });
+if (!process.argv.includes("dev")) {
+    const postStats = new dbl(bot.config.dbl.token, bot);
 
-const postStats = new dbl(bot.config.dbl.token, bot);
+    postStats.on('posted', () => {
+        console.log('Server count posted!');
+    })
 
-postStats.on('posted', () => {
-    console.log('Server count posted!');
-})
-
-postStats.on('error', e => {
-    console.log(`Oops! ${e}`);
-})
+    postStats.on('error', e => {
+        console.log(`Oops! ${e}`);
+    })
+}
 
 bot.on("guildCreate", (guild) => {
     const wb = new Discord.WebhookClient(config.webhook.joinleaves.id, config.webhook.joinleaves.password);

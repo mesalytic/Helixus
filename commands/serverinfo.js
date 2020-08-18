@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args, con) => {
   }
   const emojisembed = [];
   if (emojis.length === 0) {
-    emojisembed.push("Aucun emoji.");
+    emojisembed.push("No emoji.");
   } else if (emojis.join(" ").length > 1000) {
     let emojislength = "";
     let status = false;
