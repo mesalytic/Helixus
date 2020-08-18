@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args, con) => {
     .addField(bot.lang.infos.userinfo.discordjoindate, timestamp.display(user.user.createdAt), true)
     .addField(bot.lang.infos.userinfo.serverjoindate, user.joinedTimestamp ? timestamp.display(user.joinedTimestamp) : bot.lang.infos.userinfo.unknown, true)
     .addField(bot.lang.infos.userinfo.nickname, user.nickname || "None", true)
-    .addField("Bot ?", user.bot ? "Yes" : "No", true)
+    .addField("Bot ?", user.user.bot ? "Yes" : "No", true)
     .addField(bot.lang.infos.userinfo.activity, uPresence)
     .addField(`${bot.lang.infos.userinfo.roles} (${user.roles.cache.size})`, user.roles.cache.size ? `<@&${user.roles.cache.map(r => r.id).filter(r => r !== message.guild.roles.everyone.id).join(">, <@&")}>` : bot.lang.infos.userinfo.none);
 

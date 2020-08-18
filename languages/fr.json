@@ -504,20 +504,6 @@
       "help_description": "Obtenir des infos sur soi-même ou sur quelqu'un",
       "help_usage": "am!userinfo [mention]"
     },
-    "weather": {
-      "noargs": "Veuillez indiquer une ville !",
-      "time": "Temps pour ${current.observationpoint}",
-      "timezone": "Plage horaine",
-      "degreetype": "Mesure",
-      "temperature": "Température",
-      "feelslike": "Ressenti",
-      "wind": "Vents",
-      "humidity": "Humidité",
-      "observationtime": "Temps d'observation",
-      "error": "Ville inconnue ou non-existante..",
-      "help_description": "Obtenir le temps météo d'une ville",
-      "help_usage": "am!weather <ville>"
-    },
     "shards": {
       "help_description": "Vous envoie des informations sur tous les shards.",
       "help_usage": "am!shards"

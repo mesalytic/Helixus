@@ -503,20 +503,6 @@
       "help_description": "Displays informations about yourself or about someone else",
       "help_usage": "am!userinfo [@user]"
     },
-    "weather": {
-      "noargs": "Please specify a city !",
-      "time": "Time for ${current.observationpoint}",
-      "timezone": "Timezone",
-      "degreetype": "Degree type",
-      "temperature": "Temperature",
-      "feelslike": "Feels like",
-      "wind": "Winds",
-      "humidity": "Humidity",
-      "observationtime": "Observation time",
-      "error": "Unknown or non-existant city...",
-      "help_description": "Displays weather informations about a city",
-      "help_usage": "am!weather <city>"
-    },
     "shards": {
       "help_description": "Sends you informations about all the shards.",
       "help_usage": "am!shards"
