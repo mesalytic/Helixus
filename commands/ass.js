@@ -5,20 +5,13 @@ module.exports.run = async (bot, message, args, con) => {
 
   try {
     let m = await message.channel.send(bot.lang.nsfw.ass.wait);
-    const g = require("superagent")
-      .get(`https://nekobot.xyz/api/image`)
+    const g = require("superagent").get(`https://nekobot.xyz/api/image`)
       .query({
         type: "ass",
       })
       .end((err, res) => {
-        let astr = bot.lang.nsfw.ass.request.replace(
-          "${message.author.tag}",
-          message.author.tag,
-        );
-        let bstr = bot.lang.nsfw.ass.notdisplay.replace(
-          "${res.body.message}",
-          res.body.message,
-        );
+        let astr = bot.lang.nsfw.ass.request.replace("${message.author.tag}", message.author.tag);
+        let bstr = bot.lang.nsfw.ass.notdisplay.replace("${res.body.message}", res.body.message);
         const result = new Discord.MessageEmbed()
           .setTitle(astr)
           .setDescription(bstr)

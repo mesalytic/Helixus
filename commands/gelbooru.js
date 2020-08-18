@@ -35,20 +35,10 @@ module.exports.run = async (bot, message, args, con) => {
     }
 
     moment.locale("fr");
-    const duration = moment(new Date(data.created_at).getTime()).format(
-      "D MM YYYY [a] H:mm:s",
-    );
-    let astr = bot.lang.nsfw.gelbooru.request.replace(
-      "${message.author.tag}",
-      message.author.tag,
-    );
-    let bstr = bot.lang.nsfw.gelbooru.result
-      .replace("${data.owner}", data.owner)
-      .replace("${rank}", rank)
-      .replace("${data.score}", data.score)
-      .replace("${data.tags}", data.tags)
-      .replace("${data.file_url}", data.file_url)
-      .replace("${duration}", duration);
+    const duration = moment(new Date(data.created_at).getTime()).format("D MM YYYY [a] H:mm:s");
+    let astr = bot.lang.nsfw.gelbooru.request.replace("${message.author.tag}", message.author.tag);
+    let bstr = bot.lang.nsfw.gelbooru.result.replace("${data.owner}", data.owner).replace("${rank}", rank).replace("${data.score}", data.score).replace("${data.tags}", data.tags).replace("${data.file_url}", data.file_url).replace("${duration}", duration);
+
     const result = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTitle(astr)

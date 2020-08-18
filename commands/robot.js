@@ -13,26 +13,12 @@ module.exports.run = async (bot, message, args, con) => {
       encoding: null,
     };
     const response = await request(options);
-    message.channel
-      .send({
-        files: [
-          {
-            attachment: response,
-          },
-        ],
-      })
-      .catch(e => {
-        throw e;
-      });
-    message.channel.stopTyping();
+    message.channel.send({ files: [{ attachment: response }] }).catch(e => {
+      throw e;
+    });
   } catch (e) {
     if (e.reponse) {
-      return bot.emit(
-        "error",
-        e.response.statusCode,
-        e.response.statusMessage,
-        message.channel,
-      );
+      return bot.emit("error", e.response.statusCode, e.response.statusMessage, message.channel);
     }
     console.log(e);
   }

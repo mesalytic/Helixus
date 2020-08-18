@@ -10,12 +10,12 @@ module.exports.run = async (bot, message, args, con) => {
     let deleteCount = parseInt(args[0], 10);
     if (!deleteCount || deleteCount < 2) return message.reply(bot.lang.mods.purge.noargs);
     for (let i = 0; i <= Math.floor(deleteCount / 100); i++) {
-if (deleteCount - i * 100 < 100) {
+      if (deleteCount - i * 100 < 100) {
         await message.channel.bulkDelete((deleteCount % 100) + 1);
       } else {
         await message.channel.bulkDelete(100);
       }
-}
+    }
     let str = bot.lang.mods.purge.purged.replace("${deleteCount}", deleteCount);
     message.channel.send(str).then(m => {
       setTimeout(() => {

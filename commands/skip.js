@@ -18,22 +18,11 @@ module.exports.run = async (bot, message, args, con) => {
   await map.set(message.guild.id, mapload);
 
   if (mapload.users.length === 1) {
-    const newvstr = bot.lang.musique.skip.vote
-      .replace("${message.author}", message.author)
-      .replace(
-        "${message.guild.me.voiceChannel.members.size / 2}",
-        parseInt(message.guild.me.voice.channel.members.size / 2, 10),
-      );
+    const newvstr = bot.lang.musique.skip.vote.replace("${message.author}", message.author).replace("${message.guild.me.voiceChannel.members.size / 2}", parseInt(message.guild.me.voice.channel.members.size / 2, 10));
     message.channel.send(newvstr);
   }
   if (mapload.users.length > 1) {
-    const vstr = bot.lang.musique.skip.voted
-      .replace("${message.author}", message.author)
-      .replace(
-        "${message.guild.me.voiceChannel.members.size / 2}",
-        parseInt(message.guild.me.voice.channel.members.size / 2, 10),
-      )
-      .replace("${mapload.users.length}", mapload.users.length);
+    const vstr = bot.lang.musique.skip.voted.replace("${message.author}", message.author).replace("${message.guild.me.voiceChannel.members.size / 2}", parseInt(message.guild.me.voice.channel.members.size / 2, 10)).replace("${mapload.users.length}", mapload.users.length);
     message.channel.send(vstr);
   }
   const number = parseInt(message.guild.me.voice.channel.members.size / 2, 10);

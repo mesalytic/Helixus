@@ -5,22 +5,14 @@ module.exports.run = async (bot, message, args, con) => {
 
   try {
     var embed = new Discord.MessageEmbed()
-    .setColor("RANDOM")
-    .setDescription(
-      defineduser ?
-        bot.lang.membres.pp.hisavatar :
-        bot.lang.membres.pp.youravatar,
-    )
-    .setImage(
-      defineduser ?
-        defineduser.avatarURL({ dynamic: true, size: 512, format: "png" }) :
-        message.author.avatarURL({ dynamic: true, size: 512, format: "png" }),
-    );
-  return message.channel.send(embed);
+      .setColor("RANDOM")
+      .setDescription(defineduser ? bot.lang.membres.pp.hisavatar : bot.lang.membres.pp.youravatar,)
+      .setImage(defineduser ? defineduser.avatarURL({ dynamic: true, size: 512, format: "png" }) : message.author.avatarURL({ dynamic: true, size: 512, format: "png" }));
+    return message.channel.send(embed);
   } catch (err) {
     throw err;
   }
-  
+
 };
 module.exports.help = {
   name: "avatar",

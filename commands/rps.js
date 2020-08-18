@@ -2,19 +2,21 @@ module.exports.run = async (bot, message, args, con) => {
   const Discord = require("discord.js");
 
   if (!args[0]) return message.channel.send(bot.lang.fun.rps.noargs);
-  const rpsargs = message.content
-    .split(" ")
-    .slice(1)
-    .join(" ");
+  const rpsargs = message.content.split(" ").slice(1).join(" ");
 
   const computer_choice = rand(0, 2);
   let user_choice;
   var winner = "";
   var color = "";
-  if (args[0].toLowerCase() === bot.lang.fun.rps.choice_rock) { user_choice = 0; } else if (args[0].toLowerCase() === bot.lang.fun.rps.choice_paper) { user_choice = 1; } else if (
-    (args[0].toLowerCase() === "ciseaux") ===
-    bot.lang.fun.rps.choice_scissors
-  ) { user_choice = 2; } else { return message.channel.send(bot.lang.fun.rps.noargs); }
+  if (args[0].toLowerCase() === bot.lang.fun.rps.choice_rock) {
+    user_choice = 0;
+  } else if (args[0].toLowerCase() === bot.lang.fun.rps.choice_paper) {
+    user_choice = 1;
+  } else if (args[0].toLowerCase() === bot.lang.fun.rps.choice_scissors) {
+    user_choice = 2;
+  } else {
+    return message.channel.send(bot.lang.fun.rps.noargs);
+  }
 
   if (computer_choice == user_choice) {
     color = "#FFA500";

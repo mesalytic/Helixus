@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args, con) => {
     const Canvas = require('canvas');
     const request = require('node-superfetch');
     const path = require('path');
-  
+
     const base = await Canvas.loadImage(`${process.cwd()}/assets/images/3000-years.png`);
     const { body } = await request.get(url);
     const data = await Canvas.loadImage(body);
@@ -16,12 +16,12 @@ module.exports.run = async (bot, message, args, con) => {
     ctx.drawImage(base, 0, 0);
     ctx.drawImage(data, 461, 127, 200, 200);
     const attachment = canvas.toBuffer();
-  
+
     message.channel.send({ files: [{ attachment: new Buffer(attachment, 'base64'), name: "3000years.png" }] })
-  } catch (err){
+  } catch (err) {
     throw err;
   }
-  
+
 };
 module.exports.help = {
   name: "3000years",

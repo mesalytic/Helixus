@@ -6,15 +6,15 @@ module.exports.run = async (bot, message, args, con) => {
   if (!message.member.voice.channel) return message.channel.send(bot.lang.musique.forceskip.nochannel);
   if (!serverQueue) return message.channel.send(bot.lang.musique.forceskip.noskip);
 
-  
+
   try {
     message.channel.send(bot.lang.musique.forceskip.skipped);
 
     await serverQueue.connection.dispatcher.end();
-  
+
   } catch (e) {
     throw e;
-  }  
+  }
 };
 module.exports.help = {
   name: "forceskip",

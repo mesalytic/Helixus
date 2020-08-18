@@ -49,30 +49,12 @@ module.exports.run = async (bot, message, args, con) => {
     .addField(bot.lang.infos.serverinfo.owner, message.guild.owner, true)
     .addField(bot.lang.infos.serverinfo.id, message.guild.id, true)
     .addField(bot.lang.infos.serverinfo.total, message.guild.memberCount, true)
-    .addField(
-      "Bots",
-      message.guild.members.cache.filter(member => member.user.bot).size,
-      true,
-    )
-    .addField(
-      bot.lang.infos.serverinfo.channels,
-      message.guild.channels.cache.size,
-      true,
-    )
+    .addField("Bots", message.guild.members.cache.filter(member => member.user.bot).size, true)
+    .addField(bot.lang.infos.serverinfo.channels, message.guild.channels.cache.size, true)
     .addField(bot.lang.infos.serverinfo.roles, message.guild.roles.cache.size, true)
     .addField(bot.lang.infos.serverinfo.rolelist, rlist, true)
-    .addField(
-      bot.lang.infos.serverinfo.createdat,
-      `${moment(message.guild.createdTimestamp).format(
-        bot.lang.infos.serverinfo.createddate,
-      )}`,
-      true,
-    )
-    .addField(
-      bot.lang.infos.serverinfo.country,
-      bot.lang.regions[message.guild.region],
-      true,
-    )
+    .addField(bot.lang.infos.serverinfo.createdat, `${moment(message.guild.createdTimestamp).format(bot.lang.infos.serverinfo.createddate,)}`, true)
+    .addField(bot.lang.infos.serverinfo.country, bot.lang.regions[message.guild.region], true)
     .addField("Emojis", emojisembed.join(" "), true);
   // .addField('\u200B', emojis, true)
   message.channel.send(serverembed);

@@ -9,8 +9,8 @@ module.exports.run = async (bot, message, args, con) => {
     const Canvas = require('canvas');
     const request = require('node-superfetch');
     const path = require('path');
-    
-  
+
+
     const { body } = await request.get(url);
     const data = await Canvas.loadImage(body);
     const dimensions = data.width <= data.height ? data.width : data.height;
@@ -21,9 +21,9 @@ module.exports.run = async (bot, message, args, con) => {
     ctx.closePath();
     ctx.clip();
     ctx.drawImage(data, (canvas.width / 2) - (data.width / 2), (canvas.height / 2) - (data.height / 2));
-  
+
     message.channel.send({ files: [{ attachment: canvas.toBuffer(), name: "circle.png" }] })
-  
+
   } catch (e) {
     throw e;
   }

@@ -5,11 +5,10 @@ module.exports.run = async (bot, message, args) => {
   message.delete();
   exec(`${args.join(" ")}`, (error, stdout) => {
     const response = error || stdout;
-    message.channel
-      .send(`Executé: ${args.join(" ")}\n${response}`, {
-        code: "asciidoc",
-        split: "\n",
-      })
+    message.channel.send(`Executé: ${args.join(" ")}\n${response}`, {
+      code: "asciidoc",
+      split: "\n",
+    })
       .catch(console.error);
   });
 };

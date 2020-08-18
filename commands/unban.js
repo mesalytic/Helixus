@@ -14,9 +14,7 @@ module.exports.run = async (bot, message, args, con) => {
   message.guild.members.unban(user, reason).catch(error => {
     throw error;
   });
-  let str = bot.lang.mods.unban.unban
-    .replace("${user}", user)
-    .replace("${reason}", reason);
+  let str = bot.lang.mods.unban.unban.replace("${user}", user).replace("${reason}", reason);
   message.channel.send(str);
 };
 module.exports.help = {

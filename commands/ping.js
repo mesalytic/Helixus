@@ -5,10 +5,7 @@ module.exports.run = async (bot, message, args, con) => {
   const ping_embed = new Discord.MessageEmbed()
     .setColor("#333333")
     .setTitle("Ping")
-    .addField(
-      bot.lang.membres.ping.latency,
-      `${m.createdTimestamp - message.createdTimestamp}ms`,
-    )
+    .addField(bot.lang.membres.ping.latency, `${m.createdTimestamp - message.createdTimestamp}ms`)
     .addField(bot.lang.membres.ping.api, `${Math.round(bot.ws.ping)}ms`)
     .setTimestamp();
   message.channel.send(ping_embed);

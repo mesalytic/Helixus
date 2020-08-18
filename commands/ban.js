@@ -28,11 +28,7 @@ module.exports.run = async (bot, message, args, con) => {
         .ban({ days: 7, reason: reason })
         .then(member => {
           message.channel.bulkDelete(1);
-          message.channel.send(
-            bot.lang.mods.ban.banned
-              .replace("${member.displayName}", member.displayName)
-              .replace("${breason}", reason),
-          );
+          message.channel.send(bot.lang.mods.ban.banned.replace("${member.displayName}", member.displayName).replace("${breason}", reason));
           let e = new Discord.MessageEmbed()
             .setColor("#228569")
             .setTitle("ModLogs Helixus")
@@ -44,14 +40,10 @@ module.exports.run = async (bot, message, args, con) => {
             .addField(bot.lang.modlogs.reason, reason, true);
           modlog.send(e);
         })
-
     })
-
   } catch (err) {
     throw err;
   }
-
-
 };
 module.exports.help = {
   name: "ban",

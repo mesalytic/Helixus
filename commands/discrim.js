@@ -14,10 +14,10 @@ module.exports.run = async (bot, message, args, con) => {
       if (user.discriminator == args[0]) return resp += `${user.username}\n`;
       else return;
     });
-  
+
     embed.setTitle(`Discrim: ${args[0]}`).setDescription(resp);
-  
-    message.channel.send(embed);    
+
+    message.channel.send(embed);
   } catch (e) {
     throw e;
   }

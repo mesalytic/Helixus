@@ -14,9 +14,7 @@ module.exports.run = async (bot, message, args, con) => {
     totalTime += q.duration_unformated;
   }
 
-  let embedtitle = bot.lang.musique.queue.embedtitle
-    .replace("${paginated.page}", paginated.page)
-    .replace("${paginated.maxPage}", paginated.maxPage);
+  let embedtitle = bot.lang.musique.queue.embedtitle.replace("${paginated.page}", paginated.page).replace("${paginated.maxPage}", paginated.maxPage);
 
   return message.channel.send({
     embed: {
@@ -27,16 +25,16 @@ module.exports.run = async (bot, message, args, con) => {
         iconURL: message.author.displayAvatarURL,
       },
       description: stripIndents`
-            ${paginated.items.map(song =>`**-** ${!isNaN(song.id) ?`${song.title} (${song.duration_length})` :`[${song.title}](${`https://www.youtube.com/watch?v=${song.id}`})`} (${song.duration_length})`,)
-              .join("\n")}
+            ${paginated.items.map(song => `**-** ${!isNaN(song.id) ? `${song.title} (${song.duration_length})` : `[${song.title}](${`https://www.youtube.com/watch?v=${song.id}`})`} (${song.duration_length})`,)
+          .join("\n")}
             ${paginated.maxPage > 1 ? `\n${bot.lang.musique.queue.usage}` : ""}
             ${bot.lang.musique.queue.progress} ${
         !isNaN(currentSong.id) ?
           `${currentSong.title}` :
           `[${
-              currentSong.title
-            }](${`https://www.youtube.com/watch?v=${currentSong.id}`})`
-      }
+          currentSong.title
+          }](${`https://www.youtube.com/watch?v=${currentSong.id}`})`
+        }
             ${oneLine`
 				${bot.lang.musique.queue.progression}
                 ${timeString(currentTime)} /
@@ -51,9 +49,7 @@ module.exports.run = async (bot, message, args, con) => {
   function timeString(seconds, forceHours = false) {
     const hours = Math.floor(seconds / 3600),
       minutes = Math.floor((seconds % 3600) / 60);
-    return `${forceHours || hours >= 1 ? `${hours}:` : ""}${
-      hours >= 1 ? `0${minutes}`.slice(-2) : minutes
-    }:${`0${Math.floor(seconds % 60)}`.slice(-2)}`;
+    return `${forceHours || hours >= 1 ? `${hours}:` : ""}${hours >= 1 ? `0${minutes}`.slice(-2) : minutes}:${`0${Math.floor(seconds % 60)}`.slice(-2)}`;
   }
 
   function timeLeft(currentTime) {
@@ -67,10 +63,7 @@ function paginate(items, page = 1, pageLength = 10) {
   if (page > maxPage) page = maxPage;
   const startIndex = (page - 1) * pageLength;
   return {
-    items:
-      items.length > pageLength ?
-        items.slice(startIndex, startIndex + pageLength) :
-        items,
+    items: items.length > pageLength ? items.slice(startIndex, startIndex + pageLength) : items,
     page,
     maxPage,
     pageLength,

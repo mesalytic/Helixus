@@ -1,10 +1,10 @@
 module.exports.run = async (bot, message, args, con) => {
-  const shuffle = a =>
-    a.reduce((l, e, i) => {
-      const j = Math.floor(Math.random() * (a.length - i) + i);
-      [a[i], a[j]] = [a[j], a[i]];
-      return a;
-    }, a);
+  const shuffle = a => a.reduce((l, e, i) => {
+    const j = Math.floor(Math.random() * (a.length - i) + i);
+    [a[i], a[j]] = [a[j], a[i]];
+    return a;
+  }, a);
+
   const fixedShuffle = (a, f) => {
     const fixed = a.reduce((acc, e, i) => {
       if (f[i]) acc.push([e, i]);

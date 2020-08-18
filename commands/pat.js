@@ -9,19 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (member.id === message.member.id) member = null;
   const embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
-    .setDescription(
-      member ?
-        bot.lang.rp.pat.ment
-            .replace(
-              "${message.member.user.username}",
-              message.member.user.username,
-            )
-            .replace("${member.user.username}", member.user.username) :
-        bot.lang.rp.pat.noment.replace(
-            "${message.member.user.username}",
-            message.member.user.username,
-          ),
-    )
+    .setDescription(member ? bot.lang.rp.pat.ment.replace("${message.member.user.username}", message.member.user.username,).replace("${member.user.username}", member.user.username) : bot.lang.rp.pat.noment.replace("${message.member.user.username}", message.member.user.username))
     .setImage(image.url)
     .setFooter("Pat - Helixus")
     .setTimestamp();

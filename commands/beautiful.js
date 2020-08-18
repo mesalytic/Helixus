@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args, con) => {
   const { createCanvas, loadImage } = require('canvas');
   const request = require('node-superfetch');
   const path = require('path');
-  
+
   try {
     const base = await loadImage('./assets/images/plate_beautiful.png');
 

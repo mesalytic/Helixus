@@ -2,9 +2,7 @@ module.exports.run = async (bot, message, args, con) => {
   const Discord = require("discord.js");
   let modlog;
 
-  con.query(
-    `SELECT * FROM ModlogsChannel WHERE guildID='${message.guild.id}'`,
-    (err, rows) => {
+  con.query(`SELECT * FROM ModlogsChannel WHERE guildID='${message.guild.id}'`,(err, rows) => {
       if (!rows[0]) {
         message.channel.send(bot.lang.mods.kick.channotdefined);
         modlog = message.channel;
@@ -23,15 +21,10 @@ module.exports.run = async (bot, message, args, con) => {
   if (!reason) reason = bot.lang.mods.kick.noreason;
 
   message.reply(`You have been **kicked** from __**${message.guild.name}**__.\nReason: **${reason}**`).then(() => {
-    member
-    .kick(reason)
+    member.kick(reason)
     .then(member => {
       message.channel.bulkDelete(1);
-      message.channel.send(
-        bot.lang.mods.kick.kick
-          .replace("${member.displayName}", member.displayName)
-          .replace("${breason}", reason),
-      );
+      message.channel.send(bot.lang.mods.kick.kick.replace("${member.displayName}", member.displayName).replace("${breason}", reason));
       let e = new Discord.MessageEmbed()
         .setColor("#DE2F42")
         .setTitle("ModLogs Helixus")

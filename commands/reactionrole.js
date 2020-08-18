@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args, con) => {
         let rMsg;
         if (rChannel.messages.resolve(args[2])) rMsg = await rChannel.messages.resolve(args[2]);
         else return message.reply(bot.lang.admin.reactionrole.no_message);
-        
+
 
         let rEmote;
         if (!args[3]) return message.reply(bot.lang.admin.reactionrole.no_emote);
@@ -37,54 +37,54 @@ module.exports.run = async (bot, message, args, con) => {
         }
         );
       }
-        let channel;
-        if (message.mentions.channels.first()) channel = message.mentions.channels.first();
-        else if (message.guild.channels.resolve(args[0])) channel = message.guild.channels.resolve(args[0]);
-        else if (message.guild.channels.cache.find(c => c.name === args[0])) channel = message.guild.channels.cache.find(c => c.name === args[0]);
-        else return message.reply(bot.lang.admin.reactionrole.no_channel);
+      let channel;
+      if (message.mentions.channels.first()) channel = message.mentions.channels.first();
+      else if (message.guild.channels.resolve(args[0])) channel = message.guild.channels.resolve(args[0]);
+      else if (message.guild.channels.cache.find(c => c.name === args[0])) channel = message.guild.channels.cache.find(c => c.name === args[0]);
+      else return message.reply(bot.lang.admin.reactionrole.no_channel);
 
-        let msg;
-        if (channel.messages.resolve(args[1])) msg = await channel.messages.resolve(args[1]);
-        else return message.reply(bot.lang.admin.reactionrole.no_message);
-        
-        let role;
-        if (message.mentions.roles.first()) role = message.mentions.roles.first();
-        else if (message.guild.roles.resolve(args[2])) role = message.guild.roles.resolve(args[2]);
-        else if (message.guild.roles.cache.find(u => u.name === args[2])) role = message.guild.roles.cache.find(u => u.name === args[2]);
-        else return message.reply(bot.lang.admin.reactionrole.no_role);
+      let msg;
+      if (channel.messages.resolve(args[1])) msg = await channel.messages.resolve(args[1]);
+      else return message.reply(bot.lang.admin.reactionrole.no_message);
+
+      let role;
+      if (message.mentions.roles.first()) role = message.mentions.roles.first();
+      else if (message.guild.roles.resolve(args[2])) role = message.guild.roles.resolve(args[2]);
+      else if (message.guild.roles.cache.find(u => u.name === args[2])) role = message.guild.roles.cache.find(u => u.name === args[2]);
+      else return message.reply(bot.lang.admin.reactionrole.no_role);
 
 
-        let emote;
-        if (!args[3]) return message.reply(bot.lang.admin.reactionrole.no_emote);
-        if (regex.test(args[3]) === true)
-          emote = base64(parseEmoji(args[3]).name, "encode");
-        else if (message.guild.emojis.cache.get(parseEmoji(args[3]).id)) emote = parseEmoji(args[3]).id;
-        else return message.reply(bot.lang.admin.reactionrole.not_emote);
+      let emote;
+      if (!args[3]) return message.reply(bot.lang.admin.reactionrole.no_emote);
+      if (regex.test(args[3]) === true)
+        emote = base64(parseEmoji(args[3]).name, "encode");
+      else if (message.guild.emojis.cache.get(parseEmoji(args[3]).id)) emote = parseEmoji(args[3]).id;
+      else return message.reply(bot.lang.admin.reactionrole.not_emote);
 
-        con.query(
-          `SELECT * FROM ReactionRole WHERE messageID='${msg.id}' AND emojiID='${emote}'`,
-          (err, rows) => {
-            if (rows[0]) return message.reply(bot.lang.admin.reactionrole.emote_in_use);
-            else {
-              con.query(
-                `SELECT * FROM ReactionRole WHERE messageID='${msg.id}' AND roleID='${role.id}'`,
-                (err, rRows) => {
-                  if (err) throw err;
-                  if (rRows[0]) {
-                    return message.reply(bot.lang.admin.reactionrole.role_in_use);
-                  } else {
-                    con.query(
-                      `INSERT INTO ReactionRole (guildID, channelID, messageID, roleID, emojiID) VALUES ('${message.guild.id}', '${channel.id}', '${msg.id}', '${role.id}', '${emote.toString()}')`);
-                    message.reply(bot.lang.admin.reactionrole.added);
+      con.query(
+        `SELECT * FROM ReactionRole WHERE messageID='${msg.id}' AND emojiID='${emote}'`,
+        (err, rows) => {
+          if (rows[0]) return message.reply(bot.lang.admin.reactionrole.emote_in_use);
+          else {
+            con.query(
+              `SELECT * FROM ReactionRole WHERE messageID='${msg.id}' AND roleID='${role.id}'`,
+              (err, rRows) => {
+                if (err) throw err;
+                if (rRows[0]) {
+                  return message.reply(bot.lang.admin.reactionrole.role_in_use);
+                } else {
+                  con.query(
+                    `INSERT INTO ReactionRole (guildID, channelID, messageID, roleID, emojiID) VALUES ('${message.guild.id}', '${channel.id}', '${msg.id}', '${role.id}', '${emote.toString()}')`);
+                  message.reply(bot.lang.admin.reactionrole.added);
 
-                    if (isNaN(emote)) emote = base64(emote, "decode");
-                    return msg.react(emote);
-                  }
-                })
-            }
+                  if (isNaN(emote)) emote = base64(emote, "decode");
+                  return msg.react(emote);
+                }
+              })
           }
-        );
-      
+        }
+      );
+
     }
   } catch (e) {
     if (e.message.match("DiscordAPIError")) return;

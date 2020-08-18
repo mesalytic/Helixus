@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, con) => {
     const { createCanvas, loadImage } = require('canvas');
     const request = require('node-superfetch');
     const path = require('path');
-  
+
     const base = await loadImage(`${process.cwd()}/assets/images/frame.png`);
     const { body } = await request.get(url);
     const data = await loadImage(body);
@@ -18,8 +18,8 @@ module.exports.run = async (bot, message, args, con) => {
     ctx.drawImage(data, 0, 0);
     ctx.drawImage(base, 0, 0, data.width, data.height);
     const attachment = canvas.toBuffer();
-  
-    message.channel.send({ files: [{ attachment: canvas.toBuffer(), name: "frame.png" }] })  
+
+    message.channel.send({ files: [{ attachment: canvas.toBuffer(), name: "frame.png" }] })
   } catch (e) {
     throw e;
   }

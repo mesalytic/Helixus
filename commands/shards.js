@@ -1,8 +1,5 @@
 module.exports.run = async (bot, message, args, con) => {
-  const promises = [
-    bot.shard.fetchClientValues("guilds.cache.size"),
-    bot.shard.broadcastEval("this.ws.status"),
-  ];
+  const promises = [bot.shard.fetchClientValues("guilds.cache.size"), bot.shard.broadcastEval("this.ws.status")];
 
   Promise.all(promises).then(res => {
     var stat;

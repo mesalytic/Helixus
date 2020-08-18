@@ -1,4 +1,4 @@
-  module.exports.run = async (bot, message, args, con) => {
+module.exports.run = async (bot, message, args, con) => {
   const { get } = require("axios");
 
   if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().avatarURL({ format: "png", size: 512 }); } else { url = args[0] ? args[0] : message.author.avatarURL({ format: "png", size: 512 }); }
@@ -8,7 +8,7 @@
   const Canvas = require('canvas');
   const request = require('node-superfetch');
   const path = require('path');
-  
+
   const base = await Canvas.loadImage(`${process.cwd()}/assets/images/rainbow.png`);
   const { body } = await request.get(url);
   const data = await Canvas.loadImage(body);

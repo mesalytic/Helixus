@@ -11,9 +11,7 @@ module.exports.run = async (bot, message, args, con) => {
   playing.add(message.channel.id);
   try {
     const str = bot.lang.fun.tictactoe.asking;
-    const res = str
-      .replace("${opponent}", opponent)
-      .replace("${message.author}", message.author);
+    const res = str.replace("${opponent}", opponent).replace("${message.author}", message.author);
     await message.channel.send(res);
     const verification = await verify(message.channel, opponent);
     if (!verification) {
@@ -39,11 +37,7 @@ module.exports.run = async (bot, message, args, con) => {
                 `);
       const filter = res => {
         const choice = res.content;
-        return (
-          res.author.id === user.id &&
-          sides.includes(choice) &&
-          !taken.includes(choice)
-        );
+        return (res.author.id === user.id && sides.includes(choice) && !taken.includes(choice));
       };
       const turn = await message.channel.awaitMessages(filter, {
         max: 1,

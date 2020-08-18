@@ -7,8 +7,7 @@ module.exports.run = async (bot, message, args, con) => {
 
   const jimp = require('jimp');
   jimp.read(url).then(img => {
-    img.sepia()
-    .getBuffer(jimp.MIME_PNG, (err, res) => {
+    img.sepia().getBuffer(jimp.MIME_PNG, (err, res) => {
       message.channel.send({ files: [{ attachment: new Buffer(res, 'base64'), name: "sepia.png" }] })
     })
   })

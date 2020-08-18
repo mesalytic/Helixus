@@ -25,7 +25,6 @@ module.exports.run = async (bot, message, args, con) => {
               const filter = (reaction, user) => ['⏮️', '⬅️', '➡️', '⏭️', '❌'].includes(reaction.emoji.name) && user.id === message.author.id
               const reactionCollector = new ReactionCollector(m, filter, { time: 600000 })
 
-
               reactionCollector.on('collect', async reaction => {
                 switch (reaction.emoji.name) {
                   case '⏮️':
@@ -50,7 +49,6 @@ module.exports.run = async (bot, message, args, con) => {
                     reactionCollector.stop()
                 }
               })
-
               reactionCollector.on('end', () => {
                 m.edit(bot.lang.levels.top.closed, { embed: null })
               })
@@ -71,7 +69,6 @@ module.exports.run = async (bot, message, args, con) => {
 
           if (u) output += `[${(i + 1) + (page * 10)}] __**${Util.escapeMarkdown(u.user.tag)}**__ - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
           else output += `[${(i + 1) + (page * 10)}] ???? - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
-
         }
 
         const embed = new MessageEmbed()

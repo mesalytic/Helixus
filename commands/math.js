@@ -13,9 +13,7 @@ module.exports.run = async (bot, message, args, con) => {
   } catch (err) {
     return message.reply(err);
   }
-  const str = bot.lang.membres.math.result
-    .replace("${question}", question)
-    .replace("${answer}", answer);
+  const str = bot.lang.membres.math.result.replace("${question}", question).replace("${answer}", answer);
   message.channel.send(str);
 };
 module.exports.help = {

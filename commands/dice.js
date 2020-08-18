@@ -2,7 +2,7 @@ module.exports.run = async (bot, message, args, con) => {
   try {
     const computer = rand(0, 5);
     let devaran;
-  
+
     switch (computer) {
       case 0:
         devaran = ":one:";
@@ -24,10 +24,10 @@ module.exports.run = async (bot, message, args, con) => {
         break;
     }
     return message.channel.send(bot.lang.fun.dice.result + devaran);
-  
+
   } catch (e) {
     throw e;
-  }  
+  }
 };
 module.exports.help = {
   name: "dice",

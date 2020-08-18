@@ -10,14 +10,9 @@ module.exports.run = async (bot, message, args, con) => {
       type: "hentai",
     })
     .end((err, res) => {
-      let astr = bot.lang.nsfw.hentai.request.replace(
-        "${message.author.tag}",
-        message.author.tag,
-      );
-      let bstr = bot.lang.nsfw.hentai.notdisplay.replace(
-        "${res.body.message}",
-        res.body.message,
-      );
+      let astr = bot.lang.nsfw.hentai.request.replace("${message.author.tag}", message.author.tag);
+      let bstr = bot.lang.nsfw.hentai.notdisplay.replace("${res.body.message}", res.body.message);
+
       const result = new Discord.MessageEmbed()
         .setTitle(astr)
         .setDescription(bstr)

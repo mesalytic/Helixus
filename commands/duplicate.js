@@ -12,21 +12,10 @@ module.exports.run = async (bot, message, args, con) => {
     }
     let str = bot.lang.musique.duplicate.duplicated;
     if (bot.lang.lang === "en") {
-  message.channel.send(
-        str
-          .replace("${Number(args[0])}", Math.round(Number(args[0])))
-          .replace(
-            "${Number(args[0]) === 1 ? 'time': 'times'}",
-            Math.round(Number(args[0])) === 1 ? "time" : "times",
-          ),
-      );
-  } else if (lang === "fr") {
-  message.channel.send(
-        str
-          .replace("${Number(args[0])}", Math.round(Number(args[0])))
-          .replace("${Number(args[0]) === 1 ? 'foi': 'fois'}", "fois"),
-      );
-  }
+      message.channel.send(str.replace("${Number(args[0])}", Math.round(Number(args[0]))).replace("${Number(args[0]) === 1 ? 'time': 'times'}", Math.round(Number(args[0])) === 1 ? "time" : "times"));
+    } else if (lang === "fr") {
+      message.channel.send(str.replace("${Number(args[0])}", Math.round(Number(args[0]))).replace("${Number(args[0]) === 1 ? 'foi': 'fois'}", "fois"));
+    }
   } catch (e) {
     throw e;
   }

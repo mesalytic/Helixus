@@ -5,10 +5,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (!message.member.voice.channel) return message.channel.send(bot.lang.musique.volume.nochannel);
   if (!serverQueue) return message.channel.send(bot.lang.musique.volume.nomusic);
   const cvstr = bot.lang.musique.volume.currentvolume;
-  const currentvolume = cvstr.replace(
-    "${serverQueue.volume}",
-    serverQueue.volume,
-  );
+  const currentvolume = cvstr.replace("${serverQueue.volume}", serverQueue.volume);
   if (!args[0] || isNaN(args[0])) return message.channel.send(currentvolume);
   if (args[0] > 100) return message.channel.send(bot.lang.musique.volume.toohigh);
   if (args[0] < 1) return message.channel.send(bot.lang.musique.volume.toolow);
