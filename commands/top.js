@@ -67,8 +67,8 @@ module.exports.run = async (bot, message, args, con) => {
           let currentRank = rows.indexOf(rows[i]) + 1 + page * 10
           let diff = 5 * (rows[i].level ^ 2) + 50 * rows[i].level + 100
 
-          if (u) output += `[${(i + 1) + (page * 10)}] __**${Util.escapeMarkdown(u.user.tag)}**__ - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
-          else output += `[${(i + 1) + (page * 10)}] ???? - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
+          if (u) output += `[${(i + 1) + (page * 10)}] **${Util.escapeMarkdown(u.user.tag)}** - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
+          else output += `[${(i + 1) + (page * 10)}] **????** - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
         }
 
         const embed = new MessageEmbed()
