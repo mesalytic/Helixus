@@ -32,13 +32,14 @@ module.exports.run = async (bot, message, args, con) => {
                     await gen(page)
                     break
                   case '⬅️':
-                    page = page - 1
                     if (page < 0) return page = 0
-                    else await gen(page)
+                    page = page - 1
+                    await gen(page)
                     break
                   case '➡️':
-                    page = page + 1
                     if (page > pages) return
+                    page = page + 1
+                    console.log(`page (${page}) > pages (${pages})`)
                     await gen(page)
                     break
                   case '⏭️':

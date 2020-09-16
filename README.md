@@ -67,7 +67,7 @@ In order for the bot to run properly, you need to fill a JSON config file.
 - **token** : Bot's token. [_**required**_]
 - **dbhost** : The IP address of the database server. (can be localhost) [_**required**_]
 - **dbpassword**: The password of the Database Server. [_**required**_]
-- Webhooks:
+- **Discord Webhooks**:
     - **status**: Used to display status events (disconnections, restarts, connections) [_**optional**_]
     - **joinleaves**: Used to display if the bot has been added or removed from a server. [_**optional**_]
     - **errors**: Used to display errors if any. [_**required**_]
