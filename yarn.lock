@@ -3384,10 +3384,10 @@ youtube-playlist@^1.0.4:
     cheerio "^1.0.0-rc.2"
     got "^6.3.0"
 
-yt-search@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/yt-search/-/yt-search-2.3.0.tgz#7370d4dec163b5fd367b4d9147d78f39498c7795"
-  integrity sha512-i4Hzl5aU7IMf4Vd2goqOqiWMp8dtWh/pqLo2R5CCQy6u6FOnRR2gzSEcr8Og8PO+2wDeXT5X/7YGOUifkGopPQ==
+yt-search@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/yt-search/-/yt-search-2.3.1.tgz#3665741f1c1568e525228606d363073170a2b4d5"
+  integrity sha512-jQCiPHSBQf7zWBogVKAfPllT0aVSmvMTIX08KpPDGFgyFIvp18CemAtMyF4izhusDL033zbcav1SJOh3fVQ89w==
   dependencies:
     async.parallellimit "~0.5.2"
     boolstring "~1.0.2"
