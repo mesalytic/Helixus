@@ -34,6 +34,8 @@ If you want you have the ability to give the **Administrator [ADMINISTRATOR]** p
 ## Installation
 ### Before you begin
 
+- **You should have minimum knowledge about NodeJS. No technical support will be provided.**
+
 - Please be aware that this version of the repository is a sharded version. A non sharded version will be available later.
 
 - You will need [NodeJS (v12)](https://nodejs.org), [Git](https://git-scm.com/) and a database server using either [MariaDB](https://mariadb.org/) or [MySQL](https://www.mysql.com/).
