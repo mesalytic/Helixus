@@ -1,4 +1,6 @@
-# Helixus
+# Helixus (V3)
+
+**This branch is (for the moment) not worked on. Projects will first be finished on the V2, then the rework V3 will begin.**
 
 Helixus is a multi-function Discord bot coded in Javascript using [discord.js](https://discord.js.org).
 
