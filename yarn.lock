@@ -371,15 +371,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*":
-  version "14.0.27"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
-  integrity sha512-kVrqXhbclHNHGu9ztnAwSncIgJv/FaxmzXJvGXNdcCpV1b8u1/Mi6z6m0vwy0LzKeXFTPLH0NzwmoJ3fNCIq0g==
-
-"@types/node@^14.0.13":
-  version "14.10.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.10.3.tgz#5ae1f119c96643fc9b19b2d1a83bfa2ec3dbb7ea"
-  integrity sha512-zdN0hor7TLkjAdKTnYW+Y22oIhUUpil5ZD1V1OFq0CR0CLKw+NdR6dkziTfkWRLo6sKzisayoj/GNpNbe4LY9Q==
+"@types/node@*", "@types/node@^14.11.1":
+  version "14.11.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.1.tgz#56af902ad157e763f9ba63d671c39cda3193c835"
+  integrity sha512-oTQgnd0hblfLsJ6BvJzzSL+Inogp3lq9fGgqRkMB/ziKMgEUaFl801OncOzUmalfzt14N0oPHMK47ipl+wbTIw==
 
 "@types/responselike@*", "@types/responselike@^1.0.0":
   version "1.0.0"
@@ -2135,7 +2130,7 @@ min-document@^2.19.0:
   dependencies:
     dom-walk "^0.1.0"
 
-miniget@^1.6.1, miniget@^1.7.2:
+miniget@^1.6.1:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/miniget/-/miniget-1.7.2.tgz#f95eff50b78d798dddee2460c4aa3c72db1aa23a"
   integrity sha512-USPNNK2bnHLOplX8BZVMehUkyQizS/DFpBdoH0TS+fM+hQoLNg9tWg4MeY9wE8gfY0pbzmx5UBEODujt3Lz8AA==
@@ -3398,24 +3393,14 @@ yt-search@^2.3.1:
     minimist "~1.2.5"
     node-fzf "~0.5.1"
 
-ytdl-core-discord@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/ytdl-core-discord/-/ytdl-core-discord-1.2.1.tgz#e9ac93f8ee01b061421d7c8e11e2a94188befdec"
-  integrity sha512-xBbPkm+BwS9X3UCAw24RiDn/9ueSwMDEhAXzpse4fNvY1BFn6vgF1jY2FocAKVd/YmbWMZattjFJIJEhtQ2F1g==
+ytdl-core-discord@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/ytdl-core-discord/-/ytdl-core-discord-1.2.2.tgz#daff403bc2ac8652b70f7c76998bf3758a6c86cf"
+  integrity sha512-yhq469ZO9kfsZMe0ro1vgjw4+wlxGBedYjsPfm5M5I+9lShew3570Pcb+aTy2F9EIVGU/4OqoUovFzAs9oR/3Q==
   dependencies:
-    "@types/node" "^14.0.13"
+    "@types/node" "^14.11.1"
     prism-media "^1.2.2"
-    ytdl-core "^2.1.7"
-
-ytdl-core@^2.1.7:
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-2.1.7.tgz#d62c74161691a114de211145e645f30f607a5f96"
-  integrity sha512-ithllxxlt4zmJVTnYtT8/31QLv5MGlK3fSk29lx2S4eKc1BGh+ELKQEAkRJqWIf2P8TYBYrKwijx11xND4JcXw==
-  dependencies:
-    html-entities "^1.3.1"
-    m3u8stream "^0.7.1"
-    miniget "^1.7.2"
-    sax "^1.1.3"
+    ytdl-core "^3.2.2"
 
 ytdl-core@^3.2.2:
   version "3.2.2"
