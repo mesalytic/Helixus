@@ -1,31 +1,77 @@
-const { Client, Collection } = require('discord.js');
-const Utils = require('../util/Util')
-const Loader = require('../structures/Loader')
+const { Client, Collection } = require("discord.js");
+const { readdirSync, readdir } = require("fs");
+const { resolve, join } = require("path");
+const mysql = require('mysql');
 
-module.exports = class Helixus extends Client {
-    constructor(options = {}) {
-        super({
-            disableMentions: 'everyone' // probably not for the future
+module.exports = class Bot extends Client {
+    constructor(config, options = {}) {
+        super(options);
+
+        this.db = mysql.createConnection({
+            host: config.dbhost,
+            user: "root",
+            password: config.dbpassword,
+            database: "HelixusV2",
         });
-        this.validate(options);
-        
+        this.db.connect((err) => {
+            if (err) throw err;
+            this.logger.log("info", "Connected to database");
+        });
+
+        this.logger = require('./Logger');
+
         this.commands = new Collection();
         this.aliases = new Collection();
-        this.events = new Collection();
-        this.loaders = new Loader(this);
-        // this.utils = new Util(this);
+
+        this.token = config.token
+
+        this.types = {
+            INFO: 'info',
+            FUN: 'fun',
+            COLOR: 'color',
+            POINTS: 'points',
+            MISC: 'misc',
+            MOD: 'mod',
+            ADMIN: 'admin',
+            OWNER: 'owner'
+          };
     }
 
-    validate(options) {
-        if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
+    loadCommands(path) {
+        readdirSync(path).filter(f => ! f.endsWith('.js')).forEach(dir => {
+            const commands = readdirSync(resolve(__basedir, join(path, dir))).filter(f => f.endsWith('js'));
+            commands.forEach(f => {
+                const Command = require(resolve(__basedir, join(path, dir, f)));
+                const command = new Command(this);
+                if (command.name && !command.disabled) {
+                    this.commands.set(command.name, command);
 
-        if (!options.token) throw new Error('No token has been provided.');
-        this.token = options.token;
+                    let aliases = '';
+                    if (command.aliases) {
+                        command.aliases.forEach(alias => {
+                            this.aliases.set(alias, command);
+                        });
+                        aliases = command.aliases.join(', ');
+                    };
+                }
+            })
+        })
     }
 
-    async launch(token = this.token) {
-        this.loaders.loadCommands();
-        this.loaders.loadEvents();
-        super.login(token);
+    loadEvents(path) {
+        readdir(path, (err, files) => {
+            if (err) this.logger.error(err);
+            files = files.filter(f => f.split('.').pop() === "js");
+            if (files.length <= 0) return this.logger.warn("No events found!");
+            this.logger.info(`${files.length} events found.`);
+            files.forEach(f => {
+                const eventName = f.substring(0, f.indexOf('.'));
+                const event = require(resolve(__basedir, join(path, f)));
+                super.on(eventName, event.bind(null, this));
+                delete require.cache[require.resolve(resolve(__basedir, join(path, f)))];
+                this.logger.info(`Loading event: ${eventName}`)
+            })
+        })
+        return this;
     }
 }

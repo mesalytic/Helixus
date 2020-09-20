@@ -1,20 +1,5 @@
-const Event = require('../structures/Event');
+module.exports = async (bot) => {
+    bot.user.setPresence({ status: 'online', activity: { name: "am!help", type: "LISTENING" } });
 
-module.exports = class extends Event {
-
-    constructor(...args) {
-        super(...args, {
-            once: true
-        });
-    }
-
-    run() {
-        console.log([
-			`Logged in as ${this.bot.user.tag} [Shard ${this.bot.shard.ids[0]}]`,
-			`Loaded ${this.bot.commands.size} commands!`,
-			`Loaded ${this.bot.events.size} events!`
-        ].join('\n'));
-
-        this.bot.user.setActivity(`am!help`, { type: 'WATCHING' });
-    }
+    bot.logger.info(`Helixus is now running [Shard ${bot.shard.ids[0]}]`)
 }

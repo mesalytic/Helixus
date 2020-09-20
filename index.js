@@ -1,6 +1,16 @@
-const Helixus = require('./structures/Client');
 const config = require('./config.json');
+const Client = require('./structures/Client');
 
-const bot = new Helixus(config);
+global.__basedir = __dirname;
 
-bot.launch();
+const bot = new Client(config);
+
+function init() {
+    bot.loadEvents('./events');
+    bot.loadCommands('./commands');
+    bot.login(bot.token);
+}
+
+init();
+
+process.on('unhandledRejection', err => bot.logger.error(err));
