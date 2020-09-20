@@ -1,5 +1,5 @@
 module.exports = (bot, message) => {
-    if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot || message.author.id === "199238027049041931") return;
+    if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot) return;
 
     //const prefix = bot.db.settings.selectPrefix.pluck().get(message.guild.id);
     const prefix = "am!";
