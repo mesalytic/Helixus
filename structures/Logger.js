@@ -32,6 +32,12 @@ const logger = createLogger({
             options: { flags: 'w' }
         }),
         new transports.File({
+            filename: path.join(__basedir, 'logs/debug.log'),
+            level: 'debug',
+            format: logFormat,
+            options: { flags: 'w' }
+        }),
+        new transports.File({
             filename: path.join(__basedir, 'logs/error.log'),
             level: 'warn',
             format: logFormat,
