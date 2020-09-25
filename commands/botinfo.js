@@ -7,7 +7,6 @@ module.exports.run = async (bot, message, args, con) => {
   const cpuStat = require("cpu-stat");
   const { get } = require("axios");
 
-  let cpuLol;
   try {
     cpuStat.usagePercent((err, percent, seconds) => {
       if (err) return console.log(err);
