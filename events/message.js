@@ -16,7 +16,12 @@ module.exports = (bot, message) => {
       let command = bot.commands.get(cmd) || bot.aliases.get(cmd);
 
       if (command) {
-        return command.run(message, args);
+        try {
+          command.run(message, args);
+        } catch (e) {
+          bot.logger.error(e);
+          return message.reply(`An error has occured.`)
+        }
       }
     }
   })
