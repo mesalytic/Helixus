@@ -1,0 +1,14 @@
+{
+    "token": "",
+    "ownerID": "",
+    "database": {
+        "host": "",
+        "password": ""
+    },
+    "webhook": {
+        "joinleaves": {
+            "id": "",
+            "password": ""
+        }
+    }
+}
