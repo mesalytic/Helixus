@@ -8,9 +8,9 @@ module.exports = class Bot extends Client {
         super(options);
 
         this.db = mysql.createConnection({
-            host: config.dbhost,
+            host: config.database.host,
             user: "root",
-            password: config.dbpassword,
+            password: config.database.password,
             database: "HelixusV2",
         });
         this.db.connect((err) => {
