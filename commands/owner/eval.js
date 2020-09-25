@@ -9,7 +9,8 @@ module.exports = class EvalCommand extends Command {
             name: 'eval',
             usage: 'eval <code>',
             description: 'Executing code.',
-            type: 'owner'
+            type: 'owner',
+            ownerOnly: true
         })
     }
 

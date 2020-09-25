@@ -16,6 +16,11 @@ module.exports = (bot, message) => {
       let command = bot.commands.get(cmd) || bot.aliases.get(cmd);
 
       if (command) {
+
+        if (command.ownerOnly && message.author.id !== bot.config.ownerID) {
+          return message.reply("This command is only accessible to bot owners!")
+        }
+
         try {
           command.run(message, args);
         } catch (e) {
