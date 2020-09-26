@@ -1,8 +1,7 @@
 const { WebhookClient, MessageEmbed } = require('discord.js');
-const config = require('../config.json');
 
 module.exports = async (bot, guild) => {
-    const wb = new WebhookClient(config.webhook.joinleaves.id, config.webhook.joinleaves.password);
+    const wb = new WebhookClient(bot.config.webhook.joinleaves.id, bot.config.webhook.joinleaves.password);
 
     const promises = [bot.shard.fetchClientValues("guilds.cache.size")];
 

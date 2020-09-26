@@ -1,7 +1,6 @@
 const util = require('util');
 
 const Command = require('../../structures/Command');
-const config = require('../../config.json')
 
 module.exports = class EvalCommand extends Command {
     constructor(bot) {
@@ -23,7 +22,7 @@ module.exports = class EvalCommand extends Command {
             if (str.length > 1900) {
                 str = `${str.substr(0, 1897)}...`
             }
-            str.replace(new RegExp(config.token, 'gi'), '( ͡° ͜ʖ ͡°)')
+            str.replace(new RegExp(this.bot.config.token, 'gi'), '( ͡° ͜ʖ ͡°)')
             message.channel.send('```xl\n' + str + '\n```').then(ms => {
                 if (returned != undefined && returned !== null && typeof returned.then === 'function') {
                     returned.then(() => {
