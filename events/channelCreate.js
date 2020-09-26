@@ -38,7 +38,7 @@ module.exports = async (bot, channel) => {
                             }
 
                             await setTimeout(async () => {
-                                const logs = await channel.guild.fetchAuditLogs(1, null, 10).catch(() => {return});
+                                const logs = await channel.guild.fetchAuditLogs({ limit: 5, type: 10}).catch(() => {return});
                                 if (!logs) return;
 
                                 const log = logs.entries.first()
