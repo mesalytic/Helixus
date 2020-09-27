@@ -12,7 +12,7 @@ module.exports = async (bot, channel) => {
         if (logsSettings[0]) {
             if (logsSettings[0].channelID) {
                 if (logsSettings[0].activated === "true") {
-                    if (logsSettings[0].channelcreate === "true") {
+                    if (logsSettings[0].channeldelete === "true") {
                         if (logsSettings[0].webhookID && logsSettings[0].webhookToken) {
                             const webhook = new WebhookClient(logsSettings[0].webhookID, logsSettings[0].webhookToken);
 
