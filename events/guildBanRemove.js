@@ -24,11 +24,9 @@ module.exports = async (bot, guild, user) => {
 
                                 const log = logs.entries.first()
 
-                                //console.log(logs);
                                 const perp = guild.members.resolve(log.executor.id);
                                 
                                 if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
-                                    console.log(perp);
                                     if (log.reason) embed.fields[1].value = log.reason
                                     embed.fields[2].value = `${perp.user} (${perp.user.id})`
                                     embed.footer = {
