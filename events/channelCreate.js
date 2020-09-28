@@ -1,4 +1,7 @@
-const { WebhookClient, MessageEmbed } = require("discord.js");
+const {
+    WebhookClient,
+    MessageEmbed
+} = require("discord.js");
 const CHANNEL_TYPES = {
     'text': 'Text Channel',
     'voice': 'Voice Channel',
@@ -38,7 +41,12 @@ module.exports = async (bot, channel) => {
                             }
 
                             await setTimeout(async () => {
-                                const logs = await channel.guild.fetchAuditLogs({ limit: 5, type: 10}).catch(() => {return});
+                                const logs = await channel.guild.fetchAuditLogs({
+                                    limit: 5,
+                                    type: 10
+                                }).catch(() => {
+                                    return
+                                });
                                 if (!logs) return;
 
                                 const log = logs.entries.first()

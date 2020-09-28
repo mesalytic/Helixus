@@ -1,4 +1,7 @@
-const { WebhookClient, MessageEmbed } = require('discord.js');
+const {
+    WebhookClient,
+    MessageEmbed
+} = require('discord.js');
 
 module.exports = async (bot, guild) => {
     const wb = new WebhookClient(bot.config.webhook.joinleaves.id, bot.config.webhook.joinleaves.password);
@@ -12,7 +15,9 @@ module.exports = async (bot, guild) => {
             .setColor("RANDOM")
             .setTitle("**A server removed the bot**")
             .setDescription(`Server: **${guild.name}** (\`${guild.id}\`)\nMade by **${guild.owner.user.tag}** (\`${guild.owner.id}\`)\nMembers: **${guild.memberCount}**\n\nI am now in ${guilds} guilds`)
-            .setThumbnail(guild.iconURL({ size: 256 }))
+            .setThumbnail(guild.iconURL({
+                size: 256
+            }))
             .setTimestamp();
         wb.send(e);
     });

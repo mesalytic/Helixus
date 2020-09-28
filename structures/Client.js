@@ -1,6 +1,15 @@
-const { Client, Collection } = require("discord.js");
-const { readdirSync, readdir } = require("fs");
-const { resolve, join } = require("path");
+const {
+    Client,
+    Collection
+} = require("discord.js");
+const {
+    readdirSync,
+    readdir
+} = require("fs");
+const {
+    resolve,
+    join
+} = require("path");
 const mysql = require('mysql');
 
 module.exports = class Bot extends Client {
@@ -35,11 +44,11 @@ module.exports = class Bot extends Client {
             MOD: 'mod',
             ADMIN: 'admin',
             OWNER: 'owner'
-          };
+        };
     }
 
     loadCommands(path) {
-        readdirSync(path).filter(f => ! f.endsWith('.js')).forEach(dir => {
+        readdirSync(path).filter(f => !f.endsWith('.js')).forEach(dir => {
             const commands = readdirSync(resolve(__basedir, join(path, dir))).filter(f => f.endsWith('js'));
             commands.forEach(f => {
                 const Command = require(resolve(__basedir, join(path, dir, f)));

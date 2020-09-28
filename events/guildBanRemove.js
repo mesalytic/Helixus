@@ -1,4 +1,7 @@
-const { WebhookClient, MessageEmbed } = require("discord.js");
+const {
+    WebhookClient,
+    MessageEmbed
+} = require("discord.js");
 
 
 module.exports = async (bot, guild, user) => {
@@ -19,13 +22,18 @@ module.exports = async (bot, guild, user) => {
                                 .setColor("RANDOM")
 
                             await setTimeout(async () => {
-                                const logs = await guild.fetchAuditLogs({ limit: 5, type: 23}).catch(() => {return});
+                                const logs = await guild.fetchAuditLogs({
+                                    limit: 5,
+                                    type: 23
+                                }).catch(() => {
+                                    return
+                                });
                                 if (!logs) return;
 
                                 const log = logs.entries.first()
 
                                 const perp = guild.members.resolve(log.executor.id);
-                                
+
                                 if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
                                     if (log.reason) embed.fields[1].value = log.reason
                                     embed.fields[2].value = `${perp.user} (${perp.user.id})`
