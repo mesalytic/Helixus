@@ -19,6 +19,7 @@ module.exports = async (bot, emoji) => {
                                 .addField("Emoji ID", emoji.id, true)
                                 .setThumbnail("https://canary.discordapp.com/assets/8becd37ab9d13cdfe37c08c496a9def3.svg")
                                 .setColor("RANDOM")
+                                .setTimestamp();
 
                             await setTimeout(async () => {
                                 const logs = await emoji.guild.fetchAuditLogs({

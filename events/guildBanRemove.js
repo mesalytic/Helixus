@@ -20,6 +20,7 @@ module.exports = async (bot, guild, user) => {
                                 .addField("Reason", "No reason provided.", true)
                                 .addField("Unbanned by", "Unknown", true)
                                 .setColor("RANDOM")
+                                .setTimestamp();
 
                             await setTimeout(async () => {
                                 const logs = await guild.fetchAuditLogs({

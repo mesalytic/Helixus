@@ -18,7 +18,7 @@ module.exports = async (bot, guild) => {
             .setThumbnail(guild.iconURL({
                 size: 256
             }))
-            .setThumbnail();
+            .setTimestamp();
         wb.send(e);
     })
 }

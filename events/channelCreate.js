@@ -25,6 +25,7 @@ module.exports = async (bot, channel) => {
                                 .addField("Created by", `Unknown`, true)
                                 .addField("Channel ID", channel.id, true)
                                 .setColor("RANDOM")
+                                .setTimestamp();
 
                             if (channel.permissionOverwrites.size !== 0) {
                                 channel.permissionOverwrites.forEach(overwrite => {

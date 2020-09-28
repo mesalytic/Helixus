@@ -25,6 +25,7 @@ module.exports = async (bot, channel) => {
                                 .addField("Deleted by", `Unknown`, true)
                                 .addField("Channel ID", channel.id, true)
                                 .setColor("RANDOM")
+                                .setTimestamp();
 
                             if (channel.permissionOverwrites.size !== 0) {
                                 channel.permissionOverwrites.forEach(overwrite => {
