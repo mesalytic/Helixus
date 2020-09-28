@@ -1,0 +1,32 @@
+const {
+    WebhookClient,
+    MessageEmbed
+} = require("discord.js")
+
+const moment = require('moment');
+
+module.exports = async (bot, guild, member) => {
+    bot.db.query(`SELECT * FROM Logs WHERE guildID='${guild.id}'`, async (err, logsSettings) => {
+        if (logsSettings[0]) {
+            if (logsSettings[0].channelID) {
+                if (logsSettings[0].activated = "true") {
+                    if (logsSettings[0].guildmemberadd === "true") {
+                        if (logsSettings[0].webhookID && logsSettings[0].webhookToken) {
+                            const webhook = new WebhookClient(logsSettings[0].webhookID, logsSettings[0].webhookToken);
+
+                            let embed = new MessageEmbed()
+                                .setAuthor(`${member.user.username}#${member.user.discriminator}`, `https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=512`)
+                                .setDescription(`${member} joined! We are now **${guild.memberCount}** members !`)
+                                .addField("Joined at", moment(member.joinedAt).format("dddd Do MMMM Y H[:]mm[:]ss "), true)
+                                .addField("Account age", `**${Math.floor((new Date() - member.user.createdAt) / 86400000)}** days`, true)
+                                .addField("User ID", member.id)
+                                .setColor("RANDOM")
+
+                            webhook.send(embed);
+                        }
+                    }
+                }
+            }
+        }
+    })
+}
