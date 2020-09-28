@@ -9,6 +9,10 @@
         "joinleaves": {
             "id": "",
             "password": ""
-        }
+        },
+        "status": {
+			"id": "",
+			"password": ""
+		}
     }
 }
