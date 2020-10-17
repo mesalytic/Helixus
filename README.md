@@ -3,7 +3,7 @@
 
 Helixus is a multi-function Discord bot coded in Javascript using [discord.js](https://discord.js.org).
 
-**This is the V3 branch of the bot. This branch is highly unstable and I'm not responsible for any issues that's occuring with the bot.**
+**This is the V3 branch of the bot, which is the currently in development complete rewrite of the bot. This branch is highly unstable and I'm not responsible for any issues that's occuring with the bot if you choose to host it with this branch.**
 
 
 **Website** : _currently in rework_
