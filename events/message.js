@@ -1,4 +1,6 @@
-let cmdCooldown = {};
+const { Collection } = require("discord.js");
+
+const cooldowns = new Collection();
 
 module.exports = (bot, message) => {
   if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot) return;
@@ -23,19 +25,26 @@ module.exports = (bot, message) => {
           return message.reply("This command is only accessible to bot owners!")
         }
 
-        /*let uCooldown = JSON.parse(cmdCooldown[message.author.id]);
-        console.log(`uCooldown = ${uCooldown}`)
-        if (!uCooldown) {
-          cmdCooldown[message.author.id] = {};
-          uCooldown = JSON.parse(cmdCooldown[message.author.id]);
+        if (!cooldowns.has(command.name)) {
+          cooldowns.set(command.name, new Collection());
         }
-        let time = uCooldown[command.name] | 0;
-        if (time && (time > Date.now())) {
-          return message.reply(`Hey! Please wait ${Math.ceil((time-Date.now())/1000)} seconds before performing this command!`)
+
+        const now = Date.now();
+        const timestamps = cooldowns.get(command.name);
+        const cooldownAmount = command.cooldown;
+
+        if (timestamps.has(message.author.id)) {
+          const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+          if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
+            return message.reply(`Please wait ${timeLeft.toFixed(1)} seconds before using this command.`)
+          }
         }
-        console.log(command.cooldown);
-        cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
-*/
+
+        timestamps.set(message.author.id, now);
+        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
         try {
           command.run(message, args);
         } catch (e) {
