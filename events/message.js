@@ -1,3 +1,5 @@
+let cmdCooldown = {};
+
 module.exports = (bot, message) => {
   if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot) return;
   bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefixes) => {
@@ -21,6 +23,19 @@ module.exports = (bot, message) => {
           return message.reply("This command is only accessible to bot owners!")
         }
 
+        /*let uCooldown = JSON.parse(cmdCooldown[message.author.id]);
+        console.log(`uCooldown = ${uCooldown}`)
+        if (!uCooldown) {
+          cmdCooldown[message.author.id] = {};
+          uCooldown = JSON.parse(cmdCooldown[message.author.id]);
+        }
+        let time = uCooldown[command.name] | 0;
+        if (time && (time > Date.now())) {
+          return message.reply(`Hey! Please wait ${Math.ceil((time-Date.now())/1000)} seconds before performing this command!`)
+        }
+        console.log(command.cooldown);
+        cmdCooldown[message.author.id][command.name] = Date.now() + command.cooldown;
+*/
         try {
           command.run(message, args);
         } catch (e) {
