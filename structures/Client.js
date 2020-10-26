@@ -36,8 +36,10 @@ module.exports = class Bot extends Client {
         this.token = this.config.token;
 
         this.types = {
-            INFO: 'info',
+            ADMINISTRATION: 'administration',
             GENERAL: 'general',
+            INFO: 'info',
+            MUSIC: 'music',
             OWNER: 'owner'
         };
     }
