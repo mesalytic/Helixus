@@ -20,13 +20,12 @@ module.exports = class PingCommand extends Command {
 
         const msg = await message.channel.send(embed);
         const timestamp = (message.editedTimestamp) ? message.editedTimestamp : message.createdTimestamp;
-        const latency = `\`\`\`ini\n[ ${Math.floor(msg.createdTimestamp - timestamp)}ms ]\`\`\``;
-        const apiLatency = `\`\`\`ini\n[ ${Math.round(this.bot.ws.ping)}ms ]\`\`\``;
+        const latency = Math.floor(msg.createdTimestamp - timestamp);
+        const heartbeat = Math.round(this.bot.ws.ping);
 
-        embed.setTitle(`Pong!`)
-            .setDescription('')
-            .addField('Latency', latency, true)
-            .addField('API Latency', apiLatency, true)
+        embed.setDescription(`**P${'o'.repeat(Math.min(Math.round(latency / 100), 1500))}ng!**`)
+            .addField('Latency', `\`\`\`ini\n[ ${latency}ms ]\`\`\``, true)
+            .addField('Heartbeat', `\`\`\`ini\n[ ${heartbeat}ms ]\`\`\``, true)
             .setFooter(message.member.displayName, message.author.displayAvatarURL({
                 dynamic: true
             }))
