@@ -10,10 +10,10 @@ module.exports = class UserInfoCommand extends Command {
         super(bot, {
             name: 'userinfo',
             aliases: ['ui'],
-            usage: 'userinfo [userID]',
+            usage: 'userinfo [user]',
             description: "Displays informations about a specific user __**in the server**__.",
             type: 'general',
-            examples: ['userinfo', 'userinfo <@user>']
+            examples: ['userinfo', 'userinfo @user', 'userinfo 437190817195753472']
         });
     }
 
@@ -28,7 +28,6 @@ module.exports = class UserInfoCommand extends Command {
         message.guild.members.fetch(user.id).then(member => {
             if (!member) return message.reply("[❌] This user is not in the guild!")
 
-            console.log(member);
             let embed = new MessageEmbed()
                 .setColor(member && member.displayColor ? member.displayColor : "RANDOM")
                 .setAuthor(user.tag, user.displayAvatarURL({ format: 'png', size: 512 }))
