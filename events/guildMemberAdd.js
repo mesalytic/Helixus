@@ -6,7 +6,19 @@ const {
 const moment = require('moment');
 
 module.exports = async (bot, guild, member) => {
+    bot.db.query(`SELECT * FROM Autorole WHERE guildId=${member.guild.id}`, (err, rows) => {
+        if (err) throw err;
+        if (rows[0]) {
+            const role = member.guild.roles.resolve(rows[0].roleID);
+
+            member.roles.add(role).catch((err) => {
+                throw new Error(err);
+            });
+        }
+    });
+
     bot.db.query(`SELECT * FROM Logs WHERE guildID='${guild.id}'`, async (err, logsSettings) => {
+        if (err) throw err;
         if (logsSettings[0]) {
             if (logsSettings[0].channelID) {
                 if (logsSettings[0].activated = "true") {
