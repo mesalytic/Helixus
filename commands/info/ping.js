@@ -8,7 +8,7 @@ module.exports = class PingCommand extends Command {
         super(bot, {
             name: 'ping',
             usage: 'ping',
-            description: 'Displays the bot\'s current **message latency** and **API latency**.',
+            description: 'Displays the bot\'s current **message latency** and **heartbeat**.',
             type: 'info'
         });
     }
