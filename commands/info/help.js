@@ -27,7 +27,7 @@ module.exports = class HelpCommand extends Command {
     }
 
     async run(message, args) {
-        const { INFO, GENERAL, OWNER } = this.bot.types;
+        const { INFO, GENERAL, OWNER, ADMINISTRATION, MUSIC } = this.bot.types;
         this.bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefixes) => {
             if (err) throw err;
 
@@ -61,7 +61,9 @@ module.exports = class HelpCommand extends Command {
                 const emojiMap = {
                     [INFO]: `${capitalize(INFO)}`,
                     [GENERAL] : `${capitalize(GENERAL)}`,
-        [OWNER]: `${capitalize(OWNER)}`
+        [OWNER]: `${capitalize(OWNER)}`,
+        [ADMINISTRATION]: `${capitalize(ADMINISTRATION)}`,
+        [MUSIC]: `${capitalize(MUSIC)}`
                 }
 
                 this.bot.commands.forEach(command => {
