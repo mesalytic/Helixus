@@ -49,7 +49,7 @@ module.exports = (bot, message) => {
           command.run(message, args);
         } catch (e) {
           bot.logger.error(e);
-          return message.reply(`An error has occured.`)
+          return message.reply(`Oops, an error has been triggered, sorry for that! Our team will resolve this issue as quick as possible!\n\nError: \`${err.message}\``);
         }
       }
     }
