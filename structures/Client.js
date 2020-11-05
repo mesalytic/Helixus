@@ -35,6 +35,8 @@ module.exports = class Bot extends Client {
         this.config = require('../config.json');
         this.token = this.config.token;
 
+
+
         this.types = {
             ADMINISTRATION: 'administration',
             GENERAL: 'general',
@@ -52,6 +54,7 @@ module.exports = class Bot extends Client {
                 const command = new Command(this);
                 if (command.name && !command.disabled) {
                     this.commands.set(command.name, command);
+                    this.logger.info(`Loading command: ${command.name}`)
 
                     let aliases = '';
                     if (command.aliases) {
