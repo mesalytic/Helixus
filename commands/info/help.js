@@ -1,5 +1,6 @@
 const {
-    oneLine, stripIndent
+    oneLine,
+    stripIndent
 } = require("common-tags");
 const {
     MessageEmbed
@@ -27,7 +28,13 @@ module.exports = class HelpCommand extends Command {
     }
 
     async run(message, args) {
-        const { INFO, GENERAL, OWNER, ADMINISTRATION, MUSIC } = this.bot.types;
+        const {
+            INFO,
+            GENERAL,
+            OWNER,
+            ADMINISTRATION,
+            MUSIC
+        } = this.bot.types;
         this.bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefixes) => {
             if (err) throw err;
 
@@ -60,10 +67,10 @@ module.exports = class HelpCommand extends Command {
 
                 const emojiMap = {
                     [INFO]: `${capitalize(INFO)}`,
-                    [GENERAL] : `${capitalize(GENERAL)}`,
-        [OWNER]: `${capitalize(OWNER)}`,
-        [ADMINISTRATION]: `${capitalize(ADMINISTRATION)}`,
-        [MUSIC]: `${capitalize(MUSIC)}`
+                    [GENERAL]: `${capitalize(GENERAL)}`,
+                    [OWNER]: `${capitalize(OWNER)}`,
+                    [ADMINISTRATION]: `${capitalize(ADMINISTRATION)}`,
+                    [MUSIC]: `${capitalize(MUSIC)}`
                 }
 
                 this.bot.commands.forEach(command => {
@@ -75,17 +82,17 @@ module.exports = class HelpCommand extends Command {
 
                 embed
                     .setTitle('Helixus Commands')
-                    .setDescription(stripIndent`
+                    .setDescription(stripIndent `
                     **More informations:** \`${prefix}help [command]\`
                     `)
                     .setTimestamp()
                     .setColor(message.guild.me.displayhexColor)
 
-                    for (const type of Object.values(this.bot.types)) {
-                        if (type === OWNER) continue;
-                        if (commands[type][0])
-                          embed.addField(`**${emojiMap[type]} [${commands[type].length}]**`, commands[type].join(', '));
-                    }
+                for (const type of Object.values(this.bot.types)) {
+                    if (type === OWNER) continue;
+                    if (commands[type][0])
+                        embed.addField(`**${emojiMap[type]} [${commands[type].length}]**`, commands[type].join(', '));
+                }
             }
             message.channel.send(embed);
         })

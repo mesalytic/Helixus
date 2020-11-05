@@ -42,7 +42,10 @@ module.exports = async (bot, member) => {
                             }
 
                             await setTimeout(async () => {
-                                let logs = await member.guild.fetchAuditLogs({ limit:5, type:20 }).catch(() => {})
+                                let logs = await member.guild.fetchAuditLogs({
+                                    limit: 5,
+                                    type: 20
+                                }).catch(() => {})
                                 if (!logs) return;
 
                                 let log = logs.entries.first();
@@ -51,7 +54,7 @@ module.exports = async (bot, member) => {
                                     console.log(logs);
                                     let executor = member.guild.members.cache.get(log.executor.id);
                                     console.log(executor.user);
-                                    
+
                                     let embed = new MessageEmbed()
                                         .setColor("RANDOM")
                                         .setAuthor(`${member.user.username}#${member.user.discriminator}`, `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.png?size=512`)
@@ -61,8 +64,8 @@ module.exports = async (bot, member) => {
                                         .addField('Reason', log.reason ? log.reason : "None provided.")
                                         .setFooter(`${executor.user.username}#${executor.user.discriminator}`, `https://cdn.discordapp.com/avatars/${executor.user.id}/${executor.user.avatar}.png?size=512`)
                                         .setTimestamp();
-                                        
-                                        webhook.send(embed);
+
+                                    webhook.send(embed);
                                 } else {
                                     let embed = new MessageEmbed()
                                         .setColor("RANDOM")

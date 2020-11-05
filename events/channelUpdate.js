@@ -56,7 +56,7 @@ module.exports = async (bot, oldChannel, newChannel) => {
                                     .setTimestamp();
                                 webhook.send(embed);
                             }
-                            
+
                             const permDiff = oldChannel.permissionOverwrites.filter(x => {
                                 if (newChannel.permissionOverwrites.find(y => y.allow.bitfield == x.allow.bitfield) && newChannel.permissionOverwrites.find(y => y.deny.bitfield == x.deny.bitfield)) {
                                     return false;
