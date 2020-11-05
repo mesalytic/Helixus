@@ -6,6 +6,10 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ * Converts timestamps or DateResolvables to current TZ
+ * @param {DateResolvable} data
+ */
 function timeZoneConvert(data) {
     var months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let d1 = new Date(data);
@@ -21,7 +25,7 @@ function timeZoneConvert(data) {
         tz = "PM";
     }
     return `${month} ${date}, ${year} ${h}:${m} ${tz}`;
-    
+
 }
 
 module.exports = {
