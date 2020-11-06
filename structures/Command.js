@@ -39,7 +39,7 @@ module.exports = class Command {
 		this.bot = bot;
 
 		this.name = options.name;
-		this.aliases = options.aliases | null;
+		this.aliases = options.aliases || null;
 		this.usage = options.usage || options.name;
 		this.description = options.description || 'No description';
 		this.type = options.type || bot.types.MISC;
