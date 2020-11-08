@@ -4,6 +4,7 @@
   "description": "",
   "main": "ShardManager.js",
   "dependencies": {
+    "@discordjs/opus": "^0.3.3",
     "ascii-table": "^0.0.9",
     "common-tags": "^1.8.0",
     "discord.js": "^12.4.1",
@@ -11,7 +12,11 @@
     "ms": "^2.1.2",
     "mysql": "^2.18.1",
     "path": "^0.12.7",
-    "winston": "^3.3.3"
+    "simple-youtube-api": "^5.2.1",
+    "soundcloud-downloader": "^0.1.8",
+    "string-progressbar": "^1.0.1",
+    "winston": "^3.3.3",
+    "ytdl-core-discord": "^1.2.4"
   },
   "devDependencies": {},
   "scripts": {
