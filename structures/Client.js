@@ -32,6 +32,8 @@ module.exports = class Bot extends Client {
         this.commands = new Collection();
         this.aliases = new Collection();
 
+        this.queue = new Map();
+
         this.config = require('../config.json');
         this.token = this.config.token;
 
