@@ -25,10 +25,10 @@ module.exports = class UserInfoCommand extends Command {
 
         if (!args[0] || !message.content.match(/\d{17,19}/)) user = message.member.user;
         else user = await guildUsers.fetch(message.content.match(/\d{17,19}/)[0]);
-        if (!user) return message.reply("[❌] Please specify a valid userID or a valid user mention !")
+        if (!user) return this.bot.commands.get("help").run(message, ["userinfo"])
 
         message.guild.members.fetch(user.id).then(member => {
-            if (!member) return message.reply("[❌] This user is not in the guild!")
+            if (!member) return this.bot.commands.get("help").run(message, ["userinfo"])
 
             let embed = new MessageEmbed()
                 .setColor(member && member.displayColor ? member.displayColor : "RANDOM")
@@ -46,7 +46,6 @@ module.exports = class UserInfoCommand extends Command {
                 .addField("Current Status", user.presence.status.charAt(0).toUpperCase() + user.presence.status.slice(1), true)
                 .addField("Account created", `${timeZoneConvert(user.createdAt).split(/ +/).splice(0, 3).join(' ')} | ${ms(new Date().getTime() - user.createdTimestamp, { long: true })} ago`)
                 .addField("Joined", `${timeZoneConvert(member.joinedAt).split(/ +/).splice(0,3).join(' ')}, ${ms(new Date() - member.joinedTimestamp, { long: true })} ago`)
-                .addField("Activity", user.presence.activities.length ? `${user.presence.activities[0].type.replace('CUSTOM_STATUS' , '')} ${user.presence.activities[0].name}` : 'Not playing.')
                 .addField("Currently active on", Object.keys(user.presence.clientStatus || {}).map(x => x.charAt(0).toUpperCase() + x.slice(1)).join(', ') || "Offline")
                 .addField("Nitro Boost Status", `${member && member.premiumSince ? `${timeZoneConvert(member.premiumSince).split(/ +/).splice(0,3).join(' ')}, ${ms(new Date() - member.premiumSinceTimestamp, { long: true })} ago` : "No active Server Boost."}`)
                 .addField("Roles", `${member.roles.cache.filter(role => role.id !== message.guild.id).map(role => `${role}\u2000`).splice(0, 25).join('•\u2000')} ${member.roles.cache.size > 26 ? `and ${member.roles.cache.size - 26} more.` : "\u200b"}`)
