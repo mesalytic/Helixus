@@ -5,6 +5,11 @@ Helixus is a multi-function Discord bot coded in Javascript using [discord.js](h
 
 **This is the V2 branch of the bot. As the V3 is in the works, this repo will not be updated (unless major bugs needs fixing before V3 arrival). However, this is most stable version of the bot right now, so you're still encouraged in using this version of the bot.**
 
+## V2 Acknowledged bugs fixed in V3
+    - Music not working
+    - XP Leaderboard not displaying names
+    - Close to no users in members cache
+    - Surely more...
 
 **Website** : _currently in rework_
 
