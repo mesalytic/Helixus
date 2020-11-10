@@ -14,7 +14,7 @@ module.exports = class UserInfoCommand extends Command {
             aliases: ['ui'],
             usage: 'userinfo [user]',
             description: "Displays informations about a specific user __**in the server**__.",
-            type: 'general',
+            type: 'info',
             examples: ['userinfo', 'userinfo @user', 'userinfo 437190817195753472']
         });
     }
