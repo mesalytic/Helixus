@@ -204,7 +204,7 @@ module.exports = class PlayCommand extends Command {
                 })
             dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
-            queue.textChannel.send(`🎶 Started playing: **${song.title}** ${song.url}`);
+            queue.textChannel.send(`🎶 Started playing: **${song.title}** <${song.url}>`);
         }
     }
 }
