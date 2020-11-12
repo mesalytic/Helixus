@@ -22,37 +22,59 @@ module.exports = (bot, message) => {
       let command = bot.commands.get(cmd) || bot.aliases.get(cmd);
 
       if (command) {
-
-        if (command.ownerOnly && message.author.id !== bot.config.ownerID) {
-          return message.reply("This command is only accessible to bot owners!")
-        }
-
-        if (!cooldowns.has(command.name)) {
-          cooldowns.set(command.name, new Collection());
-        }
-
-        const now = Date.now();
-        const timestamps = cooldowns.get(command.name);
-        const cooldownAmount = command.cooldown;
-
-        if (timestamps.has(message.author.id)) {
-          const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-
-          if (now < expirationTime) {
-            const timeLeft = (expirationTime - now) / 1000;
-            return message.reply(`Please wait ${timeLeft.toFixed(1)} seconds before using this command.`)
+          /* Owner Check */
+          if (command.ownerOnly && message.author.id !== bot.config.ownerID) {
+            return message.reply("This command is only accessible to bot owners!")
           }
-        }
 
-        timestamps.set(message.author.id, now);
-        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+          /* Permissions Check */
+          let neededPermsBot = [];
+          let neededPermsUser = [];
 
-        try {
-          command.run(message, args);
-        } catch (e) {
-          bot.logger.error(e);
-          return message.reply(`An error has occured.`)
-        }
+          command.userPermissions.forEach(uP => {
+            if (!message.channel.permissionsFor(message.member).has(uP)) neededPermsUser.push(uP);
+          })
+
+          command.clientPermissions.forEach(uP => {
+            if (!message.channel.permissionsFor(message.guild.me).has(uP)) neededPermsBot.push(uP);
+          })
+
+          if (neededPermsUser.length > 0) {
+            return message.reply(`Missing USER Permissions: ${neededPermsUser.map((p) => `\`${p}\``).join(", ")}`)
+          }
+
+          if (neededPermsBot.length > 0) {
+            return message.reply(`Missing BOT Permissions: ${neededPermsBot.map((p) => `\`${p}\``).join(", ")}`)
+          }
+          
+          /* Cooldowns */
+          if (!cooldowns.has(command.name)) {
+            cooldowns.set(command.name, new Collection());
+          }
+  
+          const now = Date.now();
+          const timestamps = cooldowns.get(command.name);
+          const cooldownAmount = command.cooldown;
+  
+          if (timestamps.has(message.author.id)) {
+            const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+  
+            if (now < expirationTime) {
+              const timeLeft = (expirationTime - now) / 1000;
+              return message.reply(`Please wait ${timeLeft.toFixed(1)} seconds before using this command.`)
+            }
+          }
+  
+          timestamps.set(message.author.id, now);
+          setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+  
+          try {
+            command.run(message, args);
+          } catch (e) {
+            bot.logger.error(e);
+            return message.reply(`An error has occured.`)
+          }  
+        
       }
     }
   })
