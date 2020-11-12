@@ -1,7 +1,7 @@
 const {
   Collection
 } = require("discord.js");
-
+const { permissions } = require("../structures/Constants");
 const cooldowns = new Collection();
 
 module.exports = (bot, message) => {
@@ -40,11 +40,11 @@ module.exports = (bot, message) => {
           })
 
           if (neededPermsUser.length > 0) {
-            return message.reply(`Missing USER Permissions: ${neededPermsUser.map((p) => `\`${p}\``).join(", ")}`)
+            return message.reply(`Missing USER Permissions: ${neededPermsUser.map((p) => `\`${permissions[`${p}`]}\``).join(", ")}`)
           }
 
           if (neededPermsBot.length > 0) {
-            return message.reply(`Missing BOT Permissions: ${neededPermsBot.map((p) => `\`${p}\``).join(", ")}`)
+            return message.reply(`Missing BOT Permissions: ${neededPermsBot.map((p) => `\`${permissions[`${p}`]}\``).join(", ")}`)
           }
           
           /* Cooldowns */
