@@ -6,7 +6,7 @@ let YOUTUBE_KEY = config.youtube;
 const YoutubeAPI = require("simple-youtube-api");
 const youtube = new YoutubeAPI(YOUTUBE_KEY);
 const scdl = require('soundcloud-downloader');
-const ytdl = require('ytdl-core-discord');
+const ytdl = require('discord-ytdl-core');
 const {
     MessageEmbed
 } = require("discord.js");
@@ -21,7 +21,8 @@ module.exports = class PlayCommand extends Command {
             description: "Allows you to play music from YouTube or SoundCloud!",
             usage: "play <search | YouTube/SoundCloud URL>",
             type: 'music',
-            examples: ["play The Chainsmokers", "play https://www.youtube.com/watch?v=dQw4w9WgXcQ", "play https://soundcloud.com/abvssmalx/shallow-waters"]
+            examples: ["play The Chainsmokers", "play https://www.youtube.com/watch?v=dQw4w9WgXcQ", "play https://soundcloud.com/abvssmalx/shallow-waters"],
+            clientPermissions: ["SPEAK", "CONNECT"]
         });
     }
 
@@ -58,6 +59,7 @@ module.exports = class PlayCommand extends Command {
             connection: null,
             songs: [],
             loop: false,
+            seek: 0,
             volume: 100,
             playing: true
         }
@@ -139,6 +141,7 @@ module.exports = class PlayCommand extends Command {
         try {
             queueConstruct.connection = await voiceChannel.join();
             await queueConstruct.connection.voice.setSelfDeaf(true);
+            await queueConstruct.connection.voice.setSelfMute(true);
             play(queueConstruct.songs[0], message, this.bot);
         } catch (error) {
             console.error(error);
@@ -147,30 +150,26 @@ module.exports = class PlayCommand extends Command {
             return message.channel.send(`Could not join the channel: ${error}`).catch(console.error);
         }
 
-        async function play(song, message, bot) {
+        async function play(song, message, bot, seek = 0) {
             const queue = bot.queue.get(message.guild.id);
 
             if (!song) {
                 queue.voiceChannel.leave();
-                message.client.queue.delete(message.guild.id);
+                bot.queue.delete(message.guild.id);
                 return queue.textChannel.send("🚫 Music queue ended.").catch(console.error);
             }
 
             let stream = null;
-            let streamType = song.url.includes("youtube.com") ? "opus" : "ogg/opus";
 
             try {
                 if (song.url.includes("youtube.com")) {
                     stream = await ytdl(song.url, {
-                        highWaterMark: 1 << 25
+                        filter: "audioonly",
+                        opusEncoded: false,
+                        fmt: "mp3",
                     });
                 } else if (song.url.includes("soundcloud.com")) {
-                    try {
-                        stream = await scdl.downloadFormat(song.url, scdl.FORMATS.OPUS, config.soundcloud);
-                    } catch (error) {
-                        stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.soundcloud);
-                        streamType = "unknown";
-                    }
+                    stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.soundcloud);
                 }
             } catch (error) {
                 if (queue) {
@@ -185,16 +184,27 @@ module.exports = class PlayCommand extends Command {
 
             const dispatcher = queue.connection
                 .play(stream, {
-                    type: streamType
+                    type: "unknown",
+                    seek: seek
                 })
-                .on("finish", () => {
-                    if (queue.loop) {
-                        let lSong = queue.songs.shift();
-                        queue.songs.push(lSong);
-                        play(queue.songs[0], message, bot);
+                .on("finish", reason => { //Don't really count on the callback for everything, not officially supported
+                    if (reason) {
+                        if (reason.match(`seek`)) {
+                            let seekTo = reason.split(" ")[1];
+    
+                            play(queue.songs[0], message, bot, seekTo);
+                        }
                     } else {
-                        queue.songs.shift();
-                        play(queue.songs[0], message, bot);
+                        if (queue.loop) {
+                            let lSong = queue.songs.shift();
+                            queue.songs.push(lSong);
+                            queue.seek = 0;
+                            play(queue.songs[0], message, bot);
+                        } else {
+                            queue.songs.shift();
+                            queue.seek = 0;
+                            play(queue.songs[0], message, bot);
+                        }
                     }
                 })
                 .on("error", (err) => {
@@ -204,7 +214,7 @@ module.exports = class PlayCommand extends Command {
                 })
             dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
-            queue.textChannel.send(`🎶 Started playing: **${song.title}** <${song.url}>`);
+            if (seek == 0) queue.textChannel.send(`🎶 Started playing: **${song.title}** <${song.url}>`);
         }
     }
 }

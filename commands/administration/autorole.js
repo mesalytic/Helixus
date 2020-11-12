@@ -7,7 +7,8 @@ module.exports = class AutoroleCommand extends Command {
             type: 'administration',
             usage: 'autorole ["off" | Role]',
             examples: ['autorole off', 'autorole @Role', 'autorole Role', 'autorole 437191604370145283'],
-            userPermissions: ['MANAGE_CHANNELS']
+            userPermissions: ['MANAGE_ROLES'],
+            clientPermissions: ["MANAGE_ROLES"]
         });
     }
 
