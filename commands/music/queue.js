@@ -28,14 +28,13 @@ module.exports = class QueueCommand extends Command {
 
         try {
             await queueEmbed.react("⬅️");
-            await queueEmbed.react("⏹");
             await queueEmbed.react("➡️");
         } catch (error) {
             console.error(error);
             message.channel.send(error.message).catch(console.error);
         }
 
-        const filter = (reaction, user) => ["⬅️", "⏹", "➡️"].includes(reaction.emoji.name) && message.author.id === user.id;
+        const filter = (reaction, user) => ["⬅️", "➡️"].includes(reaction.emoji.name) && message.author.id === user.id;
         const collector = queueEmbed.createReactionCollector(filter, {
             time: 60000
         });
