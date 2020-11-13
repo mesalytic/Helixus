@@ -45,5 +45,5 @@ exports.badgesEmotes = {
     "SYSTEM": "System", // Should never be encountered 
     "BUGHUNTER_LEVEL_2": "<:bughunter2:776632040643624990>",
     "VERIFIED_BOT": "<:verifiedbot:776626551025958912>",
-    "EARLY_VERIFIED_BOT_DEVELOPER": "<:verifieddev:776627149452083212>",
+    "EARLY_VERIFIED_DEVELOPER": "<:verifieddev:776627149452083212>",
 }
