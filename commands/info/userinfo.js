@@ -3,6 +3,7 @@ const {
 } = require("discord.js");
 const ms = require("ms");
 const Command = require("../../structures/Command");
+const { badgesEmotes } = require("../../structures/Constants");
 const {
     timeZoneConvert
 } = require("../../structures/Utils");
@@ -43,6 +44,7 @@ module.exports = class UserInfoCommand extends Command {
                 }))
                 .addField("Username", user.tag, true)
                 .addField("Type", user.bot ? "Bot" : "User", true)
+                .addField("Badges", user.flags ? user.flags.toArray().filter(b => b !== "VERIFIED_DEVELOPER").map(badge => `${badgesEmotes[badge]}`).join(" ") : "None")
                 .addField("Current Status", user.presence.status.charAt(0).toUpperCase() + user.presence.status.slice(1), true)
                 .addField("Account created", `${timeZoneConvert(user.createdAt).split(/ +/).splice(0, 3).join(' ')} | ${ms(new Date().getTime() - user.createdTimestamp, { long: true })} ago`)
                 .addField("Joined", `${timeZoneConvert(member.joinedAt).split(/ +/).splice(0,3).join(' ')}, ${ms(new Date() - member.joinedTimestamp, { long: true })} ago`)
