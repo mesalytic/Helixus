@@ -23,7 +23,7 @@ module.exports = class NowPlayingCommand extends Command {
         if (!queue) return message.reply("There is nothing playing.").catch(console.error);
 
         const song = queue.songs[0];
-        const seek = (queue.connection.dispatcher.streamTime - queue.connection.dispatcher.pausedTime) / 1000;
+        const seek = ((queue.connection.dispatcher.streamTime - queue.connection.dispatcher.pausedTime) / 1000) + queue.seek;
         const left = song.duration - seek;
 
         let nowPlaying = new MessageEmbed()
