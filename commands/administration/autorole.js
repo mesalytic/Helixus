@@ -25,13 +25,14 @@ module.exports = class AutoroleCommand extends Command {
                 return message.channel.send(`[✅] - The role has been removed from the autorole.`);
             }
 
-            const role = message.guild.roles.resolve(args.join(" ")) || message.guild.roles.cache.find(r => r.name === args.join("")) || message.mentions.roles.first();
+            const role = message.guild.roles.resolve(args.join(" ")) || message.guild.roles.cache.find(r => r.name === args.join(" ")) || message.mentions.roles.first();
             if (role) {
                 if (!rows[0]) this.bot.db.query(`INSERT INTO Autorole (roleID, guildID) VALUES ('${role.id}', '${message.guild.id}')`)
                 else this.bot.db.query(`UPDATE Autorole SET roleID='${role.id}' WHERE guildID='${message.guild.id}'`);
+                return message.channel.send(`[✅] - The role ${role} will now be given to new members.`)
+            } else {
+                return message.channel.send(`[❌] - The role has not been found.`)
             }
-
-            return message.channel.send(`[✅] - The role ${role} will now be given to new members.`)
         })
     }
 }
