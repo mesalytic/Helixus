@@ -5,6 +5,7 @@ module.exports = class AutoroleCommand extends Command {
         super(bot, {
             name: 'autorole',
             type: 'administration',
+            description: 'Allows you to configure a role which will be given to new members.',
             usage: 'autorole ["off" | Role]',
             examples: ['autorole off', 'autorole @Role', 'autorole Role', 'autorole 437191604370145283'],
             userPermissions: ['MANAGE_ROLES'],
