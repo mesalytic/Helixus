@@ -110,8 +110,8 @@ module.exports = class PlayCommand extends Command {
                         errors: ["time"],
                     });
                 } catch (err) {
-                    console.error(error);
-                    return message.reply(error.message).catch(console.error);
+                    console.error(err);
+                    return message.reply(err.message).catch(console.error);
                 }
 
                 const videoIndex = parseInt(response.first().content, 10);
