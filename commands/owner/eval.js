@@ -22,7 +22,9 @@ module.exports = class EvalCommand extends Command {
             if (str.length > 1900) {
                 str = `${str.substr(0, 1897)}...`
             }
-            str.replace(new RegExp(this.bot.config.token, 'gi'), '( ͡° ͜ʖ ͡°)')
+            if(str.includes(this.bot.config.token)){
+                str = str.replace(this.bot.config.token, "( ͡° ͜ʖ ͡°)");
+            }
             message.channel.send('```xl\n' + str + '\n```').then(ms => {
                 if (returned != undefined && returned !== null && typeof returned.then === 'function') {
                     returned.then(() => {
