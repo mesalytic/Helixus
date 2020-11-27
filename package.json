@@ -17,7 +17,7 @@
     "node-html-parser": "^2.0.0",
     "path": "^0.12.7",
     "simple-youtube-api": "^5.2.1",
-    "soundcloud-downloader": "^0.2.0",
+    "soundcloud-downloader": "^0.2.1",
     "string-progressbar": "^1.0.1",
     "winston": "^3.3.3"
   },
