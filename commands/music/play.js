@@ -51,7 +51,7 @@ module.exports = class PlayCommand extends Command {
         const urlValid = videoRegex.test(args[0]);
 
         if (!videoRegex.test(args[0]) && playlistYTRegex.test(args[0])) return message.reply("Playlist support isn't ready yet!");
-        else if (scdl.isValidUrl(url) && url.includes("/sets")) return message.reply("SoundCloud support is not available yet!");
+        else if (soundcloudRegex.test(args[0]) && url.includes("/sets")) return message.reply("SoundCloud playlist support is not available yet!");
 
         const queueConstruct = {
             textChannel: message.channel,
