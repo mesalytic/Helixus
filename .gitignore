@@ -105,5 +105,4 @@ dist
 
 config.json
 node_modules
-lavalink/
 .vscode/
