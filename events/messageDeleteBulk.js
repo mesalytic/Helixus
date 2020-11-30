@@ -15,7 +15,7 @@ module.exports = async (bot, messages) => {
         if (logsSettings[0]) {
             if (logsSettings[0].channelID) {
                 if (logsSettings[0].activated = "true") {
-                    if (logsSettings[0].messagedelete === "true") {
+                    if (logsSettings[0].messagedeletebulk === "true") {
                         bot.db.query(`SELECT * FROM LogsIgnore WHERE guildID='${guild.id}' AND channelID='${channel.id}'`, async (err, ignore) => {
                             if (!ignore[0] || ignore[0].ignored === "false") {
                                 if (logsSettings[0].webhookID && logsSettings[0].webhookToken) {
