@@ -18,12 +18,12 @@ module.exports = async (bot, oldMessage, newMessage) => {
                                     const webhook = new WebhookClient(logsSettings[0].webhookID, logsSettings[0].webhookToken);
                                     if (oldMessage.content !== newMessage.content && oldMessage.content.length !== 0) {
                                         let embed = new MessageEmbed()
-                                        .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
-                                        .setDescription(`A message from ${newMessage.author} (${newMessage.author.tag}) has been updated.`)
-                                        .addField("Old message", oldMessage.content.length > 1000 ? await hastebin(oldMessage.content) : oldMessage.content)
-                                        .addField("New message", newMessage.content.length > 1000 ? await hastebin(newMessage.content) : newMessage.content)
-                                        .setColor("RANDOM")
-                                        .setTimestamp();
+                                            .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
+                                            .setDescription(`A message from ${newMessage.author} (${newMessage.author.tag}) has been updated.`)
+                                            .addField("Old message", oldMessage.content.length > 1000 ? await hastebin(oldMessage.content) : oldMessage.content)
+                                            .addField("New message", newMessage.content.length > 1000 ? await hastebin(newMessage.content) : newMessage.content)
+                                            .setColor("RANDOM")
+                                            .setTimestamp();
 
                                         webhook.send(embed);
                                     }

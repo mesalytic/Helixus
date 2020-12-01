@@ -2,7 +2,9 @@ const {
     MessageEmbed
 } = require("discord.js");
 const Command = require("../../structures/Command");
-const { canModifyQueue } = require("../../structures/Utils");
+const {
+    canModifyQueue
+} = require("../../structures/Utils");
 
 module.exports = class LoopCommand extends Command {
     constructor(bot) {

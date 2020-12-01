@@ -18,7 +18,7 @@ module.exports = async (bot, oldRole, newRole) => {
                                 .addField('Updated by', 'Unknown')
                                 .setColor(newRole.color ? newRole.color : "RANDOM")
                                 .setTimestamp()
-                            
+
 
                             const oldKeys = Object.keys(oldRole);
                             oldKeys.forEach(prop => {
@@ -50,34 +50,35 @@ module.exports = async (bot, oldRole, newRole) => {
                                 }
                             })
                             if (embed.fields.length === 0) return;
-                           
-                                    await setTimeout(async () => {
-                                        const logs = await newRole.guild.fetchAuditLogs({
-                                            limit: 5,
-                                            type: 31
-                                        }).catch(() => {
-                                            return
-                                        });
-                                        if (!logs) return;
-                                        
-                                        
-                                        const log = logs.entries.find(e => e.target.id === newRole.id);
-                                        if (!log) return await webhook.send(embed);
-                                        
-                                        if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() > 3000) return;
-                                        const executor = newRole.guild.members.cache.get(log.executor.id);
-                                        embed.fields[embed.fields.length - 1].value = executor;
-                                        embed.author.name = `${executor.user.username}#${executor.user.discriminator}`
-                                        embed.author.iconURL = `https://cdn.discordapp.com/avatars/${executor.id}/${executor.user.avatar}.png?size=512`;
-                                    
-                                        await webhook.send(embed);
-                                    }, 1000)
+
+                            await setTimeout(async () => {
+                                const logs = await newRole.guild.fetchAuditLogs({
+                                    limit: 5,
+                                    type: 31
+                                }).catch(() => {
+                                    return
+                                });
+                                if (!logs) return;
+
+
+                                const log = logs.entries.find(e => e.target.id === newRole.id);
+                                if (!log) return await webhook.send(embed);
+
+                                if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() > 3000) return;
+                                const executor = newRole.guild.members.cache.get(log.executor.id);
+                                embed.fields[embed.fields.length - 1].value = executor;
+                                embed.author.name = `${executor.user.username}#${executor.user.discriminator}`
+                                embed.author.iconURL = `https://cdn.discordapp.com/avatars/${executor.id}/${executor.user.avatar}.png?size=512`;
+
+                                await webhook.send(embed);
+                            }, 1000)
                         }
                     }
                 }
             }
         }
     })
+
     function toTitleCase(str) {
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
@@ -92,7 +93,7 @@ module.exports = async (bot, oldRole, newRole) => {
         return rgbToHex(r, g, b);
     }
 
-    function rgbToHex(r,g,b) {
+    function rgbToHex(r, g, b) {
         return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
     }
 }

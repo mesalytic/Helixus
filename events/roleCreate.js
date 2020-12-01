@@ -25,35 +25,35 @@ module.exports = async (bot, role) => {
                                 .setColor("RANDOM")
                                 .setTimestamp();
 
-                                if (role.managed && role.guild.members.find(m => m.username === role.name)) {
-                                    embed.fields[1].value = 'Bot'
-                                  } else {
-                                    await setTimeout(async () => {
-                                        const logs = await role.guild.fetchAuditLogs({
-                                            limit: 5,
-                                            type: 30
-                                        }).catch(() => {
-                                            return
-                                        });
-                                        if (!logs) return;
-        
-                                        const log = logs.entries.first()
-                                        const executor = role.guild.members.cache.get(log.executor.id);
-                                        const member = role.guild.members.cache.get(executor.id);
-        
-                                        if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
-                                            embed.author.name = `${member.user.username}#${member.user.discriminator} ${member.nick ? `(${member.nick})` : ''}`
-                                            embed.author.iconURL = `https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=512`;
-                                            embed.fields[1].value = member
-        
-                                            await webhook.send(embed);
-                                        } else {
-                                            await webhook.send(embed);
-                                        }
-                                    }, 1000)
-                                  }
+                            if (role.managed && role.guild.members.find(m => m.username === role.name)) {
+                                embed.fields[1].value = 'Bot'
+                            } else {
+                                await setTimeout(async () => {
+                                    const logs = await role.guild.fetchAuditLogs({
+                                        limit: 5,
+                                        type: 30
+                                    }).catch(() => {
+                                        return
+                                    });
+                                    if (!logs) return;
 
-                            
+                                    const log = logs.entries.first()
+                                    const executor = role.guild.members.cache.get(log.executor.id);
+                                    const member = role.guild.members.cache.get(executor.id);
+
+                                    if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
+                                        embed.author.name = `${member.user.username}#${member.user.discriminator} ${member.nick ? `(${member.nick})` : ''}`
+                                        embed.author.iconURL = `https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=512`;
+                                        embed.fields[1].value = member
+
+                                        await webhook.send(embed);
+                                    } else {
+                                        await webhook.send(embed);
+                                    }
+                                }, 1000)
+                            }
+
+
                         }
                     }
                 }

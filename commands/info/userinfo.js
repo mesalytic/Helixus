@@ -3,7 +3,9 @@ const {
 } = require("discord.js");
 const ms = require("ms");
 const Command = require("../../structures/Command");
-const { badgesEmotes } = require("../../structures/Constants");
+const {
+    badgesEmotes
+} = require("../../structures/Constants");
 const {
     timeZoneConvert
 } = require("../../structures/Utils");

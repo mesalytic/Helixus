@@ -1,9 +1,13 @@
-const { commaListsOr } = require("common-tags");
+const {
+    commaListsOr
+} = require("common-tags");
 const {
     WebhookClient,
     MessageEmbed
 } = require("discord.js");
-const { compareArrays } = require("../structures/Utils");
+const {
+    compareArrays
+} = require("../structures/Utils");
 
 module.exports = async (bot, oldMember, newMember) => {
     bot.db.query(`SELECT * FROM Logs WHERE guildID='${oldMember.guild.id}'`, async (err, logsSettings) => {
@@ -75,7 +79,7 @@ module.exports = async (bot, oldMember, newMember) => {
                                         })
                                         webhook.send(embed);
                                     }
-                                })    
+                                })
                             }
                         }
                     }

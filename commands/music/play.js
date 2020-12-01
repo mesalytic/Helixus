@@ -191,7 +191,7 @@ module.exports = class PlayCommand extends Command {
                     if (reason) {
                         if (reason.match(`seek`)) {
                             let seekTo = reason.split(" ")[1];
-    
+
                             play(queue.songs[0], message, bot, seekTo);
                         }
                     } else {
