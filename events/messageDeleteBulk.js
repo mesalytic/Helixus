@@ -58,7 +58,6 @@ module.exports = async (bot, messages) => {
                                                 embed.fields[1].value = await hastebin(msg);
                                                 await webhook.send(embed);
                                             } else {
-                                                embed.fields[0].value = executor
                                                 embed.fields[1].value = await hastebin(msg);
                                                 await webhook.send(embed);
                                             }

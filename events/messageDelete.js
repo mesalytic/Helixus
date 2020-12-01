@@ -22,7 +22,7 @@ module.exports = async (bot, message) => {
                                     let embed = new MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.avatarURL())
                                         .setDescription(`A message from ${message.author} (${message.author.tag}) has been deleted.`)
-                                        .addField("Deleted by", `Unknown`, true)
+                                        .addField("Deleted by", message.author, true)
                                         .setColor("RANDOM")
                                         .setTimestamp();
         
@@ -58,14 +58,9 @@ module.exports = async (bot, message) => {
             
                                             if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
                                                 embed.fields[0].value = executor
-                                                console.log(embed.fields[0].value)
-                                                if (embed.fields[0].value === "Unknown") embed.fields[0].value = message.author
                                                 
                                                 await webhook.send(embed);
                                             } else {
-                                                console.log(embed.fields[0].value)
-                                                if (embed.fields[0].value === "Unknown") embed.fields[0].value = message.author
-                                                
                                                 await webhook.send(embed);
                                             }
                                         }, 1000)
