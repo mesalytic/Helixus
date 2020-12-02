@@ -5,6 +5,7 @@
   "main": "ShardManager.js",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
+    "@k3rn31p4nic/google-translate-api": "^1.1.1",
     "ascii-table": "^0.0.9",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
