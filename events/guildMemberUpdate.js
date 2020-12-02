@@ -63,7 +63,6 @@ module.exports = async (bot, oldMember, newMember) => {
                                         if (log.changes[0].key === '$remove') {
                                             if (log.changes[0].new.length !== 0) log.changes[0].new.forEach(r => removed.push(r));
                                         }
-                                        console.log(newMember.guild.roles);
                                         if (added.length !== 0) roleColor = newMember.guild.roles.cache.find(r => r.id === added[0].id).color;
                                         if (removed.length !== 0) roleColor = newMember.guild.roles.cache.find(r => r.id === removed[0].id).color;
                                         embed.fields[0].name = `Roles`

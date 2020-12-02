@@ -22,8 +22,6 @@ module.exports = async (bot, oldRole, newRole) => {
 
                             const oldKeys = Object.keys(oldRole);
                             oldKeys.forEach(prop => {
-                                console.log(oldRole.permissions.toString());
-                                console.log(newRole.permissions.toString());
                                 if (newRole[prop].toString() !== oldRole[prop].toString() && prop !== 'position') {
                                     if (prop === 'color') {
                                         embed.fields.unshift({

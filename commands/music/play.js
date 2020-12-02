@@ -30,8 +30,7 @@ module.exports = class PlayCommand extends Command {
         const {
             channel: voiceChannel
         } = message.member.voice;
-        console.log(voiceChannel);
-
+        
         const serverQueue = this.bot.queue.get(message.guild.id);
         if (!voiceChannel) return message.reply("You need to join a voice channel first!");
 

@@ -22,7 +22,6 @@ module.exports = class LyricsCommand extends Command {
 
         let search = args.join(" ");
 
-        console.log(search);
         try {
             axios.get(`https://genius.com/api/search/multi?q=${encodeURIComponent(search).replace(/%20/g, "+")}`, {
                 headers: {
@@ -30,7 +29,6 @@ module.exports = class LyricsCommand extends Command {
                     'x-requested-with': 'XMLHttpRequest'
                 }
             }).then(async resp => {
-                console.log(resp.data.response.sections[0].hits[0].result.url);
                 let lyric = await lyrics(resp.data.response.sections[0].hits[0].result.url)
 
                 let embed = new MessageEmbed()

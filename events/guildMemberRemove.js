@@ -51,10 +51,8 @@ module.exports = async (bot, member) => {
                                 let log = logs.entries.first();
 
                                 if (log && new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
-                                    console.log(logs);
                                     let executor = member.guild.members.cache.get(log.executor.id);
-                                    console.log(executor.user);
-
+                                    
                                     let embed = new MessageEmbed()
                                         .setColor("RANDOM")
                                         .setAuthor(`${member.user.username}#${member.user.discriminator}`, `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.png?size=512`)
