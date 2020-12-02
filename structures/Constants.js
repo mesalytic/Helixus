@@ -47,3 +47,25 @@ exports.badgesEmotes = {
     "VERIFIED_BOT": "<:verifiedbot:776626551025958912>",
     "EARLY_VERIFIED_DEVELOPER": "<:verifieddev:776627149452083212>",
 }
+
+exports.loggingEventsList = [
+    "channelcreate",
+    "channeldelete",
+    "channelupdate",
+    "emojicreate",
+    "emojidelete",
+    "emojiupdate",
+    "guildbanadd",
+    "guildbanremove",
+    "guildmemberadd",
+    "guildmemberremove",
+    "guildmemberupdate",
+    "messsagedelete",
+    "messsagedeletebulk",
+    "messsageupdate",
+    "rolecreate",
+    "roledelete",
+    "roleupdate",
+    "voicestateupdate",
+    
+]
