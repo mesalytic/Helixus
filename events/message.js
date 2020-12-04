@@ -99,12 +99,12 @@ module.exports = (bot, message) => {
               if (err) throw err;
 
               if (!lRows[0]) {
-                bot.db.query(`INSERT INTO Levels (user, guild, points, level) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(15, 25)}', '1')`);
+                bot.db.query(`INSERT INTO Levels (user, guild, points, level) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(5, 15)}', '1')`);
               } else {
                 let xp;
                 if (!lRows[0]) xp = 0;
                 else xp = Number(lRows[0].points);
-                bot.db.query(`UPDATE Levels SET points = '${lRows[0].points + generateXP(15, 25)}' WHERE guild='${message.guild.id}' AND user='${message.author.id}'`);
+                bot.db.query(`UPDATE Levels SET points = '${lRows[0].points + generateXP(5, 15)}' WHERE guild='${message.guild.id}' AND user='${message.author.id}'`);
               }
             })
           })
@@ -128,7 +128,8 @@ module.exports = (bot, message) => {
 
             if (!lRows[0]) return;
             if (!Number(lRows[0].points)) return;
-            const clvl = 5 * (lRows[0].level ^ 2) + 50 * lRows[0].level + 100;
+            const clvl = (5 * (lRows[0].level ^ 2) + 50 * lRows[0].level + 100) * 1.20;
+
             if (Number(lRows[0].points) > clvl) {
               bot.db.query(`UPDATE Levels SET level = '${Number(lRows[0].level) + 1}', points = '0' WHERE guild='${message.guild.id}' AND user='${message.author.id}'`);
 
