@@ -30,7 +30,7 @@ module.exports = async (bot, message) => {
                                         if (!message.content) embed.addField("Attachment", message.attachments.first().proxyURL);
                                         else {
                                             if (message.content.length > 1023) {
-                                                embed.addField("Message Content", await hastebin(message.content));
+                                                embed.addField("Message Content", await hastebin(message.content, { extension: "txt" }));
                                                 embed.addField("Attachment", message.attachments.first().proxyURL);
                                             } else {
                                                 embed.addField("Message Content", message.content);
@@ -38,7 +38,7 @@ module.exports = async (bot, message) => {
                                             }
                                         }
                                     } else {
-                                        if (message.content.length > 1023) embed.addField("Message Content", await hastebin(message.content));
+                                        if (message.content.length > 1023) embed.addField("Message Content", await hastebin(message.content, { extension: "txt" }));
                                         else embed.addField("Message Content", message.content);
                                     }
 

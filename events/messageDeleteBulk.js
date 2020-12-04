@@ -55,10 +55,10 @@ module.exports = async (bot, messages) => {
 
                                         if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
                                             embed.fields[0].value = executor
-                                            embed.fields[1].value = await hastebin(msg);
+                                            embed.fields[1].value = await hastebin(msg, { extension: "txt" });
                                             await webhook.send(embed);
                                         } else {
-                                            embed.fields[1].value = await hastebin(msg);
+                                            embed.fields[1].value = await hastebin(msg, { extension: "txt" });
                                             await webhook.send(embed);
                                         }
                                     }, 1000)

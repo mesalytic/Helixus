@@ -20,8 +20,8 @@ module.exports = async (bot, oldMessage, newMessage) => {
                                         let embed = new MessageEmbed()
                                             .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
                                             .setDescription(`A message from ${newMessage.author} (${newMessage.author.tag}) has been updated.`)
-                                            .addField("Old message", oldMessage.content.length > 1000 ? await hastebin(oldMessage.content) : oldMessage.content)
-                                            .addField("New message", newMessage.content.length > 1000 ? await hastebin(newMessage.content) : newMessage.content)
+                                            .addField("Old message", oldMessage.content.length > 1000 ? await hastebin(oldMessage.content, { extension: "txt" }) : oldMessage.content)
+                                            .addField("New message", newMessage.content.length > 1000 ? await hastebin(newMessage.content, { extension: "txt" }) : newMessage.content)
                                             .setColor("RANDOM")
                                             .setTimestamp();
 
