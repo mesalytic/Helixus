@@ -93,8 +93,12 @@ module.exports = (bot, message) => {
     bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
       if (rows[0]) {
         if (rows[0].activated === "true") {
-          bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}' AND guildID='${message.author.id}'`, (err, cRows) => {
-            if (cRows[0]) return;
+          bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`, (err, cRows) => {
+            if (!cRows[0]) bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active) VALUES ('${message.author.id}', '${message.guild.id}', 'true')`);
+            else return setTimeout(() => {
+              bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}'`);
+            }, 60 * 1000);
+          
             bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}' AND user='${message.author.id}'`, (err, lRows) => {
               if (err) throw err;
 
@@ -115,10 +119,10 @@ module.exports = (bot, message) => {
     bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
       if (rows[0]) {
         if (rows[0].activated === "true") {
-          bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`, (err, cRows) => {
+          bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}' AND guildID='${message.guild.id}'`, (err, cRows) => {
             if (!cRows[0]) bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active) VALUES ('${message.author.id}', '${message.guild.id}', 'true')`);
             setTimeout(() => {
-              bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}'`);
+              bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}' AND guildID='${message.guild.id}'`);
             }, 60 * 1000);
           })
 
