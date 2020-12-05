@@ -33,7 +33,8 @@ module.exports = class HelpCommand extends Command {
             GENERAL,
             OWNER,
             ADMINISTRATION,
-            MUSIC
+            MUSIC,
+            LEVELS
         } = this.bot.types;
         this.bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefixes) => {
             if (err) throw err;
@@ -66,19 +67,17 @@ module.exports = class HelpCommand extends Command {
                 }
 
                 const emojiMap = {
-                    [INFO]: `${capitalize(INFO)}`,
-                    [GENERAL]: `${capitalize(GENERAL)}`,
+                    [INFO]: `📇 ${capitalize(INFO)}`,
+                    [GENERAL]: `👨 ${capitalize(GENERAL)}`,
                     [OWNER]: `${capitalize(OWNER)}`,
-                    [ADMINISTRATION]: `${capitalize(ADMINISTRATION)}`,
-                    [MUSIC]: `${capitalize(MUSIC)}`
+                    [ADMINISTRATION]: `⚒️ ${capitalize(ADMINISTRATION)}`,
+                    [MUSIC]: `🎵 ${capitalize(MUSIC)}`,
+                    [LEVELS]: `📈 ${capitalize(LEVELS)}`
                 }
 
                 this.bot.commands.forEach(command => {
                     commands[command.type].push(`\`${command.name}\``);
                 })
-
-                const total = Object.values(commands).reduce((a, b) => a + b.length, 0) - commands[OWNER].length;
-                const size = this.bot.commands.size - commands[OWNER].length;
 
                 embed
                     .setTitle('Helixus Commands')
