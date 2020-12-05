@@ -2,7 +2,6 @@ const Command = require("../../structures/Command");
 const {
     Rank
 } = require('canvacord');
-const axios = require('axios');
 const { MessageAttachment } = require("discord.js");
 
 module.exports = class RankCommand extends Command {
