@@ -25,7 +25,7 @@ module.exports = async (bot, oldState, newState) => {
         if (logsSettings[0]) {
             if (logsSettings[0].channelID) {
                 if (logsSettings[0].activated = "true") {
-                    if (logsSettings[0].voicestates === "true") {
+                    if (logsSettings[0].voicestateupdate === "true") {
 
                         if (logsSettings[0].webhookID && logsSettings[0].webhookToken) {
                             const webhook = new WebhookClient(logsSettings[0].webhookID, logsSettings[0].webhookToken);
