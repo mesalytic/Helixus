@@ -16,6 +16,7 @@ module.exports = async (bot, oldMessage, newMessage) => {
                             if (!ignore[0] || ignore[0].ignored === "false") {
                                 if (logsSettings[0].webhookID && logsSettings[0].webhookToken) {
                                     const webhook = new WebhookClient(logsSettings[0].webhookID, logsSettings[0].webhookToken);
+                                    if (!oldMessage.content || !newMessage.content) return;
                                     if (oldMessage.content !== newMessage.content && oldMessage.content.length !== 0) {
                                         let embed = new MessageEmbed()
                                             .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
