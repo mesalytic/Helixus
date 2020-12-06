@@ -20,6 +20,7 @@
     "mysql": "^2.18.1",
     "node-html-parser": "^2.0.0",
     "os": "^0.1.1",
+    "parse-ms": "^2.1.0",
     "path": "^0.12.7",
     "simple-youtube-api": "^5.2.1",
     "soundcloud-downloader": "^0.2.1",
