@@ -29,8 +29,6 @@ module.exports = class TranslateCommand extends Command {
 
         let translated = await translate(content, { to: target });
 
-        console.log(translated);
-
         const embed = new MessageEmbed()
             .setAuthor("Translate", this.bot.user.displayAvatarURL())
             .addField(`Translated from ${translated.from.language.iso}`, `\`\`\`${content}\`\`\``)
