@@ -77,8 +77,6 @@ module.exports = (bot, message) => {
           return message.reply(`An error has occured.`)
         }
 
-      } else {
-        console.log("no else");
       }
 
 
@@ -98,7 +96,7 @@ module.exports = (bot, message) => {
             else return setTimeout(() => {
               bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}'`);
             }, 60 * 1000);
-          
+
             bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}' AND user='${message.author.id}'`, (err, lRows) => {
               if (err) throw err;
 
@@ -170,6 +168,20 @@ module.exports = (bot, message) => {
           })
         }
       }
+    })
+    bot.db.query(`SELECT * FROM Economy WHERE userID='${message.author.id}'`, (err, rows) => {
+      bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}' AND type='coins'`, (err, cools) => {
+        if (!cools[0]) bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active, type) VALUES ('${message.author.id}', '${message.guild.id}', 'true', 'coins')`);
+        else return setTimeout(() => {
+          bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}' AND type='coins'`);
+        }, 60 * 1000);
+
+        if (!rows[0]) {
+          bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(5, 15)}', '1')`);
+        } else {
+          bot.db.query(`UPDATE Economy SET balance = '${rows[0].balance + generateXP(5, 15)}' WHERE userID='${message.author.id}'`);
+        }
+      })
     })
   })
 }
