@@ -41,6 +41,7 @@ module.exports = class Bot extends Client {
 
         this.types = {
             ADMINISTRATION: 'administration',
+            ECONOMY: 'economy',
             GENERAL: 'general',
             INFO: 'info',
             LEVELS: 'levels',
