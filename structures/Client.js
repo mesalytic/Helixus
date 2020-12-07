@@ -11,6 +11,7 @@ const {
     join
 } = require("path");
 const mysql = require('mysql');
+const { KSoftClient } = require('@ksoft/api');
 
 module.exports = class Bot extends Client {
     constructor(config, options = {}) {
@@ -33,6 +34,8 @@ module.exports = class Bot extends Client {
         this.aliases = new Collection();
 
         this.queue = new Map();
+
+        this.ksoft = new KSoftClient(config.ksoft)
 
         this.config = require('../config.json');
         this.token = this.config.token;
