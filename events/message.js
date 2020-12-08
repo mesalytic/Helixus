@@ -177,7 +177,7 @@ module.exports = (bot, message) => {
         }, 60 * 1000);
 
         if (!rows[0]) {
-          bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(5, 15)}', '1')`);
+          bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${message.author.id}', '${generateXP(5, 15)}')`);
         } else {
           bot.db.query(`UPDATE Economy SET balance = '${rows[0].balance + generateXP(5, 15)}' WHERE userID='${message.author.id}'`);
         }
