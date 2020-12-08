@@ -23,7 +23,6 @@ module.exports = class LyricsCommand extends Command {
 
 
         let lyric = await this.bot.ksoft.lyrics.search(query)
-        console.log(lyric);
 
                 let embed = new MessageEmbed()
                     .setColor("RANDOM")
@@ -32,7 +31,7 @@ module.exports = class LyricsCommand extends Command {
                     .setFooter("Lyrics service provided by api.ksoft.si")
                     .setTimestamp();
 
-                //if (embed.description.length >= 2048) embed.description = `${embed.description.substr(0, 2045)}...`;
+                if (embed.description.length >= 2048) embed.description = `${embed.description.substr(0, 2045)}...`;
                 return message.channel.send(embed);
     }
 }
