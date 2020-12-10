@@ -99,7 +99,7 @@ module.exports = class BackgroundCommand extends Command {
                                     }
                                 })
                                 reactionCollector.on('end', () => {
-                                    m.edit(bot.lang.levels.top.closed, {
+                                    m.edit("Paginator closed...", {
                                         embed: null
                                     })
                                 })
