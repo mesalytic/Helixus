@@ -40,35 +40,35 @@ module.exports = class ServerInfoCommand extends Command {
             .addField("🔒 | MFA Level", message.guild.mfaLevel, true)
             .addField(`🚀 | Boosts Count`, message.guild.premiumSubscriptionCount, true)
             .addField("🚀 | Boost Level", message.guild.premiumTier, true)
-            .addField(`<:verified:786313097857335376> | Verified`, message.guild.verified
-            ? "Verified"
-            : "Not Verified", true)
-            .addField("<:partnerowner:776628269356417036> | Partner", message.guild.partnered
-            ? "Partnered"
-            : "Not Partnered", true)
+            .addField(`<:verified:786313097857335376> | Verified`, message.guild.verified ?
+                "Verified" :
+                "Not Verified", true)
+            .addField("<:partnerowner:776628269356417036> | Partner", message.guild.partnered ?
+                "Partnered" :
+                "Not Partnered", true)
             .setTimestamp();
 
-            let guildRoles = [];
-		let rolesLeft = 0;
-		let amountOfRoles = 0;
+        let guildRoles = [];
+        let rolesLeft = 0;
+        let amountOfRoles = 0;
 
-		message.guild.roles.cache.forEach((role) => {
-			amountOfRoles++;
-			if (guildRoles.join(" ").length <= 400) guildRoles.push(role);
-			else rolesLeft++;
-		});
-		embed.addField(`Roles (${amountOfRoles})`, `${guildRoles.join(" ")} ${rolesLeft !== 0 ? `and ${rolesLeft} more` : ""}`);
+        message.guild.roles.cache.forEach((role) => {
+            amountOfRoles++;
+            if (guildRoles.join(" ").length <= 400) guildRoles.push(role);
+            else rolesLeft++;
+        });
+        embed.addField(`Roles (${amountOfRoles})`, `${guildRoles.join(" ")} ${rolesLeft !== 0 ? `and ${rolesLeft} more` : ""}`);
 
-		let guildEmotes = [];
-		let emotesLeft = 0;
-		let amountOfEmotes = 0;
+        let guildEmotes = [];
+        let emotesLeft = 0;
+        let amountOfEmotes = 0;
 
-		message.guild.emojis.cache.forEach((emote) => {
-			amountOfEmotes++;
-			if (guildEmotes.join(" ").length <= 800) guildEmotes.push(emote);
-			else emotesLeft++;
-		});
-		amountOfEmotes !== 0 ? embed.addField(`Emotes (${amountOfEmotes})`, `${guildEmotes.join(" ")} ${emotesLeft !== 0 ? `and ${emotesLeft} more` : ""}`) : "";
+        message.guild.emojis.cache.forEach((emote) => {
+            amountOfEmotes++;
+            if (guildEmotes.join(" ").length <= 800) guildEmotes.push(emote);
+            else emotesLeft++;
+        });
+        amountOfEmotes !== 0 ? embed.addField(`Emotes (${amountOfEmotes})`, `${guildEmotes.join(" ")} ${emotesLeft !== 0 ? `and ${emotesLeft} more` : ""}`) : "";
 
         message.channel.send(embed);
     }
