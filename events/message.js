@@ -91,38 +91,7 @@ module.exports = (bot, message) => {
     bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
       if (rows[0]) {
         if (rows[0].activated === "true") {
-          bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`, (err, cRows) => {
-            if (!cRows[0]) bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active) VALUES ('${message.author.id}', '${message.guild.id}', 'true')`);
-            else return setTimeout(() => {
-              bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}'`);
-            }, 60 * 1000);
-
-            bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}' AND user='${message.author.id}'`, (err, lRows) => {
-              if (err) throw err;
-
-              if (!lRows[0]) {
-                bot.db.query(`INSERT INTO Levels (user, guild, points, level) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(5, 15)}', '1')`);
-              } else {
-                let xp;
-                if (!lRows[0]) xp = 0;
-                else xp = Number(lRows[0].points);
-                bot.db.query(`UPDATE Levels SET points = '${lRows[0].points + generateXP(5, 15)}' WHERE guild='${message.guild.id}' AND user='${message.author.id}'`);
-              }
-            })
-          })
-        }
-      }
-    })
-
-    bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
-      if (rows[0]) {
-        if (rows[0].activated === "true") {
-          bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}' AND guildID='${message.guild.id}'`, (err, cRows) => {
-            if (!cRows[0]) bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active) VALUES ('${message.author.id}', '${message.guild.id}', 'true')`);
-            setTimeout(() => {
-              bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}' AND guildID='${message.guild.id}'`);
-            }, 60 * 1000);
-          })
+          
 
           bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}' AND user='${message.author.id}'`, (err, lRows) => {
             var channel;
@@ -169,6 +138,33 @@ module.exports = (bot, message) => {
         }
       }
     })
+    
+    bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
+      if (rows[0]) {
+        if (rows[0].activated === "true") {
+          bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`, (err, cRows) => {
+            if (!cRows[0]) bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active) VALUES ('${message.author.id}', '${message.guild.id}', 'true')`);
+            else return setTimeout(() => {
+              bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}'`);
+            }, 60 * 1000);
+
+            bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}' AND user='${message.author.id}'`, (err, lRows) => {
+              if (err) throw err;
+
+              if (!lRows[0]) {
+                bot.db.query(`INSERT INTO Levels (user, guild, points, level) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(5, 15)}', '1')`);
+              } else {
+                let xp;
+                if (!lRows[0]) xp = 0;
+                else xp = Number(lRows[0].points);
+                bot.db.query(`UPDATE Levels SET points = '${lRows[0].points + generateXP(5, 15)}' WHERE guild='${message.guild.id}' AND user='${message.author.id}'`);
+              }
+            })
+          })
+        }
+      }
+    })
+
     bot.db.query(`SELECT * FROM Economy WHERE userID='${message.author.id}'`, (err, rows) => {
       bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}' AND type='coins'`, (err, cools) => {
         if (!cools[0]) bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active, type) VALUES ('${message.author.id}', '${message.guild.id}', 'true', 'coins')`);
