@@ -10,6 +10,7 @@ module.exports = class Command {
 		this.aliases = options.aliases || null;
 		this.usage = options.usage || options.name;
 		this.description = options.description || 'No description';
+		this.notes = options.notes || null;
 		this.type = options.type || bot.types.MISC;
 		this.clientPermissions = options.clientPermissions || ['SEND_MESSAGES', 'EMBED_LINKS'];
 		this.userPermissions = options.userPermissions || [];

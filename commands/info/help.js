@@ -61,6 +61,7 @@ module.exports = class HelpCommand extends Command {
 
                 if (command.aliases) embed.addField('Aliases', command.aliases.map(c => `\`${c}\``).join(' '));
                 if (command.examples) embed.addField('Examples', command.examples.map(c => `\`${prefix}${c}\``).join('\n'));
+                if (command.notes) embed.addField('Notes', command.notes)
             } else {
                 const commands = {};
                 for (const type of Object.values(this.bot.types)) {
