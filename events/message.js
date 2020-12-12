@@ -71,7 +71,13 @@ module.exports = (bot, message) => {
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
         try {
-          command.run(message, args);
+          bot.db.query(`SELECT * FROM IgnoreChannels WHERE channelID='${message.channel.id}'`, (err, rows) => {
+            if (rows[0] && rows[0].ignored === "true" && !message.member.hasPermission("MANAGE_MESSAGES")) {
+              message.delete();
+              return message.channel.send('[❌] - This channel has been restricted for command usage. Only moderators can use commands in this channel.')
+            } else command.run(message, args);
+          })
+          
         } catch (e) {
           bot.logger.error(e);
           return message.reply(`An error has occured.`)
