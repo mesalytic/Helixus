@@ -6,6 +6,8 @@ module.exports = class ToggleCommand extends Command {
             name: 'toggle',
             description: 'Toggles on or off the levelling system in your server.',
             type: 'levels',
+            usage: 'toggle <on/off>',
+            examples: ["toggle off", "toggle on"],
             userPermissions: ["MANAGE_GUILD"]
         });
     }
