@@ -22,7 +22,6 @@ module.exports = class BackgroundCommand extends Command {
     async run(message, args) {
         if (args[0] === "buy") {
             let bgBuy = args.slice(1).join(" ");
-            console.log()
             if (!bgBuy) return message.reply('[❌] - Please specify a background to buy! To see the list of available backgrounds, check the `am!background list` command!')
             if (!Object.keys(backgroundColor).includes(bgBuy)) return message.reply('[❌] - Please specify a valid background to buy! To see the list of available backgrounds, check the `am!background list` command!')
 
@@ -87,7 +86,6 @@ module.exports = class BackgroundCommand extends Command {
                                         case '➡️':
                                             if (page > pages) return
                                             page = page + 1
-                                            console.log(`page (${page}) > pages (${pages})`)
                                             await gen(page, this.bot)
                                             break
                                         case '⏭️':
