@@ -18,16 +18,16 @@ module.exports = class LevelUpCommand extends Command {
 
     if (args[0] === "channel") {
       let chanName = args.slice(1);
-      if (!chanName) return message.reply('[X] - Please specify a channel name, ID, or mention!')
+      if (!chanName) return message.reply('[❌] - Please specify a channel name, ID, or mention!')
       let chan = message.guild.channels.cache.find(chan => (chan.name === chanName.toString()) || (chan.id === chanName.toString().replace(/[^\w\s]/gi, '')));
 
-      if (!chan) return message.reply('[X] - This channel doesn\'t exist.')
+      if (!chan) return message.reply('[❌] - This channel doesn\'t exist.')
       else {
         this.bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
-          if (!rows[0]) return message.reply('[X] - Levelling is not enabled on this server. See `am!help toggle`.');
+          if (!rows[0]) return message.reply('[❌] - Levelling is not enabled on this server. See `am!help toggle`.');
           else {
             this.bot.db.query(`UPDATE LevelsConfig SET lvlupChannelID='${chan.id}' WHERE guildID='${message.guild.id}'`);
-            return message.channel.send(`[V] - Level up messages will now be sent to ${chan}!`)
+            return message.channel.send(`[✅] - Level up messages will now be sent to ${chan}!`)
           }
         })
       }
@@ -36,13 +36,13 @@ module.exports = class LevelUpCommand extends Command {
     if (args[0] === "message") {
       let content = args.slice(1).join(" ");
 
-      if (!content) return message.reply('[X] - You haven\'t specified a levelup message content. Please check `am!help levelup` to see which tags you can use inside of your levelup message.')
+      if (!content) return message.reply('[❌] - You haven\'t specified a levelup message content. Please check `am!help levelup` to see which tags you can use inside of your levelup message.')
 
       this.bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
-        if (!rows[0]) return message.reply('[X] - Levelling is not enabled on this server. See `am!help toggle`.');
+        if (!rows[0]) return message.reply('[❌] - Levelling is not enabled on this server. See `am!help toggle`.');
         else {
           this.bot.db.query(`UPDATE LevelsConfig SET lvlupMessage='${content}' WHERE guildID='${message.guild.id}'`);
-          return message.channel.send(`[V] - This server's levelup message has been updated!`)
+          return message.channel.send(`[✅] - This server's levelup message has been updated!`)
         }
       })
     }

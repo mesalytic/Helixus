@@ -18,7 +18,7 @@ module.exports = class LyricsCommand extends Command {
     async run(message, args) {
 
         const query = args.join(" ");
-        if (!query) return message.channel.send('[X] - Please specify a song to search.');
+        if (!query) return message.channel.send('[❌] - Please specify a song to search.');
 
 
 
