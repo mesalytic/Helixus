@@ -4,8 +4,17 @@ const {
 } = require("discord.js")
 
 const moment = require('moment');
+const message = require("./message");
 
 module.exports = async (bot, member) => {
+    bot.db.query(`SELECT * FROM JoinMessages WHERE guildID='${member.guild.id}'`, (err, rows) => {
+        if (err) throw err;
+        if (rows[0]) {
+            let chan = member.guild.channels.cache.get(rows[0].channelID);
+            chan.send(rows[0].joinmsg.replace(/{user}/g, member).replace(/{username}/g, member.user.username).replace(/{server}/g, member.guild.name));
+        }
+    })
+
     bot.db.query(`SELECT * FROM Autorole WHERE guildId=${member.guild.id}`, (err, rows) => {
         if (err) throw err;
         if (rows[0]) {
