@@ -26,31 +26,31 @@ module.exports = class LeaveMessageCommand extends Command {
                 case "on":
                     if (!rows[0]) this.bot.db.query(`INSERT INTO LeaveMessages (guildID, activated) VALUES ('${message.guild.id}', 'true')`)
                     else this.bot.db.query(`UPDATE LeaveMessages SET activated = 'true' WHERE guildID='${message.guild.id}'`)
-                    message.channel.send(`[✅] - Leave messages have been enabled. If you haven't already, check \`am!help leavemessage\` to see how to configure the leave message.`)
+                    message.channel.send(message.guild.lang.COMMANDS.LEAVEMESSAGE.ON.enabled)
                     break;
                 case "off":
-                    if (!rows[0]) return message.reply('[❌] - Leave messages are currently not enabled.')
+                    if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.OFF.notEnabled)
                     else this.bot.db.query(`UPDATE LeaveMessages SET activated = 'false' WHERE guildID='${message.guild.id}'`)
-                    message.channel.send(`[✅] - Leave messages have been disabled.`)
+                    message.channel.send(message.guild.lang.COMMANDS.LEAVEMESSAGE.OFF.disabled)
                     break;
                 case "channel":
                     let chanName = args.slice(1);
-                    if (!chanName) return message.reply('[❌] - Please specify a channel name, ID, or mention!')
+                    if (!chanName) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.channel.noChanSpecified)
                     let chan = message.guild.channels.cache.find(chan => (chan.name === chanName.toString()) || (chan.id === chanName.toString().replace(/[^\w\s]/gi, '')));
-                    if (!chan) return message.reply('[❌] - You haven\'t specified a valid channel.')
+                    if (!chan) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.CHANNEL.noValidChan)
 
-                    if (!rows[0]) return message.reply('[❌] - Leave messages are currently not enabled.')
+                    if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.CHANNEL.notEnabled)
                     else this.bot.db.query(`UPDATE LeaveMessages SET channelID = '${chan.id}' WHERE guildID='${message.guild.id}'`)
-                    message.channel.send(`[✅] - Leave messages will be sent to ${chan}.`)
+                    message.channel.send(message.guild.lang.COMMANDS.LEAVEMESSAGE.CHANNEL.success(chan))
                     break;
                 default:
                     let content = args.leave(" ");
-                    if (!content) return message.reply('[❌] - Please specify the leave message content. Check the `am!help leavemessage` page to see what tags you can use.')
+                    if (!content) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.noContent)
 
-                    if (!rows[0]) return message.reply('[❌] - Leave messages are currently not enabled.')
+                    if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.notEnabled)
                     else this.bot.db.query(`UPDATE LeaveMessages SET leavemsg = '${content}' WHERE guildID='${message.guild.id}'`)
 
-                    message.channel.send(`[✅] - The leave message content has successfully been set.`)
+                    message.channel.send(message.guild.lang.COMMANDS.LEAVEMESSAGE.success)
                     break;
             }
         })

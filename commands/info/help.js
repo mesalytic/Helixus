@@ -50,7 +50,7 @@ module.exports = class HelpCommand extends Command {
             if (command && (command.type != OWNER)) {
                 embed
                     .setTitle(`Command: \`${command.name}\``)
-                    .setDescription(command.description)
+                    .setDescription(message.guild.lang.COMMANDS[command.name.toUpperCase()].description ? message.guild.lang.COMMANDS[command.name.toUpperCase()].description : command.description)
                     .addField('Usage', `\`${prefix}${command.usage}\``, true)
                     .addField('Type', `\`${capitalize(command.type)}\``, true)
                     .setFooter(message.member.displayName, message.author.displayAvatarURL({
@@ -61,7 +61,7 @@ module.exports = class HelpCommand extends Command {
 
                 if (command.aliases) embed.addField('Aliases', command.aliases.map(c => `\`${c}\``).join(' '));
                 if (command.examples) embed.addField('Examples', command.examples.map(c => `\`${prefix}${c}\``).join('\n'));
-                if (command.notes) embed.addField('Notes', command.notes)
+                if (command.notes) embed.addField('Notes', message.guild.lang.COMMANDS[command.name.toUpperCase()].notes ? message.guild.lang.COMMANDS[command.name.toUpperCase()].notes : command.notes)
             } else {
                 const commands = {};
                 for (const type of Object.values(this.bot.types)) {

@@ -24,7 +24,8 @@ module.exports = class LangCommand extends Command {
       } else {
         this.bot.db.query(`UPDATE Langs SET lang = '${args[0].toLowerCase()}' WHERE guildID='${message.guild.id}'`);
       }
-      message.channel.send(`[V] - The server language has been updated to **${args[0].toLowerCase()}**`);
+      message.guild.lang = require(`../../structures/Languages/${args[0].toLowerCase()}.js`);
+      message.channel.send(message.guild.lang.COMMANDS.LANG.success);
     });
   } else {
       return this.bot.commands.get("help").run(message, ["lang"]);

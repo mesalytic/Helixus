@@ -23,6 +23,12 @@ module.exports = (bot, message) => {
       const cmd = args.shift().toLowerCase();
       let command = bot.commands.get(cmd) || bot.aliases.get(cmd);
 
+      if (!message.guild.lang) {
+        bot.db.query(`SELECT * FROM Langs WHERE guildID='${message.guild.id}'`, (err, rows) => {
+         message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
+        })
+      }
+
       if (command) {
         /* Owner Check */
         if (command.ownerOnly && message.author.id !== bot.config.ownerID) {

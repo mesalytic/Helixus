@@ -26,31 +26,31 @@ module.exports = class JoinMessageCommand extends Command {
                 case "on":
                     if (!rows[0]) this.bot.db.query(`INSERT INTO JoinMessages (guildID, activated) VALUES ('${message.guild.id}', 'true')`)
                     else this.bot.db.query(`UPDATE JoinMessages SET activated = 'true' WHERE guildID='${message.guild.id}'`)
-                    message.channel.send(`[✅] - Join messages have been enabled. If you haven't already, check \`am!help joinmessage\` to see how to configure the join message.`)
+                    message.channel.send(message.guild.lang.COMMANDS.JOINMESSAGE.ON.enabled)
                     break;
                 case "off":
-                    if (!rows[0]) return message.reply('[❌] - Join messages are currently not enabled.')
+                    if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.OFF.notEnabled)
                     else this.bot.db.query(`UPDATE JoinMessages SET activated = 'false' WHERE guildID='${message.guild.id}'`)
-                    message.channel.send(`[✅] - Join messages have been disabled.`)
+                    message.channel.send(message.guild.lang.COMMANDS.JOINMESSAGE.OFF.disabled);
                     break;
                 case "channel":
                     let chanName = args.slice(1);
-                    if (!chanName) return message.reply('[❌] - Please specify a channel name, ID, or mention!')
+                    if (!chanName) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.noChanSpecified)
                     let chan = message.guild.channels.cache.find(chan => (chan.name === chanName.toString()) || (chan.id === chanName.toString().replace(/[^\w\s]/gi, '')));
-                    if (!chan) return message.reply('[❌] - You haven\'t specified a valid channel.')
+                    if (!chan) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.noValidChan)
 
-                    if (!rows[0]) return message.reply('[❌] - Join messages are currently not enabled.')
+                    if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.notEnabled)
                     else this.bot.db.query(`UPDATE JoinMessages SET channelID = '${chan.id}' WHERE guildID='${message.guild.id}'`)
-                    message.channel.send(`[✅] - Join messages will be sent to ${chan}.`)
+                    message.channel.send(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.notEnabled(chan))
                     break;
                 default:
                     let content = args.join(" ");
-                    if (!content) return message.reply('[❌] - Please specify the join message content. Check the `am!help joinmessage` page to see what tags you can use.')
+                    if (!content) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.noContent)
 
-                    if (!rows[0]) return message.reply('[❌] - Join messages are currently not enabled.')
+                    if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.notEnabled)
                     else this.bot.db.query(`UPDATE JoinMessages SET joinmsg = '${content}' WHERE guildID='${message.guild.id}'`)
 
-                    message.channel.send(`[✅] - The join message content has successfully been set.`)
+                    message.channel.send(message.guild.lang.COMMANDS.JOINMESSAGE.success)
                     break;
             }
         })
