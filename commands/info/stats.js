@@ -17,20 +17,18 @@ module.exports = class StatsCommand extends Command {
     }
 
     async run(message, args) {
-        const duration = 
-
-        cpuStat.usagePercent((err, percent, seconds) => {
+        cpuStat.usagePercent((err, percent, _) => {
             const embed = new MessageEmbed()
             .setColor("RANDOM")
             .setAuthor(this.bot.user.username, this.bot.user.avatarURL())
-            .setDescription("This bot is licensed under the MIT license, for more info please see the full license **[here](https://github.com/chocololat/Helixus/blob/master/LICENSE)**")
-            .addField("• __Developer__", "⚧ MesaVipère ❤#0101")
-            .addField("• __Statistics__", `**Servers**: ${this.bot.guilds.cache.size}\n**Users**: ${this.bot.users.cache.size}\n**Channels**: ${this.bot.channels.cache.size}`, true)
-			.addField("• __Using__", `\`Discord.js : v${version}\`\n\`Nodejs : v${process.versions.node}\``, true)
-            .addField("• __Uptime__", ms(this.bot.uptime), true)
-            .addField("• __RAM__", `\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB\``, true)
-            .addField(`• __CPU (${percent.toFixed(2)}%)__`, `\`\`\`md\n${os.cpus().map(i => `${i.model}`)[0]}\`\`\``, true)
-            .addField("• __Links__", `[**Support server**](https://discord.gg/FR5qwwcEpm)\n[**Invitation Link**](https://discord.com/oauth2/authorize?client_id=437190817195753472&permissions=8&scope=bot)\n[**Website**](https://aliceraina.moe/helixus)`)
+            .setDescription(message.guild.lang.COMMANDS.STATS.license)
+            .addField(message.guild.lang.COMMANDS.STATS.developer, "⚧ MesaVipère ❤#0101")
+            .addField(message.guild.lang.COMMANDS.STATS.statistics, message.guild.lang.COMMANDS.STATS.statisticsValue(this.bot.guilds.cache.size, this.bot.users.cache.size, this.bot.channels.cache.size), true)
+			.addField(message.guild.lang.COMMANDS.STATS.using, `\`Discord.js : v${version}\`\n\`Nodejs : v${process.versions.node}\``, true)
+            .addField(message.guild.lang.COMMANDS.STATS.uptime, ms(this.bot.uptime), true)
+            .addField(message.guild.lang.COMMANDS.STATS.ram, `\`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB\``, true)
+            .addField(message.guild.lang.COMMANDS.STATS.cpu(percent), `\`\`\`md\n${os.cpus().map(i => `${i.model}`)[0]}\`\`\``, true)
+            .addField(message.guild.lang.COMMANDS.STATS.links, `[**${message.guild.lang.COMMANDS.STATS.supportServer}**](https://discord.gg/FR5qwwcEpm)\n[**${message.guild.lang.COMMANDS.STATS.invitationLink}**](https://discord.com/oauth2/authorize?client_id=437190817195753472&permissions=8&scope=bot)\n[**${message.guild.lang.COMMANDS.STATS.website}**](https://aliceraina.moe/helixus)`)
             
             message.channel.send(embed);
         })

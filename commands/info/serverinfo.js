@@ -27,25 +27,25 @@ module.exports = class ServerInfoCommand extends Command {
                 dynamic: true
             }))
             .setThumbnail(message.guild.iconURL)
-            .addField("👑 | Owner", `${message.guild.owner} \`${message.guild.owner.user.tag}\``, true)
-            .addField("👥 | Members", message.guild.memberCount, true)
-            .addField("🔑 | Server ID", message.guild.id, true)
-            .addField("📙 | Language", message.guild.preferredLocale, true)
-            .addField("🚩 | Region", message.guild.region, true)
-            .addField("🗨️ | Channel Count", `**${message.guild.channels.cache.size}** channels`, true)
-            .addField(`👀 | Emoji Count`, `**${message.guild.emojis.cache.size}** emojis`, true)
-            .addField("⏱️ | Created On", moment(message.guild.createdAt).format("DD MMMM Y | HH:mm:ss"), true)
-            .addField("🔗 | Joined On", moment(message.guild.joinedAt).format("DD MMMM Y | HH:mm:ss"), true)
-            .addField("🚥 | Verification Level", message.guild.verificationLevel, true)
-            .addField("🔒 | MFA Level", message.guild.mfaLevel, true)
-            .addField(`🚀 | Boosts Count`, message.guild.premiumSubscriptionCount, true)
-            .addField("🚀 | Boost Level", message.guild.premiumTier, true)
-            .addField(`<:verified:786313097857335376> | Verified`, message.guild.verified ?
-                "Verified" :
-                "Not Verified", true)
-            .addField("<:partnerowner:776628269356417036> | Partner", message.guild.partnered ?
-                "Partnered" :
-                "Not Partnered", true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.owner, `${message.guild.owner} \`${message.guild.owner.user.tag}\``, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.members, message.guild.memberCount, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.serverID, message.guild.id, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.language, message.guild.preferredLocale, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.region, message.guild.region, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.channelCount, message.guild.lang.COMMANDS.SERVERINFO.channelCountValue(message.guild.channels.cache.size), true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.emojiCount, message.guild.lang.COMMANDS.SERVERINFO.emojiCountValue(message.guild.emojis.cache.size), true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.createdOn, moment(message.guild.createdAt).format("DD MMMM Y | HH:mm:ss"), true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.joinedOn, moment(message.guild.joinedAt).format("DD MMMM Y | HH:mm:ss"), true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.verificationLevel, message.guild.verificationLevel, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.mfaLevel, message.guild.mfaLevel, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.boostsCount, message.guild.premiumSubscriptionCount, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.boostLevel, message.guild.premiumTier, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.verifiedServer, message.guild.verified ?
+                message.guild.lang.COMMANDS.SERVERINFO.verified :
+                message.guild.lang.COMMANDS.SERVERINFO.notVerified, true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.partner, message.guild.partnered ?
+                message.guild.lang.COMMANDS.SERVERINFO.partnered :
+                message.guild.lang.COMMANDS.SERVERINFO.notPartnered, true)
             .setTimestamp();
 
         let guildRoles = [];
@@ -57,7 +57,7 @@ module.exports = class ServerInfoCommand extends Command {
             if (guildRoles.join(" ").length <= 400) guildRoles.push(role);
             else rolesLeft++;
         });
-        embed.addField(`Roles (${amountOfRoles})`, `${guildRoles.join(" ")} ${rolesLeft !== 0 ? `and ${rolesLeft} more` : ""}`);
+        embed.addField(`Roles (${amountOfRoles})`, `${guildRoles.join(" ")} ${rolesLeft !== 0 ? message.guild.lang.COMMANDS.SERVERINFO.moreRole(rolesLeft) : ""}`);
 
         let guildEmotes = [];
         let emotesLeft = 0;
@@ -68,7 +68,7 @@ module.exports = class ServerInfoCommand extends Command {
             if (guildEmotes.join(" ").length <= 800) guildEmotes.push(emote);
             else emotesLeft++;
         });
-        amountOfEmotes !== 0 ? embed.addField(`Emotes (${amountOfEmotes})`, `${guildEmotes.join(" ")} ${emotesLeft !== 0 ? `and ${emotesLeft} more` : ""}`) : "";
+        amountOfEmotes !== 0 ? embed.addField(`Emotes (${amountOfEmotes})`, `${guildEmotes.join(" ")} ${emotesLeft !== 0 ? message.guild.lang.COMMANDS.SERVERINFO.moreEmotes(emotesLeft) : ""}`) : "";
 
         message.channel.send(embed);
     }

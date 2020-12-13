@@ -18,6 +18,25 @@ module.exports = {
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `Vous avez récupéré votre récompense journalière de ${amount} pièces !`
         },
+        HELP: {
+            TYPES: {
+                administration: "Administration",
+                economy: "Economie",
+                general: "Général",
+                info: "Infos",
+                levels: "Niveaux",
+                music: "Musique"
+            },
+            description: `Affiche la liste des commandes, triées par catégorie et par alphabet.\nEn spécifiant une commande, vous aurez plus d'informations sur celle ci.`,
+            helpEmbedTitle: (command) => `Commande: \`${command.name}\``,
+            helpEmbedUsage: 'Utilisation',
+            helpEmbedType: 'Catégorie',
+            helpEmbedAliases: 'Aliases',
+            helpEmbedExamples: 'Exemples',
+            helpEmbedNotes: 'Notes',
+            embedTitle: 'Commandes d\'Helixus',
+            embedDescription: (prefix) => `**Pour plus d'informations:** \`${prefix}help [command]\``
+        },
         IGNORE: {
             description: "Vous permets de configurer dans quels salons les commandes pourront être exécutées",
             noChanSpecified: "[❌] - Vous n'avez spécifié aucun salon.",
@@ -93,11 +112,74 @@ module.exports = {
             },
             noChanSpecified: '[❌] - Veuillez indiquer un ID, un nom ou une mention de salon!',
         },
+        PING: {
+            description: 'Affiche la **latence de message** ainsi que le **heartbeat** du bot.',
+            latency: "Latence",
+        },
+        SERVERINFO: {
+            description: "Affiche des informations à propos du serveur.",
+            owner: "👑 | Propriétaire",
+            members: "👥 | Membres",
+            serverID: "🔑 | ID du serveur",
+            language: "📙 | Langue",
+            region: "🚩 | Région",
+            channelCount: "🗨️ | Nombre de salons",
+            channelCountValue: (channelsSize) => `**${channelsSize}** salons`,
+            emojiCount: "👀 | Nombre d'emojis",
+            emojiCountValue: (emojisSize) => `**${emojisSize}** emojis`,
+            createdOn: "⏱️ | Créé le",
+            joinedOn: "🔗 | Rejoins le",
+            verificationLevel: "🚥 | Niveau de vérification",
+            mfaLevel: "🔒 | Niveau de l'Authentification a Double Facteurs",
+            boostsCount: "🚀 | Nombre de boosts",
+            boostLevel: "🚀 | Niveau de boost",
+            verifiedServer: "<:verified:786313097857335376> | Serveur vérifié",
+            verified: "Verifié",
+            notVerified: "Non Verifié",
+            partner: "<:partnerowner:776628269356417036> | Serveur Partenaire",
+            partnered: "Partenaire",
+            notPartnered: "Non Partenaire",
+            moreRole: (rolesLeft) => `et ${rolesLeft} autres rôles.`,
+            moreEmotes: (emotesLeft) => `et ${emotesLeft} autres emotes.`
+        },
+        STATS: {
+            description: 'Affiche les statistiques a propos du bot.',
+            license: "Ce bot est sous la license Open-Source MIT, pour plus d'informations, visionnez la license entière **[ici](https://github.com/chocololat/Helixus/blob/master/LICENSE)**",
+            developer: "• __Developpeur__",
+            statistics: "• __Statistiques__",
+            statisticsValue: (guildsCache, usersCache, channelsSize) => `**Serveurs**: ${guildsCache}\n**Utilisateurs**: ${usersCache}\n**Salons**: ${channelsSize}`,
+            using: "• __Utilise__",
+            uptime: "• __En ligne depuis__",
+            ram: "• __RAM__",
+            cpu: (percent) => `• __CPU (${percent.toFixed(2)}%)__`,
+            links: "• __Liens__",
+            supportServer: "Serveur de support",
+            invitationLink: "Lien d'invitation",
+            website: "Site Internet (en developpement)"
+        },
         TRANSLATE: {
             description: 'Permets de traduire du texte.',
             embedAuthor: "Traduction",
             embedTranslatedFrom: (translatedFrom) => `Traduit de ${translatedFrom}`,
             embedTranslatedTo: (target) => `vers ${target}`
+        },
+        USERINFO: {
+            description: "Affiche des informations a propos d'un utilisateur __**étant sur le serveur**__.",
+            username: "Nom d'utilisateur",
+            bot: "Bot",
+            user: "Utilisateur",
+            none: "Aucun",
+            currentStatus: "Statut",
+            accountCreated: "Compte créé le",
+            accountCreatedAgo: (time) => `Il y a ${time.replace("days", "jours")}`,
+            joined: "Rejoins le",
+            joinedAgo: (time) => `Il y a ${time.replace("days", "jours")}`,
+            currentlyActiveOn: "Connecté sur",
+            offline: "Hors-Ligne",
+            nitroBoostStatus: "Statut Nitro Boost",
+            nitroBoostStatusAgo: (time) => `Il y a ${time.replace("days", "jours")}`,
+            noNitroBoostStatus: "Aucun Nitro Boost d'actif",
+            moreRoles: (rolesSize) => `et ${rolesSize} autres rôles.`
         }
     }
 }

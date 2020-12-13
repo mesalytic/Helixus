@@ -18,10 +18,7 @@ module.exports = class HelpCommand extends Command {
             name: 'help',
             aliases: ['h'],
             usage: 'help [command]',
-            description: oneLine `
-            Displays a list of current commands, sorted by category.
-            You can also give an argument, to get more infos about a specific command.
-            `,
+            description: `Displays a list of current commands, sorted by category.\nYou can also give an argument, to get more infos about a specific command.`,
             type: 'info',
             examples: ['help', 'help ping']
         });
@@ -49,19 +46,19 @@ module.exports = class HelpCommand extends Command {
             const command = this.bot.commands.get(args[0]) || this.bot.aliases.get(args[0]);
             if (command && (command.type != OWNER)) {
                 embed
-                    .setTitle(`Command: \`${command.name}\``)
+                    .setTitle(message.guild.lang.COMMANDS.HELP.helpEmbedTitle(command))
                     .setDescription(message.guild.lang.COMMANDS[command.name.toUpperCase()].description ? message.guild.lang.COMMANDS[command.name.toUpperCase()].description : command.description)
-                    .addField('Usage', `\`${prefix}${command.usage}\``, true)
-                    .addField('Type', `\`${capitalize(command.type)}\``, true)
+                    .addField(message.guild.lang.COMMANDS.HELP.helpEmbedUsage, `\`${prefix}${command.usage}\``, true)
+                    .addField(message.guild.lang.COMMANDS.HELP.helpEmbedType, `\`${capitalize(command.type)}\``, true)
                     .setFooter(message.member.displayName, message.author.displayAvatarURL({
                         dynamic: true
                     }))
                     .setTimestamp()
                     .setColor(message.guild.me.displayHexColor);
 
-                if (command.aliases) embed.addField('Aliases', command.aliases.map(c => `\`${c}\``).join(' '));
-                if (command.examples) embed.addField('Examples', command.examples.map(c => `\`${prefix}${c}\``).join('\n'));
-                if (command.notes) embed.addField('Notes', message.guild.lang.COMMANDS[command.name.toUpperCase()].notes ? message.guild.lang.COMMANDS[command.name.toUpperCase()].notes : command.notes)
+                if (command.aliases) embed.addField(message.guild.lang.COMMANDS.HELP.helpEmbedAliases, command.aliases.map(c => `\`${c}\``).join(' '));
+                if (command.examples) embed.addField(message.guild.lang.COMMANDS.HELP.helpEmbedExamples, command.examples.map(c => `\`${prefix}${c}\``).join('\n'));
+                if (command.notes) embed.addField(message.guild.lang.COMMANDS.HELP.helpEmbedNotes, message.guild.lang.COMMANDS[command.name.toUpperCase()].notes ? message.guild.lang.COMMANDS[command.name.toUpperCase()].notes : command.notes)
             } else {
                 const commands = {};
                 for (const type of Object.values(this.bot.types)) {
@@ -69,13 +66,13 @@ module.exports = class HelpCommand extends Command {
                 }
 
                 const emojiMap = {
-                    [INFO]: `📇 ${capitalize(INFO)}`,
-                    [GENERAL]: `👨 ${capitalize(GENERAL)}`,
+                    [INFO]: `📇 ${message.guild.lang.COMMANDS.HELP.TYPES.info}`,
+                    [GENERAL]: `👨 ${message.guild.lang.COMMANDS.HELP.TYPES.general}`,
                     [OWNER]: `${capitalize(OWNER)}`,
-                    [ADMINISTRATION]: `⚒️ ${capitalize(ADMINISTRATION)}`,
-                    [MUSIC]: `🎵 ${capitalize(MUSIC)}`,
-                    [LEVELS]: `📈 ${capitalize(LEVELS)}`,
-                    [ECONOMY]: `🪙 ${capitalize(ECONOMY)}`
+                    [ADMINISTRATION]: `⚒️ ${message.guild.lang.COMMANDS.HELP.TYPES.administration}`,
+                    [MUSIC]: `🎵 ${message.guild.lang.COMMANDS.HELP.TYPES.music}`,
+                    [LEVELS]: `📈 ${message.guild.lang.COMMANDS.HELP.TYPES.levels}`,
+                    [ECONOMY]: `🪙 ${message.guild.lang.COMMANDS.HELP.TYPES.economy}`
                 }
 
                 this.bot.commands.forEach(command => {
@@ -83,10 +80,8 @@ module.exports = class HelpCommand extends Command {
                 })
 
                 embed
-                    .setTitle('Helixus Commands')
-                    .setDescription(stripIndent `
-                    **More informations:** \`${prefix}help [command]\`
-                    `)
+                    .setTitle(message.guild.lang.COMMANDS.HELP.embedTitle)
+                    .setDescription(message.guild.lang.COMMANDS.HELP.embedDescription(prefix))
                     .setTimestamp()
                     .setColor(message.guild.me.displayhexColor)
 

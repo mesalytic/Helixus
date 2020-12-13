@@ -18,6 +18,25 @@ module.exports = {
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `You've collected your daily reward of ${amount} coins!`
         },
+        HELP: {
+            TYPES: {
+                administration: "Administration",
+                economy: "Economy",
+                general: "General",
+                info: "Info",
+                levels: "Levels",
+                music: "Music"
+            },
+            description: `Displays a list of current commands, sorted by category.\nYou can also give an argument, to get more infos about a specific command.`,
+            helpEmbedTitle: (command) => `Command: \`${command.name}\``,
+            helpEmbedUsage: 'Usage',
+            helpEmbedType: 'Type',
+            helpEmbedAliases: 'Aliases',
+            helpEmbedExamples: 'Examples',
+            helpEmbedNotes: 'Notes',
+            embedTitle: 'Helixus Commands',
+            embedDescription: (prefix) => `**More informations:** \`${prefix}help [command]\``
+        },
         IGNORE: {
             description: "Configure in which channel commands should be executed.",
             noChanSpecified: "[❌] - You haven\'t specified a channel to ignore.",
@@ -93,11 +112,74 @@ module.exports = {
             },
             noChanSpecified: "[❌] - Please mention a channel.",
         },
+        PING: {
+            description: 'Displays the bot\'s current **message latency** and **heartbeat**.',
+            latency: "Latency",
+        },
+        SERVERINFO: {
+            description: "Displays informations about the server.",
+            owner: "👑 | Owner",
+            members: "👥 | Members",
+            serverID: "🔑 | Server ID",
+            language: "📙 | Language",
+            region: "🚩 | Region",
+            channelCount: "🗨️ | Channel Count",
+            channelCountValue: (channelsSize) => `**${channelsSize}** channels`,
+            emojiCount: "👀 | Emoji Count",
+            emojiCountValue: (emojisSize) => `**${emojisSize}** emojis`,
+            createdOn: "⏱️ | Created On",
+            joinedOn: "🔗 | Joined On",
+            verificationLevel: "🚥 | Verification Level",
+            mfaLevel: "🔒 | MFA Level",
+            boostsCount: "🚀 | Boosts Count",
+            boostLevel: "🚀 | Boost Level",
+            verifiedServer: "<:verified:786313097857335376> | Verified Server",
+            verified: "Verified",
+            notVerified: "Not Verified",
+            partner: "<:partnerowner:776628269356417036> | Partner",
+            partnered: "Partnered",
+            notPartnered: "Not Partnered",
+            moreRole: (rolesLeft) => `and ${rolesLeft} more`,
+            moreEmotes: (emotesLeft) => `and ${emotesLeft} more`
+        },
+        STATS: {
+            description: 'Shows statistics about the bot.',
+            license: "This bot is licensed under the MIT license, for more info please see the full license **[here](https://github.com/chocololat/Helixus/blob/master/LICENSE)**",
+            developer: "• __Developer__",
+            statistics: "• __Statistics__",
+            statisticsValue: (guildsCache, usersCache, channelsSize) => `**Servers**: ${guildsCache}\n**Users**: ${usersCache}\n**Channels**: ${channelsSize}`,
+            using: "• __Using__",
+            uptime: "• __Uptime__",
+            ram: "• __RAM__",
+            cpu: (percent) => `• __CPU (${percent.toFixed(2)}%)__`,
+            links: "• __Links__",
+            supportServer: "Support server",
+            invitationLink: "Invitation Link",
+            website: "Website (WIP)"
+        },
         TRANSLATE: {
             description: 'Allows you to translate text.',
             embedAuthor: "Translate",
             embedTranslatedFrom: (translatedFrom) => `Translated from ${translatedFrom}`,
             embedTranslatedTo: (target) => `to ${target}`
+        },
+        USERINFO: {
+            description: "Displays informations about a specific user __**in the server**__.",
+            username: "Username",
+            bot: "Bot",
+            user: "User",
+            none: "None",
+            currentStatus: "Current Status",
+            accountCreated: "Account created",
+            accountCreatedAgo: (time) => `${time} ago`,
+            joined: "Joined",
+            joinedAgo: (time) => `${time} ago`,
+            currentlyActiveOn: "Currently active on",
+            offline: "Offline",
+            nitroBoostStatus: "Nitro Boost Status",
+            nitroBoostStatusAgo: `${time} ago`,
+            noNitroBoostStatus: "No active Server Boost.",
+            moreRoles: (rolesSize) => `and ${rolesSize} more.`
         }
     }
 }

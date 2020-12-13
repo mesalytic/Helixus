@@ -15,7 +15,7 @@ module.exports = class PingCommand extends Command {
 
     async run(message) {
         const embed = new MessageEmbed()
-            .setDescription(`Pinging...`)
+            .setDescription(`Pong...`)
             .setColor("RANDOM")
 
         const msg = await message.channel.send(embed);
@@ -25,7 +25,7 @@ module.exports = class PingCommand extends Command {
 
         embed.setDescription(`**P${'o'.repeat(Math.min(Math.round(latency / 100), 1500))}ng!**`)
             .addField('Latency', `\`\`\`ini\n[ ${latency}ms ]\`\`\``, true)
-            .addField('Heartbeat', `\`\`\`ini\n[ ${heartbeat}ms ]\`\`\``, true)
+            .addField(message.guild.lang.COMMANDS.PING.latency, `\`\`\`ini\n[ ${heartbeat}ms ]\`\`\``, true)
             .setFooter(message.member.displayName, message.author.displayAvatarURL({
                 dynamic: true
             }))
