@@ -23,12 +23,12 @@ module.exports = class DailyCommand extends Command {
             if (rows[0] && (rows[0].dailyCooldown !== null && timeout - (Date.now() - rows[0].dailyCooldown) > 0)) {
                 
                 let time = ms(timeout - (Date.now() - rows[0].dailyCooldown));
-                return message.reply(`You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`)
+                return message.reply(message.guild.lang.COMMANDS.DAILY.notReady(time))
             } else {
                 if (!rows[0]) this.bot.db.query(`INSERT INTO Economy (userID, balance, dailyCooldown) VALUES ('${message.author.id}', '${amount}', '${Date.now()}')`)
                 else this.bot.db.query(`UPDATE Economy SET balance = '${rows[0].balance + amount}', dailyCooldown = '${Date.now()}' WHERE userID='${message.author.id}'`);
 
-                return message.reply(`You've collected your daily reward of ${amount} coins!`)
+                return message.reply(message.guild.lang.COMMANDS.DAILY.success(amount));
             }
         })
     }

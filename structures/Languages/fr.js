@@ -9,6 +9,15 @@ module.exports = {
             added: (role) => `[✅] - Le rôle ${role} sera désormais attribué aux nouveaux membres.`,
             notFound: '[❌] - Le rôle n\'a pas été trouvé.'
         },
+        BALANCE: {
+            description: "Affiche votre porte monnaie!",
+            output: (bal) => `Vous avez <a:coin:784930553748520961> **${bal}** pièces!`
+        },
+        DAILY: {
+            description: "Vous donne des pièces tous les jours",
+            notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,
+            success: (amount) => `Vous avez récupéré votre récompense journalière de ${amount} pièces !`
+        },
         IGNORE: {
             description: "Vous permets de configurer dans quels salons les commandes pourront être exécutées",
             noChanSpecified: "[❌] - Vous n'avez spécifié aucun salon.",

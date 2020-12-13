@@ -9,6 +9,15 @@ module.exports = {
             added: (role) => `[✅] - The role ${role} will now be given to new members.`,
             notFound: '[❌] - The role has not been found.'
         },
+        BALANCE: {
+            description: "Displays your current balance.",
+            output: (bal) => `You have <a:coin:784930553748520961> **${bal}** coins!`
+        },
+        DAILY: {
+            description: "Gives you coins daily!",
+            notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
+            success: (amount) => `You've collected your daily reward of ${amount} coins!`
+        },
         IGNORE: {
             description: "Configure in which channel commands should be executed.",
             noChanSpecified: "[❌] - You haven\'t specified a channel to ignore.",

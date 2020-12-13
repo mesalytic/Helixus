@@ -18,7 +18,7 @@ module.exports = class BalanceCommand extends Command {
             if (!rows[0]) this.bot.db.query(`INSERT INTO Economy (userID) VALUES ('${message.author.id}')`);
             else bal = rows[0].balance;
 
-            message.reply(`You have <a:coin:784930553748520961> **${bal}** coins!`)
+            message.reply(message.guild.lang.COMMANDS.BALANCE.output(bal))
         })
     }
 }
