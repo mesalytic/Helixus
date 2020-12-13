@@ -92,6 +92,12 @@ module.exports = {
                 eventDisabled: '[✅] - This event will stop being logged in this server.'
             },
             noChanSpecified: "[❌] - Please mention a channel.",
+        },
+        TRANSLATE: {
+            description: 'Allows you to translate text.',
+            embedAuthor: "Translate",
+            embedTranslatedFrom: (translatedFrom) => `Translated from ${translatedFrom}`,
+            embedTranslatedTo: (target) => `to ${target}`
         }
     }
 }

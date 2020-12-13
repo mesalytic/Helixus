@@ -10,7 +10,9 @@ module.exports = class TranslateCommand extends Command {
         super(bot, {
             name: 'translate',
             type: 'general',
+            description: 'Allows you to translate text.',
             usage: 'translate <target lang> <text>',
+            examples: ["translate french Hello World!"],
             aliases: ["translation", "traduction"]
         });
     }
@@ -31,12 +33,11 @@ module.exports = class TranslateCommand extends Command {
 
         const embed = new MessageEmbed()
             .setAuthor("Translate", this.bot.user.displayAvatarURL())
-            .addField(`Translated from ${translated.from.language.iso}`, `\`\`\`${content}\`\`\``)
-            .addField(`to ${target}`, "```"+translated.text+"```")
+            .addField(message.guild.lang.COMMANDS.TRANSLATE.embedTranslatedFrom(translated.from.language.iso), `\`\`\`${content}\`\`\``)
+            .addField(message.guild.lang.COMMANDS.TRANSLATE.embedTranslatedTo(target), "```"+translated.text+"```")
             .setColor("RANDOM")
             .setTimestamp();
 
-        message.channel.send(embed);
-        
+        message.channel.send(embed);       
     }
 }

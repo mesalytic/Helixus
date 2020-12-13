@@ -92,6 +92,12 @@ module.exports = {
                 eventDisabled: '[✅] - Cet evénement ne sera plus log sur ce serveur.'
             },
             noChanSpecified: '[❌] - Veuillez indiquer un ID, un nom ou une mention de salon!',
+        },
+        TRANSLATE: {
+            description: 'Permets de traduire du texte.',
+            embedAuthor: "Traduction",
+            embedTranslatedFrom: (translatedFrom) => `Traduit de ${translatedFrom}`,
+            embedTranslatedTo: (target) => `vers ${target}`
         }
     }
 }
