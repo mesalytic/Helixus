@@ -26,7 +26,7 @@ module.exports = class RankCommand extends Command {
 
             let page = 0
             const pages = Math.ceil(Number(Number(count) / 10)) - 1
-            let m = await message.channel.send("Please wait...")
+            let m = await message.channel.send(message.guild.lang.COMMANDS.TOP.pleaseWait)
 
             m.react('⏮️').then(() => {
                 m.react('⬅️').then(() => {
@@ -72,14 +72,15 @@ module.exports = class RankCommand extends Command {
                                                     if (u) hasteOutput += `[${(i + 1) + (page * 10)}] **${Util.escapeMarkdown(u.user.tag)}** - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
                                                     else hasteOutput += `[${(i + 1) + (page * 10)}] **????** - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
                                                 }
-                                                message.channel.send(`Here is the full top: ${await hastebin(hasteOutput, { extension: "txt" })}`)
+                                                message.channel.send(message.guild.lang.COMMANDS.TOP.fullTop(await hastebin(hasteOutput, { extension: "txt" })))
+                                                message.channel.send(message.guild.lang.COMMANDS.TOP.fullTop())
                                                 reactionCollector.stop();
                                             case '❌':
                                                 reactionCollector.stop()
                                         }
                                     })
                                     reactionCollector.on('end', () => {
-                                        m.edit("This paginator is closed...", {
+                                        m.edit(message.guild.lang.COMMANDS.TOP.closedPaginator, {
                                             embed: null
                                         })
                                     })
@@ -104,10 +105,10 @@ module.exports = class RankCommand extends Command {
 
                     const embed = new MessageEmbed()
                         .setColor("RANDOM")
-                        .setAuthor(`${message.guild.name} - XP Leaderboard`, message.guild.iconURL())
+                        .setAuthor(message.guild.lang.COMMANDS.TOP.embedAuthor(message.guild.name), message.guild.iconURL())
                         .setTitle(`Page ${page + 1}/${pages + 1}`)
                         .setDescription(output)
-                        .setFooter("Use the reactions to navigate!")
+                        .setFooter(message.guild.lang.COMMANDS.TOP.embedFooter)
                     await m.edit("", {
                         embed: embed
                     })

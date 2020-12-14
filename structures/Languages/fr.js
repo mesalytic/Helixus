@@ -9,6 +9,28 @@ module.exports = {
             added: (role) => `[✅] - Le rôle ${role} sera désormais attribué aux nouveaux membres.`,
             notFound: '[❌] - Le rôle n\'a pas été trouvé.'
         },
+        BACKGROUND: {
+            description: 'Vous permets de configurer le fond de votre carte de niveaux, de les acheter et de voir la liste complète!',
+            BUY: {
+                noBackgroundSpecified: '[❌] - Veuillez indiquer un fond a acheter! Pour voir la liste des fonds disponibles, faites `am!background list`!',
+                invalidBackground: '[❌] - Veuillez indiquer un fond valide! Pour voir la liste des fonds disponibles, faites `am!background list`!',
+                notEnoughCoins: '[❌] Vous n\'avez pas **5000** coins! Revenez une fois cette somme obtenue...',
+                alreadyBought: '[❌] - Vous possedez déjà ce fond!',
+                success: (background) => `[✅] - Vous avez acheté le fond **${background}** !`
+            },
+            SET: {
+                noBackgrounds: '[❌] - Vous n\'avez aucun fond...',
+                noBackgroundSpecified: '[❌] - Veuillez indiquer un fond a configurer! Pour voir la liste des fonds disponibles, faites `am!background list`!',
+                invalidBackground: '[❌] - Veuillez indiquer un fond valide! Pour voir la liste des fonds disponibles, faites `am!background list`!',
+                success: (background) => `[✅] - Vous avez mis le fond **${background}** !`
+            },
+            LIST: {
+                pleaseWait: "Veuillez patienter...",
+                closedPaginator: "❌ Pagination fermée... ❌",
+                embedAuthor: "Liste des fonds",
+                embedTitle: `Le signe ❌ signifie que vous ne possédez pas le fond.\nAchetez le en faisant \`am!background buy <fond>\` !`
+            }
+        },
         BALANCE: {
             description: "Affiche votre porte monnaie!",
             output: (bal) => `Vous avez <a:coin:784930553748520961> **${bal}** pièces!`
@@ -88,6 +110,21 @@ module.exports = {
             notEnabled: '[❌] - Les messages de leave sont désactivés.',
             success: `[✅] - Le message de leave a bien été configuré.`
         },
+        LEVELUP: {
+            description: 'Vous permet de configurer le message de level up, ainsi que le salon auquel ce message sera envoyé.',
+            notes: '__**Paramètres "Channel"**__:\nSi vous voulez que le message de levelup soit envoyé dans le même salon, mettez msgChannel comme argument. `msgChannel`.\n\n__**Paramètres "Message"**__:\nVoici la liste des tags que vous pouvez utiliser:\n{user} - mentionne l\'utilisateur\n{username} - affiche le pseudo du membre\n{server} - affiche le nom du serveur\n{level} - affiche le niveau obtenu',
+            CHANNEL: {
+                noChanSpecified: '[❌] - Veuillez indiquer un ID, un nom ou une mention de salon!',
+                invalidChan: '[❌] - Ce salon n\'existe pas.',
+                levelNotEnabled: '[❌] - Le système de niveau n\'est pas activé sur votre serveur. Voir `am!help toggle`.',
+                success: (chan) => `[✅] - Les messages de level up seront maintenant envoyés dans ${chan}!`
+            },
+            MESSAGE: {
+                noContent: '[❌] - Vous n\'avez spécifié aucun contenu pour le message de level up. Afin de voir les tags que vous pouvez utiliser au sein de votre message, faites `am!help levelup`.',
+                levelNotEnabled: '[❌] - Le système de niveau n\'est pas activé sur votre serveur. Voir `am!help toggle`.',
+                success: `[✅] - Le message de levelup a été changé !`
+            }
+        },
         LOGS: {
             description: 'Vous permets de configurer le système de logs.',
             ON: {
@@ -115,6 +152,29 @@ module.exports = {
         PING: {
             description: 'Affiche la **latence de message** ainsi que le **heartbeat** du bot.',
             latency: "Latence",
+        },
+        RANK: {
+            description: 'Affiche votre niveau.',
+        },
+        REWARDS: {
+            description: 'Vous permets de configurer des récompenses de rôles en fonction du niveau.',
+            ADD: {
+                noLevelSpecified: '[❌] - Veuillez indiquer un niveau pour la récompense.',
+                noRoleSpecified: '[❌] - Veuillez indiquer un rôle pour la récompense.',
+                levelAlreadyUsed: '[❌] - Ce niveau est déjà utilisé pour une autre récompense !',
+                roleAlreadyUsed: '[❌] - Ce rôle est déjà utilisé pour une autre récompense!',
+                success: (role, level) => `[✅] - Le rôle ${role} sera dorénavant donné aux membres passant le niveau **${level}**!`
+            },
+            REMOVE: {
+                noLevelSpecified: '[❌] - Veuillez indiquer un niveau pour la récompense.',
+                success: (role, level) => `[✅] - Le rôle ${role} ne sera plus donné aux membres passant le niveau **${level}**!`,
+                notFound: (level) => `[❌] - Aucune récompense a été trouvée pour le niveau **${level}**.`
+            },
+            SHOW: {
+                pleaseWait: "Veuillez patienter...",
+                closedPaginator: "Paginateur fermé..",
+                embedTitle: (page, pages) => `Liste des récompenses de niveau (${page + 1}/${pages + 1})`
+            }
         },
         SERVERINFO: {
             description: "Affiche des informations à propos du serveur.",
@@ -156,6 +216,25 @@ module.exports = {
             supportServer: "Serveur de support",
             invitationLink: "Lien d'invitation",
             website: "Site Internet (en developpement)"
+        },
+        TOGGLE: {
+            description: 'Active ou désactive le système de niveaux',
+            OFF: {
+                alreadyDisabled: '[❌] - Le système de niveau est déjà **désactivé**!',
+                success: '[✅] - Le système de niveau a bien été **désactivé** !'
+            },
+            ON: {
+                success: '[✅] - Le système de niveau a bien été **activé** !',
+                alreadyEnabled: '[❌] - Le système de niveau est déjà **activé**!'
+            }
+        },
+        TOP: {
+            description: 'Affiche le classement des niveaux sur le serveur',
+            pleaseWait: "Veuillez patienter...",
+            fullTop: (fullTop) => `Voici le classement en entier: ${fullTop}`,
+            closedPaginator: "Ce paginateur est fermé..",
+            embedAuthor: (guildName) => `${guildName} - Classement Niveaux`,
+            embedFooter: "Utilise les réactions pour intéragir avec le message!"
         },
         TRANSLATE: {
             description: 'Permets de traduire du texte.',

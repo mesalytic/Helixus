@@ -42,7 +42,7 @@ module.exports = class RankCommand extends Command {
                                 .setRequiredXP(xpNextLvl)
                                 .setLevel(rows[0].level)
                                 .setBackground("IMAGE", bgRows[0] ? `${process.cwd()}\\assets\\images\\backgrounds\\${bgRows[0].activeBg.replace(/ /g, "_")}.jpg` : `${process.cwd()}\\assets\\images\\backgrounds\\Moonlit_Asteroid.jpg`)
-                                .setRank(rankPos + 1, "RANK")
+                                .setRank(rankPos + 1, "#")
                                 .setStatus("online")
                                 .setProgressBar(bgRows[0] ? backgroundColor[bgRows[0].activeBg] : ["#ff0061", "#5d1f91"], "GRADIENT")
                                 .setUsername(message.author.username)
@@ -53,11 +53,8 @@ module.exports = class RankCommand extends Command {
                                 .then(data => {
                                     const attachment = new MessageAttachment(data, `${message.author.id}-rank.png`);
                                     message.channel.send(attachment);
-                                });
-                        
+                                })
                     })
-                    
-    
                 })
             })
     }

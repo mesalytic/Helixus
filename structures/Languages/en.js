@@ -9,6 +9,28 @@ module.exports = {
             added: (role) => `[✅] - The role ${role} will now be given to new members.`,
             notFound: '[❌] - The role has not been found.'
         },
+        BACKGROUND: {
+            description: 'Allows you to see the list of backgrounds, or to buy and set them.',
+            BUY: {
+                noBackgroundSpecified: '[❌] - Please specify a background to buy! To see the list of available backgrounds, check the `am!background list` command!',
+                invalidBackground: '[❌] - Please specify a valid background to buy! To see the list of available backgrounds, check the `am!background list` command!',
+                notEnoughCoins: '[❌] You don\'t have **5000** coins! Come back later...',
+                alreadyBought: '[❌] - You already have this background!',
+                success: (background) => `[✅] - You have bought the **${background}** background!`
+            },
+            SET: {
+                noBackgrounds: '[❌] - You don\'t have any background...',
+                noBackgroundSpecified: '[❌] - Please specify a background to set! To see the list of available backgrounds, check the `am!background list` command!',
+                invalidBackground: '[❌] - Please specify a valid background to set! To see the list of available backgrounds, check the `am!background list` command!',
+                success: (background) => `[✅] - You successfully set the **${background}** background!`
+            },
+            LIST: {
+                pleaseWait: "Please wait...",
+                closedPaginator: "❌ Paginator closed... ❌",
+                embedAuthor: "Rank Background List",
+                embedTitle: `The ❌ sign means you don't have the background.\nBuy it with \`am!background buy <background>\` !`
+            }
+        },
         BALANCE: {
             description: "Displays your current balance.",
             output: (bal) => `You have <a:coin:784930553748520961> **${bal}** coins!`
@@ -88,6 +110,21 @@ module.exports = {
             notEnabled: '[❌] - Leave messages are currently not enabled.',
             success: `[✅] - The leave message content has successfully been set.`
         },
+        LEVELUP: {
+            description: 'Lets you configure the levelup message content/channel target for your server.',
+            notes: '__**Channel Parameter**__:\nIf you want it to be displayed where the user has levelled up, type `msgChannel`.\n\n__**Message Parameters**__:\nHere is the list of the tags you can use:\n{user} - mentions the user\n{username} - displays the username\n{server} - displays the server name\n{level} - displays the obtained level',
+            CHANNEL: {
+                noChanSpecified: '[❌] - Please specify a channel name, ID, or mention!',
+                invalidChan: '[❌] - This channel doesn\'t exist.',
+                levelNotEnabled: '[❌] - Levelling is not enabled on this server. See `am!help toggle`.',
+                success: (chan) => `[✅] - Level up messages will now be sent to ${chan}!`
+            },
+            MESSAGE: {
+                noContent: '[❌] - You haven\'t specified a levelup message content. Please check `am!help levelup` to see which tags you can use inside of your levelup message.',
+                levelNotEnabled: '[❌] - Levelling is not enabled on this server. See `am!help toggle`.',
+                success: `[✅] - This server's levelup message has been updated!`
+            }
+        },
         LOGS: {
             description: 'Lets you configure the logging system.',
             ON: {
@@ -115,6 +152,29 @@ module.exports = {
         PING: {
             description: 'Displays the bot\'s current **message latency** and **heartbeat**.',
             latency: "Latency",
+        },
+        RANK: {
+            description: 'Displays your level stats.',
+        },
+        REWARDS: {
+            description: 'Lets you configure leveled role rewards.',
+            ADD: {
+                noLevelSpecified: '[❌] - Please provide a level number for the role reward.',
+                noRoleSpecified: '[❌] - Please provide a role for the role reward.',
+                levelAlreadyUsed: '[❌] - This level has already been configured for another role!',
+                roleAlreadyUsed: '[❌] - This role has already been configured for another level!',
+                success: (role, level) => `[✅] - ${role} has been successfully set for level **${level}**!`
+            },
+            REMOVE: {
+                noLevelSpecified: '[❌] - Please provide a level number for the role reward.',
+                success: (role, level) => `[✅] - ${role} will no longer be given at level **${level}**!`,
+                notFound: (level) => `[❌] - No rewards were found at level **${level}**.`
+            },
+            SHOW: {
+                pleaseWait: "Please wait...",
+                closedPaginator: "Paginator closed..",
+                embedTitle: (page, pages) => `Role Rewards List (${page + 1}/${pages + 1})`
+            }
         },
         SERVERINFO: {
             description: "Displays informations about the server.",
@@ -157,6 +217,25 @@ module.exports = {
             invitationLink: "Invitation Link",
             website: "Website (WIP)"
         },
+        TOGGLE: {
+            description: 'Toggles on or off the levelling system in your server.',
+            OFF: {
+                alreadyDisabled: '[❌] - The levelling system is already **disabled**!',
+                success: '[✅] - The levelling system has successfully been **disabled** !'
+            },
+            ON: {
+                success: '[✅] - The levelling system has successfully been **enabled** !',
+                alreadyEnabled: '[❌] - The levelling system is already **enabled**!'
+            }
+        },
+        TOP: {
+            description: 'Displays a leaderboard of the guild\'s XP ranks.',
+            pleaseWait: "Please wait...",
+            fullTop: (fullTop) => `Here is the full top: ${fullTop}`,
+            closedPaginator: "This paginator is closed...",
+            embedAuthor: (guildName) => `${guildName} - XP Leaderboard`,
+            embedFooter: "Use the reactions to navigate!"
+        },
         TRANSLATE: {
             description: 'Allows you to translate text.',
             embedAuthor: "Translate",
@@ -177,7 +256,7 @@ module.exports = {
             currentlyActiveOn: "Currently active on",
             offline: "Offline",
             nitroBoostStatus: "Nitro Boost Status",
-            nitroBoostStatusAgo: `${time} ago`,
+            nitroBoostStatusAgo: (time) => `${time} ago`,
             noNitroBoostStatus: "No active Server Boost.",
             moreRoles: (rolesSize) => `and ${rolesSize} more.`
         }

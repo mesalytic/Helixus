@@ -22,8 +22,8 @@ module.exports = class BackgroundCommand extends Command {
     async run(message, args) {
         if (args[0] === "buy") {
             let bgBuy = args.slice(1).join(" ");
-            if (!bgBuy) return message.reply('[❌] - Please specify a background to buy! To see the list of available backgrounds, check the `am!background list` command!')
-            if (!Object.keys(backgroundColor).includes(bgBuy)) return message.reply('[❌] - Please specify a valid background to buy! To see the list of available backgrounds, check the `am!background list` command!')
+            if (!bgBuy) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.noBackgroundSpecified)
+            if (!Object.keys(backgroundColor).includes(bgBuy)) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.invalidBackground)
 
             this.bot.db.query(`SELECT * FROM Backgrounds WHERE userID='${message.author.id}'`, (err, rows) => {
                 this.bot.db.query(`SELECT * FROM Economy WHERE userID='${message.author.id}'`, (err, eRows) => {
@@ -33,12 +33,12 @@ module.exports = class BackgroundCommand extends Command {
                         this.bot.db.query(`INSERT INTO Economy (userID, balance, dailyCooldown) VALUES ('${message.author.id}', '${amount}', '${Date.now()}')`)
                         coins = 0;
                     } else coins = eRows[0].balance;
-                    if (coins < 5000) return message.reply('[❌] You don\'t have **5000** coins! Come back later...');
+                    if (coins < 5000) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.notEnoughCoins);
                     else {
-                        if (rows[0][bgBuy] === "true") return message.reply('[❌] - You already have this background!')
+                        if (rows[0][bgBuy] === "true") return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.alreadyBought)
                         this.bot.db.query(`UPDATE Economy SET balance = '${coins - 5000}' WHERE userID='${message.author.id}'`);
                         this.bot.db.query(`UPDATE Backgrounds SET \`${bgBuy}\` = 'true' WHERE userID='${message.author.id}'`);
-                        return message.channel.send(`[✅] - You have bought the **${bgBuy}** background!`)
+                        return message.channel.send(message.guild.lang.COMMANDS.BACKGROUND.BUY.success(bgBuy))
                     }
                 })
             })
@@ -47,20 +47,20 @@ module.exports = class BackgroundCommand extends Command {
             this.bot.db.query(`SELECT * FROM Backgrounds WHERE userID='${message.author.id}'`, (err, rows) => {
                 if (!rows[0]) {
                     this.bot.db.query(`INSERT INTO Backgrounds (userID, activeBg) VALUES ('${message.author.id}', 'Moonlit Asteroid')`)
-                    return message.channel.send('You don\'t have any background...')
+                    return message.channel.send(message.guild.lang.COMMANDS.BACKGROUND.SET.noBackgrounds)
                 } else {
                     let bgSet = args.slice(1).join(" ");
-                    if (!bgSet) return message.reply('[❌] - Please specify a background to set! To see the list of available backgrounds, check the `am!background list` command!')
-                    if (!Object.keys(backgroundColor).includes(bgSet)) return message.reply('[❌] - Please specify a valid background to set! To see the list of available backgrounds, check the `am!background list` command!')
+                    if (!bgSet) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.SET.noBackgroundSpecified)
+                    if (!Object.keys(backgroundColor).includes(bgSet)) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.SET.invalidBackground)
                     this.bot.db.query(`UPDATE Backgrounds SET activeBg = '${bgSet}' WHERE userID='${message.author.id}'`)
-                    return message.channel.send(`[✅] - You successfully set the **${bgSet}** background!`)
+                    return message.channel.send(message.guild.lang.COMMANDS.BACKGROUND.SET.success(bgSet))
                 }
             })
         }
         if (args[0] === "list") {
             let page = 0
             const pages = Math.ceil(Number(Object.keys(backgroundColor).length) / 10) - 1
-            let m = await message.channel.send("Please wait...");
+            let m = await message.channel.send(message.guild.lang.COMMANDS.BACKGROUND.LIST.pleaseWait);
             m.react('⏮️').then(() => {
                 m.react('⬅️').then(() => {
                     m.react('➡️').then(() => {
@@ -97,7 +97,7 @@ module.exports = class BackgroundCommand extends Command {
                                     }
                                 })
                                 reactionCollector.on('end', () => {
-                                    m.edit("Paginator closed...", {
+                                    m.edit(message.guild.lang.COMMANDS.BACKGROUND.LIST.closedPaginator, {
                                         embed: null
                                     })
                                 })
@@ -119,8 +119,8 @@ module.exports = class BackgroundCommand extends Command {
 
                     const embed = new MessageEmbed()
                         .setColor("RANDOM")
-                        .setAuthor("Rank Background List")
-                        .setTitle(`The ❌ sign means you don't have the background.\nBuy it with \`am!background buy <background>\` !`)
+                        .setAuthor(message.guild.lang.COMMANDS.BACKGROUND.LIST.embedAuthor)
+                        .setTitle(message.guild.lang.COMMANDS.BACKGROUND.LIST.embedTitle)
                         .setDescription(output)
                     await m.edit(embed);
                 })

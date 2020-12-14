@@ -31,20 +31,20 @@ module.exports = class RewardsCommand extends Command {
 
         if (method === 'add') {
             if (isNaN(lArgs) && !lArgs || lArgs < 1) {
-                return message.reply('[❌] - Please provide a level number for the role reward.');
+                return message.reply(message.guild.lang.COMMANDS.REWARDS.ADD.noLevelSpecified);
             } else {
                 if (!role) {
-                    return message.reply('[❌] - Please provide a role for the role reward.');
+                    return message.reply(message.guild.lang.COMMANDS.REWARDS.ADD.noRoleSpecified);
                 } else {
                     this.bot.db.query(`SELECT * FROM LevelsRewards WHERE guildID='${message.guild.id}' AND level='${lArgs}'`, (err, levelRows) => {
                         this.bot.db.query(`SELECT * FROM LevelsRewards WHERE guildID='${message.guild.id}' AND roleID='${role.id}'`, (err, roleRows) => {
                             if (err) throw err;
 
-                            if (levelRows[0]) return message.reply('[❌] - This level has already been configured for another role!')
-                            if (roleRows[0]) return message.reply('[❌] - This role has already been configured for another level!')
+                            if (levelRows[0]) return message.reply(message.guild.lang.COMMANDS.REWARDS.ADD.levelAlreadyUsed)
+                            if (roleRows[0]) return message.reply(message.guild.lang.COMMANDS.REWARDS.ADD.roleAlreadyUsed)
 
                             this.bot.db.query(`INSERT INTO LevelsRewards (guildID, roleID, level) VALUES ('${message.guild.id}', '${role.id}', '${lArgs}')`)
-                            return message.channel.send(`[✅] - ${role} has been successfully set for level **${lArgs}**!`)
+                            return message.channel.send(message.guild.lang.COMMANDS.REWARDS.ADD.success(role, lArgs))
                         })
                     })
                 }
@@ -52,14 +52,14 @@ module.exports = class RewardsCommand extends Command {
         }
         if (method === "remove") {
             if (isNaN(lArgs) && !lArgs || lArgs < 1) {
-                return message.reply('[❌] - Please provide a level number for the role reward.');
+                return message.reply(message.guild.lang.COMMANDS.REWARDS.REMOVE.noLevelSpecified);
             }
             this.bot.db.query(`SELECT * FROM LevelsRewards WHERE guildID='${message.guild.id}' AND roleID='${role.id}'`, (err, roleRows) => {
                 if (rRows[0]) {
                     con.query(`DELETE FROM LevelsRewards WHERE guildID='${message.guild.id}' AND level='${lArgs}'`);
-                    return message.channel.send(`[✅] - ${role} will no longer be given at level **${lArgs}**!`);
+                    return message.channel.send(message.guild.lang.COMMANDS.REWARDS.REMOVE.success(role, lArgs));
                 } else {
-                    return message.reply(`[❌] - No rewards were found at level **${lArgs}**.`);
+                    return message.reply(message.guild.lang.COMMANDS.REWARDS.REMOVE.notFound(lArgs));
                 }
             })
         }
@@ -71,7 +71,7 @@ module.exports = class RewardsCommand extends Command {
 
                 let page = 0
                 const pages = Math.ceil(Number(count) / 10) - 1
-                let m = await message.channel.send("Please wait...");
+                let m = await message.channel.send(message.guild.lang.COMMANDS.REWARDS.SHOW.pleaseWait);
 
                 m.react('⏮️').then(() => {
                     m.react('⬅️').then(() => {
@@ -110,7 +110,7 @@ module.exports = class RewardsCommand extends Command {
                                         }
                                     })
                                     reactionCollector.on('end', () => {
-                                        m.edit("Paginator closed..", {
+                                        m.edit(message.guild.lang.COMMANDS.REWARDS.SHOW.closedPaginator, {
                                             embed: null
                                         })
                                     })
@@ -129,7 +129,7 @@ module.exports = class RewardsCommand extends Command {
                         }
                         const embed = new MessageEmbed()
                             .setColor("RANDOM")
-                            .setAuthor(`Role Rewards List (${page + 1}/${pages + 1})`, message.guild.iconURL())
+                            .setAuthor(message.guild.lang.COMMANDS.REWARDS.SHOW.embedTitle(page, pages), message.guild.iconURL())
                             .setDescription(output)
                             .setTimestamp();
 
