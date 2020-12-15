@@ -32,9 +32,9 @@ module.exports = class PlayCommand extends Command {
         } = message.member.voice;
         
         const serverQueue = this.bot.queue.get(message.guild.id);
-        if (!voiceChannel) return message.reply("You need to join a voice channel first!");
+        if (!voiceChannel) return message.reply(message.guild.lang.COMMANDS.PLAY.noVoiceChannel);
 
-        if (serverQueue && voiceChannel !== message.guild.me.voice.channel) return message.reply("You need to be in the same voice channel as the bot.")
+        if (serverQueue && voiceChannel !== message.guild.me.voice.channel) return message.reply(message.guild.lang.COMMANDS.PLAY.notSameVoiceChannel)
 
         if (!args.length) return this.bot.commands.get("help").run(message, ["play"])
 
@@ -96,7 +96,7 @@ module.exports = class PlayCommand extends Command {
                 const embed = new MessageEmbed()
                     .setColor("#7BB3FF")
                     .setDescription(`${results.map(video2 => `**${++index} -** ${video2.title.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"').replace(/&OElig;/g, "Œ").replace(/&oelig;/g, "œ").replace(/&Scaron;/g, "Š").replace(/&scaron;/g, "š").replace(/&Yuml;/g, "Ÿ").replace(/&circ;/g, "ˆ").replace(/&tilde;/g, "˜").replace(/&ndash;/g, "–").replace(/&mdash;/g, "—").replace(/&lsquo;/g, "‘").replace(/&rsquo;/g, "’").replace(/&sbquo;/g, "‚").replace(/&ldquo;/g, "“").replace(/&rdquo;/g, "”").replace(/&bdquo;/g, "„").replace(/&dagger;/g, "†").replace(/&Dagger;/g, "‡").replace(/&permil;/g, "‰").replace(/&lsaquo;/g, "‹").replace(/&rsaquo;/g, "›").replace(/&euro;/g, "€").replace(/&copy;/g, "©").replace(/&trade;/g, "™").replace(/&reg;/g, "®").replace(/&nbsp;/g, " ")}`).join("\n")}`)
-                    .setAuthor("Song selection", "https://cdn.discordapp.com/attachments/355972323590930432/357097120580501504/unnamed.jpg");
+                    .setAuthor(message.guild.lang.COMMANDS.PLAY.embedAuthor, "https://cdn.discordapp.com/attachments/355972323590930432/357097120580501504/unnamed.jpg");
 
                 message.channel.send({
                     embed
@@ -130,7 +130,7 @@ module.exports = class PlayCommand extends Command {
         if (serverQueue) {
             serverQueue.songs.push(song);
             return serverQueue.textChannel
-                .send(`✅ - **${song.title}** has been added to the queue by ${message.author}`)
+                .send(message.guild.lang.COMMANDS.PLAY.addedToQueue(song.title, message.author))
                 .catch(console.error);
         }
 
@@ -140,13 +140,12 @@ module.exports = class PlayCommand extends Command {
         try {
             queueConstruct.connection = await voiceChannel.join();
             await queueConstruct.connection.voice.setSelfDeaf(true);
-            await queueConstruct.connection.voice.setSelfMute(true);
             play(queueConstruct.songs[0], message, this.bot);
         } catch (error) {
             console.error(error);
             this.bot.queue.delete(message.guild.id);
             await voiceChannel.leave();
-            return message.channel.send(`Could not join the channel: ${error}`).catch(console.error);
+            return message.channel.send(message.guild.lang.COMMANDS.PLAY.error(error)).catch(console.error);
         }
 
         async function play(song, message, bot, seek = 0) {
@@ -155,7 +154,7 @@ module.exports = class PlayCommand extends Command {
             if (!song) {
                 queue.voiceChannel.leave();
                 bot.queue.delete(message.guild.id);
-                return queue.textChannel.send("🚫 Music queue ended.").catch(console.error);
+                return queue.textChannel.send(message.guild.lang.COMMANDS.PLAY.ended).catch(console.error);
             }
 
             let stream = null;
@@ -213,7 +212,7 @@ module.exports = class PlayCommand extends Command {
                 })
             dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
-            if (seek == 0) queue.textChannel.send(`🎶 Started playing: **${song.title}** <${song.url}>`);
+            if (seek == 0) queue.textChannel.send(message.guild.lang.COMMANDS.PLAY.startedPlaying(song.title, song.url));
         }
     }
 }

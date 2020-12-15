@@ -20,19 +20,19 @@ module.exports = class NowPlayingCommand extends Command {
 
     async run(message) {
         const queue = this.bot.queue.get(message.guild.id);
-        if (!queue) return message.reply("There is nothing playing.").catch(console.error);
+        if (!queue) return message.reply(message.guild.lang.COMMANDS.NOWPLAYING.noQueue).catch(console.error);
 
         const song = queue.songs[0];
         const seek = ((queue.connection.dispatcher.streamTime - queue.connection.dispatcher.pausedTime) / 1000) + queue.seek;
         const left = song.duration - seek;
 
         let nowPlaying = new MessageEmbed()
-            .setAuthor(`Now playing: ${song.title}`, null, song.url)
+            .setAuthor(message.guild.lang.COMMANDS.NOWPLAYING.embedAuthor(song.title), null, song.url)
             .setColor("RANDOM")
 
         if (song.duration > 0) {
             nowPlaying.setDescription(new Date(seek * 1000).toISOString().substr(11, 8) + "[" + createBar(song.duration == 0 ? seek : song.duration, seek, 20)[0] + "]" + (song.duration == 0 ? " ◉ LIVE" : new Date(song.duration * 1000).toISOString().substr(11, 8)), false);
-            nowPlaying.setFooter("Time Remaining: " + new Date(left * 1000).toISOString().substr(11, 8));
+            nowPlaying.setFooter(message.guild.lang.COMMANDS.NOWPLAYING.embedFooter(new Date(left * 1000).toISOString().substr(11, 8)));
         }
 
         return message.channel.send(nowPlaying);

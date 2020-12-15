@@ -149,12 +149,55 @@ module.exports = {
             },
             noChanSpecified: "[❌] - Please mention a channel.",
         },
+        LOOP: {
+            description: 'Loops the music queue',
+            noQueue: "[❌] - There is nothing playing.",
+            success: (loopStatus) => `✅ - The loop is now ${loopStatus === true ? "**enabled**" : "**disabled**"}!`
+        },
+        LYRICS: {
+            description: 'Displays the lyrics about specified song.',
+            noQuery: '[❌] - Please specify a song to search.',
+            embedTitle: (title, artist) => `Lyrics for ${title} by ${artist}`,
+            embedFooter: "Lyrics service provided by api.ksoft.si"
+        },
+        NOWPLAYING: {
+            description: 'Shows what music is currently playing.',
+            noQueue: "[❌] - There is nothing playing.",
+            embedAuthor: (title) => `Now playing: ${title}`,
+            embedFooter: (time) => `Time Remaining: ${time}`
+        },
+        PAUSE: {
+            description: 'Pauses the musics that its currently playing.',
+            noQueue: "[❌] - There is nothing playing.",
+            success: (author) => `⏸ ${author} has paused the music.`
+        },
         PING: {
             description: 'Displays the bot\'s current **message latency** and **heartbeat**.',
             latency: "Latency",
         },
+        PLAY: {
+            description: "Allows you to play music from YouTube or SoundCloud!",
+            noVoiceChannel: "You need to join a voice channel first!",
+            notSameVoiceChannel: "You need to be in the same voice channel as the bot.",
+            embedAuthor: "Song selection",
+            addedToQueue: (song, author) => `✅ - **${song}** has been added to the queue by ${author}`,
+            error: (error) => `Could not join the channel: ${error}`,
+            ended: "🚫 Music queue ended.",
+            startedPlaying: (title, url) => `🎶 Started playing: **${title}** <${url}>`
+        },
+        QUEUE: {
+            description: 'Displays the whole music queue. Use the reactions to navigate.',
+            noQueue: "[❌] - There is nothing playing.",
+            embedTitle: "Song Queue\n",
+            embedDescription: (title, url, info) => `**Current Song - [${title}](${url})**\n\n${info}`
+        },
         RANK: {
             description: 'Displays your level stats.',
+        },
+        RESUME: {
+            description: 'Resumes the musics that its currently playing.',
+            noQueue: "[❌] - There is nothing playing.",
+            success: (author) => `▶ ${author} has resumed the music.`
         },
         REWARDS: {
             description: 'Lets you configure leveled role rewards.',
@@ -175,6 +218,12 @@ module.exports = {
                 closedPaginator: "Paginator closed..",
                 embedTitle: (page, pages) => `Role Rewards List (${page + 1}/${pages + 1})`
             }
+        },
+        SEEK: {
+            description: 'Allows you to set the music to a specific point.',
+            noQueue: "[❌] - There is nothing playing.",
+            notThatLong: "[❌] - The song isn't that long!",
+            success: (duration) => `✅ - The song has seeked to **${duration}**!`
         },
         SERVERINFO: {
             description: "Displays informations about the server.",
@@ -202,6 +251,11 @@ module.exports = {
             moreRole: (rolesLeft) => `and ${rolesLeft} more`,
             moreEmotes: (emotesLeft) => `and ${emotesLeft} more`
         },
+        SKIP: {
+            description: 'Skips the current song.',
+            noQueue: "[❌] - There is nothing playing.",
+            success: `✅ - Song has been skipped!`
+        },
         STATS: {
             description: 'Shows statistics about the bot.',
             license: "This bot is licensed under the MIT license, for more info please see the full license **[here](https://github.com/chocololat/Helixus/blob/master/LICENSE)**",
@@ -216,6 +270,11 @@ module.exports = {
             supportServer: "Support server",
             invitationLink: "Invitation Link",
             website: "Website (WIP)"
+        },
+        STOP: {
+            description: 'Stops the music and clears the queue.',
+            noQueue: "[❌] - There is nothing playing.",
+            success: (author) => `⏹ ${author} has stopped the music!`
         },
         TOGGLE: {
             description: 'Toggles on or off the levelling system in your server.',
@@ -259,6 +318,12 @@ module.exports = {
             nitroBoostStatusAgo: (time) => `${time} ago`,
             noNitroBoostStatus: "No active Server Boost.",
             moreRoles: (rolesSize) => `and ${rolesSize} more.`
+        },
+        VOLUME: {
+            description: 'Changes the volume of the playing song.',
+            noQueue: "[❌] - There is nothing playing.",
+            volume: (volume) => `🔊 - The volume is at **${volume}%**.`,
+            success: (volume) => `✅ - Volume has been set to **${parseInt(args[0])}%**!`
         }
     }
 }

@@ -9,22 +9,19 @@ module.exports = class QueueCommand extends Command {
             name: 'queue',
             description: 'Displays the whole music queue. Use the reactions to navigate.',
             usage: 'queue',
-            type: 'music'
+            type: 'music',
+            clientPermissions: ["MANAGE_MESSAGES", "ADD_REACTIONS"]
         });
     }
 
     async run(message) {
-        const permissions = message.channel.permissionsFor(message.client.user);
-        if (!permissions.has(["MANAGE_MESSAGES", "ADD_REACTIONS"]))
-            return message.reply("Missing Permissions: MANAGE_MESSAGES, ADD_REACTIONS");
-
         const queue = this.bot.queue.get(message.guild.id);
-        if (!queue) return message.channel.send("❌ - There is nothing playing in this server.");
+        if (!queue) return message.channel.send(message.guild.lang.COMMANDS.QUEUE.noQueue);
 
         let currentPage = 0;
         const embeds = generateQueueEmbed(message, queue.songs);
 
-        const queueEmbed = await message.channel.send(`**Current Page - ${currentPage + 1}/${embeds.length}**`, embeds[currentPage]);
+        const queueEmbed = await message.channel.send(`**Page ${currentPage + 1}/${embeds.length}**`, embeds[currentPage]);
 
         try {
             await queueEmbed.react("⬅️");
@@ -44,12 +41,12 @@ module.exports = class QueueCommand extends Command {
                 if (reaction.emoji.name === "➡️") {
                     if (currentPage < embeds.length - 1) {
                         currentPage++;
-                        queueEmbed.edit(`**Current Page - ${currentPage + 1}/${embeds.length}**`, embeds[currentPage]);
+                        queueEmbed.edit(`**Page ${currentPage + 1}/${embeds.length}**`, embeds[currentPage]);
                     }
                 } else if (reaction.emoji.name === "⬅️") {
                     if (currentPage !== 0) {
                         --currentPage;
-                        queueEmbed.edit(`**Current Page - ${currentPage + 1}/${embeds.length}**`, embeds[currentPage]);
+                        queueEmbed.edit(`**Page - ${currentPage + 1}/${embeds.length}**`, embeds[currentPage]);
                     }
                 } else {
                     collector.stop();
@@ -75,10 +72,10 @@ module.exports = class QueueCommand extends Command {
                 const info = current.map((track) => `${++j} - [${track.title}](${track.url})`).join("\n");
 
                 const embed = new MessageEmbed()
-                    .setTitle("Song Queue\n")
+                    .setTitle(message.guild.lang.COMMANDS.QUEUE.embedTitle)
                     .setThumbnail(message.guild.iconURL())
                     .setColor("RANDOM")
-                    .setDescription(`**Current Song - [${queue[0].title}](${queue[0].url})**\n\n${info}`)
+                    .setDescription(message.guild.lang.COMMANDS.QUEUE.embedDescription(queue[0].title, queue[0].url, info))
                     .setTimestamp();
                 embeds.push(embed);
             }

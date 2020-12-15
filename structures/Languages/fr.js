@@ -149,12 +149,55 @@ module.exports = {
             },
             noChanSpecified: '[❌] - Veuillez indiquer un ID, un nom ou une mention de salon!',
         },
+        LOOP: {
+            description: 'Met en boucle la file de musique',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            success: (loopStatus) => `✅ - La boucle est maintenant ${loopStatus === true ? "**activée**" : "**désactivée**"}!`
+        },
+        LYRICS: {
+            description: 'Affiche les paroles de la musique souhaitée via l\'API KSoft.si',
+            noQuery: '[❌] - Veuillez indiquer une musique a chercher.',
+            embedTitle: (title, artist) => `Paroles de ${title} par ${artist}`,
+            embedFooter: "Service livré par api.ksoft.si"
+        },
+        NOWPLAYING: {
+            description: 'Affiche la musique actuellement jouée.',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            embedAuthor: (title) => `Joue: ${title}`,
+            embedFooter: (time) => `Temps restant: ${time}`
+        },
+        PAUSE: {
+            description: 'Met en pause la musique qui est actuellement jouée',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            success: (author) => `⏸ ${author} a mis en pause la musique.`
+        },
         PING: {
             description: 'Affiche la **latence de message** ainsi que le **heartbeat** du bot.',
             latency: "Latence",
         },
+        PLAY: {
+            description: "Vous permets de jouer de la musique venant de YouTube ou SoundCloud",
+            noVoiceChannel: "[❌] - Vous devez être dans un salon vocal!",
+            notSameVoiceChannel: "[❌] - Vous devez être dans le même salon vocal que le bot.",
+            embedAuthor: "Selection de musique",
+            addedToQueue: (song, author) => `✅ - **${song}** a été ajouté par ${author}`,
+            error: (error) => `[❌] - Impossible de rejoindre le salon vocal: ${error}`,
+            ended: "🚫 File terminée.",
+            startedPlaying: (title, url) => `🎶 Joue: **${title}** <${url}>`
+        },
+        QUEUE: {
+            description: 'Affiche la file. Utilisez les réactions pour naviguer entre les pages.',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            embedTitle: "File\n",
+            embedDescription: (title, url, info) => `**Joue - [${title}](${url})**\n\n${info}`
+        },
         RANK: {
             description: 'Affiche votre niveau.',
+        },
+        RESUME: {
+            description: 'Relance la musique si elle est en pause.',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            success: (author) => `▶ ${author} a relancé la musique.`
         },
         REWARDS: {
             description: 'Vous permets de configurer des récompenses de rôles en fonction du niveau.',
@@ -175,6 +218,12 @@ module.exports = {
                 closedPaginator: "Paginateur fermé..",
                 embedTitle: (page, pages) => `Liste des récompenses de niveau (${page + 1}/${pages + 1})`
             }
+        },
+        SEEK: {
+            description: 'Vous permets d\'aller a un point spécifique de la musique.',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            notThatLong: "[❌] - La musique n'est pas aussi longue...",
+            success: (duration) => `✅ - La musique est maintenant à **${duration}**!`
         },
         SERVERINFO: {
             description: "Affiche des informations à propos du serveur.",
@@ -202,6 +251,11 @@ module.exports = {
             moreRole: (rolesLeft) => `et ${rolesLeft} autres rôles.`,
             moreEmotes: (emotesLeft) => `et ${emotesLeft} autres emotes.`
         },
+        SKIP: {
+            description: 'Passe la musique actuelle.',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            success: `✅ - La musique a bien été passée!`
+        },
         STATS: {
             description: 'Affiche les statistiques a propos du bot.',
             license: "Ce bot est sous la license Open-Source MIT, pour plus d'informations, visionnez la license entière **[ici](https://github.com/chocololat/Helixus/blob/master/LICENSE)**",
@@ -216,6 +270,11 @@ module.exports = {
             supportServer: "Serveur de support",
             invitationLink: "Lien d'invitation",
             website: "Site Internet (en developpement)"
+        },
+        STOP: {
+            description: 'Stoppe la musique et enlève la file.',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            success: (author) => `⏹ ${author} a stoppé la musique!`
         },
         TOGGLE: {
             description: 'Active ou désactive le système de niveaux',
@@ -259,6 +318,12 @@ module.exports = {
             nitroBoostStatusAgo: (time) => `Il y a ${time.replace("days", "jours")}`,
             noNitroBoostStatus: "Aucun Nitro Boost d'actif",
             moreRoles: (rolesSize) => `et ${rolesSize} autres rôles.`
+        },
+        VOLUME: {
+            description: 'Change le volume de la musique actuelle.',
+            noQueue: "[❌] - Aucune musique n'est jouée.",
+            volume: (volume) => `🔊 - Le volume est à **${volume}%**.`,
+            success: (volume) => `✅ - Le volume est maintenant à **${volume}%**!`
         }
     }
 }

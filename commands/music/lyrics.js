@@ -18,20 +18,18 @@ module.exports = class LyricsCommand extends Command {
     async run(message, args) {
 
         const query = args.join(" ");
-        if (!query) return message.channel.send('[❌] - Please specify a song to search.');
-
-
+        if (!query) return message.channel.send(message.guild.lang.COMMANDS.LYRICS.noQuery);
 
         let lyric = await this.bot.ksoft.lyrics.search(query)
 
-                let embed = new MessageEmbed()
-                    .setColor("RANDOM")
-                    .setTitle(`Lyrics for ${lyric[0].name} by ${lyric[0].artist.name}`)
-                    .setDescription(lyric[0].lyrics)
-                    .setFooter("Lyrics service provided by api.ksoft.si")
-                    .setTimestamp();
+        let embed = new MessageEmbed()
+            .setColor("RANDOM")
+            .setTitle(message.guild.lang.COMMANDS.LYRICS.embedTitle(lyric[0].name, lyric[0].artist.name))
+            .setDescription(lyric[0].lyrics)
+            .setFooter(message.guild.lang.COMMANDS.LYRICS.embedFooter)
+            .setTimestamp();
 
-                if (embed.description.length >= 2048) embed.description = `${embed.description.substr(0, 2045)}...`;
-                return message.channel.send(embed);
+        if (embed.description.length >= 2048) embed.description = `${embed.description.substr(0, 2045)}...`;
+        return message.channel.send(embed);
     }
 }

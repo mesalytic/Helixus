@@ -18,10 +18,10 @@ module.exports = class LoopCommand extends Command {
 
     async run(message) {
         const queue = this.bot.queue.get(message.guild.id);
-        if (!queue) return message.reply("There is nothing playing.").catch(console.error);
+        if (!queue) return message.reply(message.guild.lang.COMMANDS.LOOP.noQueue).catch(console.error);
         if (!canModifyQueue(message.member)) return;
 
         queue.loop = !queue.loop;
-        message.channel.send(`✅ - The loop is now ${queue.loop ? "**on**" : "**off**"}!`);
+        message.channel.send(message.guild.lang.COMMANDS.LOOP.success(queue.loop ? true : false));
     }
 }
