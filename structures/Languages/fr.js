@@ -359,6 +359,12 @@ module.exports = {
             created: (emoji) => `Nouvel emoji créé (**${emoji.name}** [\`<:${emoji.name}:${emoji.id}>\`])`,
             createdBy: "Créé Par",
             emojiID: "ID de l'Emoji",
+        },
+        EMOJIDELETE: {
+            unknownUser: 'Membre Inconnu',
+            deleted: (emoji) => `Emoji supprimé (**${emoji.name}**)`,
+            deletedBy: "Supprimé Par",
+            emojiID: "ID de l'Emoji",
         }
     }
 }
