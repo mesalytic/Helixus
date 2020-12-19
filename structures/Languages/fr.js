@@ -342,6 +342,17 @@ module.exports = {
             deleted: (type, channel) => `${type === "Catégorie" ? "Une": "Un"} **${type}** a été supprimé. (**${channel.name}**)`,
             deletedBy: "Supprimé par",
             channelID: "ID",
+        },
+        CHANNELUPDATE: {
+            changedName: (newChannel) => `**Le nom de ${newChannel} a été changé.**`,
+            changedTopic: (newChannel) => `**Le sujet de ${newChannel} a été changé.**`,
+            changedPermissions: (newChannel) => `Les permissions de **${newChannel} ont été changées.**\n*note:* cliquez [ici](https://discordapp.com/developers/docs/topics/permissions) pour savoir ce que ces chiffres signifient`,
+            old: "Ancien:",
+            new: "Nouveau:",
+            none: "Aucun",
+            allowed: (oldPerms, newPerms) => `Permissions autorisées: \`${oldPerms}\` -> \`${newPerms}\`\n`,
+            denied: (oldPerms, newPerms) => `Permissions refusées: \`${oldPerms}\` -> \`${newPerms}\`\n`,
+            deleted: 'Permissions supprimées'
         }
     }
 }

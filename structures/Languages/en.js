@@ -342,6 +342,17 @@ module.exports = {
             deleted: (type, channel) => `A **${type}** has been deleted. (**${channel.name}**)`,
             deletedBy: "Deleted By",
             channelID: "Channel ID"
+        },
+        CHANNELUPDATE: {
+            changedName: (newChannel) => `**${newChannel} name has been changed**`,
+            changedTopic: (newChannel) => `**${newChannel} topic has been changed**`,
+            changedPermissions: (newChannel) => `**${newChannel} permissions have been changed.**\n*note:* check [docs](https://discordapp.com/developers/docs/topics/permissions) to see what the numbers mean`,
+            old: "Old:",
+            new: "New:",
+            none: "None",
+            allowed: (oldPerms, newPerms) => `Allowed Perms: \`${oldPerms}\` to \`${newPerms}\`\n`,
+            denied: (oldPerms, newPerms) => `Denied Perms: \`${oldPerms}\` to \`${newPerms}\`\n`,
+            deleted: 'Overwrite got deleted'
         }
     }
 }
