@@ -441,6 +441,11 @@ module.exports = {
             contentWithoutMessage: (link) => `Fichier attaché: ${link}`,
             contentWithMessage: (link, message) => `Fichier attaché: ${link} | Message: ${message}`,
             noContent: "Aucun contenu n'a été trouvé..."
+        },
+        MESSAGEUPDATE: {
+            updated: (author) => `Un message de ${author} (${author.tag}) a été mis a jour.`,
+            oldMessage: "Ancien Message",
+            newMessage: "Nouveau Message"
         }
     }
 }
