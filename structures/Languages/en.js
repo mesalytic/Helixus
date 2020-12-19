@@ -353,6 +353,12 @@ module.exports = {
             allowed: (oldPerms, newPerms) => `Allowed Perms: \`${oldPerms}\` to \`${newPerms}\`\n`,
             denied: (oldPerms, newPerms) => `Denied Perms: \`${oldPerms}\` to \`${newPerms}\`\n`,
             deleted: 'Overwrite got deleted'
+        },
+        EMOJICREATE: {
+            unknownUser: 'Unknown User',
+            created: (emoji) => `New emoji created (**${emoji.name}** [\`<:${emoji.name}:${emoji.id}>\`])`,
+            createdBy: "Created By",
+            emojiID: "Emoji ID",
         }
     }
 }

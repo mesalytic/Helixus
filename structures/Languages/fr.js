@@ -332,7 +332,7 @@ module.exports = {
             unknownUser: 'Membre Inconnu',
             created: (type, channel) => `${type === "Catégorie" ? "Une": "Un"} **${type}** a été créé. (**${channel.name}** [<#${channel.id}>])`,
             createdBy: "Créé par",
-            channelID: "ID",
+            channelID: "ID du salon",
             permissionsOverwrite: (role) => `Permissions:\n${role.name}`,
             permissions: (allowed, denied) => `Type: role\nPermissions autorisées: ${allowed}\nPermissions refusées: ${denied}`,
             none: "Aucun",
@@ -341,7 +341,7 @@ module.exports = {
             unknownUser: 'Membre Inconnu',
             deleted: (type, channel) => `${type === "Catégorie" ? "Une": "Un"} **${type}** a été supprimé. (**${channel.name}**)`,
             deletedBy: "Supprimé par",
-            channelID: "ID",
+            channelID: "ID du Salon",
         },
         CHANNELUPDATE: {
             changedName: (newChannel) => `**Le nom de ${newChannel} a été changé.**`,
@@ -353,6 +353,12 @@ module.exports = {
             allowed: (oldPerms, newPerms) => `Permissions autorisées: \`${oldPerms}\` -> \`${newPerms}\`\n`,
             denied: (oldPerms, newPerms) => `Permissions refusées: \`${oldPerms}\` -> \`${newPerms}\`\n`,
             deleted: 'Permissions supprimées'
+        },
+        EMOJICREATE: {
+            unknownUser: 'Membre Inconnu',
+            created: (emoji) => `Nouvel emoji créé (**${emoji.name}** [\`<:${emoji.name}:${emoji.id}>\`])`,
+            createdBy: "Créé Par",
+            emojiID: "ID de l'Emoji",
         }
     }
 }
