@@ -373,6 +373,15 @@ module.exports = {
             oldName: "Ancien Nom",
             newName: "Nouveau Nom",
             emojiID: "ID de l'Emoji",
+        },
+        GUILDBANADD: {
+            banned: (user) => `${user.username}#${user.discriminator} a été banni.`,
+            userInfos: "Informations sur le membre",
+            isBot: "\nEst un bot",
+            reason: "Raison",
+            none: "Aucune",
+            bannedBy: "Banni par",
+            unknownUser: 'Membre Inconnu',
         }
     }
 }
