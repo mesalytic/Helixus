@@ -18,7 +18,7 @@ module.exports = async (bot, role) => {
 
                                 let embed = new MessageEmbed()
                                     .setAuthor(lang.unknownUser)
-                                    .setDescription(`A role has been created`)
+                                    .setDescription(lang.created)
                                     .addField("Role", `${role}\n**${role.name}**\n**${role.id}**`, true)
                                     .addField(lang.createdBy, lang.unknownUser, true)
                                     .setColor("RANDOM")
