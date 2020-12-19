@@ -1,4 +1,5 @@
 module.exports = {
+    code: 'en',
     COMMANDS: {
         AUTOROLE: {
             description: 'Allows you to configure a role which will be given to new members.',
@@ -323,7 +324,18 @@ module.exports = {
             description: 'Changes the volume of the playing song.',
             noQueue: "[❌] - There is nothing playing.",
             volume: (volume) => `🔊 - The volume is at **${volume}%**.`,
-            success: (volume) => `✅ - Volume has been set to **${parseInt(args[0])}%**!`
+            success: (volume) => `✅ - Volume has been set to **${volume}%**!`
+        }
+    },
+    EVENTS: {
+        CHANNELCREATE: {
+            unknownUser: 'Unknown User',
+            created: (type, channel) => `New **${type}** created (**${channel.name}** [<#${channel.id}>])`,
+            createdBy: "Created By",
+            channelID: "Channel ID",
+            permissionsOverwrite: (role) => `Channel Permissions Overwrite:\n${role.name}`,
+            permissions: (allowed, denied) => `Type: role\nAllowed Permissions: ${allowed}\nDenied Permissions: ${denied}`,
+            none: "None",
         }
     }
 }

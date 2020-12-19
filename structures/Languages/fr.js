@@ -1,4 +1,5 @@
 module.exports = {
+    code: 'fr',
     COMMANDS: {
         AUTOROLE: {
             description: 'Vous permets de configurer un rôle qui sera attribué aux nouveaux membres.',
@@ -324,6 +325,17 @@ module.exports = {
             noQueue: "[❌] - Aucune musique n'est jouée.",
             volume: (volume) => `🔊 - Le volume est à **${volume}%**.`,
             success: (volume) => `✅ - Le volume est maintenant à **${volume}%**!`
+        }
+    },
+    EVENTS: {
+        CHANNELCREATE: {
+            unknownUser: 'Membre Inconnu',
+            created: (type, channel) => `${type === "Catégorie" ? "Une": "Un"} **${type}** a été créé. (**${channel.name}** [<#${channel.id}>])`,
+            createdBy: "Créé par",
+            channelID: "ID",
+            permissionsOverwrite: (role) => `Permissions:\n${role.name}`,
+            permissions: (allowed, denied) => `Type: role\nPermissions autorisées: ${allowed}\nPermissions refusées: ${denied}`,
+            none: "Aucun",
         }
     }
 }
