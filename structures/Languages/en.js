@@ -451,6 +451,12 @@ module.exports = {
             unknownUser: "Unknown User",
             created: `A role has been created`,
             createdBy: "Created By",
+        },
+        ROLEDELETE: {
+            unknownUser: "Unknown User",
+            deleted: `A role has been deleted`,
+            createdBy: "Deleted By",
+            deletedLeft: `Deletion upon member leaving`
         }
     }
 }
