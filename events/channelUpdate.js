@@ -2,18 +2,6 @@ const {
     WebhookClient,
     MessageEmbed
 } = require("discord.js");
-const CHANNEL_TYPES = {
-    'fr': {
-        'text': 'Salon Textuel',
-        'voice': 'Salon Vocal',
-        'category': 'Catégorie'
-    },
-    'en': {
-        'text': 'Text Channel',
-        'voice': 'Voice Channel',
-        'category': 'Category'
-    }
-}
 
 module.exports = async (bot, oldChannel, newChannel) => {
     if (newChannel.type === "dm") return;
@@ -23,10 +11,6 @@ module.exports = async (bot, oldChannel, newChannel) => {
             let {
                 CHANNELUPDATE: lang
             } = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`).EVENTS;
-            let {
-                code
-            } = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`)
-
             if (logsSettings[0]) {
                 if (logsSettings[0].channelID) {
                     if (logsSettings[0].activated === "true") {
