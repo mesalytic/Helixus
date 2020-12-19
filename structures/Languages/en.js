@@ -426,6 +426,12 @@ module.exports = {
             restricted: '[❌] - This channel has been restricted for command usage. Only moderators can use commands in this channel.',
             error: (error) => `An error has occured: ${error.message}`,
             lvlUpMessage: "Congratulations {user}, you are now level **{level}** !"
+        },
+        MESSAGEDELETE: {
+            deleted: (message) => `A message from ${message.author} (${message.author.tag}) has been deleted.`,
+            deletedBy: "Deleted By",
+            attachment: "Attachment",
+            content: "Message Content"
         }
     }
 }

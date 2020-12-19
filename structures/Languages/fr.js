@@ -426,6 +426,12 @@ module.exports = {
             restricted: '[❌] - Ce salon a été restreint pour l\'utilisation de commandes. Seuls les modérateurs peuvent y exécuter des commandes.',
             error: (error) => `Une erreur s'est produite: ${error.message}`,
             lvlUpMessage: "Félicitations {user}, tu es maintenant niveau **{level}** !"
+        },
+        MESSAGEDELETE: {
+            deleted: (message) => `Un message de ${message.author} (${message.author.tag}) a été supprimé.`,
+            deletedBy: "Supprimé par",
+            attachment: "Fichier attaché",
+            content: "Contenu du message"
         }
     }
 }
