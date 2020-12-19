@@ -432,6 +432,15 @@ module.exports = {
             deletedBy: "Deleted By",
             attachment: "Attachment",
             content: "Message Content"
+        },
+        MESSAGEDELETEBULK: {
+            deleted: (messages, channel) => `**${messages.size}** messages were deleted in ${channel}.`,
+            deletedBy: "Deleted By",
+            unknownUser: `Unknown User`,
+            header: `The most recent message is at the top. The least recent message is at the bottom.\n\n\n\n`,
+            contentWithoutMessage: (link) => `Attachment: ${link}`,
+            contentWithMessage: (link, message) => `Attachment: ${link} | Message: ${message}`,
+            noContent: "No content has been found..."
         }
     }
 }
