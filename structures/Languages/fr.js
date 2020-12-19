@@ -382,6 +382,15 @@ module.exports = {
             none: "Aucune",
             bannedBy: "Banni par",
             unknownUser: 'Membre Inconnu',
+        },
+        GUILDBANREMOVE: {
+            unbanned: (user) => `${user.username}#${user.discriminator} a été débanni.`,
+            userInfos: "Informations sur le membre",
+            isBot: "\nEst un bot",
+            reason: "Raison",
+            none: "Aucune",
+            unbannedBy: "Débanni par",
+            unknownUser: 'Membre Inconnu',
         }
     }
 }
