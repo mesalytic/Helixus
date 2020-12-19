@@ -22,7 +22,6 @@ module.exports = async (bot, channel) => {
         bot.db.query(`SELECT * FROM Langs WHERE guildID='${channel.guild.id}'`, async (err, rows) => {
             let { CHANNELCREATE: lang } = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`).EVENTS;
             let { code } = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`)
-            console.log(lang);
             if (logsSettings[0]) {
                 if (logsSettings[0].channelID) {
                     if (logsSettings[0].activated === "true") {
