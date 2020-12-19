@@ -365,6 +365,14 @@ module.exports = {
             deleted: (emoji) => `Emoji deleted (**${emoji.name}**)`,
             deletedBy: "Deleted By",
             emojiID: "Emoji ID",
+        },
+        EMOJIUPDATE: {
+            unknownUser: 'Unknown User',
+            updated: (emoji) => `Emoji updated (**${emoji.name}** [\`<:${emoji.name}:${emoji.id}>\`])`,
+            updatedBy: "Updated By",
+            oldName: "Old Name",
+            newName: "New Name",
+            emojiID: "Emoji ID",
         }
     }
 }
