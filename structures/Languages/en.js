@@ -424,7 +424,7 @@ module.exports = {
             missingBotPerms: (permissions) => `[❌] - The bot is missing these permissions: ${permissions}`,
             pleaseWait: (time) => `[❌] - Please wait **${time} seconds** before using this command.`,
             restricted: '[❌] - This channel has been restricted for command usage. Only moderators can use commands in this channel.',
-            error: (error) `An error has occured: ${error.message}`,
+            error: (error) => `An error has occured: ${error.message}`,
             lvlUpMessage: "Congratulations {user}, you are now level **{level}** !"
         }
     }
