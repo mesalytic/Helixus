@@ -457,6 +457,14 @@ module.exports = {
             deleted: `Un rôle a été supprimé`,
             createdBy: "Supprimé par",
             deletedLeft: `Suppression après le départ du membre`
+        },
+        ROLEUPDATE: {
+            unknownUser: "Membre Inconnu",
+            updated: (role) => `**Le rôle ${role} a été mis a jour. (${role.id})**`,
+            updatedBy: 'Mis a jour par',
+            now: "__**Maintenant**__",
+            was: "__**Avant**__",
+            footer: 'Regardez les logs Discord afin de voir quelles permissions ont été modifiées.'
         }
     }
 }

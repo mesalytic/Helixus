@@ -457,6 +457,14 @@ module.exports = {
             deleted: `A role has been deleted`,
             createdBy: "Deleted By",
             deletedLeft: `Deletion upon member leaving`
+        },
+        ROLEUPDATE: {
+            unknownUser: "Unknown User",
+            updated: (role) => `**The role ${role} has been updated (${role.id})**`,
+            updatedBy: 'Updated by',
+            now: "__**Now**__",
+            was: "__**Was**__",
+            footer: 'Please check the audit logs to see what specific permissions were changed.'
         }
     }
 }
