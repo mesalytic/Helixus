@@ -409,6 +409,15 @@ module.exports = {
             userInfos: "Infos sur le membre",
             isBot: "\nEst un bot",
             reason: "Raison",
+        },
+        GUILDMEMBERUPDATE: {
+            updated: (member) => `**${member.user.username}#${member.user.discriminator}** (${member})'} a été mis a jour.`,
+            unknownChanges: "Changement inconnu",
+            weird: "Le bot n'a pas pu récuperer le changement. Regardez le bas de l'embed pour voir qui a mis a jour le membre.",
+            newNick: "Nouveau Pseudo",
+            oldNick: "Ancien Pseudo",
+            none: "Aucun",
+            ID: (memberID, executorID) => `ID du Membre = ${memberID}\nModérateur = ${executorID}`
         }
     }
 }

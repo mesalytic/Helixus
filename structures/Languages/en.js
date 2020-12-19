@@ -409,6 +409,15 @@ module.exports = {
             userInfos: "User Infos",
             isBot: "\nIs a bot",
             reason: "Reason",
+        },
+        GUILDMEMBERUPDATE: {
+            updated: (member) => `**${member.user.username}#${member.user.discriminator}** (${member})'} was updated.`,
+            unknownChanges: "Unknown Changes",
+            weird: "For a weird reason, this is empty... check the footer to see who updated the member.",
+            newNick: "New Nickname",
+            oldNick: "Old Nickname",
+            none: "None",
+            ID: (memberID, executorID) => `Member ID = ${memberID}\nExecutor = ${executorID}`
         }
     }
 }
