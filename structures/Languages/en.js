@@ -398,6 +398,17 @@ module.exports = {
             accountAge: "Account Age",
             days: (days) => `**${days}** days`,
             userID: "User ID",
+        },
+        GUILDMEMBERREMOVE: {
+            unknown: "Unknown",
+            none: "None",
+            lurker: "Lurker",
+            lurkerLeft: `A lurker has left the server.`,
+            kicked: (member) => `${member.user.username}#${member.user.discriminator} has been kicked.`,
+            left: (member) => `${member.user.username}#${member.user.discriminator} has left the server.`,
+            userInfos: "User Infos",
+            isBot: "\nIs a bot",
+            reason: "Reason",
         }
     }
 }
