@@ -391,6 +391,13 @@ module.exports = {
             none: "None",
             unbannedBy: "Unbanned By",
             unknownUser: 'Unknown User',
+        },
+        GUILDMEMBERADD: {
+            joined: (member, memberCount) => `${member} joined! We are now **${memberCount}** members !`,
+            joinedAt: "Joined at",
+            accountAge: "Account Age",
+            days: (days) => `**${days}** days`,
+            userID: "User ID",
         }
     }
 }
