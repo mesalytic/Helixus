@@ -31,9 +31,7 @@ module.exports = (bot, message) => {
 
       if (command) {
         /* Owner Check */
-        if (command.ownerOnly && message.author.id !== bot.config.ownerID) {
-          return message.reply("This command is only accessible to bot owners!")
-        }
+        if (command.ownerOnly && message.author.id !== bot.config.ownerID) return;
 
         /* Permissions Check */
         let neededPermsBot = [];
@@ -48,11 +46,11 @@ module.exports = (bot, message) => {
         })
 
         if (neededPermsUser.length > 0) {
-          return message.reply(`Missing USER Permissions: ${neededPermsUser.map((p) => `\`${permissions[`${p}`]}\``).join(", ")}`)
+          return message.reply(message.guild.lang.EVENTS.MESSAGE.missingUserPerms(neededPermsUser.map((p) => `\`${permissions[`${p}`]}\``).join(", ")))
         }
 
         if (neededPermsBot.length > 0) {
-          return message.reply(`Missing BOT Permissions: ${neededPermsBot.map((p) => `\`${permissions[`${p}`]}\``).join(", ")}`)
+          return message.reply(message.guild.lang.EVENTS.MESSAGE.missingBotPerms(neededPermsBot.map((p) => `\`${permissions[`${p}`]}\``).join(", ")))
         }
 
         /* Cooldowns */
@@ -69,7 +67,7 @@ module.exports = (bot, message) => {
 
           if (now < expirationTime) {
             const timeLeft = (expirationTime - now) / 1000;
-            return message.reply(`Please wait ${timeLeft.toFixed(1)} seconds before using this command.`)
+            return message.reply(message.guild.lang.EVENTS.MESSAGE.pleaseWait(timeLeft.toFixed(1)))
           }
         }
 
@@ -80,13 +78,17 @@ module.exports = (bot, message) => {
           bot.db.query(`SELECT * FROM IgnoreChannels WHERE channelID='${message.channel.id}'`, (err, rows) => {
             if (rows[0] && rows[0].ignored === "true" && !message.member.hasPermission("MANAGE_MESSAGES")) {
               message.delete();
-              return message.channel.send('[❌] - This channel has been restricted for command usage. Only moderators can use commands in this channel.')
-            } else command.run(message, args);
-          })
+              return message.channel.send(message.guild.lang.EVENTS.MESSAGE.restricted)
+            } else {
+              /* @TODO: Command Logging */
+              command.run(message, args);
+          }
+        })
           
         } catch (e) {
+          /* @TODO: Error Logging */
           bot.logger.error(e);
-          return message.reply(`An error has occured.`)
+          return message.reply(message.guild.lang.EVENTS.MESSAGE.error(e))
         }
 
       }
@@ -129,7 +131,7 @@ module.exports = (bot, message) => {
                   if (!rows[0].lvlupChannelID || rows[0].lvlupChannelID === "msgChannel") channel = message.channel.id;
                   else channel = rows[0].lvlupChannelID;
 
-                  if (!rows[0].lvlupMessage) lvlupMsg = "Congratulations {user}, you are now level **{level}** !";
+                  if (!rows[0].lvlupMessage) lvlupMsg = message.guild.lang.EVENTS.MESSAGE.lvlUpMessage;
                   else lvlupMsg = rows[0].lvlupMessage;
 
                   bot.db.query(`SELECT * FROM LevelsRewards WHERE guildID='${message.guild.id}' AND level='${lRows[0].level + 1}'`, (err, rRows) => {
@@ -148,7 +150,7 @@ module.exports = (bot, message) => {
                   }
 
                   if (!channel) channel = message.channel.id;
-                  if (!lvlupMsg) lvlupMsg = "Congratulations {user}, you are now level **{level}** !";
+                  if (!lvlupMsg) lvlupMsg = message.guild.lang.EVENTS.MESSAGE.lvlUpMessage;
 
                   const res = lvlupMsg.replace(/{user}/g, message.author).replace(/{level}/g, Number(lRows[0].level + 1)).replace(/{server}/g, message.guild.name).replace(/{username}/g, message.author.username);
 
@@ -182,7 +184,7 @@ module.exports = (bot, message) => {
               if (!rows[0].lvlupChannelID || rows[0].lvlupChannelID === "msgChannel") channel = message.channel.id;
               else channel = rows[0].lvlupChannelID;
 
-              if (!rows[0].lvlupMessage) lvlupMsg = "Congratulations {user}, you are now level **{level}** !";
+              if (!rows[0].lvlupMessage) lvlupMsg = message.guild.lang.EVENTS.MESSAGE.lvlUpMessage;
               else lvlupMsg = rows[0].lvlupMessage;
 
               bot.db.query(`SELECT * FROM LevelsRewards WHERE guildID='${message.guild.id}' AND level='${lRows[0].level + 1}'`, (err, rRows) => {
@@ -201,7 +203,7 @@ module.exports = (bot, message) => {
               }
 
               if (!channel) channel = message.channel.id;
-              if (!lvlupMsg) lvlupMsg = "Congratulations {user}, you are now level **{level}** !";
+              if (!lvlupMsg) lvlupMsg = message.guild.lang.EVENTS.MESSAGE.lvlUpMessage;
 
               const res = lvlupMsg.replace(/{user}/g, message.author).replace(/{level}/g, Number(lRows[0].level + 1)).replace(/{server}/g, message.guild.name).replace(/{username}/g, message.author.username);
 
