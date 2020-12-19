@@ -336,6 +336,12 @@ module.exports = {
             permissionsOverwrite: (role) => `Permissions:\n${role.name}`,
             permissions: (allowed, denied) => `Type: role\nPermissions autorisées: ${allowed}\nPermissions refusées: ${denied}`,
             none: "Aucun",
+        },
+        CHANNELDELETE: {
+            unknownUser: 'Membre Inconnu',
+            deleted: (type, channel) => `${type === "Catégorie" ? "Une": "Un"} **${type}** a été supprimé. (**${channel.name}**)`,
+            deletedBy: "Supprimé par",
+            channelID: "ID",
         }
     }
 }
