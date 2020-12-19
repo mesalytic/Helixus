@@ -446,6 +446,11 @@ module.exports = {
             updated: (author) => `A message from ${author} (${author.tag}) has been updated.`,
             oldMessage: "Old Message",
             newMessage: "New Message"
+        },
+        ROLECREATE: {
+            unknownUser: "Unknown User",
+            created: `A role has been created`,
+            createdBy: "Created By",
         }
     }
 }
