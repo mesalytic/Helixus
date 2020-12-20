@@ -465,6 +465,14 @@ module.exports = {
             now: "__**Now**__",
             was: "__**Was**__",
             footer: 'Please check the audit logs to see what specific permissions were changed.'
+        },
+        VOICESTATEUPDATE: {
+            joined: (member, channel) => `${member} **__joined__ ${channel.name}**`,
+            switch: (member, newChannel, oldChannel) => `${member} **__joined__ ${newChannel.name}** and **__left__ ${oldChannel.name}**.`,
+            left: (member, channel) => `${member} **__left__ ${channel.name}**`,
+            updated: (newState) => `**${newState.member.user.username}#${newState.member.user.discriminator}** (${newState.member.id}) had their voice state updated.`,
+            voiceChannel: "Voice Channel",
+            states: (oldState, newState) => `Was: ${oldState}\nNow: ${newState}`
         }
     }
 }

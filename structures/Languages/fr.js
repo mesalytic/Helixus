@@ -465,6 +465,14 @@ module.exports = {
             now: "__**Maintenant**__",
             was: "__**Avant**__",
             footer: 'Regardez les logs Discord afin de voir quelles permissions ont été modifiées.'
+        },
+        VOICESTATEUPDATE: {
+            joined: (member, channel) => `${member} **__a rejoins__ ${channel.name}**`,
+            switch: (member, newChannel, oldChannel) => `${member} **__a rejoins__ ${newChannel.name}** et **__a quitté__ ${oldChannel.name}**.`,
+            left: (member, channel) => `${member} **__a quitté__ ${channel.name}**`,
+            updated: (newState) => `L'état de **${newState.member.user.username}#${newState.member.user.discriminator}** (${newState.member.id}) a été mis a jour.`,
+            voiceChannel: "Salon Vocal",
+            states: (oldState, newState) => `Avant: ${oldState}\nAprès: ${newState}`
         }
     }
 }
