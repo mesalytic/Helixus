@@ -94,7 +94,7 @@ module.exports = async (bot, oldState, newState) => {
                                         .setColor("RANDOM")
 
                                     if (new Date().getTime() - new Date((log.id / 4194304) + 1420070400000).getTime() < 3000) {
-                                        embed.addField(`${toTitleCase(log.changes[0].key)}`, lang.states(states[code][log.changes[0].key][log.changes[0].old], states[code][log.changes[0].key][log.changes[0].new])`Was: ${}\nNow: ${}`)
+                                        embed.addField(`${toTitleCase(log.changes[0].key)}`, lang.states(states[code][log.changes[0].key][log.changes[0].old], states[code][log.changes[0].key][log.changes[0].new]))
                                         webhook.send(embed)
                                     } else {
                                         webhook.send(embed)
