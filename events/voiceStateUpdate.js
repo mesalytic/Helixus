@@ -29,7 +29,7 @@ const states = {
 module.exports = async (bot, oldState, newState) => {
     bot.db.query(`SELECT * FROM Logs WHERE guildID='${newState.guild.id}'`, async (err, logsSettings) => {
         if (err) throw err;
-        bot.db.query(`SELECT * FROM Langs WHERE guildID='${role.guild.id}'`, async (err, rows) => {
+        bot.db.query(`SELECT * FROM Langs WHERE guildID='${newState.guild.id}'`, async (err, rows) => {
             let {
                 ROLECREATE: lang
             } = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`).EVENTS;
