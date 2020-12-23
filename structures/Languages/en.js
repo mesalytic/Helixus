@@ -89,7 +89,7 @@ module.exports = {
         },
         LANG: {
             description: 'Changes the bot\'s language on the server.',
-            success: `[V] - The server language has been updated to **English**!`
+            success: `[✅] - The server language has been updated to **English**!`
         },
         LEAVEMESSAGE: {
             description: "Configure the message that will display when a user leaves the server",
@@ -194,6 +194,22 @@ module.exports = {
         },
         RANK: {
             description: 'Displays your level stats.',
+        },
+        REACTIONROLE: {
+            description: 'Lets you configure reaction roles.\nIf a user adds a reaction on a reaction role, the role linked to the reaction will be given to the user.',
+            noChanSpecified: "[❌] - You haven\'t specified a channel.",
+            noValidChan: '[❌] - You haven\'t specified a valid channel.',
+            noMessageID: `[❌] - You haven't specified a message ID.`,
+            noEmoteSpecified: `[❌] - You haven't specified an emote.`,
+            noValidEmote: `[❌] - You haven't specifed a valid emote.`,
+            noRole: `[❌] - The role you specified is not valid or non existant.`,
+            emoteAlreadyUsed: '[❌] - This emoji is already used as a reaction role for this message!',
+            roleAlreadyUsed: '[❌] - This role is already used as a reaction role for this message!',
+            success: (emote) => `[✅] - This role will now be given via reacting with ${emote}`,
+            REMOVE: {
+                success: `[✅] - The reaction role has successfully been removed.`,
+                notFound: `[❌] - The reaction role has not been found.`
+            }
         },
         RESUME: {
             description: 'Resumes the musics that its currently playing.',

@@ -89,7 +89,7 @@ module.exports = {
         },
         LANG: {
             description: 'Change la langue du bot sur le serveur.',
-            success: `[V] - La langue du bot sur ce serveur a bien été mis en **Français** !`
+            success: `[✅] - La langue du bot sur ce serveur a bien été mis en **Français** !`
         },
         LEAVEMESSAGE: {
             description: "Vous permets de configurer un message qui sera affiché dès le départ d'un membre.",
@@ -194,6 +194,22 @@ module.exports = {
         },
         RANK: {
             description: 'Affiche votre niveau.',
+        },
+        REACTIONROLE: {
+            description: 'Vous permet de configurer des Reaction Roles.\nSi un membre ajoute une réaction qui est liée a un role, ce rôle lui sera attribué.',
+            noChanSpecified: "[❌] - Vous n'avez spécifié aucun salon.",
+            noValidChan: '[❌] - Le salon spécifié n\'est pas valide.',
+            noMessageID: `[❌] - Vous n'avez pas spécifié d'ID de message.`,
+            noEmoteSpecified: `[❌] - Vous n'avez pas spécifié d'emoji.`,
+            noValidEmote: `[❌] - L'emoji spécifié n'est pas valide.`,
+            noRole: `[❌] - Le rôle spécifié n'est pas valide ou non existant.`,
+            emoteAlreadyUsed: '[❌] - Cet emoji est déjà lié a un Reaction Role pour ce message.',
+            roleAlreadyUsed: '[❌] - Ce rôle est déjà lié a un Reaction Role pour ce message.',
+            success: (emote) => `[✅] - Ce rôle sera désormais donné quand quelqu'un ajoutera l'emoji ${emote} sur le message.`,
+            REMOVE: {
+                success: `[✅] - Le Reaction Role a bien été supprimé.`,
+                notFound: `[❌] - Le Reaction Role n'a pas été trouvé.`
+            }
         },
         RESUME: {
             description: 'Relance la musique si elle est en pause.',

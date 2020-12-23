@@ -41,20 +41,45 @@ function canModifyQueue(member) {
 
     return true;
 }
-function compareArrays (a, b) {
+
+function compareArrays(a, b) {
     if (a === b) return true
     if (a == null || b == null) return false
     if (a.length !== b.length) return false
-  
+
     for (let i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false
+        if (a[i] !== b[i]) return false
     }
     return true
-  }
+}
+
+function parseEmoji(text) {
+    if (text.includes("%")) text = decodeURIComponent(text);
+    if (!text.includes(":")) return {
+        animated: false,
+        name: text,
+        id: null
+    };
+    const m = text.match(/<?(?:(a):)?(\w{2,32}):(\d{17,19})?>?/);
+    if (!m) return null;
+    return {
+        animated: Boolean(m[1]),
+        name: m[2],
+        id: m[3] || null
+    };
+}
+
+function base64(text, mode = 'encode') {
+    if (mode === 'encode') return Buffer.from(text).toString('base64');
+    if (mode === 'decode') return Buffer.from(text, 'base64').toString('utf8') || null;
+    throw new TypeError(`${mode} is not a supported base64 mode.`);
+}
 
 module.exports = {
     capitalize,
     timeZoneConvert,
     canModifyQueue,
-    compareArrays
+    compareArrays,
+    parseEmoji,
+    base64
 };
