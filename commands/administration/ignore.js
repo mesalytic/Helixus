@@ -1,7 +1,3 @@
-const {
-    MessageEmbed
-} = require("discord.js");
-const ms = require('parse-ms');
 const Command = require("../../structures/Command");
 
 module.exports = class IgnoreCommand extends Command {
@@ -24,7 +20,7 @@ module.exports = class IgnoreCommand extends Command {
                 this.bot.db.query(`INSERT INTO IgnoreChannels (guildID, channelID, ignored) VALUES ('${message.guild.id}', '${chan.id}', "true")`);
                 return message.channel.send(message.guild.lang.COMMANDS.IGNORE.noRowsIgnored(chan));
             } else {
-                switch(rows[0].ignored) {
+                switch (rows[0].ignored) {
                     case "true":
                         this.bot.db.query(`UPDATE IgnoreChannels SET ignored = "false" WHERE channelID = '${chan.id}'`);
                         message.channel.send(message.guild.lang.COMMANDS.IGNORE.notIgnored)

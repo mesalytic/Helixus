@@ -1,7 +1,3 @@
-const {
-    MessageEmbed
-} = require("discord.js");
-const ms = require('parse-ms');
 const Command = require("../../structures/Command");
 
 module.exports = class JoinMessageCommand extends Command {
@@ -22,7 +18,7 @@ module.exports = class JoinMessageCommand extends Command {
         if (!args[0]) return this.bot.commands.get("help").run(message, ["joinmessage"]);
 
         this.bot.db.query(`SELECT * FROM JoinMessages WHERE guildID='${message.guild.id}'`, (err, rows) => {
-            switch(args[0]) {
+            switch (args[0]) {
                 case "on":
                     if (!rows[0]) this.bot.db.query(`INSERT INTO JoinMessages (guildID, activated) VALUES ('${message.guild.id}', 'true')`)
                     else this.bot.db.query(`UPDATE JoinMessages SET activated = 'true' WHERE guildID='${message.guild.id}'`)

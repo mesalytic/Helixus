@@ -1,5 +1,4 @@
 const {
-    MessageEmbed,
     WebhookClient
 } = require("discord.js");
 const Command = require("../../structures/Command");

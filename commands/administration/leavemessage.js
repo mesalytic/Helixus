@@ -1,6 +1,3 @@
-const {
-    MessageEmbed
-} = require("discord.js");
 const ms = require('parse-ms');
 const Command = require("../../structures/Command");
 
@@ -22,7 +19,7 @@ module.exports = class LeaveMessageCommand extends Command {
         if (!args[0]) return this.bot.commands.get("help").run(message, ["leavemessage"]);
 
         this.bot.db.query(`SELECT * FROM LeaveMessages WHERE guildID='${message.guild.id}'`, (err, rows) => {
-            switch(args[0]) {
+            switch (args[0]) {
                 case "on":
                     if (!rows[0]) this.bot.db.query(`INSERT INTO LeaveMessages (guildID, activated) VALUES ('${message.guild.id}', 'true')`)
                     else this.bot.db.query(`UPDATE LeaveMessages SET activated = 'true' WHERE guildID='${message.guild.id}'`)
