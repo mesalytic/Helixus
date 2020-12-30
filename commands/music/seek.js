@@ -1,7 +1,4 @@
 const Command = require("../../structures/Command");
-const {
-    canModifyQueue
-} = require("../../structures/Utils");
 
 module.exports = class SeekCommand extends Command {
     constructor(bot) {

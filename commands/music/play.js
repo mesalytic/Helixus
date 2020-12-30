@@ -10,9 +10,6 @@ const ytdl = require('discord-ytdl-core');
 const {
     MessageEmbed
 } = require("discord.js");
-const {
-    canModifyQueue
-} = require("../../structures/Utils");
 
 module.exports = class PlayCommand extends Command {
     constructor(bot) {

@@ -1,7 +1,4 @@
 const Command = require("../../structures/Command");
-const {
-    canModifyQueue
-} = require("../../structures/Utils");
 
 module.exports = class VolumeCommand extends Command {
     constructor(bot) {
@@ -17,7 +14,6 @@ module.exports = class VolumeCommand extends Command {
     async run(message, args) {
         const queue = this.bot.queue.get(message.guild.id);
         if (!queue) return message.reply(message.guild.lang.COMMANDS.VOLUME.noQueue).catch(console.error);
-        if (!canModifyQueue(message.member)) return;
 
         if (!args[0]) return message.channel.send(message.guild.lang.COMMANDS.VOLUME.volume(queue.volume))
 

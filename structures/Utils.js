@@ -1,3 +1,7 @@
+const Client = require('./Client');
+const config = require('../config.json')
+const bot = new Client(config);
+
 /**
  * Capitalizes a string
  * @param {string} string 
@@ -26,20 +30,6 @@ function timeZoneConvert(data) {
     }
     return `${month} ${date}, ${year} ${h}:${m} ${tz}`;
 
-}
-
-function canModifyQueue(member) {
-    const {
-        channelID
-    } = member.voice;
-    const botChannel = member.guild.voice.channelID;
-
-    if (channelID !== botChannel) {
-        member.send("You need to join the voice channel first!").catch(console.error);
-        return;
-    }
-
-    return true;
 }
 
 function compareArrays(a, b) {
@@ -78,7 +68,6 @@ function base64(text, mode = 'encode') {
 module.exports = {
     capitalize,
     timeZoneConvert,
-    canModifyQueue,
     compareArrays,
     parseEmoji,
     base64

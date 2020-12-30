@@ -2,9 +2,6 @@ const {
     MessageEmbed
 } = require("discord.js");
 const Command = require("../../structures/Command");
-const {
-    canModifyQueue
-} = require("../../structures/Utils");
 const createBar = require("string-progressbar");
 
 module.exports = class NowPlayingCommand extends Command {
