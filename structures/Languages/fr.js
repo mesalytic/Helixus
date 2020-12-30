@@ -236,6 +236,10 @@ module.exports = {
                 embedTitle: (page, pages) => `Liste des récompenses de niveau (${page + 1}/${pages + 1})`
             }
         },
+        SAY: {
+            description: 'Repète la phrase spécifiée.',
+            tooLong: '[❌] - Veuillez spécifier une phrase faisant moins de 1950 caractères.'
+        },
         SEEK: {
             description: 'Vous permets d\'aller a un point spécifique de la musique.',
             noQueue: "[❌] - Aucune musique n'est jouée.",

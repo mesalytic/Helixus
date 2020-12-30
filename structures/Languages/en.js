@@ -236,6 +236,10 @@ module.exports = {
                 embedTitle: (page, pages) => `Role Rewards List (${page + 1}/${pages + 1})`
             }
         },
+        SAY: {
+            description: 'Repeat the text you provided.',
+            tooLong: '[❌] - Please specify a text with less than 1950 characters.'
+        },
         SEEK: {
             description: 'Allows you to set the music to a specific point.',
             noQueue: "[❌] - There is nothing playing.",
