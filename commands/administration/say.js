@@ -17,7 +17,7 @@ module.exports = class SayCommand extends Command {
 
     async run(message, args) {
   if (!args[0]) return this.bot.commands.get("help").run(message, ["say"]);
-  if (args.join(" ").length > 1950) return message.reply()
+  if (args.join(" ").length > 1950) return message.reply(message.guild.lang.COMMANDS.SAY.tooMuch)
 
   try {
     message.delete();
