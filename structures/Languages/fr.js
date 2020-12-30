@@ -186,6 +186,12 @@ module.exports = {
             ended: "🚫 File terminée.",
             startedPlaying: (title, url) => `🎶 Joue: **${title}** <${url}>`
         },
+        PREFIX: {
+            description: 'Change le préfixe du bot sur le serveur.',
+            actualPrefix: (prefix) => `Le préfixe actuel est: \`${prefix}\``,
+            tooLong: `[X] - Le préfixe doit faire moins de 5 caractères.`,
+            success: (prefix) => `[V] - Le préfixe pour ce serveur est maintenant \`${prefix}\`.`
+        },
         QUEUE: {
             description: 'Affiche la file. Utilisez les réactions pour naviguer entre les pages.',
             noQueue: "[❌] - Aucune musique n'est jouée.",

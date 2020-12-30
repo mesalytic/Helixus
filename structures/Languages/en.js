@@ -186,6 +186,12 @@ module.exports = {
             ended: "🚫 Music queue ended.",
             startedPlaying: (title, url) => `🎶 Started playing: **${title}** <${url}>`
         },
+        PREFIX: {
+            description: 'Changes the bot\'s prefix on the server.',
+            actualPrefix: (prefix) => `The current prefix is: \`${prefix}\``,
+            tooLong: `[X] - The prefix must be only 5 characters long.`,
+            success: (prefix) => `[V] - The prefix for this server is now \`${prefix}\`.`
+        },
         QUEUE: {
             description: 'Displays the whole music queue. Use the reactions to navigate.',
             noQueue: "[❌] - There is nothing playing.",
