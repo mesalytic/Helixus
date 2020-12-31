@@ -36,6 +36,11 @@ module.exports = {
             description: "Displays your current balance.",
             output: (bal) => `You have <a:coin:784930553748520961> **${bal}** coins!`
         },
+        BEG: {
+            description: "Begging for coins...",
+            notReady: (time) => `You already begged recently! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
+            success: (amount) => `You begged and received ${amount} coins!`
+        },
         DAILY: {
             description: "Gives you coins daily!",
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,

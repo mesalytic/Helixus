@@ -36,6 +36,11 @@ module.exports = {
             description: "Affiche votre porte monnaie!",
             output: (bal) => `Vous avez <a:coin:784930553748520961> **${bal}** pièces!`
         },
+        BEG: {
+            description: "Supplie pour des pièces!",
+            notReady: (time) => `Tu as déjà supplié pour des pièces récemment! Reviens dans ${time.hours}:${time.minutes}:${time.seconds} !`,
+            success: (amount) => `Tu as supplié et a reçu ${amount} pièces!`
+        },
         DAILY: {
             description: "Vous donne des pièces tous les jours",
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,

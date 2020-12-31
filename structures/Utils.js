@@ -65,10 +65,15 @@ function base64(text, mode = 'encode') {
     throw new TypeError(`${mode} is not a supported base64 mode.`);
 }
 
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
+}
+
 module.exports = {
     capitalize,
     timeZoneConvert,
     compareArrays,
     parseEmoji,
-    base64
+    base64,
+    randomInt
 };
