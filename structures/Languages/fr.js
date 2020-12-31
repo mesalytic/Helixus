@@ -356,7 +356,12 @@ module.exports = {
             noQueue: "[❌] - Aucune musique n'est jouée.",
             volume: (volume) => `🔊 - Le volume est à **${volume}%**.`,
             success: (volume) => `✅ - Le volume est maintenant à **${volume}%**!`
-        }
+        },
+        WEEKLY: {
+            description: "Vous donne des pièces toutes les semaines!",
+            notReady: (time) => `Vous avez déjà collecté votre récompense hebdomadaire! Revenez dans ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
+            success: (amount) => `Vous avez récupéré votre récompense hebdomadaire de ${amount} pièces !`
+        },
     },
     EVENTS: {
         CHANNELCREATE: {

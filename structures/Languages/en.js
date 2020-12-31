@@ -356,7 +356,12 @@ module.exports = {
             noQueue: "[❌] - There is nothing playing.",
             volume: (volume) => `🔊 - The volume is at **${volume}%**.`,
             success: (volume) => `✅ - Volume has been set to **${volume}%**!`
-        }
+        },
+        WEEKLY: {
+            description: "Gives you coins weekly!",
+            notReady: (time) => `You already collected your weekly bonus! Come back in ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
+            success: (amount) => `You've collected your weekly reward of ${amount} coins!`
+        },
     },
     EVENTS: {
         CHANNELCREATE: {
