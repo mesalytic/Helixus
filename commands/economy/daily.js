@@ -1,6 +1,3 @@
-const {
-    MessageEmbed
-} = require("discord.js");
 const ms = require('parse-ms');
 const Command = require("../../structures/Command");
 
