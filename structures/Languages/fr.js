@@ -50,6 +50,7 @@ module.exports = {
             TYPES: {
                 administration: "Administration",
                 economy: "Economie",
+                fun: "Fun",
                 general: "Général",
                 info: "Infos",
                 levels: "Niveaux",
