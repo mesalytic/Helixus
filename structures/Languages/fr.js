@@ -41,6 +41,11 @@ module.exports = {
             notReady: (time) => `Tu as déjà supplié pour des pièces récemment! Reviens dans ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `Tu as supplié et a reçu ${amount} pièces!`
         },
+        CHOOSE: {
+            description: 'Permets au bot de choisir parmi plusieurs choix.',
+            success: (choice) => `[✅] - Mon choix est... **${choice}**!`
+        },
+
         DAILY: {
             description: "Vous donne des pièces tous les jours",
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,

@@ -41,6 +41,10 @@ module.exports = {
             notReady: (time) => `You already begged recently! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `You begged and received ${amount} coins!`
         },
+        CHOOSE: {
+            description: 'Allows you to choose between multiple choices.',
+            success: (choice) => `[✅] - My choice is... **${choice}**!`
+        },
         DAILY: {
             description: "Gives you coins daily!",
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
@@ -181,13 +185,13 @@ module.exports = {
         PAY: {
             description: "Give someone coins.",
             notes: 'For every coin transaction made, a 5% fee is deducted. You must consider those 5% when doing a transaction',
-            noUser: '[X] - You have to mention someone!',
-            isBot: '[X] - You can\'t send coins to a bot.',
-            notEnoughCoins: '[X] - You don\'t have enough coins!',
-            noCoinsSpecified: '[X] - You have to specify an amount of coins to give.',
+            noUser: '[❌] - You have to mention someone!',
+            isBot: '[❌] - You can\'t send coins to a bot.',
+            notEnoughCoins: '[❌] - You don\'t have enough coins!',
+            noCoinsSpecified: '[❌] - You have to specify an amount of coins to give.',
             pending: (oldAmt, newAmt, user) => `[<a:loading:543460555113889792>] - Do you want to send ~~${oldAmt}~~ (_5% transaction fee_) **${newAmt} coins** to ${user} ?`,
-            success: (amount, user) => `[V] - You have succesfully transferred **${amount} coins** to ${user}!`,
-            cancelled: `[X] - The transaction has been cancelled.`
+            success: (amount, user) => `[✅] - You have succesfully transferred **${amount} coins** to ${user}!`,
+            cancelled: `[❌] - The transaction has been cancelled.`
         },
         PING: {
             description: 'Displays the bot\'s current **message latency** and **heartbeat**.',
@@ -206,8 +210,8 @@ module.exports = {
         PREFIX: {
             description: 'Changes the bot\'s prefix on the server.',
             actualPrefix: (prefix) => `The current prefix is: \`${prefix}\``,
-            tooLong: `[X] - The prefix must be only 5 characters long.`,
-            success: (prefix) => `[V] - The prefix for this server is now \`${prefix}\`.`
+            tooLong: `[❌] - The prefix must be only 5 characters long.`,
+            success: (prefix) => `[✅] - The prefix for this server is now \`${prefix}\`.`
         },
         QUEUE: {
             description: 'Displays the whole music queue. Use the reactions to navigate.',
