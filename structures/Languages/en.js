@@ -186,7 +186,7 @@ module.exports = {
             notEnoughCoins: '[X] - You don\'t have enough coins!',
             noCoinsSpecified: '[X] - You have to specify an amount of coins to give.',
             pending: (oldAmt, newAmt, user) => `[<a:loading:543460555113889792>] - Do you want to send ~~${oldAmt}~~ (_5% transaction fee_) **${newAmt} coins** to ${user} ?`,
-            success: (amount, user)`[V] - You have succesfully transferred **${Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05))} coins** to ${user}!`,
+            success: (amount, user) => `[V] - You have succesfully transferred **${amount} coins** to ${user}!`,
             cancelled: `[X] - The transaction has been cancelled.`
         },
         PING: {
