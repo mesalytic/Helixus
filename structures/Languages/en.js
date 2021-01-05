@@ -177,6 +177,17 @@ module.exports = {
             noQueue: "[❌] - There is nothing playing.",
             success: (author) => `⏸ ${author} has paused the music.`
         },
+        PAY: {
+            description: "Give someone coins.",
+            notes: 'For every coin transaction made, a 5% fee is deducted. You must consider those 5% when doing a transaction',
+            noUser: '[X] - You have to mention someone!',
+            isBot: '[X] - You can\'t send coins to a bot.',
+            notEnoughCoins: '[X] - You don\'t have enough coins!',
+            noCoinsSpecified: '[X] - You have to specify an amount of coins to give.',
+            pending: (oldAmt, newAmt, user) => `[<a:loading:543460555113889792>] - Do you want to send ~~${oldAmt}~~ (_5% transaction fee_) **${newAmt} coins** to ${user} ?`,
+            success: (amount, user)`[V] - You have succesfully transferred **${Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05))} coins** to ${user}!`,
+            cancelled: `[X] - The transaction has been cancelled.`
+        },
         PING: {
             description: 'Displays the bot\'s current **message latency** and **heartbeat**.',
             latency: "Latency",

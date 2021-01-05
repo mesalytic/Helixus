@@ -177,6 +177,17 @@ module.exports = {
             noQueue: "[❌] - Aucune musique n'est jouée.",
             success: (author) => `⏸ ${author} a mis en pause la musique.`
         },
+        PAY: {
+            description: "Donner des pièces a quelqu'un.",
+            notes: 'Pour chaque transaction effectuée, une taxe de 5% sera déduite. Veuillez prendre ceci en compte lors de vos transactions.',
+            noUser: '[❌] - Vous devez mentionner quelqu\'un!',
+            isBot: '[❌] - Vous ne pouvez pas envoyer de pièces a un bot.',
+            notEnoughCoins: '[❌] - Vous n\'avez pas suffisamment de pièces!',
+            noCoinsSpecified: '[❌] - Vous devez specifier un nombre de pièces.',
+            pending: (oldAmt, newAmt, user) => `[<a:loading:543460555113889792>] - Voulez vous vraiment envoyer ~~${oldAmt}~~ (_5% de taxe_) **${newAmt} pièces** à ${user} ?`,
+            success: (amount, user)`[✅] - Vous avez envoyé **${Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05))} pièces** à ${user}!`,
+            cancelled: `[❌] - La transaction a été annulée.`
+        },
         PING: {
             description: 'Affiche la **latence de message** ainsi que le **heartbeat** du bot.',
             latency: "Latence",
@@ -194,8 +205,8 @@ module.exports = {
         PREFIX: {
             description: 'Change le préfixe du bot sur le serveur.',
             actualPrefix: (prefix) => `Le préfixe actuel est: \`${prefix}\``,
-            tooLong: `[X] - Le préfixe doit faire moins de 5 caractères.`,
-            success: (prefix) => `[V] - Le préfixe pour ce serveur est maintenant \`${prefix}\`.`
+            tooLong: `[❌] - Le préfixe doit faire moins de 5 caractères.`,
+            success: (prefix) => `[✅] - Le préfixe pour ce serveur est maintenant \`${prefix}\`.`
         },
         QUEUE: {
             description: 'Affiche la file. Utilisez les réactions pour naviguer entre les pages.',
