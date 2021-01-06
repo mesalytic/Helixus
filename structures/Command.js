@@ -17,7 +17,7 @@ module.exports = class Command {
 		this.examples = options.examples || null;
 		this.ownerOnly = options.ownerOnly || false;
 		this.disabled = options.disabled || false;
-		this.cooldown = options.cooldown || 3000;
+		this.cooldown = options.cooldown * 1000 || 3000;
 		this.errorTypes = ['Invalid Argument', 'Command Failure'];
 	}
 
