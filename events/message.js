@@ -117,6 +117,12 @@ module.exports = (bot, message) => {
                 bot.db.query(`INSERT INTO Levels (user, guild, points, level) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(5, 15)}', '1')`);
               } else {
 
+                if (!message.guild.lang) {
+                  bot.db.query(`SELECT * FROM Langs WHERE guildID='${message.guild.id}'`, (err, rows) => {
+                   message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
+                  })
+                }
+
                 let xp;
                 let xpToWin = generateXP(5, 15);
                 
