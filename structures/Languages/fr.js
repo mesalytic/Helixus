@@ -51,6 +51,24 @@ module.exports = {
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `Vous avez récupéré votre récompense journalière de ${amount} pièces !`
         },
+        FISH: {
+            description: "Allons pêcher",
+            INVENTORY: {
+                inventory: "Inventaire de poissons",
+                content: (junkFish, commonFish, uncommonFish, rareFish) => `🔧 - Dechets: **${junkFish}**\n🐟 - Communs: **${commonFish}**\n🐠 - Non communs: **${uncommonFish}**\n🐡 - Rare: **${rareFish}**\n`
+            },
+            SELL: {
+                sellWhat: "What would you like to sell?",
+                content: (junkFish, commonFish, uncommonFish, rareFish) => `🔧 - Dechets: **${junkFish}**\n🐟 - Communs: **${commonFish}**\n🐠 - Non communs: **${uncommonFish}**\n🐡 - Rare: **${rareFish}**\n`,
+                pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
+                sold: "Poisson vendus",
+                soldContent: (fishAmount, fishSymbol, coins) => `Tu as vendu **${fishAmount} ${fishSymbol}** pour __**${coins} pièces**__!`,
+                failed: (fishSymbol) => `Tu n'as pas de ${fishSymbol} a vendre...`,
+                cancelled: `Tu n'as rien vendu...`
+            },
+            notEnoughCoins: '[❌] - Tu dois avoir au moins 10 pièces avant de commencer a pêcher.',
+            caught: (fishSymbol) => `[✅] - Tu as attrapé... ${fishSymbol} ! (**-10 <a:coin:784930553748520961>**)`
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",

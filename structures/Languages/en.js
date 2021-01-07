@@ -50,6 +50,24 @@ module.exports = {
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `You've collected your daily reward of ${amount} coins!`
         },
+        FISH: {
+            description: "Lets go fishing!",
+            INVENTORY: {
+                inventory: "Fish Inventory",
+                content: (junkFish, commonFish, uncommonFish, rareFish) => `🔧 - Junk: **${junkFish}**\n🐟 - Common: **${commonFish}**\n🐠 - Uncommon: **${uncommonFish}**\n🐡 - Rare: **${rareFish}**\n`
+            },
+            SELL: {
+                sellWhat: "What would you like to sell?",
+                content: (junkFish, commonFish, uncommonFish, rareFish) => `🔧 - Junk: **${junkFish}**\n🐟 - Common: **${commonFish}**\n🐠 - Uncommon: **${uncommonFish}**\n🐡 - Rare: **${rareFish}**\n`,
+                pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+                sold: "Fish Sold",
+                soldContent: (fishAmount, fishSymbol, coins) => `You successfully sold your **${fishAmount} ${fishSymbol} items** for __**${coins} coins**__!`,
+                failed: (fishSymbol) => `You don't have any ${fishSymbol} to sell...`,
+                cancelled: `You have sold nothing...`
+            },
+            notEnoughCoins: '[❌] - You must have at least 10 coins to start fishing.',
+            caught: (fishSymbol) => `[V] - You caught... ${fishSymbol} ! (**-10 <a:coin:784930553748520961>**)`
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",
