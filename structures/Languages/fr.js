@@ -45,6 +45,10 @@ module.exports = {
             description: 'Permets au bot de choisir parmi plusieurs choix.',
             success: (choice) => `[✅] - Mon choix est... **${choice}**!`
         },
+        COIN: {
+            description: 'Pile ou face?',
+            success: (side) => `[✅] - C'est atteri sur **${side}**!`
+        },
         DAILY: {
             description: "Vous donne des pièces tous les jours",
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,

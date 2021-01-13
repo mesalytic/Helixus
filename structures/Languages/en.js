@@ -45,6 +45,10 @@ module.exports = {
             description: 'Allows you to choose between multiple choices.',
             success: (choice) => `[✅] - My choice is... **${choice}**!`
         },
+        COIN: {
+            description: 'Heads or tails?',
+            success: (side) => `[✅] - It landed on **${side}**!`
+        },
         DAILY: {
             description: "Gives you coins daily!",
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
