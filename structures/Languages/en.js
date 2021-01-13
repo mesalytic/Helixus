@@ -50,6 +50,10 @@ module.exports = {
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `You've collected your daily reward of ${amount} coins!`
         },
+        DICE: {
+            description: 'Rolls a dice within a 1-max value of your choice.',
+            success: (number) => `[✅] - You rolled a **${number}**!`
+        },
         FISH: {
             description: "Lets go fishing!",
             INVENTORY: {

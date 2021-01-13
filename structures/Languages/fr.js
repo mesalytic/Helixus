@@ -45,11 +45,14 @@ module.exports = {
             description: 'Permets au bot de choisir parmi plusieurs choix.',
             success: (choice) => `[✅] - Mon choix est... **${choice}**!`
         },
-
         DAILY: {
             description: "Vous donne des pièces tous les jours",
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `Vous avez récupéré votre récompense journalière de ${amount} pièces !`
+        },
+        DICE: {
+            description: 'Lance un dé et retourne un nombre entre 1 et le nombre de votre choix.',
+            success: (number) => `[✅] - Vous avez eu **${number}**!`
         },
         FISH: {
             description: "Allons pêcher",
