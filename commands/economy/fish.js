@@ -118,7 +118,6 @@ module.exports = class FishCommand extends Command {
                                         for (let i = 0; i < Number(rows[0][`${reason[1]}Fish`]); i++) {
                                             amountGiven += randomInt(fishes[reason[1]].min, fishes[reason[1]].max);
                                         }
-                                        console.log(amountGiven);
                                         this.bot.db.query(`UPDATE Economy SET balance='${Number(rows[0].balance) + Number(amountGiven)}', ${reason[1]}Fish='0' WHERE userID='${message.author.id}'`)
                                         embed.author.name = message.guild.lang.COMMANDS.FISH.SELL.sold
                                         embed.description = message.guild.lang.COMMANDS.FISH.SELL.soldContent(Number(rows[0][`${reason[1]}Fish`]), fishes[reason[1]].symbol, amountGiven)
