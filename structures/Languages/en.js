@@ -197,6 +197,10 @@ module.exports = {
             embedTitle: (title, artist) => `Lyrics for ${title} by ${artist}`,
             embedFooter: "Lyrics service provided by api.ksoft.si"
         },
+        MEME: {
+            description: 'Displays a random meme from Reddit.',
+            loading: "[<a:loading:543460555113889792>] - Please wait..."
+        },
         NOWPLAYING: {
             description: 'Shows what music is currently playing.',
             noQueue: "[❌] - There is nothing playing.",

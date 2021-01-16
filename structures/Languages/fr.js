@@ -197,6 +197,10 @@ module.exports = {
             embedTitle: (title, artist) => `Paroles de ${title} par ${artist}`,
             embedFooter: "Service livré par api.ksoft.si"
         },
+        MEME: {
+            description: 'Affiche un meme aléatoire venant de Reddit.',
+            loading: "[<a:loading:543460555113889792>] - Veuillez patienter..."
+        },
         NOWPLAYING: {
             description: 'Affiche la musique actuellement jouée.',
             noQueue: "[❌] - Aucune musique n'est jouée.",
