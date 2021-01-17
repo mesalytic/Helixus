@@ -46,12 +46,6 @@ module.exports = class ConnectFourCommand extends Command {
         });
     }
 
-    /**
-     * TODO:
-     * * ReactionCollector to accept or decline the game
-     * 
-     */
-
     async run(message, args) {
         let opponent = message.mentions.users.first();
         if (!opponent) return message.reply(message.guild.lang.COMMANDS.CONNECT4.noMention);
