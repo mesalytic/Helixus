@@ -50,6 +50,7 @@ module.exports = class ConnectFourCommand extends Command {
         let opponent = message.mentions.users.first();
         if (!opponent) return message.reply(message.guild.lang.COMMANDS.CONNECT4.noMention);
         if (!args[1]) return message.reply(message.guild.lang.COMMANDS.CONNECT4.noColor(list(Object.keys(colors[message.guild.lang.code]), message.guild.lang.COMMANDS.CONNECT4.conj)))
+        if (!Object.keys(colors[message.guild.lang.code]).includes(args[1].toLowerCase())) return message.reply(message.guild.lang.COMMANDS.CONNECT4.noColor(list(Object.keys(colors[message.guild.lang.code]), message.guild.lang.COMMANDS.CONNECT4.conj)))
         let color = args[1].toLowerCase();
         if (opponent.id === message.author.id) return message.reply(message.guild.lang.COMMANDS.CONNECT4.againstYourself);
 
@@ -58,7 +59,7 @@ module.exports = class ConnectFourCommand extends Command {
         this.bot.games.set(message.channel.id, {
             name: "connect4"
         });
-        const playerOneEmoji = colors[message.guild.lang.code][color];
+        let playerOneEmoji = colors[message.guild.lang.code][color];
         let playerTwoEmoji = ['yellow', 'jaune'].includes(color) ? colors.en.red : colors.en.yellow;
 
         try {
@@ -72,18 +73,19 @@ module.exports = class ConnectFourCommand extends Command {
             } else {
                 await message.channel.send(message.guild.lang.COMMANDS.CONNECT4.askingOpponent(opponent, message.author));
 
-                const verification = verify(message.channel, opponent);
+                const verification = await verify(message.channel, opponent);
                 if (!verification) {
                     this.bot.games.delete(message.channel.id);
                     return message.reply(message.guild.lang.COMMANDS.CONNECT4.denied);
+                } else {
+                    await message.channel.send(message.guild.lang.COMMANDS.CONNECT4.colors(opponent, list(available, message.guild.lang.COMMANDS.CONNECT4.conj)));
+                    const filter = res => res.author.id === opponent.id && available.includes(res.content.toLowerCase());
+                    let p2Color = await message.channel.awaitMessages(filter, {
+                        max: 1,
+                        time: 30000
+                    });
+                    if (p2Color.size) playerTwoEmoji = colors[message.guild.lang.code][p2Color.first().content.toLowerCase()];
                 }
-                await message.channel.send(message.guild.lang.COMMANDS.CONNECT4.colors(opponent, list(available, message.guild.lang.COMMANDS.CONNECT4.conj)));
-                const filter = res => res.author.id === opponent.id && available.includes(res.content.toLowerCase());
-                const p2Color = await message.channel.awaitMessages(filter, {
-                    max: 1,
-                    time: 30000
-                });
-                if (p2Color.size) playerOneEmoji = colors[message.guild.lang.code][p2Color.first().content.toLowerCase()];
             }
             let AIEngine = null;
             if (opponent.bot) AIEngine = new Connect4AI();
