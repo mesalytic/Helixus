@@ -32,6 +32,7 @@ module.exports = class Bot extends Client {
 
         this.commands = new Collection();
         this.aliases = new Collection();
+        this.games = new Collection();
 
         this.queue = new Map();
 

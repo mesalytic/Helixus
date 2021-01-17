@@ -1,3 +1,7 @@
+const {
+    stripIndents
+} = require("common-tags");
+
 module.exports = {
     code: 'fr',
     COMMANDS: {
@@ -48,6 +52,30 @@ module.exports = {
         COIN: {
             description: 'Pile ou face?',
             success: (side) => `[✅] - C'est atteri sur **${side}**!`
+        },
+        CONNECT4: {
+            description: 'Jouez au Puissance 4 avec des amis ou avec le bot!',
+            noMention: '[❌] - Veuillez mentionner quelqu\'un. Pour jouer avec le bot, mentionnez le bot.',
+            noColor: (colorList) => `[❌] - Veuillez choisir une couleur: ${colorList}`,
+            conj: "et",
+            againstYourself: "[❌] - Vous ne pouvez pas jouer avec vous même.",
+            currentGame: `[❌] - Une partie est actuellement en cours dans ce salon. Veuillez attendre que le jeu est fini ou allez dans un autre salon.`,
+            askingOpponent: (opponent, author) => `[<a:loading:543460555113889792>] - ${opponent}, voulez vous jouer au puissance 4 avec ${author}?`,
+            denied: '[❌] - Partie refusée...',
+            colors: (opponent, list) => `${opponent}, quelle couleur voulez vous? Choisissez dans cette liste: ${list}`,
+            none: "Aucun",
+            chooseColumn: (user, lastMove, board, nums) => stripIndents `
+            ${user}, veuillez choisir une colonne. Vous pouvez ecrire \`stop\` pour vous rendre.
+            Tour précédent : Colonne **${lastMove}**
+
+            ${board}
+            ${nums}
+            `,
+            timesUp: '[❌] - Temps du tour écoulé!',
+            inactivity: '[❌] - Le jeu s\'est terminé pour inactivité.',
+            finalMove: "Tour final: Colonne",
+            winString: (winner) => `[✅] - Félicitations ${winner} !`,
+            drawString: '[❌] - Et c\'est une égalité...'
         },
         DAILY: {
             description: "Vous donne des pièces tous les jours",

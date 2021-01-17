@@ -1,3 +1,7 @@
+const {
+    stripIndents
+} = require("common-tags");
+
 module.exports = {
     code: 'en',
     COMMANDS: {
@@ -49,6 +53,30 @@ module.exports = {
             description: 'Heads or tails?',
             success: (side) => `[✅] - It landed on **${side}**!`
         },
+        CONNECT4: {
+            description: 'Play Connect Four with a friend. Want to play with me? Just tag me!',
+            noMention: '[❌] - Please mention someone to play with. You can mention the bot to play against an AI.',
+            noColor: (colorList) => `[❌] - Please choose a color from this list: ${colorList}`,
+            conj: "or",
+            againstYourself: "[❌] - You can't play against yourself.",
+            currentGame: `[❌] - A game is currently being played on this channel. Please wait until the game is finished or go into another channel.`,
+            askingOpponent: (opponent, author) => `[<a:loading:543460555113889792>] - ${opponent}, do you accept to play connect four with ${author}?`,
+            denied: '[❌] - They denied...',
+            colors: (opponent, list) => `${opponent}, what color do you want? Choose from this list: ${list}`,
+            none: "None",
+            chooseColumn: (user, lastMove, board, nums) => stripIndents `
+            ${user}, please choose which column do you pick. You can type \`stop\` to surrend.
+            Previous Move : Row **${lastMove}**
+
+            ${board}
+            ${nums}
+            `,
+            timesUp: '[❌] - Your time is up!',
+            inactivity: '[❌] - The game has ended for inactivity.',
+            finalMove: "Final Move: Row",
+            winString: (winner) => `[✅] - Congratulations to ${winner} !`,
+            drawString: '[❌] - It\'s a draw...'
+        },
         DAILY: {
             description: "Gives you coins daily!",
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
@@ -74,7 +102,7 @@ module.exports = {
                 cancelled: `You have sold nothing...`
             },
             notEnoughCoins: '[❌] - You must have at least 10 coins to start fishing.',
-            caught: (fishSymbol) => `[V] - You caught... ${fishSymbol} ! (**-10 <a:coin:784930553748520961>**)`
+            caught: (fishSymbol) => `[✅] - You caught... ${fishSymbol} ! (**-10 <a:coin:784930553748520961>**)`
         },
         HELP: {
             TYPES: {
