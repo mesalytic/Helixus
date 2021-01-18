@@ -324,6 +324,16 @@ module.exports = {
                 embedTitle: (page, pages) => `Liste des récompenses de niveau (${page + 1}/${pages + 1})`
             }
         },
+        RPS: {
+            description: 'Joue au Pierre Feuille Ciseaux contre le bot!',
+            whatChoice: "Quel est ton choix?",
+            choiceList: '✊ - Pierre\n📄 - Feuille\n✂️ - Ciseaux',
+            loading: '[Loading] - Veuillez patienter...',
+            tie: "C'est une égalité!",
+            botWin: "J'ai gagné!",
+            userWin: "Tu as gagné",
+            choices: (userChoice, botChoice) => `Tu as choisi: ${userChoice}\nJ'ai choisi: ${botChoice}`
+        },
         SAY: {
             description: 'Repète la phrase spécifiée.',
             tooLong: '[❌] - Veuillez spécifier une phrase faisant moins de 1950 caractères.'

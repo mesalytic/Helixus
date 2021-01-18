@@ -324,6 +324,16 @@ module.exports = {
                 embedTitle: (page, pages) => `Role Rewards List (${page + 1}/${pages + 1})`
             }
         },
+        RPS: {
+            description: 'Play Rock Paper Scissors against the AI!',
+            whatChoice: "What's your choice?",
+            choiceList: '✊ - Rock\n📄 - Paper\n✂️ - Scissors',
+            loading: '[Loading] - Please wait...',
+            tie: "It's a tie!",
+            botWin: "I won!",
+            userWin: "You won!",
+            choices: (userChoice, botChoice) => `You chose: ${userChoice}\nI chose: ${botChoice}`
+        },
         SAY: {
             description: 'Repeat the text you provided.',
             tooLong: '[❌] - Please specify a text with less than 1950 characters.'
