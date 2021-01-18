@@ -40,6 +40,10 @@ module.exports = {
             description: "Displays your current balance.",
             output: (bal) => `You have <a:coin:784930553748520961> **${bal}** coins!`
         },
+        BEAUTIFUL: {
+            description: 'U see this ? Beautiful.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         BEG: {
             description: "Begging for coins...",
             notReady: (time) => `You already begged recently! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
