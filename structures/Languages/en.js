@@ -328,7 +328,7 @@ module.exports = {
             description: 'Play Rock Paper Scissors against the AI!',
             whatChoice: "What's your choice?",
             choiceList: '✊ - Rock\n📄 - Paper\n✂️ - Scissors',
-            loading: '[Loading] - Please wait...',
+            loading: '[<a:loading:543460555113889792>] - Please wait...',
             tie: "It's a tie!",
             botWin: "I won!",
             userWin: "You won!",
@@ -343,6 +343,11 @@ module.exports = {
             noQueue: "[❌] - There is nothing playing.",
             notThatLong: "[❌] - The song isn't that long!",
             success: (duration) => `✅ - The song has seeked to **${duration}**!`
+        },
+        SELECT: {
+            description: 'Selects someone randomly in the server.',
+            noSubject: (randomMember) => `[V] - The selected member is... ${randomMember}.`,
+            subject: (subject, randomMember) => `[V] - The selected member for **${subject}** is... ${randomMember}.`
         },
         SERVERINFO: {
             description: "Displays informations about the server.",

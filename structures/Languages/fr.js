@@ -328,7 +328,7 @@ module.exports = {
             description: 'Joue au Pierre Feuille Ciseaux contre le bot!',
             whatChoice: "Quel est ton choix?",
             choiceList: '✊ - Pierre\n📄 - Feuille\n✂️ - Ciseaux',
-            loading: '[Loading] - Veuillez patienter...',
+            loading: '[<a:loading:543460555113889792>] - Veuillez patienter...',
             tie: "C'est une égalité!",
             botWin: "J'ai gagné!",
             userWin: "Tu as gagné",
@@ -343,6 +343,11 @@ module.exports = {
             noQueue: "[❌] - Aucune musique n'est jouée.",
             notThatLong: "[❌] - La musique n'est pas aussi longue...",
             success: (duration) => `✅ - La musique est maintenant à **${duration}**!`
+        },
+        SELECT: {
+            description: 'Selectionne quelqu\'un aléatoirement sur le serveur.',
+            noSubject: (randomMember) => `[V] - Le membre selectionné est... ${randomMember}.`,
+            subject: (subject, randomMember) => `[V] - Le membre selectionné pour **${subject}** est... ${randomMember}.`
         },
         SERVERINFO: {
             description: "Affiche des informations à propos du serveur.",
