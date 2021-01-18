@@ -347,8 +347,8 @@ module.exports = {
         },
         SELECT: {
             description: 'Selectionne quelqu\'un aléatoirement sur le serveur.',
-            noSubject: (randomMember) => `[V] - Le membre selectionné est... ${randomMember}.`,
-            subject: (subject, randomMember) => `[V] - Le membre selectionné pour **${subject}** est... ${randomMember}.`
+            noSubject: (randomMember) => `[✅] - Le membre selectionné est... ${randomMember}.`,
+            subject: (subject, randomMember) => `[✅] - Le membre selectionné pour **${subject}** est... ${randomMember}.`
         },
         SERVERINFO: {
             description: "Affiche des informations à propos du serveur.",
@@ -400,6 +400,10 @@ module.exports = {
             description: 'Stoppe la musique et enlève la file.',
             noQueue: "[❌] - Aucune musique n'est jouée.",
             success: (author) => `⏹ ${author} a stoppé la musique!`
+        },
+        THREEKYEARS: {
+            description: 'Ajoute la photo de votre choix sur le meme Pokémon `It\'s been 3000 years...`',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
         TOGGLE: {
             description: 'Active ou désactive le système de niveaux',

@@ -347,8 +347,8 @@ module.exports = {
         },
         SELECT: {
             description: 'Selects someone randomly in the server.',
-            noSubject: (randomMember) => `[V] - The selected member is... ${randomMember}.`,
-            subject: (subject, randomMember) => `[V] - The selected member for **${subject}** is... ${randomMember}.`
+            noSubject: (randomMember) => `[✅] - The selected member is... ${randomMember}.`,
+            subject: (subject, randomMember) => `[✅] - The selected member for **${subject}** is... ${randomMember}.`
         },
         SERVERINFO: {
             description: "Displays informations about the server.",
@@ -400,6 +400,10 @@ module.exports = {
             description: 'Stops the music and clears the queue.',
             noQueue: "[❌] - There is nothing playing.",
             success: (author) => `⏹ ${author} has stopped the music!`
+        },
+        THREEKYEARS: {
+            description: 'Add\'s your (or someone elses) profile pic to the Pokemon Meme `It\'s been 3000 years...`',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
         },
         TOGGLE: {
             description: 'Toggles on or off the levelling system in your server.',
