@@ -1,11 +1,10 @@
 const Command = require("../../structures/Command");
 const { randomInt } = require('../../structures/Utils')
 
-module.exports = class ChooseCommand extends Command {
+module.exports = class DiceCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'dice',
-            usage: 'dice',
             description: 'Rolls a dice within a 1-max value of your choice.',
             usage: 'dice <maxNum>',
             examples: ["dice 569"],
