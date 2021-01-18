@@ -301,6 +301,9 @@ module.exports = {
             noQueue: "[❌] - There is nothing playing.",
             success: (author) => `▶ ${author} has resumed the music.`
         },
+        REVERSE: {
+            description: 'Reverses the specified text.',
+        },
         REWARDS: {
             description: 'Lets you configure leveled role rewards.',
             ADD: {

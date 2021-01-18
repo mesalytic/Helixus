@@ -301,6 +301,9 @@ module.exports = {
             noQueue: "[❌] - Aucune musique n'est jouée.",
             success: (author) => `▶ ${author} a relancé la musique.`
         },
+        REVERSE: {
+            description: 'Inverse le texte spécifié.',
+        },
         REWARDS: {
             description: 'Vous permets de configurer des récompenses de rôles en fonction du niveau.',
             ADD: {
