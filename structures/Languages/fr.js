@@ -112,7 +112,8 @@ module.exports = {
                 general: "Général",
                 info: "Infos",
                 levels: "Niveaux",
-                music: "Musique"
+                music: "Musique",
+                images: "Images"
             },
             description: `Affiche la liste des commandes, triées par catégorie et par alphabet.\nEn spécifiant une commande, vous aurez plus d'informations sur celle ci.`,
             helpEmbedTitle: (command) => `Commande: \`${command.name}\``,

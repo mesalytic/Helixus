@@ -33,7 +33,8 @@ module.exports = class HelpCommand extends Command {
             MUSIC,
             LEVELS,
             ECONOMY,
-            FUN
+            FUN,
+            IMAGES
         } = this.bot.types;
         this.bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefixes) => {
             if (err) throw err;
@@ -74,7 +75,8 @@ module.exports = class HelpCommand extends Command {
                     [MUSIC]: `🎵 ${message.guild.lang.COMMANDS.HELP.TYPES.music}`,
                     [LEVELS]: `📈 ${message.guild.lang.COMMANDS.HELP.TYPES.levels}`,
                     [ECONOMY]: `🪙 ${message.guild.lang.COMMANDS.HELP.TYPES.economy}`,
-                    [FUN]: `🎲 ${message.guild.lang.COMMANDS.HELP.TYPES.fun}`
+                    [FUN]: `🎲 ${message.guild.lang.COMMANDS.HELP.TYPES.fun}`,
+                    [IMAGES]: `🖼️ ${message.guild.lang.COMMANDS.HELP.TYPES.images}`
                 }
 
                 this.bot.commands.forEach(command => {

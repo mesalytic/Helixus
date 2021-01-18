@@ -113,6 +113,7 @@ module.exports = {
                 info: "Info",
                 levels: "Levels",
                 music: "Music",
+                images: "Images",
             },
             description: `Displays a list of current commands, sorted by category.\nYou can also give an argument, to get more infos about a specific command.`,
             helpEmbedTitle: (command) => `Command: \`${command.name}\``,
