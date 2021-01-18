@@ -9,7 +9,7 @@ module.exports = class ThreeKYearsCommand extends Command {
             name: '3000years',
             usage: '3000years [url]',
             description: 'Add\'s your (or someone elses) profile pic to the Pokemon Meme `It\'s been 3000 years...`',
-            type: 'info'
+            type: 'images'
         });
     }
 
