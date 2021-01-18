@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const { MessageEmbed } = require("discord.js");
 
 let subreddits = ["dankmemes", "memes", "programmerhumor", "crappyoffbrands", "MemeEconomy", "me_irl"]
-module.exports = class ChooseCommand extends Command {
+module.exports = class MemeCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'meme',

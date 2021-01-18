@@ -3,7 +3,7 @@ const sides = {
     fr: ["pile", "face"],
     en: ["heads", "tails"]
 };
-module.exports = class ChooseCommand extends Command {
+module.exports = class CoinCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'coin',

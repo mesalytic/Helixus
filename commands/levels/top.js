@@ -7,7 +7,7 @@ const {
 } = require("discord.js");
 
 const hastebin = require('hastebin-gen');
-module.exports = class RankCommand extends Command {
+module.exports = class TopCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'top',
