@@ -504,6 +504,10 @@ module.exports = {
             embedTranslatedFrom: (translatedFrom) => `Translated from ${translatedFrom}`,
             embedTranslatedTo: (target) => `to ${target}`
         },
+        TRIGGERED: {
+            description: 'Sends a GIF with the Triggered effect.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+        },
         USERINFO: {
             description: "Displays informations about a specific user __**in the server**__.",
             username: "Username",
