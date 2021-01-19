@@ -136,6 +136,10 @@ module.exports = {
             notEnoughCoins: '[❌] - You must have at least 10 coins to start fishing.',
             caught: (fishSymbol) => `[✅] - You caught... ${fishSymbol} ! (**-10 <a:coin:784930553748520961>**)`
         },
+        FRAME: {
+            description: 'Adds a frame in the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",
