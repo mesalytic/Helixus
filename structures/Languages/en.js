@@ -415,6 +415,10 @@ module.exports = {
             noSubject: (randomMember) => `[✅] - The selected member is... ${randomMember}.`,
             subject: (subject, randomMember) => `[✅] - The selected member for **${subject}** is... ${randomMember}.`
         },
+        SEPIA: {
+            description: 'Adds a sepia effect to the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         SERVERINFO: {
             description: "Displays informations about the server.",
             owner: "👑 | Owner",
