@@ -101,6 +101,10 @@ module.exports = {
             description: 'Ajoute un contraste a l\'image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
+        CONVOLUTE: {
+            description: 'Applique des napes de courants sur votre image',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         DAILY: {
             description: "Vous donne des pièces tous les jours",
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,
