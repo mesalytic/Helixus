@@ -8,26 +8,26 @@ module.exports = {
         AUTOROLE: {
             description: 'Allows you to configure a role which will be given to new members.',
             OFF: {
-                noRoleConfigured: '[❌] - No role has been configured.',
-                removed: '[✅] - The role has been removed from the autorole.'
+                noRoleConfigured: '❌ - No role has been configured.',
+                removed: '✅ - The role has been removed from the autorole.'
             },
-            added: (role) => `[✅] - The role ${role} will now be given to new members.`,
-            notFound: '[❌] - The role has not been found.'
+            added: (role) => `✅ - The role ${role} will now be given to new members.`,
+            notFound: '❌ - The role has not been found.'
         },
         BACKGROUND: {
             description: 'Allows you to see the list of backgrounds, or to buy and set them.',
             BUY: {
-                noBackgroundSpecified: '[❌] - Please specify a background to buy! To see the list of available backgrounds, check the `am!background list` command!',
-                invalidBackground: '[❌] - Please specify a valid background to buy! To see the list of available backgrounds, check the `am!background list` command!',
-                notEnoughCoins: '[❌] You don\'t have **5000** coins! Come back later...',
-                alreadyBought: '[❌] - You already have this background!',
-                success: (background) => `[✅] - You have bought the **${background}** background!`
+                noBackgroundSpecified: '❌ - Please specify a background to buy! To see the list of available backgrounds, check the `am!background list` command!',
+                invalidBackground: '❌ - Please specify a valid background to buy! To see the list of available backgrounds, check the `am!background list` command!',
+                notEnoughCoins: '❌ You don\'t have **5000** coins! Come back later...',
+                alreadyBought: '❌ - You already have this background!',
+                success: (background) => `✅ - You have bought the **${background}** background!`
             },
             SET: {
-                noBackgrounds: '[❌] - You don\'t have any background...',
-                noBackgroundSpecified: '[❌] - Please specify a background to set! To see the list of available backgrounds, check the `am!background list` command!',
-                invalidBackground: '[❌] - Please specify a valid background to set! To see the list of available backgrounds, check the `am!background list` command!',
-                success: (background) => `[✅] - You successfully set the **${background}** background!`
+                noBackgrounds: '❌ - You don\'t have any background...',
+                noBackgroundSpecified: '❌ - Please specify a background to set! To see the list of available backgrounds, check the `am!background list` command!',
+                invalidBackground: '❌ - Please specify a valid background to set! To see the list of available backgrounds, check the `am!background list` command!',
+                success: (background) => `✅ - You successfully set the **${background}** background!`
             },
             LIST: {
                 pleaseWait: "Please wait...",
@@ -42,7 +42,7 @@ module.exports = {
         },
         BEAUTIFUL: {
             description: 'U see this ? Beautiful.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         BEG: {
             description: "Begging for coins...",
@@ -51,37 +51,37 @@ module.exports = {
         },
         BLUR: {
             description: 'Blurs the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         BOBROSS: {
             description: 'You are now a Bob Ross art piece.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         BRAZZERS: {
             description: 'You are now in a Brazzers movie.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         CHOOSE: {
             description: 'Allows you to choose between multiple choices.',
-            success: (choice) => `[✅] - My choice is... **${choice}**!`
+            success: (choice) => `✅ - My choice is... **${choice}**!`
         },
         CIRCLE: {
             description: 'Adds a circle around the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         COIN: {
             description: 'Heads or tails?',
-            success: (side) => `[✅] - It landed on **${side}**!`
+            success: (side) => `✅ - It landed on **${side}**!`
         },
         CONNECT4: {
             description: 'Play Connect Four with a friend. Want to play with me? Just tag me!',
-            noMention: '[❌] - Please mention someone to play with. You can mention the bot to play against an AI.',
-            noColor: (colorList) => `[❌] - Please choose a color from this list: ${colorList}`,
+            noMention: '❌ - Please mention someone to play with. You can mention the bot to play against an AI.',
+            noColor: (colorList) => `❌ - Please choose a color from this list: ${colorList}`,
             conj: "or",
-            againstYourself: "[❌] - You can't play against yourself.",
-            currentGame: `[❌] - A game is currently being played on this channel. Please wait until the game is finished or go into another channel.`,
-            askingOpponent: (opponent, author) => `[<a:loading:543460555113889792>] - ${opponent}, do you accept to play connect four with ${author}?`,
-            denied: '[❌] - They denied...',
+            againstYourself: "❌ - You can't play against yourself.",
+            currentGame: `❌ - A game is currently being played on this channel. Please wait until the game is finished or go into another channel.`,
+            askingOpponent: (opponent, author) => `<a:loading:543460555113889792> - ${opponent}, do you accept to play connect four with ${author}?`,
+            denied: '❌ - They denied...',
             colors: (opponent, list) => `${opponent}, what color do you want? Choose from this list: ${list}`,
             none: "None",
             chooseColumn: (user, lastMove, board, nums) => stripIndents `
@@ -91,19 +91,19 @@ module.exports = {
             ${board}
             ${nums}
             `,
-            timesUp: '[❌] - Your time is up!',
-            inactivity: '[❌] - The game has ended for inactivity.',
+            timesUp: '❌ - Your time is up!',
+            inactivity: '❌ - The game has ended for inactivity.',
             finalMove: "Final Move: Row",
-            winString: (winner) => `[✅] - Congratulations to ${winner} !`,
-            drawString: '[❌] - It\'s a draw...'
+            winString: (winner) => `✅ - Congratulations to ${winner} !`,
+            drawString: '❌ - It\'s a draw...'
         },
         CONTRAST: {
             description: 'Adds a contrast to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         CONVOLUTE: {
             description: 'Convolutes the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         DAILY: {
             description: "Gives you coins daily!",
@@ -112,15 +112,15 @@ module.exports = {
         },
         DICE: {
             description: 'Rolls a dice within a 1-max value of your choice.',
-            success: (number) => `[✅] - You rolled a **${number}**!`
+            success: (number) => `✅ - You rolled a **${number}**!`
         },
         DISTORT: {
             description: 'Distorts the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         FIRE: {
             description: 'Sends a GIF with a fire effect.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
         FISH: {
             description: "Lets go fishing!",
@@ -131,34 +131,34 @@ module.exports = {
             SELL: {
                 sellWhat: "What would you like to sell?",
                 content: (junkFish, commonFish, uncommonFish, rareFish) => `🔧 - Junk: **${junkFish}**\n🐟 - Common: **${commonFish}**\n🐠 - Uncommon: **${uncommonFish}**\n🐡 - Rare: **${rareFish}**\n`,
-                pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+                pleaseWait: '<a:loading:543460555113889792> - Please wait...',
                 sold: "Fish Sold",
                 soldContent: (fishAmount, fishSymbol, coins) => `You successfully sold your **${fishAmount} ${fishSymbol} items** for __**${coins} coins**__!`,
                 failed: (fishSymbol) => `You don't have any ${fishSymbol} to sell...`,
                 cancelled: `You have sold nothing...`
             },
-            notEnoughCoins: '[❌] - You must have at least 10 coins to start fishing.',
-            caught: (fishSymbol) => `[✅] - You caught... ${fishSymbol} ! (**-10 <a:coin:784930553748520961>**)`
+            notEnoughCoins: '❌ - You must have at least 10 coins to start fishing.',
+            caught: (fishSymbol) => `✅ - You caught... ${fishSymbol} ! (**-10 <a:coin:784930553748520961>**)`
         },
         FISHEYE: {
             description: 'Adds a fisheye effect to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
         FRAME: {
             description: 'Adds a frame in the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         GLITCH: {
             description: 'Glitches the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         GRAYSCALE: {
             description: 'Adds a grayscale effect to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         HEARTS: {
             description: 'Adds hearts to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
         HELP: {
             TYPES: {
@@ -183,134 +183,134 @@ module.exports = {
         },
         IGNORE: {
             description: "Configure in which channel commands should be executed.",
-            noChanSpecified: "[❌] - You haven\'t specified a channel to ignore.",
-            noRowsIgnored: (chan) => `[✅] - ${chan} will now be ignored for commands.`,
-            notIgnored: (chan) => `[✅] - ${chan} will now be listened for commands again.`,
-            ignored: (chan) => `[✅] - ${chan} will now be ignored for commands.`
+            noChanSpecified: "❌ - You haven\'t specified a channel to ignore.",
+            noRowsIgnored: (chan) => `✅ - ${chan} will now be ignored for commands.`,
+            notIgnored: (chan) => `✅ - ${chan} will now be listened for commands again.`,
+            ignored: (chan) => `✅ - ${chan} will now be ignored for commands.`
         },
         INVERT: {
             description: 'Inverts the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         JOINMESSAGE: {
             description: "Configure the message that will display when a user joins the server",
             notes: 'Here is the list of tags you can use:\n\n{user} - mentions the user\n{username} displays the username of the member\n{server} - displays the server name\n\nYou can use channel and role mentions like you would on an ordinary message.',
             ON: {
-                enabled: `[✅] - Join messages have been enabled. If you haven't already, check \`am!help joinmessage\` to see how to configure the join message.`
+                enabled: `✅ - Join messages have been enabled. If you haven't already, check \`am!help joinmessage\` to see how to configure the join message.`
             },
             OFF: {
-                notEnabled: '[❌] - Join messages are currently not enabled.',
-                disabled: `[✅] - Join messages have been disabled.`
+                notEnabled: '❌ - Join messages are currently not enabled.',
+                disabled: `✅ - Join messages have been disabled.`
             },
             CHANNEL: {
-                noChanSpecified: '[❌] - Please specify a channel name, ID, or mention!',
-                noValidChan: '[❌] - You haven\'t specified a valid channel.',
-                notEnabled: '[❌] - Join messages are currently not enabled.',
-                success: (chan) => `[✅] - Join messages will be sent to ${chan}.`
+                noChanSpecified: '❌ - Please specify a channel name, ID, or mention!',
+                noValidChan: '❌ - You haven\'t specified a valid channel.',
+                notEnabled: '❌ - Join messages are currently not enabled.',
+                success: (chan) => `✅ - Join messages will be sent to ${chan}.`
             },
-            noContent: '[❌] - Please specify the join message content. Check the `am!help joinmessage` page to see what tags you can use.',
-            notEnabled: '[❌] - Join messages are currently not enabled.',
-            success: `[✅] - The join message content has successfully been set.`
+            noContent: '❌ - Please specify the join message content. Check the `am!help joinmessage` page to see what tags you can use.',
+            notEnabled: '❌ - Join messages are currently not enabled.',
+            success: `✅ - The join message content has successfully been set.`
         },
         LANG: {
             description: 'Changes the bot\'s language on the server.',
-            success: `[✅] - The server language has been updated to **English**!`
+            success: `✅ - The server language has been updated to **English**!`
         },
         LEAVEMESSAGE: {
             description: "Configure the message that will display when a user leaves the server",
             notes: 'Here is the list of tags you can use:\n\n{username} displays the username of the member\n{server} - displays the server name\n\nYou can use channel and role mentions like you would on an ordinary message.',
             ON: {
-                enabled: `[✅] - Leave messages have been enabled. If you haven't already, check \`am!help leavemessage\` to see how to configure the leave message.`
+                enabled: `✅ - Leave messages have been enabled. If you haven't already, check \`am!help leavemessage\` to see how to configure the leave message.`
             },
             OFF: {
-                notEnabled: '[❌] - Leave messages are currently not enabled.',
-                disabled: `[✅] - Leave messages have been disabled.`
+                notEnabled: '❌ - Leave messages are currently not enabled.',
+                disabled: `✅ - Leave messages have been disabled.`
             },
             CHANNEL: {
-                noChanSpecified: '[❌] - Please specify a channel name, ID, or mention!',
-                noValidChan: '[❌] - You haven\'t specified a valid channel.',
-                notEnabled: '[❌] - Leave messages are currently not enabled.',
-                success: (chan) => `[✅] - Leave messages will be sent to ${chan}.`
+                noChanSpecified: '❌ - Please specify a channel name, ID, or mention!',
+                noValidChan: '❌ - You haven\'t specified a valid channel.',
+                notEnabled: '❌ - Leave messages are currently not enabled.',
+                success: (chan) => `✅ - Leave messages will be sent to ${chan}.`
             },
-            noContent: '[❌] - Please specify the leave message content. Check the `am!help leavemessage` page to see what tags you can use.',
-            notEnabled: '[❌] - Leave messages are currently not enabled.',
-            success: `[✅] - The leave message content has successfully been set.`
+            noContent: '❌ - Please specify the leave message content. Check the `am!help leavemessage` page to see what tags you can use.',
+            notEnabled: '❌ - Leave messages are currently not enabled.',
+            success: `✅ - The leave message content has successfully been set.`
         },
         LEVELUP: {
             description: 'Lets you configure the levelup message content/channel target for your server.',
             notes: '__**Channel Parameter**__:\nIf you want it to be displayed where the user has levelled up, type `msgChannel`.\n\n__**Message Parameters**__:\nHere is the list of the tags you can use:\n{user} - mentions the user\n{username} - displays the username\n{server} - displays the server name\n{level} - displays the obtained level',
             CHANNEL: {
-                noChanSpecified: '[❌] - Please specify a channel name, ID, or mention!',
-                invalidChan: '[❌] - This channel doesn\'t exist.',
-                levelNotEnabled: '[❌] - Levelling is not enabled on this server. See `am!help toggle`.',
-                success: (chan) => `[✅] - Level up messages will now be sent to ${chan}!`
+                noChanSpecified: '❌ - Please specify a channel name, ID, or mention!',
+                invalidChan: '❌ - This channel doesn\'t exist.',
+                levelNotEnabled: '❌ - Levelling is not enabled on this server. See `am!help toggle`.',
+                success: (chan) => `✅ - Level up messages will now be sent to ${chan}!`
             },
             MESSAGE: {
-                noContent: '[❌] - You haven\'t specified a levelup message content. Please check `am!help levelup` to see which tags you can use inside of your levelup message.',
-                levelNotEnabled: '[❌] - Levelling is not enabled on this server. See `am!help toggle`.',
-                success: `[✅] - This server's levelup message has been updated!`
+                noContent: '❌ - You haven\'t specified a levelup message content. Please check `am!help levelup` to see which tags you can use inside of your levelup message.',
+                levelNotEnabled: '❌ - Levelling is not enabled on this server. See `am!help toggle`.',
+                success: `✅ - This server's levelup message has been updated!`
             }
         },
         LOGS: {
             description: 'Lets you configure the logging system.',
             ON: {
-                alreadyEnabled: '[❌] - Logs are already activated in this server!',
+                alreadyEnabled: '❌ - Logs are already activated in this server!',
                 enabled: `✅ - Logs are now enabled in this server.`
             },
             CHANNEL: {
-                noChanSpecified: '[❌] - Please specify a channel name, ID, or mention!',
-                notEnabled: `[❌] - Logs are not activated in this server.`,
+                noChanSpecified: '❌ - Please specify a channel name, ID, or mention!',
+                notEnabled: `❌ - Logs are not activated in this server.`,
                 success: (channel) => `✅ - Logs will now be sent to ${channel}`
             },
             IGNORE: {
-                noChanSpecified: '[❌] - Please specify a channel name, ID, or mention!',
-                ignored: '[✅] - This channel will now be ignored for logging.',
-                notIgnored: '[✅] - This channel will now stop being ignored for logging.'
+                noChanSpecified: '❌ - Please specify a channel name, ID, or mention!',
+                ignored: '✅ - This channel will now be ignored for logging.',
+                notIgnored: '✅ - This channel will now stop being ignored for logging.'
             },
             TOGGLE: {
-                notValidEvent: (logsEventList) => `[❌] - Please provide a valid event.\nValid events: \`${logsEventList}\``,
-                notEnabled: `[❌] - Logs are not activated in this server.`,
-                eventEnabled: '[✅] - This event will now be logged in this server.',
-                eventDisabled: '[✅] - This event will stop being logged in this server.'
+                notValidEvent: (logsEventList) => `❌ - Please provide a valid event.\nValid events: \`${logsEventList}\``,
+                notEnabled: `❌ - Logs are not activated in this server.`,
+                eventEnabled: '✅ - This event will now be logged in this server.',
+                eventDisabled: '✅ - This event will stop being logged in this server.'
             },
-            noChanSpecified: "[❌] - Please mention a channel.",
+            noChanSpecified: "❌ - Please mention a channel.",
         },
         LOOP: {
             description: 'Loops the music queue',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             success: (loopStatus) => `✅ - The loop is now ${loopStatus === true ? "**enabled**" : "**disabled**"}!`
         },
         LYRICS: {
             description: 'Displays the lyrics about specified song.',
-            noQuery: '[❌] - Please specify a song to search.',
+            noQuery: '❌ - Please specify a song to search.',
             embedTitle: (title, artist) => `Lyrics for ${title} by ${artist}`,
             embedFooter: "Lyrics service provided by api.ksoft.si"
         },
         MEME: {
             description: 'Displays a random meme from Reddit.',
-            loading: "[<a:loading:543460555113889792>] - Please wait..."
+            loading: "<a:loading:543460555113889792> - Please wait..."
         },
         NOWPLAYING: {
             description: 'Shows what music is currently playing.',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             embedAuthor: (title) => `Now playing: ${title}`,
             embedFooter: (time) => `Time Remaining: ${time}`
         },
         PAUSE: {
             description: 'Pauses the musics that its currently playing.',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             success: (author) => `⏸ ${author} has paused the music.`
         },
         PAY: {
             description: "Give someone coins.",
             notes: 'For every coin transaction made, a 5% fee is deducted. You must consider those 5% when doing a transaction',
-            noUser: '[❌] - You have to mention someone!',
-            isBot: '[❌] - You can\'t send coins to a bot.',
-            notEnoughCoins: '[❌] - You don\'t have enough coins!',
-            noCoinsSpecified: '[❌] - You have to specify an amount of coins to give.',
-            pending: (oldAmt, newAmt, user) => `[<a:loading:543460555113889792>] - Do you want to send ~~${oldAmt}~~ (_5% transaction fee_) **${newAmt} coins** to ${user} ?`,
-            success: (amount, user) => `[✅] - You have succesfully transferred **${amount} coins** to ${user}!`,
-            cancelled: `[❌] - The transaction has been cancelled.`
+            noUser: '❌ - You have to mention someone!',
+            isBot: '❌ - You can\'t send coins to a bot.',
+            notEnoughCoins: '❌ - You don\'t have enough coins!',
+            noCoinsSpecified: '❌ - You have to specify an amount of coins to give.',
+            pending: (oldAmt, newAmt, user) => `<a:loading:543460555113889792> - Do you want to send ~~${oldAmt}~~ (_5% transaction fee_) **${newAmt} coins** to ${user} ?`,
+            success: (amount, user) => `✅ - You have succesfully transferred **${amount} coins** to ${user}!`,
+            cancelled: `❌ - The transaction has been cancelled.`
         },
         PING: {
             description: 'Displays the bot\'s current **message latency** and **heartbeat**.',
@@ -318,7 +318,7 @@ module.exports = {
         },
         PIXEL: {
             description: 'Pixelates the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         PLAY: {
             description: "Allows you to play music from YouTube or SoundCloud!",
@@ -333,46 +333,46 @@ module.exports = {
         PREFIX: {
             description: 'Changes the bot\'s prefix on the server.',
             actualPrefix: (prefix) => `The current prefix is: \`${prefix}\``,
-            tooLong: `[❌] - The prefix must be only 5 characters long.`,
-            success: (prefix) => `[✅] - The prefix for this server is now \`${prefix}\`.`
+            tooLong: `❌ - The prefix must be only 5 characters long.`,
+            success: (prefix) => `✅ - The prefix for this server is now \`${prefix}\`.`
         },
         QRCODE: {
             description: 'Converts the specified string to a QRCode.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
-            noArgs: '[❌] - Please specify a text that should be converted to a QRCode.'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
+            noArgs: '❌ - Please specify a text that should be converted to a QRCode.'
         },
         QUEUE: {
             description: 'Displays the whole music queue. Use the reactions to navigate.',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             embedTitle: "Song Queue\n",
             embedDescription: (title, url, info) => `**Current Song - [${title}](${url})**\n\n${info}`
         },
         RAINBOW: {
             description: 'Adds a Rainbow effect to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         RANK: {
             description: 'Displays your level stats.',
         },
         REACTIONROLE: {
             description: 'Lets you configure reaction roles.\nIf a user adds a reaction on a reaction role, the role linked to the reaction will be given to the user.',
-            noChanSpecified: "[❌] - You haven\'t specified a channel.",
-            noValidChan: '[❌] - You haven\'t specified a valid channel.',
-            noMessageID: `[❌] - You haven't specified a message ID.`,
-            noEmoteSpecified: `[❌] - You haven't specified an emote.`,
-            noValidEmote: `[❌] - You haven't specifed a valid emote.`,
-            noRole: `[❌] - The role you specified is not valid or non existant.`,
-            emoteAlreadyUsed: '[❌] - This emoji is already used as a reaction role for this message!',
-            roleAlreadyUsed: '[❌] - This role is already used as a reaction role for this message!',
-            success: (emote) => `[✅] - This role will now be given via reacting with ${emote}`,
+            noChanSpecified: "❌ - You haven\'t specified a channel.",
+            noValidChan: '❌ - You haven\'t specified a valid channel.',
+            noMessageID: `❌ - You haven't specified a message ID.`,
+            noEmoteSpecified: `❌ - You haven't specified an emote.`,
+            noValidEmote: `❌ - You haven't specifed a valid emote.`,
+            noRole: `❌ - The role you specified is not valid or non existant.`,
+            emoteAlreadyUsed: '❌ - This emoji is already used as a reaction role for this message!',
+            roleAlreadyUsed: '❌ - This role is already used as a reaction role for this message!',
+            success: (emote) => `✅ - This role will now be given via reacting with ${emote}`,
             REMOVE: {
-                success: `[✅] - The reaction role has successfully been removed.`,
-                notFound: `[❌] - The reaction role has not been found.`
+                success: `✅ - The reaction role has successfully been removed.`,
+                notFound: `❌ - The reaction role has not been found.`
             }
         },
         RESUME: {
             description: 'Resumes the musics that its currently playing.',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             success: (author) => `▶ ${author} has resumed the music.`
         },
         REVERSE: {
@@ -381,16 +381,16 @@ module.exports = {
         REWARDS: {
             description: 'Lets you configure leveled role rewards.',
             ADD: {
-                noLevelSpecified: '[❌] - Please provide a level number for the role reward.',
-                noRoleSpecified: '[❌] - Please provide a role for the role reward.',
-                levelAlreadyUsed: '[❌] - This level has already been configured for another role!',
-                roleAlreadyUsed: '[❌] - This role has already been configured for another level!',
-                success: (role, level) => `[✅] - ${role} has been successfully set for level **${level}**!`
+                noLevelSpecified: '❌ - Please provide a level number for the role reward.',
+                noRoleSpecified: '❌ - Please provide a role for the role reward.',
+                levelAlreadyUsed: '❌ - This level has already been configured for another role!',
+                roleAlreadyUsed: '❌ - This role has already been configured for another level!',
+                success: (role, level) => `✅ - ${role} has been successfully set for level **${level}**!`
             },
             REMOVE: {
-                noLevelSpecified: '[❌] - Please provide a level number for the role reward.',
-                success: (role, level) => `[✅] - ${role} will no longer be given at level **${level}**!`,
-                notFound: (level) => `[❌] - No rewards were found at level **${level}**.`
+                noLevelSpecified: '❌ - Please provide a level number for the role reward.',
+                success: (role, level) => `✅ - ${role} will no longer be given at level **${level}**!`,
+                notFound: (level) => `❌ - No rewards were found at level **${level}**.`
             },
             SHOW: {
                 pleaseWait: "Please wait...",
@@ -400,13 +400,13 @@ module.exports = {
         },
         ROBOT: {
             description: 'Displays a robot based on you (or on any specified text).',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         RPS: {
             description: 'Play Rock Paper Scissors against the AI!',
             whatChoice: "What's your choice?",
             choiceList: '✊ - Rock\n📄 - Paper\n✂️ - Scissors',
-            loading: '[<a:loading:543460555113889792>] - Please wait...',
+            loading: '<a:loading:543460555113889792> - Please wait...',
             tie: "It's a tie!",
             botWin: "I won!",
             userWin: "You won!",
@@ -414,22 +414,22 @@ module.exports = {
         },
         SAY: {
             description: 'Repeat the text you provided.',
-            tooLong: '[❌] - Please specify a text with less than 1950 characters.'
+            tooLong: '❌ - Please specify a text with less than 1950 characters.'
         },
         SEEK: {
             description: 'Allows you to set the music to a specific point.',
-            noQueue: "[❌] - There is nothing playing.",
-            notThatLong: "[❌] - The song isn't that long!",
+            noQueue: "❌ - There is nothing playing.",
+            notThatLong: "❌ - The song isn't that long!",
             success: (duration) => `✅ - The song has seeked to **${duration}**!`
         },
         SELECT: {
             description: 'Selects someone randomly in the server.',
-            noSubject: (randomMember) => `[✅] - The selected member is... ${randomMember}.`,
-            subject: (subject, randomMember) => `[✅] - The selected member for **${subject}** is... ${randomMember}.`
+            noSubject: (randomMember) => `✅ - The selected member is... ${randomMember}.`,
+            subject: (subject, randomMember) => `✅ - The selected member for **${subject}** is... ${randomMember}.`
         },
         SEPIA: {
             description: 'Adds a sepia effect to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         SERVERINFO: {
             description: "Displays informations about the server.",
@@ -459,7 +459,7 @@ module.exports = {
         },
         SHARD: {
             description: 'Displays the bot\'s current **shard**.',
-            shard: (shard, shardCount) => `[✅] - You are on the shard **${shard}**/${shardCount} !`
+            shard: (shard, shardCount) => `✅ - You are on the shard **${shard}**/${shardCount} !`
         },
         SHARDS: {
             description: 'Displays stats about the shards.',
@@ -473,12 +473,12 @@ module.exports = {
         },
         SKIP: {
             description: 'Skips the current song.',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             success: `✅ - Song has been skipped!`
         },
         SPOTIFYNOWPLAYING: {
             description: 'Allows you to create a customized Spotify Now Playing card.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
         STATS: {
             description: 'Shows statistics about the bot.',
@@ -497,27 +497,27 @@ module.exports = {
         },
         STEAMPLAYING: {
             description: 'Lets you create a customized `Steam Playing` card.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
-            tooLong: '[❌] - The game is too long! It must be 20 characters or less.'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
+            tooLong: '❌ - The game is too long! It must be 20 characters or less.'
         },
         STOP: {
             description: 'Stops the music and clears the queue.',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             success: (author) => `⏹ ${author} has stopped the music!`
         },
         THREEKYEARS: {
             description: 'Add\'s your (or someone elses) profile pic to the Pokemon Meme `It\'s been 3000 years...`',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
         TOGGLE: {
             description: 'Toggles on or off the levelling system in your server.',
             OFF: {
-                alreadyDisabled: '[❌] - The levelling system is already **disabled**!',
-                success: '[✅] - The levelling system has successfully been **disabled** !'
+                alreadyDisabled: '❌ - The levelling system is already **disabled**!',
+                success: '✅ - The levelling system has successfully been **disabled** !'
             },
             ON: {
-                success: '[✅] - The levelling system has successfully been **enabled** !',
-                alreadyEnabled: '[❌] - The levelling system is already **enabled**!'
+                success: '✅ - The levelling system has successfully been **enabled** !',
+                alreadyEnabled: '❌ - The levelling system is already **enabled**!'
             }
         },
         TOP: {
@@ -536,7 +536,7 @@ module.exports = {
         },
         TRIGGERED: {
             description: 'Sends a GIF with the Triggered effect.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
         USERINFO: {
             description: "Displays informations about a specific user __**in the server**__.",
@@ -562,17 +562,17 @@ module.exports = {
         },
         USSR: {
             description: 'Adds the USSR flag to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
         VOLUME: {
             description: 'Changes the volume of the playing song.',
-            noQueue: "[❌] - There is nothing playing.",
+            noQueue: "❌ - There is nothing playing.",
             volume: (volume) => `🔊 - The volume is at **${volume}%**.`,
             success: (volume) => `✅ - Volume has been set to **${volume}%**!`
         },
         WANTED: {
             description: 'Adds the Wanted frame from One Piece to the image.',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
         WEEKLY: {
             description: "Gives you coins weekly!",
@@ -673,10 +673,10 @@ module.exports = {
             ID: (memberID, executorID) => `Member ID = ${memberID}\nExecutor = ${executorID}`
         },
         MESSAGE: {
-            missingUserPerms: (permissions) => `[❌] - You are missing these permissions: ${permissions}`,
-            missingBotPerms: (permissions) => `[❌] - The bot is missing these permissions: ${permissions}`,
-            pleaseWait: (time) => `[❌] - Please wait **${time} seconds** before using this command.`,
-            restricted: '[❌] - This channel has been restricted for command usage. Only moderators can use commands in this channel.',
+            missingUserPerms: (permissions) => `❌ - You are missing these permissions: ${permissions}`,
+            missingBotPerms: (permissions) => `❌ - The bot is missing these permissions: ${permissions}`,
+            pleaseWait: (time) => `❌ - Please wait **${time} seconds** before using this command.`,
+            restricted: '❌ - This channel has been restricted for command usage. Only moderators can use commands in this channel.',
             error: (error) => `An error has occured: ${error.message}`,
             lvlUpMessage: "Congratulations {user}, you are now level **{level}** !"
         },
