@@ -140,6 +140,10 @@ module.exports = {
             description: 'Ajoute un cadre à l\'image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
+        GLITCH: {
+            description: 'Ajoute un effet de glitch l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",

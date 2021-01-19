@@ -140,6 +140,10 @@ module.exports = {
             description: 'Adds a frame in the image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
         },
+        GLITCH: {
+            description: 'Glitches the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",
