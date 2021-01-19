@@ -118,6 +118,10 @@ module.exports = {
             description: 'Distorts the image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
         },
+        FIRE: {
+            description: 'Sends a GIF with a fire effect.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+        },
         FISH: {
             description: "Lets go fishing!",
             INVENTORY: {
