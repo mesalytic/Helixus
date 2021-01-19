@@ -176,6 +176,10 @@ module.exports = {
             notIgnored: (chan) => `[✅] - ${chan} will now be listened for commands again.`,
             ignored: (chan) => `[✅] - ${chan} will now be ignored for commands.`
         },
+        INVERT: {
+            description: 'Inverts the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         JOINMESSAGE: {
             description: "Configure the message that will display when a user joins the server",
             notes: 'Here is the list of tags you can use:\n\n{user} - mentions the user\n{username} displays the username of the member\n{server} - displays the server name\n\nYou can use channel and role mentions like you would on an ordinary message.',
