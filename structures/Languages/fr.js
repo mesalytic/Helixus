@@ -526,6 +526,10 @@ module.exports = {
             noNitroBoostStatus: "Aucun Nitro Boost d'actif",
             moreRoles: (rolesSize) => `et ${rolesSize} autres rôles.`
         },
+        USSR: {
+            description: 'Ajoute le drapeau de l\'URSS à l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
+        },
         VOLUME: {
             description: 'Change le volume de la musique actuelle.',
             noQueue: "[❌] - Aucune musique n'est jouée.",

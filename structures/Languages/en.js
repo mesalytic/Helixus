@@ -526,6 +526,10 @@ module.exports = {
             noNitroBoostStatus: "No active Server Boost.",
             moreRoles: (rolesSize) => `and ${rolesSize} more.`
         },
+        USSR: {
+            description: 'Adds the USSR flag to the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+        },
         VOLUME: {
             description: 'Changes the volume of the playing song.',
             noQueue: "[❌] - There is nothing playing.",
