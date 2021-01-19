@@ -458,6 +458,10 @@ module.exports = {
             noQueue: "[❌] - Aucune musique n'est jouée.",
             success: `✅ - La musique a bien été passée!`
         },
+        SPOTIFYNOWPLAYING: {
+            description: 'Vous permets de faire une carte Spotify Now Playing personnalisée.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
+        },
         STATS: {
             description: 'Affiche les statistiques a propos du bot.',
             license: "Ce bot est sous la license Open-Source MIT, pour plus d'informations, visionnez la license entière **[ici](https://github.com/chocololat/Helixus/blob/master/LICENSE)**",
