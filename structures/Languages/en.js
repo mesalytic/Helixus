@@ -57,6 +57,10 @@ module.exports = {
             description: 'You are now a Bob Ross art piece.',
             pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
         },
+        BRAZZERS: {
+            description: 'You are now in a Brazzers movie.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         CHOOSE: {
             description: 'Allows you to choose between multiple choices.',
             success: (choice) => `[✅] - My choice is... **${choice}**!`

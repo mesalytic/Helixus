@@ -57,6 +57,10 @@ module.exports = {
             description: 'Deviens une oeuvre d\'art de Bob Ross.',
             pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
+        BRAZZERS: {
+            description: 'Tu fais maintenant parti d\'un film Brazzers.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         CHOOSE: {
             description: 'Permets au bot de choisir parmi plusieurs choix.',
             success: (choice) => `[✅] - Mon choix est... **${choice}**!`
