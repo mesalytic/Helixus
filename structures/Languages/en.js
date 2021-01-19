@@ -465,6 +465,11 @@ module.exports = {
             invitationLink: "Invitation Link",
             website: "Website (WIP)"
         },
+        STEAMPLAYING: {
+            description: 'Lets you create a customized `Steam Playing` card.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            tooLong: '[❌] - The game is too long! It must be 20 characters or less.'
+        },
         STOP: {
             description: 'Stops the music and clears the queue.',
             noQueue: "[❌] - There is nothing playing.",

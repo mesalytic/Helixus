@@ -465,6 +465,11 @@ module.exports = {
             invitationLink: "Lien d'invitation",
             website: "Site Internet (en developpement)"
         },
+        STEAMPLAYING: {
+            description: 'Vous permets de creer une carte Steam Playing personnalisée.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
+            tooLong: '[❌] - Le jeu est trop long! Il doit faire 20 caractères ou moins.'
+        },
         STOP: {
             description: 'Stoppe la musique et enlève la file.',
             noQueue: "[❌] - Aucune musique n'est jouée.",
