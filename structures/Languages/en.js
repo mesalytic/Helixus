@@ -324,6 +324,11 @@ module.exports = {
             tooLong: `[❌] - The prefix must be only 5 characters long.`,
             success: (prefix) => `[✅] - The prefix for this server is now \`${prefix}\`.`
         },
+        QRCODE: {
+            description: 'Converts the specified string to a QRCode.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+            noArgs: '[❌] - Please specify a text that should be converted to a QRCode.'
+        },
         QUEUE: {
             description: 'Displays the whole music queue. Use the reactions to navigate.',
             noQueue: "[❌] - There is nothing playing.",

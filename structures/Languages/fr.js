@@ -324,6 +324,11 @@ module.exports = {
             tooLong: `[❌] - Le préfixe doit faire moins de 5 caractères.`,
             success: (prefix) => `[✅] - Le préfixe pour ce serveur est maintenant \`${prefix}\`.`
         },
+        QRCODE: {
+            description: 'Convertis le texte spécifié en QRCode.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
+            noArgs: '[❌] - Veuillez spécifier un texte qui sera converti en QRCode.'
+        },
         QUEUE: {
             description: 'Affiche la file. Utilisez les réactions pour naviguer entre les pages.',
             noQueue: "[❌] - Aucune musique n'est jouée.",
