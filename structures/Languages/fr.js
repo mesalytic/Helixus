@@ -536,6 +536,10 @@ module.exports = {
             volume: (volume) => `🔊 - Le volume est à **${volume}%**.`,
             success: (volume) => `✅ - Le volume est maintenant à **${volume}%**!`
         },
+        WANTED: {
+            description: 'Ajoute le cadre Wanted de One Piece a l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
+        },
         WEEKLY: {
             description: "Vous donne des pièces toutes les semaines!",
             notReady: (time) => `Vous avez déjà collecté votre récompense hebdomadaire! Revenez dans ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
