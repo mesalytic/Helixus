@@ -542,6 +542,10 @@ module.exports = {
             noNitroBoostStatus: "No active Server Boost.",
             moreRoles: (rolesSize) => `and ${rolesSize} more.`
         },
+        UPTIME: {
+            description: 'Displays the bot\'s current **uptime**.',
+            uptime: (uptime) => `<a:hourglass:800978295562174492> - The current uptime is: **${uptime}**!`
+        },
         USSR: {
             description: 'Adds the USSR flag to the image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',

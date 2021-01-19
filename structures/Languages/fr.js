@@ -542,6 +542,10 @@ module.exports = {
             noNitroBoostStatus: "Aucun Nitro Boost d'actif",
             moreRoles: (rolesSize) => `et ${rolesSize} autres rôles.`
         },
+        UPTIME: {
+            description: 'Affiche depuis combien de temps le bot est en ligne.',
+            uptime: (uptime) => `<a:hourglass:800978295562174492> - Le bot est en ligne depuis: **${uptime}**!`
+        },
         USSR: {
             description: 'Ajoute le drapeau de l\'URSS à l\'image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
