@@ -152,6 +152,10 @@ module.exports = {
             description: 'Adds a grayscale effect to the image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
         },
+        HEARTS: {
+            description: 'Adds hearts to the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...',
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",

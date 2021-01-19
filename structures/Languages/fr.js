@@ -152,6 +152,10 @@ module.exports = {
             description: 'Ajoute un effet noir et blanc à l\'image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
+        HEARTS: {
+            description: 'Ajoute des coeurs a l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...',
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",
