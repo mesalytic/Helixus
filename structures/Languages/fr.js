@@ -65,6 +65,10 @@ module.exports = {
             description: 'Permets au bot de choisir parmi plusieurs choix.',
             success: (choice) => `[✅] - Mon choix est... **${choice}**!`
         },
+        CIRCLE: {
+            description: 'Ajoute un cercle autour de l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         COIN: {
             description: 'Pile ou face?',
             success: (side) => `[✅] - C'est atteri sur **${side}**!`

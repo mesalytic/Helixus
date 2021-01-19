@@ -65,6 +65,10 @@ module.exports = {
             description: 'Allows you to choose between multiple choices.',
             success: (choice) => `[✅] - My choice is... **${choice}**!`
         },
+        CIRCLE: {
+            description: 'Adds a circle around the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         COIN: {
             description: 'Heads or tails?',
             success: (side) => `[✅] - It landed on **${side}**!`
