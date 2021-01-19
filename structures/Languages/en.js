@@ -457,6 +457,20 @@ module.exports = {
             moreRole: (rolesLeft) => `and ${rolesLeft} more`,
             moreEmotes: (emotesLeft) => `and ${emotesLeft} more`
         },
+        SHARD: {
+            description: 'Displays the bot\'s current **shard**.',
+            shard: (shard, shardCount) => `[✅] - You are on the shard **${shard}**/${shardCount} !`
+        },
+        SHARDS: {
+            description: 'Displays stats about the shards.',
+            connected: "CONNECTED",
+            connecting: "CONNECTING",
+            reconnecting: "RECONNECTING",
+            idle: "IDLE",
+            nearly: "NEARLY",
+            disconnected: "DISCONNECTED",
+            finalMessage: (shard, servers, status) `Shard ${shard} | Servers : ${servers} | Status : ${status}\n`
+        },
         SKIP: {
             description: 'Skips the current song.',
             noQueue: "[❌] - There is nothing playing.",
