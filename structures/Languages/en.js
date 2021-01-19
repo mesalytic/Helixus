@@ -386,6 +386,10 @@ module.exports = {
                 embedTitle: (page, pages) => `Role Rewards List (${page + 1}/${pages + 1})`
             }
         },
+        ROBOT: {
+            description: 'Displays a robot based on you (or on any specified text).',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         RPS: {
             description: 'Play Rock Paper Scissors against the AI!',
             whatChoice: "What's your choice?",

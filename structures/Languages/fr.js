@@ -386,6 +386,10 @@ module.exports = {
                 embedTitle: (page, pages) => `Liste des récompenses de niveau (${page + 1}/${pages + 1})`
             }
         },
+        ROBOT: {
+            description: 'Montre une photo de robot unique a vous (ou au texte indiqué).',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         RPS: {
             description: 'Joue au Pierre Feuille Ciseaux contre le bot!',
             whatChoice: "Quel est ton choix?",
