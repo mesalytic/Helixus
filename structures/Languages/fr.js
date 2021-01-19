@@ -42,12 +42,16 @@ module.exports = {
         },
         BEAUTIFUL: {
             description: 'Tu vois ça? C\'est beau..',
-            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
         BEG: {
             description: "Supplie pour des pièces!",
             notReady: (time) => `Tu as déjà supplié pour des pièces récemment! Reviens dans ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `Tu as supplié et a reçu ${amount} pièces!`
+        },
+        BLUR: {
+            description: 'Floute l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
         CHOOSE: {
             description: 'Permets au bot de choisir parmi plusieurs choix.',

@@ -49,6 +49,10 @@ module.exports = {
             notReady: (time) => `You already begged recently! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
             success: (amount) => `You begged and received ${amount} coins!`
         },
+        BLUR: {
+            description: 'Blurs the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         CHOOSE: {
             description: 'Allows you to choose between multiple choices.',
             success: (choice) => `[✅] - My choice is... **${choice}**!`
