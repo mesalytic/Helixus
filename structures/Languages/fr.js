@@ -144,6 +144,10 @@ module.exports = {
             description: 'Ajoute un effet de glitch l\'image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
+        GRAYSCALE: {
+            description: 'Ajoute un effet noir et blanc à l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",

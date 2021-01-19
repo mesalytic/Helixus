@@ -144,6 +144,10 @@ module.exports = {
             description: 'Glitches the image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
         },
+        GRAYSCALE: {
+            description: 'Adds a grayscale effect to the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         HELP: {
             TYPES: {
                 administration: "Administration",
