@@ -114,6 +114,10 @@ module.exports = {
             description: 'Lance un dé et retourne un nombre entre 1 et le nombre de votre choix.',
             success: (number) => `[✅] - Vous avez eu **${number}**!`
         },
+        DISTORT: {
+            description: 'Distort l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         FISH: {
             description: "Allons pêcher",
             INVENTORY: {

@@ -114,6 +114,10 @@ module.exports = {
             description: 'Rolls a dice within a 1-max value of your choice.',
             success: (number) => `[✅] - You rolled a **${number}**!`
         },
+        DISTORT: {
+            description: 'Distorts the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         FISH: {
             description: "Lets go fishing!",
             INVENTORY: {
