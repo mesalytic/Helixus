@@ -335,6 +335,10 @@ module.exports = {
             embedTitle: "File\n",
             embedDescription: (title, url, info) => `**Joue - [${title}](${url})**\n\n${info}`
         },
+        RAINBOW: {
+            description: 'Ajoute un effet arc-en-ciel à l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         RANK: {
             description: 'Affiche votre niveau.',
         },

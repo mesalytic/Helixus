@@ -335,6 +335,10 @@ module.exports = {
             embedTitle: "Song Queue\n",
             embedDescription: (title, url, info) => `**Current Song - [${title}](${url})**\n\n${info}`
         },
+        RAINBOW: {
+            description: 'Adds a Rainbow effect to the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         RANK: {
             description: 'Displays your level stats.',
         },
