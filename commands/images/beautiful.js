@@ -8,7 +8,7 @@ module.exports = class BeautifulCommand extends Command {
         super(bot, {
             name: 'beautiful',
             usage: 'beautiful [url]',
-            description: 'Add\'s your (or someone elses) profile pic to the Pokemon Meme `It\'s been 3000 years...`',
+            description: 'U see this? Beautiful.',
             type: 'images'
         });
     }
