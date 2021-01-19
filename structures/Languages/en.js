@@ -53,6 +53,10 @@ module.exports = {
             description: 'Blurs the image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
         },
+        BOBROSS: {
+            description: 'You are now a Bob Ross art piece.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         CHOOSE: {
             description: 'Allows you to choose between multiple choices.',
             success: (choice) => `[✅] - My choice is... **${choice}**!`

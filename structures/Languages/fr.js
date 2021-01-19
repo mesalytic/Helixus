@@ -53,6 +53,10 @@ module.exports = {
             description: 'Floute l\'image.',
             pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
         },
+        BOBROSS: {
+            description: 'Deviens une oeuvre d\'art de Bob Ross.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         CHOOSE: {
             description: 'Permets au bot de choisir parmi plusieurs choix.',
             success: (choice) => `[✅] - Mon choix est... **${choice}**!`
