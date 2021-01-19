@@ -304,6 +304,10 @@ module.exports = {
             description: 'Affiche la **latence de message** ainsi que le **heartbeat** du bot.',
             latency: "Latence",
         },
+        PIXEL: {
+            description: 'Pixelise l\'image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Veuillez patienter...'
+        },
         PLAY: {
             description: "Vous permets de jouer de la musique venant de YouTube ou SoundCloud",
             noVoiceChannel: "[❌] - Vous devez être dans un salon vocal!",
