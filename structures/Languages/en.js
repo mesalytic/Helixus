@@ -97,6 +97,10 @@ module.exports = {
             winString: (winner) => `[✅] - Congratulations to ${winner} !`,
             drawString: '[❌] - It\'s a draw...'
         },
+        CONTRAST: {
+            description: 'Adds a contrast to the image.',
+            pleaseWait: '[<a:loading:543460555113889792>] - Please wait...'
+        },
         DAILY: {
             description: "Gives you coins daily!",
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
