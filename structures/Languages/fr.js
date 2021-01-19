@@ -469,7 +469,7 @@ module.exports = {
             idle: "INACTIF",
             nearly: "PRESQUE PRÊT",
             disconnected: "DECONNECTÉ",
-            finalMessage: (shard, servers, status) `Shard ${shard} | Serveurs : ${servers} | Statut : ${status}\n`
+            finalMessage: (shard, servers, status) => `Shard ${shard} | Serveurs : ${servers} | Statut : ${status}\n`
         },
         SKIP: {
             description: 'Passe la musique actuelle.',
