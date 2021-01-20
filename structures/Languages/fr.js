@@ -677,7 +677,7 @@ module.exports = {
             missingBotPerms: (permissions) => `❌ - Le bot n'a pas les permissions suivantes: ${permissions}`,
             pleaseWait: (time) => `❌ - Veuillez patienter **${time} secondes** avant d'utiliser la commande.`,
             restricted: '❌ - Ce salon a été restreint pour l\'utilisation de commandes. Seuls les modérateurs peuvent y exécuter des commandes.',
-            error: (error) => `Une erreur s'est produite: ${error.message}`,
+            error: (error, errorID) => `❌ - Une erreur s'est produite:\n\`\`\`${error.message}\`\`\`\nVeuillez signaler l'erreur avec l'ID suivant: **${errorID}**!`,
             lvlUpMessage: "Félicitations {user}, tu es maintenant niveau **{level}** !"
         },
         MESSAGEDELETE: {
