@@ -17,6 +17,10 @@
 		"error": {
 			"id": "",
 			"password": ""
+		},
+		"commands": {
+			"id": "",
+			"password": ""
 		}
     },
     "youtube": "",

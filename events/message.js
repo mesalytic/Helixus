@@ -1,5 +1,5 @@
 const {
-  Collection, MessageEmbed, WebhookClient
+  Collection, MessageEmbed, WebhookClient, Util
 } = require("discord.js");
 const {
   permissions
@@ -80,7 +80,10 @@ module.exports = (bot, message) => {
               message.delete();
               return message.channel.send(message.guild.lang.EVENTS.MESSAGE.restricted)
             } else {
-              /* @TODO: Command Logging */
+              const wb = new WebhookClient(bot.config.webhook.commands.id, bot.config.webhook.commands.password)
+              
+              wb.send(`\`\`\`${Util.escapeMarkdown(`${message.author.tag} (${message.author.id}) - ${message.content} (${message.guild.name} | ${message.guild.id})`)}\`\`\``);
+
               command.run(message, args).catch(e => {
                 const webhook = new WebhookClient(bot.config.webhook.error.id, bot.config.webhook.error.password)
                 
