@@ -33,6 +33,9 @@ module.exports = (bot, message) => {
         /* Owner Check */
         if (command.ownerOnly && message.author.id !== bot.config.ownerID) return;
 
+        /* NSFW check */
+        if (command.type === "nsfw" && !message.channel.nsfw) return message.reply(message.guild.lang ? message.guild.lang.EVENTS.MESSAGE.noNsfw : '❌ - Please execute this command in an NSFW channel.') // the latter solution is only a temporary rusty fix for a bug, patch will come later I hope.
+
         /* Permissions Check */
         let neededPermsBot = [];
         let neededPermsUser = [];

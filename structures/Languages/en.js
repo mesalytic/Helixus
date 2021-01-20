@@ -678,7 +678,8 @@ module.exports = {
             pleaseWait: (time) => `❌ - Please wait **${time} seconds** before using this command.`,
             restricted: '❌ - This channel has been restricted for command usage. Only moderators can use commands in this channel.',
             error: (error, errorID) => `❌ - An error has occured: \n\`\`\`${error.message}\`\`\`\nPlease report this error and specify this error ID: **${errorID}**!`,
-            lvlUpMessage: "Congratulations {user}, you are now level **{level}** !"
+            lvlUpMessage: "Congratulations {user}, you are now level **{level}** !",
+            noNsfw: '❌ - Please execute this command in an NSFW channel.'
         },
         MESSAGEDELETE: {
             deleted: (message) => `A message from ${message.author} (${message.author.tag}) has been deleted.`,

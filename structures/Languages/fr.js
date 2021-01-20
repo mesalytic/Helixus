@@ -678,7 +678,8 @@ module.exports = {
             pleaseWait: (time) => `❌ - Veuillez patienter **${time} secondes** avant d'utiliser la commande.`,
             restricted: '❌ - Ce salon a été restreint pour l\'utilisation de commandes. Seuls les modérateurs peuvent y exécuter des commandes.',
             error: (error, errorID) => `❌ - Une erreur s'est produite:\n\`\`\`${error.message}\`\`\`\nVeuillez signaler l'erreur avec l'ID suivant: **${errorID}**!`,
-            lvlUpMessage: "Félicitations {user}, tu es maintenant niveau **{level}** !"
+            lvlUpMessage: "Félicitations {user}, tu es maintenant niveau **{level}** !",
+            noNsfw: '❌ - Veuillez exécuter cette commande dans un salon NSFW.'
         },
         MESSAGEDELETE: {
             deleted: (message) => `Un message de ${message.author} (${message.author.tag}) a été supprimé.`,
