@@ -144,6 +144,13 @@ module.exports = {
             description: 'Ajoute un effet FishEye à l\'image.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',
         },
+        FOURK: {
+            description: 'Affiche une image NSFW catégorisée 4K.',
+            pleaseWait: "Loading - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
+        },
         FRAME: {
             description: 'Ajoute un cadre à l\'image.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
