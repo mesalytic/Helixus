@@ -5,6 +5,7 @@ module.exports.run = async (bot, message, args, con) => {
   if (!input) {
     return message.reply(bot.lang.membres.math.noargs);
   }
+  if (input.match(":")) return message.reply("The equation contains invalid syntax, please try again!");
 
   const question = args.join(" ");
   let answer;
