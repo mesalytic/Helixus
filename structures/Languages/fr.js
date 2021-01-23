@@ -162,6 +162,18 @@ module.exports = {
             description: 'Ajoute un cadre à l\'image.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
         },
+        GELBOORU: {
+            description: 'Affiche une image (potentiellement) NSFW venant de Gelbooru avec les tags spécifiés.',
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par Gelbooru (gelbooru.com)',
+            description: (data, duration, rating, notDisplaying) => `**Posté par**: \`${decodeURIComponent(data.owner)}\` (**${duration}**)\n**Score**: \`${data.score}\`\n**Classification**: \`${rating}\`\n**Tags**: \`${data.tags}\`\n[${notDisplaying}](${data.file_url})`,
+            s: "Securisé",
+            q: "Questionnable",
+            e: "Explicite",
+            notFound: `❌ - Aucun résultat a été trouvé.`
+        },
         GLITCH: {
             description: 'Ajoute un effet de glitch l\'image.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
