@@ -5,6 +5,13 @@ const {
 module.exports = {
     code: 'fr',
     COMMANDS: {
+        ASS: {
+            description: 'Affiche une image NSFW catégorisée `ass`.',
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
+        },
         AUTOROLE: {
             description: 'Vous permets de configurer un rôle qui sera attribué aux nouveaux membres.',
             OFF: {
@@ -146,7 +153,7 @@ module.exports = {
         },
         FOURK: {
             description: 'Affiche une image NSFW catégorisée 4K.',
-            pleaseWait: "Loading - Veuillez patienter...",
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
             requestedBy: (author) => `Demandé par ${author}`,
             notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
             providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
