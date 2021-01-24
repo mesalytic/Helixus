@@ -390,6 +390,13 @@ module.exports = {
             tooLong: `❌ - The prefix must be only 5 characters long.`,
             success: (prefix) => `✅ - The prefix for this server is now \`${prefix}\`.`
         },
+        PUSSY: {
+            description: 'Displays an NSFW picture with pussy.',
+            pleaseWait: "<a:loading:543460555113889792> - Please wait...",
+            requestedBy: (author) => `Requested by ${author}`,
+            notDisplaying: 'Click here if the image is not displaying.',
+            providedBy: 'Provided by NekoBotAPI (nekobot.xyz)'
+        },
         QRCODE: {
             description: 'Converts the specified string to a QRCode.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...',

@@ -390,6 +390,13 @@ module.exports = {
             tooLong: `❌ - Le préfixe doit faire moins de 5 caractères.`,
             success: (prefix) => `✅ - Le préfixe pour ce serveur est maintenant \`${prefix}\`.`
         },
+        PUSSY: {
+            description: 'Affiche une image NSFW catégorisée `pussy`.',
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
+        },
         QRCODE: {
             description: 'Convertis le texte spécifié en QRCode.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',
