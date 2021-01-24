@@ -64,6 +64,13 @@ module.exports = {
             description: 'You are now a Bob Ross art piece.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
+        BOOBS: {
+            description: 'Displays an NSFW picture with boobs.',
+            pleaseWait: "<a:loading:543460555113889792> - Please wait...",
+            requestedBy: (author) => `Requested by ${author}`,
+            notDisplaying: 'Click here if the image is not displaying.',
+            providedBy: 'Provided by NekoBotAPI (nekobot.xyz)'
+        },
         BRAZZERS: {
             description: 'You are now in a Brazzers movie.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
