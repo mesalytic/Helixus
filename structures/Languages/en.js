@@ -330,6 +330,13 @@ module.exports = {
             description: 'Displays a random meme from Reddit.',
             loading: "<a:loading:543460555113889792> - Please wait..."
         },
+        NEKO: {
+            description: 'Displays an NSFW picture with neko.',
+            pleaseWait: "<a:loading:543460555113889792> - Please wait...",
+            requestedBy: (author) => `Requested by ${author}`,
+            notDisplaying: 'Click here if the image is not displaying.',
+            providedBy: 'Provided by NekoBotAPI (nekobot.xyz)'
+        },
         NOWPLAYING: {
             description: 'Shows what music is currently playing.',
             noQueue: "❌ - There is nothing playing.",

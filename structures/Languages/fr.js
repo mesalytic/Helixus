@@ -330,6 +330,13 @@ module.exports = {
             description: 'Affiche un meme aléatoire venant de Reddit.',
             loading: "<a:loading:543460555113889792> - Veuillez patienter..."
         },
+        NEKO: {
+            description: 'Affiche une image NSFW catégorisée `neko`.',
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
+        },
         NOWPLAYING: {
             description: 'Affiche la musique actuellement jouée.',
             noQueue: "❌ - Aucune musique n'est jouée.",
