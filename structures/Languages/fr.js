@@ -612,6 +612,15 @@ module.exports = {
             notReady: (time) => `Vous avez déjà collecté votre récompense hebdomadaire! Revenez dans ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
             success: (amount) => `Vous avez récupéré votre récompense hebdomadaire de ${amount} pièces !`
         },
+        YANDERE: {
+            description: 'Affiche une image (potentiellement) NSFW venant de Gelbooru avec les tags spécifiés.',
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par Yande.re (yande.re)',
+            embedDescription: (data, notDisplaying) => `**Posté par**: \`${decodeURIComponent(data.author)}\`\n**Score**: \`${data.score}\`\n**Tags**: \`${data.tags}\`\n[${notDisplaying}](${data.file_url})`,
+            notFound: `❌ - Aucun résultat a été trouvé.`
+        },
     },
     EVENTS: {
         CHANNELCREATE: {

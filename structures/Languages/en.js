@@ -612,6 +612,15 @@ module.exports = {
             notReady: (time) => `You already collected your weekly bonus! Come back in ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
             success: (amount) => `You've collected your weekly reward of ${amount} coins!`
         },
+        YANDERE: {
+            description: 'Displays a (potential) NSFW image from Gelbooru with your specified tags.',
+            pleaseWait: "<a:loading:543460555113889792> - Please wait...",
+            requestedBy: (author) => `Requested by ${author}`,
+            notDisplaying: 'Click here if the image is not displaying.',
+            providedBy: 'Provided by Yande.re (yande.re)',
+            embedDescription: (data, notDisplaying) => `**Posted by**: \`${decodeURIComponent(data.author)}\`\n**Score**: \`${data.score}\`\n**Tags**: \`${data.tags}\`\n[${notDisplaying}](${data.file_url})`,
+            notFound: `❌ - No results has been found.`
+        },
     },
     EVENTS: {
         CHANNELCREATE: {
