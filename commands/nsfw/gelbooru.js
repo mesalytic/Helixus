@@ -39,7 +39,7 @@ module.exports = class GelbooruCommand extends Command {
         let embed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle(message.guild.lang.COMMANDS.GELBOORU.requestedBy(message.author.tag), message.author.displayAvatarURL())
-            .setDescription(message.guild.lang.COMMANDS.GELBOORU.description(data, duration, message.guild.lang.COMMANDS.GELBOORU[data.rating], message.guild.lang.COMMANDS.GELBOORU.notDisplaying))
+            .setDescription(message.guild.lang.COMMANDS.GELBOORU.embedDescription(data, duration, message.guild.lang.COMMANDS.GELBOORU[data.rating], message.guild.lang.COMMANDS.GELBOORU.notDisplaying))
             .setImage(data.file_url)
             .setFooter(message.guild.lang.COMMANDS.GELBOORU.providedBy)
         

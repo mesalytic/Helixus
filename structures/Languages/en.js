@@ -168,7 +168,7 @@ module.exports = {
             requestedBy: (author) => `Requested by ${author}`,
             notDisplaying: 'Click here if the image is not displaying.',
             providedBy: 'Provided by Gelbooru (gelbooru.com)',
-            description: (data, duration, rating, notDisplaying) => `**Posted by**: \`${decodeURIComponent(data.owner)}\` (**${duration}**)\n**Score**: \`${data.score}\`\n**Rank**: \`${rating}\`\n**Tags**: \`${data.tags}\`\n[${notDisplaying}](${data.file_url})`,
+            embedDescription: (data, duration, rating, notDisplaying) => `**Posted by**: \`${decodeURIComponent(data.owner)}\` (**${duration}**)\n**Score**: \`${data.score}\`\n**Rank**: \`${rating}\`\n**Tags**: \`${data.tags}\`\n[${notDisplaying}](${data.file_url})`,
             s: "Safe",
             q: "Questionable",
             e: "Explicit",
