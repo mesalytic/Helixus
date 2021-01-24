@@ -5,6 +5,13 @@ const {
 module.exports = {
     code: 'en',
     COMMANDS: {
+        ANAL: {
+            description: 'Displays an NSFW picture with anal.',
+            pleaseWait: "<a:loading:543460555113889792> - Please wait...",
+            requestedBy: (author) => `Requested by ${author}`,
+            notDisplaying: 'Click here if the image is not displaying.',
+            providedBy: 'Provided by NekoBotAPI (nekobot.xyz)'
+        },
         ASS: {
             description: 'Displays an NSFW image with ass.',
             pleaseWait: "<a:loading:543460555113889792> - Please wait...",

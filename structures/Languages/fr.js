@@ -5,6 +5,13 @@ const {
 module.exports = {
     code: 'fr',
     COMMANDS: {
+        ANAL: {
+            description: 'Affiche une image NSFW catégorisée `anal`.',
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
+        },
         ASS: {
             description: 'Affiche une image NSFW catégorisée `ass`.',
             pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
