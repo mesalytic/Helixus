@@ -207,6 +207,13 @@ module.exports = {
             embedTitle: 'Commandes d\'Helixus',
             embedDescription: (prefix) => `**Pour plus d'informations:** \`${prefix}help [command]\``
         },
+        HENTAI: {
+            description: 'Affiche une image NSFW avec du hentai.',
+            pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+            requestedBy: (author) => `Demandé par ${author}`,
+            notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
+            providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
+        },
         IGNORE: {
             description: "Vous permets de configurer dans quels salons les commandes pourront être exécutées",
             noChanSpecified: "❌ - Vous n'avez spécifié aucun salon.",
