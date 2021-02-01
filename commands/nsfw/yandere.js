@@ -26,7 +26,7 @@ module.exports = class YandereCommand extends Command {
         else {
             for (let i = 0; i < args.length; i++) {
                 if (bannedTags.indexOf(args[i].toLowerCase()) > -1) {
-                    return message.reply(`X - The tag \`${args[i].toLowerCase()}\` is banned.`)
+                    return message.reply(message.guild.lang.COMMANDS.YANDERE.banned(args[i].toLowerCase()))
                 }
             }
             url += args.join('+');

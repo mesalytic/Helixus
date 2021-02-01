@@ -656,7 +656,8 @@ module.exports = {
             notDisplaying: 'Click here if the image is not displaying.',
             providedBy: 'Provided by Yande.re (yande.re)',
             embedDescription: (data, notDisplaying) => `**Posted by**: \`${decodeURIComponent(data.author)}\`\n**Score**: \`${data.score}\`\n**Tags**: \`${data.tags}\`\n[${notDisplaying}](${data.file_url})`,
-            notFound: `❌ - No results has been found.`
+            notFound: `❌ - No results has been found.`,
+            banned: (tag) => `❌ - The tag \`${tag}\` is banned.`
         },
     },
     EVENTS: {
