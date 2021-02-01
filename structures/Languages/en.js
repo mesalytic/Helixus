@@ -7,8 +7,8 @@ module.exports = {
     COMMANDS: {
         AFK: {
             description: 'Allows you to set an AFK message that\'ll be displayed when you\'re mentionned.',
-            noReason: 'X - Please specify a reason.',
-            success: 'V - You are now AFK! Just type a message (not a command) to remove the AFK reason.'
+            noReason: '❌ - Please specify a reason.',
+            success: '✅ - You are now AFK! Just type a message (not a command) to remove the AFK reason.'
         },
         ANAL: {
             description: 'Displays an NSFW picture with anal.',
@@ -16,6 +16,10 @@ module.exports = {
             requestedBy: (author) => `Requested by ${author}`,
             notDisplaying: 'Click here if the image is not displaying.',
             providedBy: 'Provided by NekoBotAPI (nekobot.xyz)'
+        },
+        ASCII: {
+            description: 'Converts text to ASCII art.',
+            tooLong: (chars) => `❌ - The text must be 15 caracters long or less. The text you provided was ${chars} characters longer.`
         },
         ASS: {
             description: 'Displays an NSFW image with ass.',

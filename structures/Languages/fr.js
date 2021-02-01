@@ -7,8 +7,8 @@ module.exports = {
     COMMANDS: {
         AFK: {
             description: 'Permet de spécifier un message d\'AFK quand vous serez notifié.',
-            noReason: 'X - Veuillez spécifier une raison.',
-            success: 'V - Vous êtes maintenant AFK! Tapez un message (pas une commande) pour retirer le message d\'AFK.'
+            noReason: '❌ - Veuillez spécifier une raison.',
+            success: '✅ - Vous êtes maintenant AFK! Tapez un message (pas une commande) pour retirer le message d\'AFK.'
         },
         ANAL: {
             description: 'Affiche une image NSFW catégorisée `anal`.',
@@ -16,6 +16,10 @@ module.exports = {
             requestedBy: (author) => `Demandé par ${author}`,
             notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
             providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
+        },
+        ASCII: {
+            description: 'Convertis le texte en art ASCII.',
+            tooLong: (chars) => `❌ - Le texte doit faire 15 caractères ou moins. Le texte spécifié est ${chars} caractères trop long.`
         },
         ASS: {
             description: 'Affiche une image NSFW catégorisée `ass`.',
