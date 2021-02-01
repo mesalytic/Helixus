@@ -5,6 +5,11 @@ const {
 module.exports = {
     code: 'en',
     COMMANDS: {
+        AFK: {
+            description: 'Allows you to set an AFK message that\'ll be displayed when you\'re mentionned.',
+            noReason: 'X - Please specify a reason.',
+            success: 'V - You are now AFK! Just type a message (not a command) to remove the AFK reason.'
+        },
         ANAL: {
             description: 'Displays an NSFW picture with anal.',
             pleaseWait: "<a:loading:543460555113889792> - Please wait...",
@@ -749,7 +754,9 @@ module.exports = {
             restricted: '❌ - This channel has been restricted for command usage. Only moderators can use commands in this channel.',
             error: (error, errorID) => `❌ - An error has occured: \n\`\`\`${error.message}\`\`\`\nPlease report this error and specify this error ID: **${errorID}**!`,
             lvlUpMessage: "Congratulations {user}, you are now level **{level}** !",
-            noNsfw: '❌ - Please execute this command in an NSFW channel.'
+            noNsfw: '❌ - Please execute this command in an NSFW channel.',
+            removedAFK: "⏳ - Your AFK status has been removed.",
+            isAFK: (tag, reason) => `⏳ - ${tag} is currently **AFK**.\nReason: __**${reason}**__`
         },
         MESSAGEDELETE: {
             deleted: (message) => `A message from ${message.author} (${message.author.tag}) has been deleted.`,

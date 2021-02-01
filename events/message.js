@@ -1,5 +1,8 @@
 const {
-  Collection, MessageEmbed, WebhookClient, Util
+  Collection,
+  MessageEmbed,
+  WebhookClient,
+  Util
 } = require("discord.js");
 const {
   permissions
@@ -25,7 +28,7 @@ module.exports = (bot, message) => {
 
       if (!message.guild.lang) {
         bot.db.query(`SELECT * FROM Langs WHERE guildID='${message.guild.id}'`, (err, rows) => {
-         message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
+          message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
         })
       }
 
@@ -84,45 +87,59 @@ module.exports = (bot, message) => {
               return message.channel.send(message.guild.lang.EVENTS.MESSAGE.restricted)
             } else {
               const wb = new WebhookClient(bot.config.webhook.commands.id, bot.config.webhook.commands.password)
-              
+
               wb.send(`\`\`\`${Util.escapeMarkdown(`${message.author.tag} (${message.author.id}) - ${message.content} (${message.guild.name} | ${message.guild.id})`)}\`\`\``);
 
               command.run(message, args).catch(e => {
                 const webhook = new WebhookClient(bot.config.webhook.error.id, bot.config.webhook.error.password)
-                
+
                 function makeid(length) {
-                  var result           = '';
-                  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                  var result = '';
+                  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                   var charactersLength = characters.length;
-                  for ( var i = 0; i < length; i++ ) {
-                     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                  for (var i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
                   }
                   return result;
-               }
-               
-               let errorID = makeid(16);
-               console.log(errorID);
+                }
+
+                let errorID = makeid(16);
+                console.log(errorID);
 
                 const embed = new MessageEmbed()
-                        .setColor("RANDOM")
-                        .setDescription(`Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${command.name}**\nMessage content: **${message.content}**\n\nError Stack:\n\`${e.stack}\``)
-                        .setFooter(`ID: ${errorID}`);
+                  .setColor("RANDOM")
+                  .setDescription(`Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${command.name}**\nMessage content: **${message.content}**\n\nError Stack:\n\`${e.stack}\``)
+                  .setFooter(`ID: ${errorID}`);
 
                 bot.logger.error(e);
                 webhook.send(embed);
-          return message.reply(message.guild.lang.EVENTS.MESSAGE.error(e, errorID))
+                return message.reply(message.guild.lang.EVENTS.MESSAGE.error(e, errorID))
               })
-          }
-        })
-          
+            }
+          })
+
         } catch (e) {
           bot.logger.error(e);
           return message.reply(message.guild.lang.EVENTS.MESSAGE.error(e))
         }
 
       }
-
-
+    } else {
+      bot.db.query(`SELECT * FROM Afk WHERE userID = '${message.author.id}'`, (err, rows) => {
+        if (rows[0]) {
+          message.reply(message.guild.lang.EVENTS.MESSAGE.removedAFK);
+          bot.db.query(`DELETE FROM Afk WHERE userID='${message.author.id}'`);
+        }
+      });
+  
+      const mentioned = message.mentions.members.first();
+      if (mentioned) {
+        bot.db.query(`SELECT * FROM Afk WHERE userID = '${mentioned.id}'`, (err, rows) => {
+          if (rows[0]) {
+            return message.reply(message.guild.lang.EVENTS.MESSAGE.isAFK(Util.escapeMarkdown(Util.removeMentions(mention.tag)), Util.escapeMarkdown(Util.removeMentions(rows[0].reason))))
+          }
+        });
+      }
     }
 
     /* Levels */
@@ -148,13 +165,13 @@ module.exports = (bot, message) => {
 
                 if (!message.guild.lang) {
                   bot.db.query(`SELECT * FROM Langs WHERE guildID='${message.guild.id}'`, (err, rows) => {
-                   message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
+                    message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
                   })
                 }
 
                 let xp;
                 let xpToWin = generateXP(5, 15);
-                
+
                 if (!lRows[0]) xp = 0;
                 else xp = Number(lRows[0].points);
 

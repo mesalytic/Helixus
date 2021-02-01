@@ -5,6 +5,11 @@ const {
 module.exports = {
     code: 'fr',
     COMMANDS: {
+        AFK: {
+            description: 'Permet de spécifier un message d\'AFK quand vous serez notifié.',
+            noReason: 'X - Veuillez spécifier une raison.',
+            success: 'V - Vous êtes maintenant AFK! Tapez un message (pas une commande) pour retirer le message d\'AFK.'
+        },
         ANAL: {
             description: 'Affiche une image NSFW catégorisée `anal`.',
             pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
@@ -749,7 +754,9 @@ module.exports = {
             restricted: '❌ - Ce salon a été restreint pour l\'utilisation de commandes. Seuls les modérateurs peuvent y exécuter des commandes.',
             error: (error, errorID) => `❌ - Une erreur s'est produite:\n\`\`\`${error.message}\`\`\`\nVeuillez signaler l'erreur avec l'ID suivant: **${errorID}**!`,
             lvlUpMessage: "Félicitations {user}, tu es maintenant niveau **{level}** !",
-            noNsfw: '❌ - Veuillez exécuter cette commande dans un salon NSFW.'
+            noNsfw: '❌ - Veuillez exécuter cette commande dans un salon NSFW.',
+            removedAFK: "⏳ - Votre statut AFK a été retiré.",
+            isAFK: (tag, reason) => `⏳ - ${tag} est actuellement **AFK**.\nRaison: __**${reason}**__`
         },
         MESSAGEDELETE: {
             deleted: (message) => `Un message de ${message.author} (${message.author.tag}) a été supprimé.`,
