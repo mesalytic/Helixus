@@ -108,6 +108,10 @@ module.exports = {
             description: 'Pile ou face?',
             success: (side) => `✅ - C'est atteri sur **${side}**!`
         },
+        COLOR: {
+            description: 'Affiche des informations a propos d\'une couleur aléatoire.',
+            link: "Lien vers la couleur"
+        },
         CONNECT4: {
             description: 'Jouez au Puissance 4 avec des amis ou avec le bot!',
             noMention: '❌ - Veuillez mentionner quelqu\'un. Pour jouer avec le bot, mentionnez le bot.',

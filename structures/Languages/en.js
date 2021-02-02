@@ -108,6 +108,10 @@ module.exports = {
             description: 'Heads or tails?',
             success: (side) => `✅ - It landed on **${side}**!`
         },
+        COLOR: {
+            description: 'Displays informations about a random color.',
+            link: "Link to color"
+        },
         CONNECT4: {
             description: 'Play Connect Four with a friend. Want to play with me? Just tag me!',
             noMention: '❌ - Please mention someone to play with. You can mention the bot to play against an AI.',
