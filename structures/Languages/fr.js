@@ -157,6 +157,29 @@ module.exports = {
             description: 'Distort l\'image.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
         },
+        EMOJI: {
+            description: 'Affiche les informations a propos de l\'emoji spécifié.\nLes modérateurs peuvent utiliser cette commande pour ajouter, renommer et retirer des emojis du serveur.',
+            noPermission: "❌ - Vous n'avez pas la permission.",
+            ADD: {
+                noArgs: "❌ - Veuillez spécifier un nom pour l'emoji a ajouter.",
+                tooMuch: "❌ - Veuillez seulement mettre un fichier attaché **OU** un emoji venant d'un autre serveur.",
+                created: (emote) => `✅ - L'emoji ${emote} (\`${emote.name}\`) a bien été créé.`,
+                unicode: "❌ - Cet emoji est un emoji Unicode, et ne peut pas être ajouté sur le serveur.",
+                alreadyInServer: "❌ - Cet emoji est déjà sur le serveur!"
+            },
+            REMOVE: {
+                noArgs: "❌ - Veuillez spécifier l'emoji a supprimer!",
+                notInServer: "❌ - Vous ne pouvez pas supprimer un emoji qui n'est pas sur le serveur.",
+                removed: (emote) => `✅ - L'emoji ${emote.name} a bien été supprimé!`
+            },
+            RENAME: {
+                noArgs: "❌ - Veuillez spécifier l'emoji a renommer!",
+                noNewName: "❌ - Veuillez spécifier le nouveau nom de l'emoji!",
+                notInServer: "❌ - Vous ne pouvez pas renommer un emoji qui n'est pas sur le serveur!",
+                renamed: (emote, newName) => `✅ - L'emoji ${emote} a bien été renommé en ${newName}!`
+            },
+            informations: (emojiName, preview, emoteID, duration) => `**Nom**: \`${emojiName}\`\n**Aperçu**: ${preview} (\`${preview}\`)\n**ID**: \`${emoteID}\`\n**Ajouté le**: \`${duration}\``
+        },
         FIRE: {
             description: 'Renvoie un GIF avec un effet de feu.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',

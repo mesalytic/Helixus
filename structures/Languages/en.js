@@ -157,6 +157,29 @@ module.exports = {
             description: 'Distorts the image.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
+        EMOJI: {
+            description: 'Displays informations about specified emote.\nModerators can use this command to add, rename and remove emojis from the server.',
+            noPermission: "❌ - You don't have the permission.",
+            ADD: {
+                noArgs: "❌ - Please specify a name for the emote to add !",
+                tooMuch: "❌ - Only an attachment or a custom emote is required.",
+                created: (emote) => `✅ - The emote ${emote} (\`${emote.name}\`) has successfully been created!`,
+                unicode: "❌ - This emote is an unicode emote, and cannot be added to your server.",
+                alreadyInServer: "❌ - This emote is already in the server!"
+            },
+            REMOVE: {
+                noArgs: "❌ - Please specify a name for the emote to remove !",
+                notInServer: "❌ - You cannot remove an emote that is not in the server!",
+                removed: (emote) => `✅ - The emote ${emote.name} has successfully been removed!`
+            },
+            RENAME: {
+                noArgs: "❌ - Please specify a name for the emote to rename !",
+                noNewName: "❌ - Please specify the new name for the emote!",
+                notInServer: "❌ - You cannot rename an emote that is not in the server!",
+                renamed: (emote, newName) => `✅ - The emote ${emote} has successfully been renamed to ${newName}!`
+            },
+            informations: (emojiName, preview, emoteID, duration) => `**Name**: \`${emojiName}\`\n**Preview**: ${preview} (\`${preview}\`)\n**ID**: \`${emoteID}\`\n**Added on**: \`${duration}\``
+        },
         FIRE: {
             description: 'Sends a GIF with a fire effect.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...',
