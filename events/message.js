@@ -104,8 +104,7 @@ module.exports = (bot, message) => {
                 }
 
                 let errorID = makeid(16);
-                console.log(errorID);
-
+                
                 const embed = new MessageEmbed()
                   .setColor("RANDOM")
                   .setDescription(`Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${command.name}**\nMessage content: **${message.content}**\n\nError Stack:\n\`${e.stack}\``)

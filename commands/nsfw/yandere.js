@@ -34,8 +34,6 @@ module.exports = class YandereCommand extends Command {
 
         let { body } = await request.get(url)
 
-        console.log(body[0]);
-
         if (!body) return message.reply(message.guild.lang.COMMANDS.YANDERE.notFound);
     let data = body[random(body)];
     
