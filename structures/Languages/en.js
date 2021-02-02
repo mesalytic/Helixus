@@ -37,6 +37,11 @@ module.exports = {
             added: (role) => `✅ - The role ${role} will now be given to new members.`,
             notFound: '❌ - The role has not been found.'
         },
+        AVATAR: {
+            description: 'Displays your avatar or the avatar of the mentionned user.',
+            avatar: (userTag) => `Here is the avatar of ${userTag}`,
+            notShowing: "Click here if the avatar is not showing up."
+        },
         BACKGROUND: {
             description: 'Allows you to see the list of backgrounds, or to buy and set them.',
             BUY: {

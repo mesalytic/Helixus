@@ -37,6 +37,11 @@ module.exports = {
             added: (role) => `✅ - Le rôle ${role} sera désormais attribué aux nouveaux membres.`,
             notFound: '❌ - Le rôle n\'a pas été trouvé.'
         },
+        AVATAR: {
+            description: 'Affiche votre avatar ou celui de l\'utilisateur mentionné.',
+            avatar: (userTag) => `Voici l'avatar de ${userTag}`,
+            notShowing: "Cliquez ici si l'avatar ne s'affiche pas."
+        },
         BACKGROUND: {
             description: 'Vous permets de configurer le fond de votre carte de niveaux, de les acheter et de voir la liste complète!',
             BUY: {
