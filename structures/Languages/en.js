@@ -396,6 +396,19 @@ module.exports = {
             embedAuthor: (title) => `Now playing: ${title}`,
             embedFooter: (time) => `Time Remaining: ${time}`
         },
+        OSU: {
+            description: 'Displays informations about the specified player, in the specified game mode.',
+            notFound: "❌ - User not found.",
+            stats: (username, mode) => `${username}'s stats (osu!${mode})`,
+            username: "Username",
+            level: "Level",
+            accuracy: "Accuracy",
+            rank: "Rank",
+            totalGames: "Total Games",
+            country: "Country",
+            totalRankedScore: "Total Ranked Score",
+            totalScore: "Total Score"
+        },
         PAUSE: {
             description: 'Pauses the musics that its currently playing.',
             noQueue: "❌ - There is nothing playing.",

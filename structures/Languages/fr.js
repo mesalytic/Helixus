@@ -396,6 +396,19 @@ module.exports = {
             embedAuthor: (title) => `Joue: ${title}`,
             embedFooter: (time) => `Temps restant: ${time}`
         },
+        OSU: {
+            description: 'Affiche les informations d\'un joueur, sur le mode de jeu osu! spécifié.',
+            notFound: "❌ - Joueur non trouvé.",
+            stats: (username, mode) => `Stats de ${username} (osu!${mode})`,
+            username: "Pseudo",
+            level: "Niveau",
+            accuracy: "Précision",
+            rank: "Classement Global",
+            totalGames: "Nombres de parties",
+            country: "Pays",
+            totalRankedScore: "Score Classé",
+            totalScore: "Score Total"
+        },
         PAUSE: {
             description: 'Met en pause la musique qui est actuellement jouée',
             noQueue: "❌ - Aucune musique n'est jouée.",
