@@ -20,6 +20,7 @@
     "gifencoder": "^2.0.1",
     "hastebin-gen": "git+https://github.com/chocololat/hastebin-gen.git",
     "jimp": "^0.16.1",
+    "mathjs": "^9.1.0",
     "moment": "^2.29.1",
     "ms": "^2.1.3",
     "mysql": "^2.18.1",

@@ -374,6 +374,11 @@ module.exports = {
             embedTitle: (title, artist) => `Paroles de ${title} par ${artist}`,
             embedFooter: "Service livré par api.ksoft.si"
         },
+        MATH: {
+            description: 'Resous l\'équation spécifiée.',
+            invalidSyntax: "❌ - Cette équation contient une syntaxe invalide.",
+            answer: (answer) => `✅ - La réponse a cette équation est: **${answer}** !`
+        },
         MEME: {
             description: 'Affiche un meme aléatoire venant de Reddit.',
             loading: "<a:loading:543460555113889792> - Veuillez patienter..."
