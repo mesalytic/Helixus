@@ -591,6 +591,10 @@ module.exports = {
             disconnected: "DECONNECTÉ",
             finalMessage: (shard, servers, status) => `Shard ${shard} | Serveurs : ${servers} | Statut : ${status}\n`
         },
+        SHORTEN: {
+            description: 'Raccourcis le lien spécifié.',
+            success: (link) => `✅ - Voici votre lien raccourci: __**<${link}>**__!`
+        },
         SKIP: {
             description: 'Passe la musique actuelle.',
             noQueue: "❌ - Aucune musique n'est jouée.",

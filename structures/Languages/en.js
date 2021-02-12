@@ -591,6 +591,10 @@ module.exports = {
             disconnected: "DISCONNECTED",
             finalMessage: (shard, servers, status) => `Shard ${shard} | Servers : ${servers} | Status : ${status}\n`
         },
+        SHORTEN: {
+            description: 'Shortens the specified link.',
+            success: (link) => `✅ - Here is your shortened link: __**<${link}>**__!`
+        },
         SKIP: {
             description: 'Skips the current song.',
             noQueue: "❌ - There is nothing playing.",
