@@ -23,4 +23,25 @@ module.exports = async (bot) => {
         .setTimestamp();
 
     wb.send(embed);
+
+    bot.db.query(`SELECT * FROM Reminders`, (err, rows) => {
+        if (rows[0]) {
+            rows.forEach(row => {
+                let time = row.timestamp - Date.now();
+                if (time > 0) {
+                    setTimeout(() => {
+                        let user = bot.users.cache.get(row.userID);
+
+                        user.send(`⌛ - **Remind**: ${row.reason}`)
+                        bot.db.query(`DELETE FROM Reminders WHERE reason='${row.reason}' AND userID='${user.id}'`)
+                    }, time);
+                } else {
+                    let user = bot.users.cache.get(row.userID);
+
+                    user.send(`⌛ - **Remind**: ${row.reason}`)
+                    bot.db.query(`DELETE FROM Reminders WHERE reason='${row.reason}' AND userID='${user.id}'`)
+                }
+            })
+        }
+    })
 }

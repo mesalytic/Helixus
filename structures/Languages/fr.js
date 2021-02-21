@@ -490,6 +490,12 @@ module.exports = {
                 notFound: `❌ - Le Reaction Role n'a pas été trouvé.`
             }
         },
+        REMINDME: {
+            description: 'Définis un rappel.',
+            invalidTime: "❌ - Temps invalide, veuillez réessayer.",
+            success: (reason, time) => `✅ - Je vous rappelerais pour **${reason}** dans __**${time}**__!`,
+            reminded: (reason) => `⌛ - **Rappel**: ${reason}`
+        },
         RESUME: {
             description: 'Relance la musique si elle est en pause.',
             noQueue: "❌ - Aucune musique n'est jouée.",

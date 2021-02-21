@@ -490,6 +490,12 @@ module.exports = {
                 notFound: `❌ - The reaction role has not been found.`
             }
         },
+        REMINDME: {
+            description: 'Reminds you at a specified date for a specified reason.',
+            invalidTime: "❌ - Invalid time, please try again.",
+            success: (reason, time) => `✅ - I will remind you for **${reason}** in __**${time}**__!`,
+            reminded: (reason) => `⌛ - **Remind**: ${reason}`
+        },
         RESUME: {
             description: 'Resumes the musics that its currently playing.',
             noQueue: "❌ - There is nothing playing.",
