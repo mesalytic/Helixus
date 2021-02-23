@@ -51,7 +51,7 @@ module.exports = class HelpCommand extends Command {
             if (command && (command.type != OWNER)) {
                 embed
                     .setTitle(message.guild.lang.COMMANDS.HELP.helpEmbedTitle(command))
-                    .setDescription(message.guild.lang.COMMANDS[command.name.toUpperCase()] ? message.guild.lang.COMMANDS[command.name.toUpperCase()].description : command.description)
+                    .setDescription(`${message.guild.lang.COMMANDS[command.name.toUpperCase()] ? message.guild.lang.COMMANDS[command.name.toUpperCase()].description : command.description}\n\n${message.guild.lang.COMMANDS.HELP.reminder}`)
                     .addField(message.guild.lang.COMMANDS.HELP.helpEmbedUsage, `\`${prefix}${command.usage.replace(/am!/g, prefix)}\``, true)
                     .addField(message.guild.lang.COMMANDS.HELP.helpEmbedType, `\`${capitalize(command.type)}\``, true)
                     .setFooter(message.member.displayName, message.author.displayAvatarURL({

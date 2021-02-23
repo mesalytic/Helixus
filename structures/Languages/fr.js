@@ -265,7 +265,8 @@ module.exports = {
             helpEmbedExamples: 'Exemples',
             helpEmbedNotes: 'Notes',
             embedTitle: 'Commandes d\'Helixus',
-            embedDescription: (prefix) => `**Pour plus d'informations:** \`${prefix}help [command]\``
+            embedDescription: (prefix) => `**Pour plus d'informations:** \`${prefix}help [command]\``,
+            reminder: '**Rappel**: Les crochets du type \`[]\` (argument __optionnel__) et \`<>\` (argument __obligatoire__) ne doivent pas être utilisés dans la commande.'
         },
         HENTAI: {
             description: 'Affiche une image NSFW avec du hentai.',
