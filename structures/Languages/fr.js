@@ -149,6 +149,12 @@ module.exports = {
             description: 'Applique des napes de courants sur votre image',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
         },
+        CUDDLE: {
+            description: 'Fait un calin a quelqu\'un!',
+            cuddleNoMention: (memberTag) => `**${memberTag}** fait un calin!`,
+            cuddleMention: (memberTag, cuddledTag) => `**${memberTag}** fait un calin à **${cuddledTag}**!`,
+            service: "Service par nekos.life"
+        },
         DAILY: {
             description: "Vous donne des pièces tous les jours",
             notReady: (time) => `Vous avez déjà collecté votre récompense journalière! Revenez dans ${time.hours}:${time.minutes}:${time.seconds} !`,

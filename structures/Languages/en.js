@@ -149,6 +149,12 @@ module.exports = {
             description: 'Convolutes the image.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
+        CUDDLE: {
+            description: 'Cuddle someone!',
+            cuddleNoMention: (memberTag) => `**${memberTag}** is cuddling someone!`,
+            cuddleMention: (memberTag, cuddledTag) => `**${memberTag}** is cuddling **${cuddledTag}**!`,
+            service: "Service By nekos.life"
+        },
         DAILY: {
             description: "Gives you coins daily!",
             notReady: (time) => `You already collected your daily bonus! Come back in ${time.hours}:${time.minutes}:${time.seconds} !`,
