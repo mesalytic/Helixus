@@ -191,6 +191,12 @@ module.exports = {
             },
             informations: (emojiName, preview, emoteID, duration) => `**Nom**: \`${emojiName}\`\n**Aperçu**: ${preview} (\`${preview}\`)\n**ID**: \`${emoteID}\`\n**Ajouté le**: \`${duration}\``
         },
+        FEED: {
+            description: 'Nourris quelqu\'un!',
+            feedNoMention: (memberTag) => `**${memberTag}** nourrit quelqu\'un!`,
+            feedMention: (memberTag, fedTag) => `**${memberTag}** nourrit **${fedTag}**!`,
+            service: "Service par nekos.life"
+        },
         FIRE: {
             description: 'Renvoie un GIF avec un effet de feu.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',
