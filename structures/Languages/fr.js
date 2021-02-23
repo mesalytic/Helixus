@@ -64,6 +64,11 @@ module.exports = {
                 embedTitle: `Le signe ❌ signifie que vous ne possédez pas le fond.\nAchetez le en faisant \`am!background buy <fond>\` !`
             }
         },
+        BAKA: {
+            description: 'Dit a quelqu\'un qu\'il est un baka! (idiot)',
+            baka: (memberTag) => `**${memberTag}** est un baka!`,
+            service: "Service par nekos.life"
+        },
         BALANCE: {
             description: "Affiche votre porte monnaie!",
             output: (bal) => `Vous avez <a:coin:784930553748520961> **${bal}** pièces!`

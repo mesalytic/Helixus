@@ -35,7 +35,8 @@ module.exports = class HelpCommand extends Command {
             ECONOMY,
             FUN,
             IMAGES,
-            NSFW
+            NSFW,
+            RP
         } = this.bot.types;
         this.bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefixes) => {
             if (err) throw err;
@@ -78,7 +79,8 @@ module.exports = class HelpCommand extends Command {
                     [ECONOMY]: `🪙 ${message.guild.lang.COMMANDS.HELP.TYPES.economy}`,
                     [FUN]: `🎲 ${message.guild.lang.COMMANDS.HELP.TYPES.fun}`,
                     [IMAGES]: `🖼️ ${message.guild.lang.COMMANDS.HELP.TYPES.images}`,
-                    [NSFW] : '🔞 NSFW'
+                    [NSFW] : '🔞 NSFW',
+                    [RP] : '🛂 RP',
                 }
 
                 this.bot.commands.forEach(command => {

@@ -53,7 +53,8 @@ module.exports = class Bot extends Client {
             LEVELS: 'levels',
             MUSIC: 'music',
             NSFW: 'nsfw',
-            OWNER: 'owner'
+            OWNER: 'owner',
+            RP: 'rp'
         };
     }
 

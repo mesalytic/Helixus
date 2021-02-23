@@ -64,6 +64,11 @@ module.exports = {
                 embedTitle: `The ❌ sign means you don't have the background.\nBuy it with \`am!background buy <background>\` !`
             }
         },
+        BAKA: {
+            description: 'Say to someone he\'s a baka.',
+            baka: (memberTag) => `**${memberTag}** is a baka!`,
+            service: "Service By nekos.life"
+        },
         BALANCE: {
             description: "Displays your current balance.",
             output: (bal) => `You have <a:coin:784930553748520961> **${bal}** coins!`
