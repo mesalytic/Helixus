@@ -150,9 +150,9 @@ module.exports = {
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
         },
         CUDDLE: {
-            description: 'Fait un calin a quelqu\'un!',
-            cuddleNoMention: (memberTag) => `**${memberTag}** fait un calin!`,
-            cuddleMention: (memberTag, cuddledTag) => `**${memberTag}** fait un calin à **${cuddledTag}**!`,
+            description: 'Cajole quelqu\'un!',
+            cuddleNoMention: (memberTag) => `**${memberTag}** cajole quelqu\'un!`,
+            cuddleMention: (memberTag, cuddledTag) => `**${memberTag}** cajole **${cuddledTag}**!`,
             service: "Service par nekos.life"
         },
         DAILY: {
