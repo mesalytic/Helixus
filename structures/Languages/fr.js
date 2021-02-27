@@ -369,6 +369,12 @@ module.exports = {
                 success: `✅ - Le message de levelup a été changé !`
             }
         },
+        LICK: {
+            description: 'Lechez quelqu\'un!',
+            lickNoMention: (memberTag) => `**${memberTag}** leche quelqu'un!`,
+            lickMention: (memberTag, lickedTag) => `**${memberTag}** leche **${lickedTag}**!`,
+            service: "Service par ksoft.si"
+        },
         LOGS: {
             description: 'Vous permets de configurer le système de logs.',
             ON: {
