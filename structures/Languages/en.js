@@ -324,6 +324,12 @@ module.exports = {
             notEnabled: '❌ - Join messages are currently not enabled.',
             success: `✅ - The join message content has successfully been set.`
         },
+        KISS: {
+            description: 'Kiss someone!',
+            kissNoMention: (memberTag) => `**${memberTag}** kisses someone!`,
+            kissMention: (memberTag, kissedTag) => `**${memberTag}** kisses **${kissedTag}**!`,
+            service: "Service By nekos.life"
+        },
         LANG: {
             description: 'Changes the bot\'s language on the server.',
             success: `✅ - The server language has been updated to **English**!`

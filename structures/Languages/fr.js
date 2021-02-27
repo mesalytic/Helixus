@@ -324,6 +324,12 @@ module.exports = {
             notEnabled: '❌ - Les messages de join sont désactivés.',
             success: `✅ - Le message de join a bien été configuré.`
         },
+        KISS: {
+            description: 'Embrasse quelqu\'un!',
+            kissNoMention: (memberTag) => `**${memberTag}** embrasse quelqu'un!`,
+            kissMention: (memberTag, kissedTag) => `**${memberTag}** embrasse **${kissedTag}**!`,
+            service: "Service par nekos.life"
+        },
         LANG: {
             description: 'Change la langue du bot sur le serveur.',
             success: `✅ - La langue du bot sur ce serveur a bien été mis en **Français** !`
