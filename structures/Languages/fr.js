@@ -651,7 +651,7 @@ module.exports = {
         SMUG: {
             description: 'Soyez prétentieux·se envers quelqu\'un!',
             smugNoMention: (memberTag) => `**${memberTag}** est prétentieux·se envers quelqu'un!`,
-            smugMention: (memberTag, smuggedTag) => `**${memberTag}** est prétentieux·se **${smuggedTag}**!`,
+            smugMention: (memberTag, smuggedTag) => `**${memberTag}** est prétentieux·se envers **${smuggedTag}**!`,
             service: "Service par nekos.life"
         },
         SPOTIFYNOWPLAYING: {
