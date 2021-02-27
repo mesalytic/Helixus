@@ -642,6 +642,12 @@ module.exports = {
             noQueue: "❌ - Aucune musique n'est jouée.",
             success: `✅ - La musique a bien été passée!`
         },
+        SLAP: {
+            description: 'Claque quelqu\'un!',
+            slapNoMention: (memberTag) => `**${memberTag}** claque quelqu'un!`,
+            slapMention: (memberTag, slappedTag) => `**${memberTag}** claque **${slappedTag}**!`,
+            service: "Service par nekos.life"
+        },
         SPOTIFYNOWPLAYING: {
             description: 'Vous permets de faire une carte Spotify Now Playing personnalisée.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',

@@ -642,6 +642,12 @@ module.exports = {
             noQueue: "❌ - There is nothing playing.",
             success: `✅ - Song has been skipped!`
         },
+        SLAP: {
+            description: 'Slap someone!',
+            slapNoMention: (memberTag) => `**${memberTag}** slapped someone!`,
+            slapMention: (memberTag, slappedTag) => `**${memberTag}** slapped **${slappedTag}**!`,
+            service: "Service By nekos.life"
+        },
         SPOTIFYNOWPLAYING: {
             description: 'Allows you to create a customized Spotify Now Playing card.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...',
