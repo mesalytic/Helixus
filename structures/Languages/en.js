@@ -687,6 +687,12 @@ module.exports = {
             description: 'Add\'s your (or someone elses) profile pic to the Pokemon Meme `It\'s been 3000 years...`',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
+        TICKLE: {
+            description: 'Tickle someone!',
+            tickleNoMention: (memberTag) => `**${memberTag}** tickled someone!`,
+            tickleMention: (memberTag, tickledTag) => `**${memberTag}** tickled **${tickledTag}**!`,
+            service: "Service By nekos.life"
+        },
         TOGGLE: {
             description: 'Toggles on or off the levelling system in your server.',
             OFF: {

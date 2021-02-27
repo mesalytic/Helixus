@@ -687,6 +687,12 @@ module.exports = {
             description: 'Ajoute la photo de votre choix sur le meme Pokémon `It\'s been 3000 years...`',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
         },
+        TICKLE: {
+            description: 'Chatouillez quelqu\'un!',
+            tickleNoMention: (memberTag) => `**${memberTag}** chatouille quelqu'un!`,
+            tickleMention: (memberTag, tickledTag) => `**${memberTag}** chatouille **${tickledTag}**!`,
+            service: "Service par nekos.life"
+        },
         TOGGLE: {
             description: 'Active ou désactive le système de niveaux',
             OFF: {
