@@ -439,6 +439,12 @@ module.exports = {
             totalRankedScore: "Total Ranked Score",
             totalScore: "Total Score"
         },
+        PAT: {
+            description: 'Pat someone!',
+            patNoMention: (memberTag) => `**${memberTag}** pat someone!`,
+            patMention: (memberTag, pattedTag) => `**${memberTag}** pat **${pattedTag}**!`,
+            service: "Service By nekos.life"
+        },
         PAUSE: {
             description: 'Pauses the musics that its currently playing.',
             noQueue: "❌ - There is nothing playing.",
