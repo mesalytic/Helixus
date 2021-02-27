@@ -287,6 +287,12 @@ module.exports = {
             notDisplaying: 'Cliquez ici si l\'image ne s\'affiche pas.',
             providedBy: 'Service par NekoBotAPI (nekobot.xyz)'
         },
+        HUG: {
+            description: 'Fait un calin a quelqu\'un!',
+            hugNoMention: (memberTag) => `**${memberTag}** fait un calin!`,
+            hugMention: (memberTag, huggedTag) => `**${memberTag}** fait un calin à **${huggedTag}**!`,
+            service: "Service par nekos.life"
+        },
         IGNORE: {
             description: "Vous permets de configurer dans quels salons les commandes pourront être exécutées",
             noChanSpecified: "❌ - Vous n'avez spécifié aucun salon.",

@@ -287,6 +287,12 @@ module.exports = {
             notDisplaying: 'Click here if the image is not displaying.',
             providedBy: 'Provided by NekoBotAPI (nekobot.xyz)'
         },
+        HUG: {
+            description: 'Hug someone!',
+            hugNoMention: (memberTag) => `**${memberTag}** hugs someone!`,
+            hugMention: (memberTag, huggedTag) => `**${memberTag}** hugs **${huggedTag}**!`,
+            service: "Service By nekos.life"
+        },
         IGNORE: {
             description: "Configure in which channel commands should be executed.",
             noChanSpecified: "❌ - You haven\'t specified a channel to ignore.",
