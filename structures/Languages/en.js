@@ -648,6 +648,12 @@ module.exports = {
             slapMention: (memberTag, slappedTag) => `**${memberTag}** slapped **${slappedTag}**!`,
             service: "Service By nekos.life"
         },
+        SMUG: {
+            description: 'Smug on someone!',
+            smugNoMention: (memberTag) => `**${memberTag}** smugged on someone!`,
+            smugMention: (memberTag, smuggedTag) => `**${memberTag}** smugged on **${smuggedTag}**!`,
+            service: "Service By nekos.life"
+        },
         SPOTIFYNOWPLAYING: {
             description: 'Allows you to create a customized Spotify Now Playing card.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...',
