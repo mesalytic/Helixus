@@ -109,6 +109,12 @@ module.exports = {
             description: 'Adds a circle around the image.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
+        CLAP: {
+            description: 'Clap at someone!',
+            clapNoMention: (memberTag) => `**${memberTag}** clapped at someone!`,
+            clapMention: (memberTag, clappedTag) => `**${memberTag}** clapped at **${clappedTag}**!`,
+            service: "Service By ksoft.si"
+        },
         COIN: {
             description: 'Heads or tails?',
             success: (side) => `✅ - It landed on **${side}**!`
