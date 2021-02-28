@@ -73,6 +73,16 @@ module.exports = {
             description: "Displays your current balance.",
             output: (bal) => `You have <a:coin:784930553748520961> **${bal}** coins!`
         },
+        BAN: {
+            description: 'Bans the specified user.',
+            noMention: "❌ - Please mention a member to ban.",
+            noValidMention: "❌ - Please mention a **valid** member to ban.",
+            noReason: "No reason specified.",
+            confirmation: (member, reason) => `<a:loading:543460555113889792> - Do you really want to ban **${member.user.tag}** (${member.id}) for __**${reason}**__?`,
+            confirmed: (member) => `✅ - The member **${member.user.tag}** has sucessfully banned.`,
+            pmConfirmed: (guildName, reason) => `You have been banned from **${guildName}**.\nReason: __**${reason}**__`,
+            cancelled: "❌ - The ban confirmation has been cancelled."
+        },
         BEAUTIFUL: {
             description: 'U see this ? Beautiful.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'

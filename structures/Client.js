@@ -51,6 +51,7 @@ module.exports = class Bot extends Client {
             IMAGES: 'images',
             INFO: 'info',
             LEVELS: 'levels',
+            MODERATION: 'moderation',
             MUSIC: 'music',
             NSFW: 'nsfw',
             OWNER: 'owner',

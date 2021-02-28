@@ -73,6 +73,16 @@ module.exports = {
             description: "Affiche votre porte monnaie!",
             output: (bal) => `Vous avez <a:coin:784930553748520961> **${bal}** pièces!`
         },
+        BAN: {
+            description: 'Bannis le membre spécifié.',
+            noMention: "❌ - Veuillez mentionner un membre à bannir.",
+            noValidMention: "❌ - Veuillez mentionner un membre **valide** à bannir.",
+            noReason: "Aucune raison spécifiée.",
+            confirmation: (member, reason) => `<a:loading:543460555113889792> - Voulez-vous vraiment bannir **${member.user.tag}** (${member.id}) pour __**${reason}**__?`,
+            confirmed: (member) => `✅ - Le membre **${member.user.tag}** à bien été banni.`,
+            pmConfirmed: (guildName, reason) => `Vous avez été banni du serveur **${guildName}**.\nRaison: __**${reason}**__`,
+            cancelled: "❌ - Le bannissement a été annulé."
+        },
         BEAUTIFUL: {
             description: 'Tu vois ça? C\'est beau..',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
