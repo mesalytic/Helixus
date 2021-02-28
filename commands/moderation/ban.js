@@ -5,7 +5,7 @@ module.exports = class BanCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'ban',
-            usage: 'ban <@user> [reason]',
+            usage: 'ban <@user / userID> [reason]',
             description: 'Bans the specified user.',
             type: 'moderation',
             userPermissions: ["BAN_MEMBERS"],
@@ -16,7 +16,37 @@ module.exports = class BanCommand extends Command {
     async run(message, args) {
         let member = message.mentions.members.first();
 
-        if (!member) return message.reply(message.guild.lang.COMMANDS.BAN.noMention);
+        if (!member) {
+            let userID = args[0];
+            if (isNaN(userID)) return message.reply(message.guild.lang.COMMANDS.BAN.noMention);
+
+            let reason = args.slice(1).join(" ");
+            if (!reason) reason = message.guild.lang.COMMANDS.BAN.noReason;
+            let m = await message.channel.send(message.guild.lang.COMMANDS.BAN.confirmationID(userID, reason));
+            
+            m.react("✅").then(() => {
+                m.react("❌").then(() => {
+                    const filter = (reaction, user) => ['✅', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
+                    const reactionCollector = new ReactionCollector(m, filter, {
+                        time: 60000
+                    })
+
+                    reactionCollector.on('collect', reaction => {
+                        switch(reaction.emoji.name) {
+                            case '✅':
+                                m.edit(message.guild.lang.COMMANDS.BAN.confirmedID(userID))
+                                message.guild.members.ban(userID, { reason: reason });
+                            case '❌':
+                                reactionCollector.stop("cancelled");
+                        }
+                    })
+
+                    reactionCollector.on('end', (collected, reason) => {
+                        if (!collected.first() || (collected.first().emoji.name === "❌" && reason === "cancelled")) m.edit(message.guild.lang.COMMANDS.BAN.cancelled);
+                    })
+                })
+            })
+        }
         else {
             if (member === message.member || !member.bannable) return message.reply(message.guild.lang.COMMANDS.BAN.noValidMention);
             let reason = args.slice(1).join(" ");
