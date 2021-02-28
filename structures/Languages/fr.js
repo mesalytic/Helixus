@@ -340,6 +340,16 @@ module.exports = {
             notEnabled: '❌ - Les messages de join sont désactivés.',
             success: `✅ - Le message de join a bien été configuré.`
         },
+        KICK: {
+            description: 'Exclus le membre spécifié.',
+            noMention: "❌ - Veuillez mentionner un membre à exclure.",
+            noValidMention: "❌ - Veuillez mentionner un membre **valide** à exclure.",
+            noReason: "Aucune raison spécifiée.",
+            confirmation: (member, reason) => `<a:loading:543460555113889792> - Voulez-vous vraiment exclure **${member.user.tag}** (${member.id}) pour __**${reason}**__?`,
+            confirmed: (member) => `✅ - Le membre **${member.user.tag}** à bien été exclu.`,
+            pmConfirmed: (guildName, reason) => `Vous avez été exclu du serveur **${guildName}**.\nRaison: __**${reason}**__`,
+            cancelled: "❌ - Le bannissement a été annulé."
+        },
         KISS: {
             description: 'Embrasse quelqu\'un!',
             kissNoMention: (memberTag) => `**${memberTag}** embrasse quelqu'un!`,

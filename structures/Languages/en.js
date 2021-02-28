@@ -340,6 +340,16 @@ module.exports = {
             notEnabled: '❌ - Join messages are currently not enabled.',
             success: `✅ - The join message content has successfully been set.`
         },
+        KICK: {
+            description: 'Kicks the specified user.',
+            noMention: "❌ - Please mention a member to kick.",
+            noValidMention: "❌ - Please mention a **valid** member to kick.",
+            noReason: "No reason specified.",
+            confirmation: (member, reason) => `<a:loading:543460555113889792> - Do you really want to kick **${member.user.tag}** (${member.id}) for __**${reason}**__?`,
+            confirmed: (member) => `✅ - The member **${member.user.tag}** has sucessfully kicked.`,
+            pmConfirmed: (guildName, reason) => `You have been kicked from **${guildName}**.\nReason: __**${reason}**__`,
+            cancelled: "❌ - The kick confirmation has been cancelled."
+        },
         KISS: {
             description: 'Kiss someone!',
             kissNoMention: (memberTag) => `**${memberTag}** kisses someone!`,
