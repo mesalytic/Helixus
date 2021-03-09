@@ -519,6 +519,12 @@ module.exports = {
             tooLong: `❌ - The prefix must be only 5 characters long.`,
             success: (prefix) => `✅ - The prefix for this server is now \`${prefix}\`.`
         },
+        PURGE: {
+            description: 'Removes the specified amount of messages.',
+            notes: "`number` is limited to 100 messages, due to API limitations. To delete more than 100 messages, you'll need to run the command multiple times.",
+            noValidNumber: "X - Please specify a valid number.",
+            purged: (deleted) => `V - **${deleted}** messages have been __**successfully**__ been deleted.`
+        },
         PUSSY: {
             description: 'Displays an NSFW picture with pussy.',
             pleaseWait: "<a:loading:543460555113889792> - Please wait...",

@@ -519,6 +519,12 @@ module.exports = {
             tooLong: `❌ - Le préfixe doit faire moins de 5 caractères.`,
             success: (prefix) => `✅ - Le préfixe pour ce serveur est maintenant \`${prefix}\`.`
         },
+        PURGE: {
+            description: 'Supprime le nombre spécifié de messages.',
+            notes: "`number` est limité à 100 messages, dù a des limitations Discord. Pour supprimer plus de 100 messages, vous devrez exécuter la commande plusieurs fois.",
+            noValidNumber: "X - Veuillez spécifier un nombre valide.",
+            purged: (deleted) => `V - **${deleted}** messages ont __**bien**__ été supprimés.`
+        },
         PUSSY: {
             description: 'Affiche une image NSFW catégorisée `pussy`.',
             pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
