@@ -63,7 +63,7 @@ module.exports = class HelpCommand extends Command {
 
                 if (command.aliases) embed.addField(message.guild.lang.COMMANDS.HELP.helpEmbedAliases, command.aliases.map(c => `\`${c}\``).join(' '));
                 if (command.examples) embed.addField(message.guild.lang.COMMANDS.HELP.helpEmbedExamples, command.examples.map(c => `\`${prefix}${c}\``).join('\n'));
-                if (command.notes) embed.addField(message.guild.lang.COMMANDS.HELP.helpEmbedNotes, message.guild.lang.COMMANDS[command.name.toUpperCase()].notes ? message.guild.lang.COMMANDS[command.name.toUpperCase()].notes : command.notes)
+                if (command.notes) embed.addField(message.guild.lang.COMMANDS.HELP.helpEmbedNotes, message.guild.lang.COMMANDS[command.name.toUpperCase()] ? message.guild.lang.COMMANDS[command.name.toUpperCase()].notes : command.notes)
             } else {
                 const commands = {};
                 for (const type of Object.values(this.bot.types)) {
