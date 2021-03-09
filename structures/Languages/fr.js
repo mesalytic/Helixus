@@ -75,11 +75,13 @@ module.exports = {
         },
         BAN: {
             description: 'Bannis le membre spécifié.',
-            noMention: "❌ - Veuillez mentionner un membre à bannir.",
-            noValidMention: "❌ - Veuillez mentionner un membre **valide** à bannir.",
+            noMention: "❌ - Veuillez mentionner un membre ou spécifier l'ID du membre à bannir.",
+            noValidMention: "❌ - Veuillez mentionner un membre **valide** ou spécfier l'ID du membre à bannir.",
             noReason: "Aucune raison spécifiée.",
             confirmation: (member, reason) => `<a:loading:543460555113889792> - Voulez-vous vraiment bannir **${member.user.tag}** (${member.id}) pour __**${reason}**__?`,
+            confirmationID: (memberID, reason) => `<a:loading:543460555113889792> - Voulez-vous vraiment bannir **${memberID}** pour __**${reason}**__?`,
             confirmed: (member) => `✅ - Le membre **${member.user.tag}** à bien été banni.`,
+            confirmedID: (memberID) => `✅ - L'ID **${memberID}** a bien été banni.`,
             pmConfirmed: (guildName, reason) => `Vous avez été banni du serveur **${guildName}**.\nRaison: __**${reason}**__`,
             cancelled: "❌ - Le bannissement a été annulé."
         },

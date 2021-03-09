@@ -75,11 +75,13 @@ module.exports = {
         },
         BAN: {
             description: 'Bans the specified user.',
-            noMention: "❌ - Please mention a member to ban.",
-            noValidMention: "❌ - Please mention a **valid** member to ban.",
+            noMention: "❌ - Please mention a member or specify an ID of the user to ban.",
+            noValidMention: "❌ - Please mention a **valid** member or specify an ID of the user to ban.",
             noReason: "No reason specified.",
             confirmation: (member, reason) => `<a:loading:543460555113889792> - Do you really want to ban **${member.user.tag}** (${member.id}) for __**${reason}**__?`,
+            confirmationID: (memberID, reason) => `<a:loading:543460555113889792> - Do you really want to ban **${memberID}** for __**${reason}**__?`,
             confirmed: (member) => `✅ - The member **${member.user.tag}** has sucessfully banned.`,
+            confirmedID: (memberID) => `✅ - The ID **${memberID}** has sucessfully banned.`,
             pmConfirmed: (guildName, reason) => `You have been banned from **${guildName}**.\nReason: __**${reason}**__`,
             cancelled: "❌ - The ban confirmation has been cancelled."
         },
