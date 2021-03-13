@@ -694,6 +694,18 @@ module.exports = {
             smugMention: (memberTag, smuggedTag) => `**${memberTag}** est prétentieux·se envers **${smuggedTag}**!`,
             service: "Service par nekos.life"
         },
+        SOFTBAN: {
+            description: 'Exclus le membre spécifié, tout en supprimant ses messages.',
+            noMention: "❌ - Veuillez mentionner un membre ou spécifier l'ID du membre à exclure.",
+            noValidMention: "❌ - Veuillez mentionner un membre **valide** ou spécfier l'ID du membre à exclure.",
+            noReason: "Aucune raison spécifiée.",
+            confirmation: (member, reason) => `<a:loading:543460555113889792> - Voulez-vous vraiment exclure **${member.user.tag}** (${member.id}) pour __**${reason}**__?`,
+            confirmationID: (memberID, reason) => `<a:loading:543460555113889792> - Voulez-vous vraiment exclure **${memberID}** pour __**${reason}**__?`,
+            confirmed: (member) => `✅ - Le membre **${member.user.tag}** à bien été exclu.`,
+            confirmedID: (memberID) => `✅ - L'ID **${memberID}** a bien été exclu.`,
+            pmConfirmed: (guildName, reason) => `Vous avez été exclu du serveur **${guildName}**.\nRaison: __**${reason}**__`,
+            cancelled: "❌ - L'exclusion a été annulé."
+        },
         SPOTIFYNOWPLAYING: {
             description: 'Vous permets de faire une carte Spotify Now Playing personnalisée.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',

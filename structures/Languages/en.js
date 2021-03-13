@@ -694,6 +694,18 @@ module.exports = {
             smugMention: (memberTag, smuggedTag) => `**${memberTag}** smugged on **${smuggedTag}**!`,
             service: "Service By nekos.life"
         },
+        SOFTBAN: {
+            description: 'Softbans the specified user. (banning then immediately unbanning a user)\nThis wipes all of their messages from the server. (up to 7 days)',
+            noMention: "❌ - Please mention a member or specify an ID of the user to softban.",
+            noValidMention: "❌ - Please mention a **valid** member or specify an ID of the user to softban.",
+            noReason: "No reason specified.",
+            confirmation: (member, reason) => `<a:loading:543460555113889792> - Do you really want to softban **${member.user.tag}** (${member.id}) for __**${reason}**__?`,
+            confirmationID: (memberID, reason) => `<a:loading:543460555113889792> - Do you really want to softban **${memberID}** for __**${reason}**__?`,
+            confirmed: (member) => `✅ - The member **${member.user.tag}** has sucessfully softbanned.`,
+            confirmedID: (memberID) => `✅ - The ID **${memberID}** has sucessfully softbanned.`,
+            pmConfirmed: (guildName, reason) => `You have been softbanned from **${guildName}**.\nReason: __**${reason}**__`,
+            cancelled: "❌ - The softban confirmation has been cancelled."
+        },
         SPOTIFYNOWPLAYING: {
             description: 'Allows you to create a customized Spotify Now Playing card.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...',
