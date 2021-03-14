@@ -137,79 +137,78 @@ module.exports = class PlayCommand extends Command {
         try {
             queueConstruct.connection = await voiceChannel.join();
             await queueConstruct.connection.voice.setSelfDeaf(true);
-            play(queueConstruct.songs[0], message, this.bot);
+            this.play(queueConstruct.songs[0], message);
         } catch (error) {
             console.error(error);
             this.bot.queue.delete(message.guild.id);
             await voiceChannel.leave();
             return message.channel.send(message.guild.lang.COMMANDS.PLAY.error(error)).catch(console.error);
         }
+    }
+    async play (song, message, seek = 0) {
+        const queue = this.bot.queue.get(message.guild.id);
 
-        async function play(song, message, bot, seek = 0) {
-            const queue = bot.queue.get(message.guild.id);
-
-            if (!song) {
-                queue.voiceChannel.leave();
-                bot.queue.delete(message.guild.id);
-                return queue.textChannel.send(message.guild.lang.COMMANDS.PLAY.ended).catch(console.error);
-            }
-
-            let stream = null;
-
-            try {
-                if (song.url.includes("youtube.com")) {
-                    stream = await ytdl(song.url, {
-                        filter: "audioonly",
-                        opusEncoded: false,
-                        fmt: "mp3",
-                    });
-                } else if (song.url.includes("soundcloud.com")) {
-                    stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.soundcloud);
-                }
-            } catch (error) {
-                if (queue) {
-                    queue.songs.shift();
-                    play(queue.songs[0], message, bot);
-                }
-
-                console.error(error);
-                return message.channel.send(`Error: ${error.message ? error.message : error}`);
-            }
-            queue.connection.on("disconnect", () => bot.queue.delete(message.guild.id));
-
-            const dispatcher = queue.connection
-                .play(stream, {
-                    type: "unknown",
-                    seek: seek
-                })
-                .on("finish", reason => { //Don't really count on the callback for everything, not officially supported
-                    if (reason) {
-                        if (reason.match(`seek`)) {
-                            let seekTo = reason.split(" ")[1];
-
-                            play(queue.songs[0], message, bot, seekTo);
-                        }
-                    } else {
-                        if (queue.loop) {
-                            let lSong = queue.songs.shift();
-                            queue.songs.push(lSong);
-                            queue.seek = 0;
-                            play(queue.songs[0], message, bot);
-                        } else {
-                            queue.songs.shift();
-                            queue.seek = 0;
-                            play(queue.songs[0], message, bot);
-                        }
-                    }
-                })
-                .on("error", (err) => {
-                    console.error(err);
-                    queue.songs.shift();
-                    play(queue.songs[0], message, bot);
-                })
-            dispatcher.setVolumeLogarithmic(queue.volume / 100);
-
-            if (seek == 0) queue.textChannel.send(message.guild.lang.COMMANDS.PLAY.startedPlaying(song.title, song.url));
+        if (!song) {
+            queue.voiceChannel.leave();
+            this.bot.queue.delete(message.guild.id);
+            return queue.textChannel.send(message.guild.lang.COMMANDS.PLAY.ended).catch(console.error);
         }
+
+        let stream = null;
+
+        try {
+            if (song.url.includes("youtube.com")) {
+                stream = await ytdl(song.url, {
+                    filter: "audioonly",
+                    opusEncoded: false,
+                    fmt: "mp3",
+                });
+            } else if (song.url.includes("soundcloud.com")) {
+                stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.soundcloud);
+            }
+        } catch (error) {
+            if (queue) {
+                queue.songs.shift();
+                this(queue.songs[0], message);
+            }
+
+            console.error(error);
+            return message.channel.send(`Error: ${error.message ? error.message : error}`);
+        }
+        queue.connection.on("disconnect", () => bot.queue.delete(message.guild.id));
+
+        const dispatcher = queue.connection
+            .play(stream, {
+                type: "unknown",
+                seek: seek
+            })
+            .on("finish", reason => { //Don't really count on the callback for everything, not officially supported
+                if (reason) {
+                    if (reason.match(`seek`)) {
+                        let seekTo = reason.split(" ")[1];
+
+                        this(queue.songs[0], message, seekTo);
+                    }
+                } else {
+                    if (queue.loop) {
+                        let lSong = queue.songs.shift();
+                        queue.songs.push(lSong);
+                        queue.seek = 0;
+                        this(queue.songs[0], message);
+                    } else {
+                        queue.songs.shift();
+                        queue.seek = 0;
+                        this(queue.songs[0], message);
+                    }
+                }
+            })
+            .on("error", (err) => {
+                console.error(err);
+                queue.songs.shift();
+                this(queue.songs[0], message);
+            })
+        dispatcher.setVolumeLogarithmic(queue.volume / 100);
+
+        if (seek == 0) queue.textChannel.send(message.guild.lang.COMMANDS.PLAY.startedPlaying(song.title, song.url));
     }
 }
