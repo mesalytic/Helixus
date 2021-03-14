@@ -788,11 +788,17 @@ module.exports = {
             description: 'Envoie un GIF avec l\'effet Triggered.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',
         },
+        UNBAN: {
+            description: 'Débannis le membre spécifié',
+            notValidID: "❌ - Veuillez spécifier un ID de membre banni valide.",
+            noReason: "Aucune raison spécifiée",
+            unbanned: (memberID) => `✅ - __**${memberID}**__ a été débanni.`
+        },
         UNMUTE: {
             description: 'Démute le membre spécifié.',
-            roleNotFound: "X - Le rôle Muted n'a pas été trouvé. Veuillez exécuter la commande `am!mute` en premier.",
-            notMuted: "X - Ce membre n'est pas mute.",
-            unmuted: "V - Ce membre a bien été démute."
+            roleNotFound: "❌ - Le rôle Muted n'a pas été trouvé. Veuillez exécuter la commande `am!mute` en premier.",
+            notMuted: "❌ - Ce membre n'est pas mute.",
+            unmuted: "✅ - Ce membre a bien été démute."
         },
         USERINFO: {
             description: "Affiche des informations a propos d'un utilisateur __**étant sur le serveur**__.",
