@@ -447,6 +447,14 @@ module.exports = {
             description: 'Affiche un meme aléatoire venant de Reddit.',
             loading: "<a:loading:543460555113889792> - Veuillez patienter..."
         },
+        MUTE: {
+            description: 'Rends muet le membre spécifié.',
+            notes: "La commande retirera les rôles actuels au membre spécifié et lui ajoutera le rôle Muted. Vous DEVREZ utiliser la commande `am!unmute` pour démute le membre, la commande ayant sauvegardée les rôles d'avant le mute.",
+            cantMute: "❌ - Vous ne pouvez pas mute ce membre.",
+            confirmation: (member) => `<a:loading:543460555113889792> - Voulez-vous vraiment mute ${member} ?`,
+            muted: "✅ - Ce membre a bien été mute.",
+            cancelled: '❌ - La confirmation a été annulée.'
+        },
         NEKO: {
             description: 'Affiche une image NSFW catégorisée `neko`.',
             pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",

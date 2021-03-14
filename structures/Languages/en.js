@@ -447,6 +447,14 @@ module.exports = {
             description: 'Displays a random meme from Reddit.',
             loading: "<a:loading:543460555113889792> - Please wait..."
         },
+        MUTE: {
+            description: 'Mutes the specified user.',
+            notes: "It will remove the actual roles of the member and adding the Muted role. You MUST use `am!unmute` to unmute someone, as it will give back their roles prior to the mute.",
+            cantMute: "❌ - You can't mute this member.",
+            confirmation: (member) => `<a:loading:543460555113889792> - Do you really want to mute ${member} ?`,
+            muted: "✅ - This member has successfully been muted.",
+            cancelled: '❌ - Mute confirmation has been cancelled.'
+        },
         NEKO: {
             description: 'Displays an NSFW picture with neko.',
             pleaseWait: "<a:loading:543460555113889792> - Please wait...",
