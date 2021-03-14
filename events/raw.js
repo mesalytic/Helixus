@@ -21,7 +21,7 @@ module.exports = async (bot, event) => {
                 let emoji = base64(event.d.emoji.name, "encode");
                 let guild = bot.guilds.cache.get(event.d.guild_id);
                 let member = guild.members.cache.get(event.d.user_id);
-                if (member.user.bot) return;
+                if (!member || member.user.bot) return;
 
                 bot.db.query(`SELECT * FROM ReactionRole WHERE guildID='${event.d.guild_id}' AND channelID='${event.d.channel_id}' AND emojiID='${emoji}'`, (err, rows) => {
                     if (rows[0]) {
