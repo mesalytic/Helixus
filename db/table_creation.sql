@@ -1,99 +1,118 @@
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
-CREATE TABLE IF NOT EXISTS `Afk` (
+CREATE TABLE IF NOT EXISTS `afk` (
   `userID` varchar(36) DEFAULT NULL,
   `reason` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `Autorole` (
+CREATE TABLE IF NOT EXISTS `autorole` (
   `roleID` varchar(50) DEFAULT NULL,
   `guildID` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `Cases` (
-  `guildID` varchar(50) DEFAULT NULL,
-  `caseN` int(11) unsigned DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS `Cooldowns` (
+CREATE TABLE IF NOT EXISTS `backgrounds` (
   `userID` varchar(50) DEFAULT NULL,
-  `active` varchar(5) DEFAULT NULL
+  `activeBg` varchar(3000) DEFAULT NULL,
+  `Alive` varchar(10) DEFAULT 'false',
+  `Amin` varchar(10) DEFAULT 'false',
+  `Argon` varchar(10) DEFAULT 'false',
+  `Bighead` varchar(10) DEFAULT 'false',
+  `By Design` varchar(10) DEFAULT 'false',
+  `Cool Blues` varchar(10) DEFAULT 'false',
+  `Cosmic Fusion` varchar(10) DEFAULT 'false',
+  `Dark Ocean` varchar(10) DEFAULT 'false',
+  `Evening Sunshine` varchar(10) DEFAULT 'false',
+  `Flare` varchar(10) DEFAULT 'false',
+  `Grade Grey` varchar(10) DEFAULT 'false',
+  `Harvey` varchar(10) DEFAULT 'false',
+  `JShine` varchar(10) DEFAULT 'false',
+  `Kye Meh` varchar(10) DEFAULT 'false',
+  `Kyoo Pal` varchar(10) DEFAULT 'false',
+  `Magic` varchar(10) DEFAULT 'false',
+  `MegaTron` varchar(10) DEFAULT 'false',
+  `Memariani` varchar(10) DEFAULT 'false',
+  `Neuromancer` varchar(10) DEFAULT 'false',
+  `Pink Flavour` varchar(10) DEFAULT 'false',
+  `Pure Lust` varchar(10) DEFAULT 'false',
+  `Rastafari` varchar(10) DEFAULT 'false',
+  `Sin City Red` varchar(10) DEFAULT 'false',
+  `Ultra Voilet` varchar(10) DEFAULT 'false',
+  `Wedding Day Blues` varchar(10) DEFAULT 'false',
+  `Wiretap` varchar(10) DEFAULT 'false',
+  `Witching Hour` varchar(10) DEFAULT 'false',
+  `Yoda` varchar(10) DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `Economy` (
-  `id` varchar(50) DEFAULT NULL,
-  `xp` bigint(20) DEFAULT NULL,
-  `level` bigint(20) DEFAULT 0,
-  `balance` bigint(20) DEFAULT 0,
-  `dailyCooldown` bigint(20) DEFAULT 0,
-  `fishJunk` bigint(20) DEFAULT 0,
-  `fishCommon` bigint(20) DEFAULT 0,
-  `fishUncommon` bigint(20) DEFAULT 0,
-  `fishRare` bigint(20) DEFAULT 0,
-  `fishLegendary` bigint(20) DEFAULT 0,
-  `reps` bigint(20) DEFAULT 0,
-  `repCooldown` bigint(20) DEFAULT 0
+CREATE TABLE IF NOT EXISTS `cooldowns` (
+  `userID` varchar(50) DEFAULT NULL,
+  `active` varchar(5) DEFAULT NULL,
+  `guildID` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT 'level'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `IgnoreChannels` (
+CREATE TABLE IF NOT EXISTS `economy` (
+  `userID` varchar(50) DEFAULT NULL,
+  `balance` int(11) DEFAULT 0,
+  `dailyCooldown` varchar(100) DEFAULT NULL,
+  `begCooldown` varchar(100) DEFAULT NULL,
+  `weeklyCooldown` varchar(100) DEFAULT NULL,
+  `robCooldown` varchar(100) DEFAULT NULL,
+  `junkFish` int(11) DEFAULT 0,
+  `commonFish` int(11) DEFAULT 0,
+  `uncommonFish` int(11) DEFAULT 0,
+  `rareFish` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `ignorechannels` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,
   `ignored` varchar(5) DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `JoinMessages` (
+CREATE TABLE IF NOT EXISTS `joinmessages` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,
-  `joinmsg` varchar(2000) DEFAULT NULL
+  `joinmsg` varchar(2000) DEFAULT NULL,
+  `activated` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `Langs` (
+CREATE TABLE IF NOT EXISTS `langs` (
   `guildID` varchar(50) DEFAULT NULL,
   `lang` varchar(5) DEFAULT 'en'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `LeaveMessages` (
+CREATE TABLE IF NOT EXISTS `leavemessages` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,
-  `leavemsg` varchar(2000) DEFAULT NULL
+  `leavemsg` varchar(2000) DEFAULT NULL,
+  `activated` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `Levels` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `levels` (
   `user` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `guild` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `points` int(11) DEFAULT NULL,
   `level` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `LevelsConfig` (
+CREATE TABLE IF NOT EXISTS `levelsconfig` (
   `activated` varchar(5) DEFAULT NULL,
   `guildID` varchar(50) DEFAULT NULL,
   `lvlupChannelID` varchar(50) DEFAULT NULL,
   `lvlupMessage` varchar(1700) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `LevelsRewards` (
+CREATE TABLE IF NOT EXISTS `levelsrewards` (
   `guildID` varchar(50) DEFAULT NULL,
   `roleID` varchar(50) DEFAULT NULL,
   `level` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `LockdownChannels` (
-  `channelID` varchar(50) DEFAULT NULL,
-  `time` varchar(50) DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS `Logs` (
+CREATE TABLE IF NOT EXISTS `logs` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,
   `activated` varchar(5) DEFAULT 'true',
   `channelcreate` varchar(5) DEFAULT 'true',
   `channeldelete` varchar(5) DEFAULT 'true',
+  `channelupdate` varchar(5) DEFAULT 'true',
   `emojicreate` varchar(5) DEFAULT 'true',
   `emojidelete` varchar(5) DEFAULT 'true',
   `emojiupdate` varchar(5) DEFAULT 'true',
@@ -107,34 +126,35 @@ CREATE TABLE IF NOT EXISTS `Logs` (
   `messageupdate` varchar(5) DEFAULT 'true',
   `rolecreate` varchar(5) DEFAULT 'true',
   `roledelete` varchar(5) DEFAULT 'true',
-  `voicestates` varchar(5) DEFAULT 'true',
+  `roleupdate` varchar(5) DEFAULT 'true',
+  `voicestateupdate` varchar(5) DEFAULT 'true',
   `webhookID` varchar(150) DEFAULT NULL,
   `webhookToken` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `LogsIgnore` (
+CREATE TABLE IF NOT EXISTS `logsignore` (
   `guildID` varchar(50) DEFAULT NULL,
   `channelID` varchar(50) DEFAULT NULL,
   `ignored` varchar(5) DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `ModlogsChannel` (
+CREATE TABLE IF NOT EXISTS `muteconfig` (
   `guildID` varchar(50) DEFAULT NULL,
-  `channelID` varchar(50) DEFAULT NULL
+  `muteRoleID` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `MuteRoles` (
+CREATE TABLE IF NOT EXISTS `muteroles` (
   `roleID` varchar(50) DEFAULT NULL,
   `mutedID` varchar(50) DEFAULT NULL,
   `guildID` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `Prefixes` (
+CREATE TABLE IF NOT EXISTS `prefixes` (
   `guildID` varchar(50) DEFAULT NULL,
   `prefix` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `ReactionRole` (
+CREATE TABLE IF NOT EXISTS `reactionrole` (
   `guildID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `channelID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `messageID` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -142,21 +162,22 @@ CREATE TABLE IF NOT EXISTS `ReactionRole` (
   `emojiID` blob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `WarnConfig` (
+CREATE TABLE IF NOT EXISTS `reminders` (
+  `userID` varchar(50) DEFAULT NULL,
+  `reason` varchar(500) DEFAULT NULL,
+  `timestamp` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `warnconfig` (
   `guildID` varchar(50) DEFAULT NULL,
   `kicks` int(11) DEFAULT NULL,
   `bans` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `Warns` (
-  `number` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `warns` (
   `guildID` varchar(50) DEFAULT '',
   `memberID` varchar(50) DEFAULT '',
   `reason` varchar(2000) DEFAULT '',
   `date` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`number`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
-
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+  `moderatorID` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
