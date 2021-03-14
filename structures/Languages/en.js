@@ -836,6 +836,22 @@ module.exports = {
             description: 'Adds the Wanted frame from One Piece to the image.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
+        WARN: {
+            LIST: {
+                pleaseWait: "<a:loading:543460555113889792> - Please wait...",
+                closed: "❌ - Paginator closed.",
+                embedAuthor: (memberTag) => `${memberTag} warnings`,
+                embedTitle: (page, count) => `Page ${page} (${count} warns total)`,
+                embedFooter: "Use the reactions to navigate!",
+                embedFieldTitle: (number, page) => `Warn #${(number + 1) + (page * 5)}`,
+                embedFieldValue: (reason, modTag, modID, date) => `**Reason**: ${reason}\nBy ${modTag} (\`${modID}\`) | ${date}`
+            },
+            description: 'Warns the specified user.',
+            noMention: "❌ - Please specify a user to warn!",
+            noReason: "No reason specified",
+            warned: (memberTag, modTag, reason) => `✅ -**${memberTag}** has been warned by **${modTag}** for __**${reason}**__ !`,
+            dmWarned: (guildName, modTag, reason) => `You have been warned in **${guildName}** by **${modTag}**.\nReason: __**${reason}**__`
+        },
         WEEKLY: {
             description: "Gives you coins weekly!",
             notReady: (time) => `You already collected your weekly bonus! Come back in ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,

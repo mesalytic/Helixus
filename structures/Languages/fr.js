@@ -836,6 +836,22 @@ module.exports = {
             description: 'Ajoute le cadre Wanted de One Piece a l\'image.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',
         },
+        WARN: {
+            LIST: {
+                pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
+                closed: "❌ - Paginateur stoppé.",
+                embedAuthor: (memberTag) => `Avertissements de ${memberTag}`,
+                embedTitle: (page, count) => `Page ${page} (${count} avertissements)`,
+                embedFooter: "Utilisez les réactions pour naviguer entre les pages!",
+                embedFieldTitle: (number, page) => `Avertissement #${(number + 1) + (page * 5)}`,
+                embedFieldValue: (reason, modTag, modID, date) => `**Raison**: ${reason}\nPar ${modTag} (\`${modID}\`) | ${date}`
+            },
+            description: 'Avertis le membre spécifié.',
+            noMention: "❌ - Veuillez spécifier un membre a avertir!",
+            noReason: "Aucune raison spécifiée",
+            warned: (memberTag, modTag, reason) => `✅ -**${memberTag}** a été averti par **${modTag}** pour __**${reason}**__ !`,
+            dmWarned: (guildName, modTag, reason) => `Vous avez été averti dans **${guildName}** par **${modTag}**.\nRaison: __**${reason}**__`
+        },
         WEEKLY: {
             description: "Vous donne des pièces toutes les semaines!",
             notReady: (time) => `Vous avez déjà collecté votre récompense hebdomadaire! Revenez dans ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
