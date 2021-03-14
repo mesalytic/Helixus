@@ -522,8 +522,8 @@ module.exports = {
         PURGE: {
             description: 'Removes the specified amount of messages.',
             notes: "`number` is limited to 100 messages, due to API limitations. To delete more than 100 messages, you'll need to run the command multiple times.",
-            noValidNumber: "X - Please specify a valid number.",
-            purged: (deleted) => `V - **${deleted}** messages have been __**successfully**__ been deleted.`
+            noValidNumber: "❌ - Please specify a valid number.",
+            purged: (deleted) => `✅ - **${deleted}** messages have been __**successfully**__ been deleted.`
         },
         PUSSY: {
             description: 'Displays an NSFW picture with pussy.',
@@ -687,6 +687,12 @@ module.exports = {
             slapNoMention: (memberTag) => `**${memberTag}** slapped someone!`,
             slapMention: (memberTag, slappedTag) => `**${memberTag}** slapped **${slappedTag}**!`,
             service: "Service By nekos.life"
+        },
+        SLOWMODE: {
+            description: 'Sets a rate limit per user in the channel.',
+            noDuration: "❌ - Please specify a duration!",
+            noValidDuration: "❌ - Please specify a duration lower than 6h. (21600000 seconds)",
+            slowed: (duration) => `✅ - The rate limit for this channel has been set to __**${duration}**__!`
         },
         SMUG: {
             description: 'Smug on someone!',

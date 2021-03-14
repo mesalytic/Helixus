@@ -522,8 +522,8 @@ module.exports = {
         PURGE: {
             description: 'Supprime le nombre spécifié de messages.',
             notes: "`number` est limité à 100 messages, dù a des limitations Discord. Pour supprimer plus de 100 messages, vous devrez exécuter la commande plusieurs fois.",
-            noValidNumber: "X - Veuillez spécifier un nombre valide.",
-            purged: (deleted) => `V - **${deleted}** messages ont __**bien**__ été supprimés.`
+            noValidNumber: "❌ - Veuillez spécifier un nombre valide.",
+            purged: (deleted) => `✅ - **${deleted}** messages ont __**bien**__ été supprimés.`
         },
         PUSSY: {
             description: 'Affiche une image NSFW catégorisée `pussy`.',
@@ -687,6 +687,12 @@ module.exports = {
             slapNoMention: (memberTag) => `**${memberTag}** claque quelqu'un!`,
             slapMention: (memberTag, slappedTag) => `**${memberTag}** claque **${slappedTag}**!`,
             service: "Service par nekos.life"
+        },
+        SLOWMODE: {
+            description: 'Configure un délai par membre entre chaque messages.',
+            noDuration: "❌ - Veuillez spécifier une durée!",
+            noValidDuration: "❌ - Veuillez spécifier une durée inférieure a 6h. (21600000 secondes)",
+            slowed: (duration) => `✅ - Le délai par messages pour ce salon a été configuré sur __**${duration}**__!`
         },
         SMUG: {
             description: 'Soyez prétentieux·se envers quelqu\'un!',
