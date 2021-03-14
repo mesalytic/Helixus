@@ -788,6 +788,12 @@ module.exports = {
             description: 'Sends a GIF with the Triggered effect.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...',
         },
+        UNMUTE: {
+            description: 'Mutes the specified user.',
+            roleNotFound: "X - The Muted role has not been found. Please run the `am!mute` command first.",
+            notMuted: "X - This member is not currently muted.",
+            unmuted: "V - This member has been unmuted."
+        },
         USERINFO: {
             description: "Displays informations about a specific user __**in the server**__.",
             username: "Username",
