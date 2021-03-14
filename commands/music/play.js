@@ -164,12 +164,12 @@ module.exports = class PlayCommand extends Command {
                     fmt: "mp3",
                 });
             } else if (song.url.includes("soundcloud.com")) {
-                stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.soundcloud);
+                stream = await scdl.default.downloadFormat(song.url, scdl.default.FORMATS.MP3, config.soundcloud);
             }
         } catch (error) {
             if (queue) {
                 queue.songs.shift();
-                this(queue.songs[0], message);
+                this.play(queue.songs[0], message);
             }
 
             console.error(error);
@@ -187,25 +187,25 @@ module.exports = class PlayCommand extends Command {
                     if (reason.match(`seek`)) {
                         let seekTo = reason.split(" ")[1];
 
-                        this(queue.songs[0], message, seekTo);
+                        this.play(queue.songs[0], message, seekTo);
                     }
                 } else {
                     if (queue.loop) {
                         let lSong = queue.songs.shift();
                         queue.songs.push(lSong);
                         queue.seek = 0;
-                        this(queue.songs[0], message);
+                        this.play(queue.songs[0], message);
                     } else {
                         queue.songs.shift();
                         queue.seek = 0;
-                        this(queue.songs[0], message);
+                        this.play(queue.songs[0], message);
                     }
                 }
             })
             .on("error", (err) => {
                 console.error(err);
                 queue.songs.shift();
-                this(queue.songs[0], message);
+                this.play(queue.songs[0], message);
             })
         dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
