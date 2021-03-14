@@ -46,8 +46,8 @@ module.exports = class PlayCommand extends Command {
         const url = args[0];
         const urlValid = videoRegex.test(args[0]);
 
-        if (!videoRegex.test(args[0]) && playlistYTRegex.test(args[0])) return message.reply("Playlist support isn't ready yet!");
-        else if (soundcloudRegex.test(args[0]) && url.includes("/sets")) return message.reply("SoundCloud playlist support is not available yet!");
+        if (!videoRegex.test(args[0]) && playlistYTRegex.test(args[0])) return this.bot.commands.get("playlist").run(message, args);
+        else if (soundcloudRegex.test(args[0]) && url.includes("/sets")) return this.bot.commands.get("playlist").run(message, args);
 
         const queueConstruct = {
             textChannel: message.channel,
@@ -175,7 +175,7 @@ module.exports = class PlayCommand extends Command {
             console.error(error);
             return message.channel.send(`Error: ${error.message ? error.message : error}`);
         }
-        queue.connection.on("disconnect", () => bot.queue.delete(message.guild.id));
+        queue.connection.on("disconnect", () => this.bot.queue.delete(message.guild.id));
 
         const dispatcher = queue.connection
             .play(stream, {
