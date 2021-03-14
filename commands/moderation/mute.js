@@ -42,6 +42,8 @@ module.exports = class MuteCommand extends Command {
                     })
 
                     muteRole = role;
+                    if (!rows[0]) this.bot.db.query(`INSERT INTO MuteConfig (guildID, muteRoleID) VALUES ('${message.guild.id}', '${role.id}')`)
+                    else this.bot.db.query(`UPDATE MuteConfig SET muteRoleID='${role.id}' WHERE guildID='${message.guild.id}'`)
                 })
             } else muteRole = message.guild.roles.cache.get(rows[0].muteRoleID);
 
