@@ -521,6 +521,14 @@ module.exports = {
             ended: "🚫 Music queue ended.",
             startedPlaying: (title, url) => `🎶 Started playing: **${title}** <${url}>`
         },
+        PLAYLIST: {
+            description: "Allows you to load playlists from YouTube or SoundCloud!",
+            notInVC: "❌ - You are not in a voice channel!",
+            notInSameVC: "❌ - You are not in the same voice channel!",
+            fetching: "LOADING - Fetching playlist...",
+            startedPlaylist: (author) => `✅ -${author} has started a playlist!`,
+            cannotJoin: "❌ - Cannot join channel.."
+        },
         PREFIX: {
             description: 'Changes the bot\'s prefix on the server.',
             actualPrefix: (prefix) => `The current prefix is: \`${prefix}\``,

@@ -521,6 +521,14 @@ module.exports = {
             ended: "🚫 File terminée.",
             startedPlaying: (title, url) => `🎶 Joue: **${title}** <${url}>`
         },
+        PLAYLIST: {
+            description: "Vous permets de charger des playlists venant de YouTube ou SoundCloud",
+            notInVC: "❌ - Vous n'êtes pas dans un salon vocal!",
+            notInSameVC: "❌ - Vous n'êtes pas dans le même salon vocal!",
+            fetching: "<a:loading:543460555113889792> - Chargement de la playlist...",
+            startedPlaylist: (author) => `✅ -${author} a démarré une playlist!`,
+            cannotJoin: "❌ - Je ne peux pas rejoindre le salon..."
+        },
         PREFIX: {
             description: 'Change le préfixe du bot sur le serveur.',
             actualPrefix: (prefix) => `Le préfixe actuel est: \`${prefix}\``,
