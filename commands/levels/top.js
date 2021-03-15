@@ -73,7 +73,6 @@ module.exports = class TopCommand extends Command {
                                                     else hasteOutput += `[${(i + 1) + (page * 10)}] **????** - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
                                                 }
                                                 message.channel.send(message.guild.lang.COMMANDS.TOP.fullTop(await hastebin(hasteOutput, { extension: "txt" })))
-                                                message.channel.send(message.guild.lang.COMMANDS.TOP.fullTop())
                                                 reactionCollector.stop();
                                             case '❌':
                                                 reactionCollector.stop()
