@@ -18,7 +18,7 @@ module.exports = class TopCommand extends Command {
     }
 
     async run(message) {
-        this.bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}'`, async (err, rows) => {
+        this.bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}' ORDER BY level DESC, points DESC`, async (err, rows) => {
             let count
             if (err) throw err
             count = rows.length
@@ -69,8 +69,8 @@ module.exports = class TopCommand extends Command {
                             
                                                     let diff = (5 * (rows[i].level ^ 2) + 50 * rows[i].level + 100) * 1.20
                             
-                                                    if (u) hasteOutput += `[${(i + 1) + (page * 10)}] **${Util.escapeMarkdown(u.user.tag)}** - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
-                                                    else hasteOutput += `[${(i + 1) + (page * 10)}] **????** - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
+                                                    if (u) hasteOutput += `[${(i + 1)}] ${Util.escapeMarkdown(u.user.tag)} - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
+                                                    else hasteOutput += `[${(i + 1)}] ???? - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
                                                 }
                                                 message.channel.send(message.guild.lang.COMMANDS.TOP.fullTop(await hastebin(hasteOutput, { extension: "txt" })))
                                                 reactionCollector.stop();
