@@ -90,6 +90,7 @@ module.exports = (bot, message) => {
 
               wb.send(`\`\`\`${Util.escapeMarkdown(`${message.author.tag} (${message.author.id}) - ${message.content} (${message.guild.name} | ${message.guild.id})`)}\`\`\``);
 
+              message.guild.members.fetch();
               command.run(message, args).catch(e => {
                 const webhook = new WebhookClient(bot.config.webhook.error.id, bot.config.webhook.error.password)
 
