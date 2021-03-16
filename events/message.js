@@ -126,20 +126,14 @@ module.exports = (bot, message) => {
       }
     } else {
 
-      console.log("0")
-
       function generateXP(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
       bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
-        console.log("a");
         if (rows[0]) {
-          console.log("b");
           if (rows[0].activated === "true") {
-            console.log("c");
             bot.db.query(`SELECT * FROM Cooldowns WHERE userID='${message.author.id}'`, (err, cRows) => {
               if (!cRows[0]) {
-                console.log("d");
                 bot.db.query(`INSERT INTO Cooldowns (userID, guildID, active) VALUES ('${message.author.id}', '${message.guild.id}', 'true')`);
               } else return setTimeout(() => {
                 bot.db.query(`DELETE FROM Cooldowns WHERE userID='${message.author.id}'`);
@@ -147,9 +141,7 @@ module.exports = (bot, message) => {
 
               bot.db.query(`SELECT * FROM Levels WHERE guild='${message.guild.id}' AND user='${message.author.id}'`, (err, lRows) => {
                 if (err) throw err;
-                console.log("e");
                 if (!lRows[0]) {
-                  console.log("f");
 
                   bot.db.query(`INSERT INTO Levels (user, guild, points, level) VALUES ('${message.author.id}', '${message.guild.id}', '${generateXP(5, 15)}', '1')`);
                 } else {

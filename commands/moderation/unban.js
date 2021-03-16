@@ -24,7 +24,6 @@ module.exports = class UnbanCommand extends Command {
             if (!reason) reason = message.guild.lang.COMMANDS.UNBAN.noReason;
 
             message.guild.members.unban(memberID, reason);
-            console.log(reason);
             message.channel.send(message.guild.lang.COMMANDS.UNBAN.unbanned(memberID))
         }
     }
