@@ -41,6 +41,7 @@
     "soundcloud-downloader": "^0.2.4",
     "string-progressbar": "^1.0.3",
     "tictactoe-minimax-ai": "^1.2.1",
+    "topgg-autoposter": "^1.1.9",
     "winston": "^3.3.3",
     "ytdl-core": "^4.5.0"
   },
