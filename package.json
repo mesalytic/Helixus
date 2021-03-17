@@ -15,7 +15,7 @@
     "cpu-stat": "^2.0.1",
     "discord-ytdl-core": "^5.0.1",
     "discord.js": "^12.5.1",
-    "ffmpeg-static": "^4.2.7",
+    "ffmpeg-static": "^4.2.8",
     "figlet": "^1.5.0",
     "gifencoder": "^2.0.1",
     "hastebin-gen": "git+https://github.com/chocololat/hastebin-gen.git",
