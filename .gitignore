@@ -107,3 +107,4 @@ config.json
 old.config.json
 node_modules
 .vscode/
+dashboard
