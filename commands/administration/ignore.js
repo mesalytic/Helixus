@@ -23,11 +23,11 @@ module.exports = class IgnoreCommand extends Command {
                 switch (rows[0].ignored) {
                     case "true":
                         this.bot.db.query(`UPDATE IgnoreChannels SET ignored = "false" WHERE channelID = '${chan.id}'`);
-                        message.channel.send(message.guild.lang.COMMANDS.IGNORE.notIgnored)
+                        message.channel.send(message.guild.lang.COMMANDS.IGNORE.notIgnored(chan))
                         break;
                     case "false":
                         this.bot.db.query(`UPDATE IgnoreChannels SET ignored = "true" WHERE channelID = '${chan.id}'`);
-                        message.channel.send(message.guild.lang.COMMANDS.IGNORE.ignored)
+                        message.channel.send(message.guild.lang.COMMANDS.IGNORE.ignored(chan))
                         break;
                 }
             }
