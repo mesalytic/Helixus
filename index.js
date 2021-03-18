@@ -11,6 +11,8 @@ function init() {
     bot.login(bot.token);
 }
 
-init();
+module.exports = bot;
 
+init();
+require('./dashboard/server');
 process.on('unhandledRejection', err => bot.logger.error(err));
