@@ -18,6 +18,7 @@ module.exports = class PayCommand extends Command {
         let user = message.mentions.users.first();
         if (!user) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
         if (user.bot) return message.reply(message.guild.lang.COMMANDS.PAY.isBot)
+        if (user === message.author) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
 
         this.bot.db.query(`SELECT * FROM Economy WHERE userID='${message.author.id}'`, async (err, payerRows) => {
             this.bot.db.query(`SELECT * FROM Economy WHERE userID='${user.id}'`, async (err, payedRows) => {
@@ -42,6 +43,7 @@ module.exports = class PayCommand extends Command {
                                         if (!payedRows[0]) this.bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${user.id}', '${Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05))}')`);
                                         else this.bot.db.query(`UPDATE Economy SET balance='${payedRows[0].balance + Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05))}' WHERE userID='${user.id}'`);
 
+                                        this.bot.db.query(`UPDATE Economy SET balance='${payerRows[0].balance - Math.floor(Number(args[1]))}' WHERE userID='${message.author.id}'`);
                                         reactionCollector.stop("pay_success");
                                     }
                                     case '❌':
