@@ -21,12 +21,12 @@ module.exports = class TriggeredCommand extends Command {
         } else if (message.mentions.users.first()) {
             url = message.mentions.users.first().avatarURL({
                 format: "png",
-                size: 2048
+                size: 512
             });
         } else {
             url = args[0] ? args[0] : message.author.avatarURL({
                 format: "png",
-                size: 2048
+                size: 512
             });
         }
 
@@ -41,7 +41,7 @@ module.exports = class TriggeredCommand extends Command {
 
         const encoder = new GIFEncoder(base.width, base.width);
 
-        const canvas = Canvas.createCanvas(avatar.width, avatar.height);
+        const canvas = Canvas.createCanvas(base.width, base.width);
         const ctx = canvas.getContext('2d');
 
         const stream = encoder.createReadStream();
