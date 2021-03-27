@@ -21,11 +21,16 @@
 		"commands": {
 			"id": "",
 			"password": ""
-		}
+		},
+        "topGG": {
+            "id":"",
+            "password": ""
+        }
     },
     "youtube": "",
     "soundcloud": "",
     "ksoft": "",
 	"osu": "",
-    "topgg": ""
+    "topgg": "",
+    "topggWebhook": ""
 }
