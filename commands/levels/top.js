@@ -72,7 +72,7 @@ module.exports = class TopCommand extends Command {
                                                     if (u) hasteOutput += `[${(i + 1)}] ${Util.escapeMarkdown(u.user.tag)} - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
                                                     else hasteOutput += `[${(i + 1)}] ???? - Level ${rows[i].level} | (${rows[i].points}/${diff} XP)\n`
                                                 }
-                                                message.channel.send(message.guild.lang.COMMANDS.TOP.fullTop(await hastebin(hasteOutput, { extension: "txt" })))
+                                                message.channel.send(message.guild.lang.COMMANDS.TOP.fullTop(await hastebin(hasteOutput, { url: "https://paste.aliceraina.moe", extension: "txt" })))
                                                 reactionCollector.stop();
                                             case '❌':
                                                 reactionCollector.stop()

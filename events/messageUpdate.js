@@ -26,9 +26,11 @@ module.exports = async (bot, oldMessage, newMessage) => {
                                                 .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
                                                 .setDescription(lang.updated(newMessage.author))
                                                 .addField(lang.oldMessage, oldMessage.content.length > 1000 ? await hastebin(oldMessage.content, {
+                                                    url: "https://paste.aliceraina.moe",
                                                     extension: "txt"
                                                 }) : oldMessage.content)
                                                 .addField(lang.newMessage, newMessage.content.length > 1000 ? await hastebin(newMessage.content, {
+                                                    url: "https://paste.aliceraina.moe",
                                                     extension: "txt"
                                                 }) : newMessage.content)
                                                 .setColor("RANDOM")

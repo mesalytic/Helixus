@@ -35,6 +35,7 @@ module.exports = async (bot, message) => {
                                             else {
                                                 if (message.content.length > 1023) {
                                                     embed.addField(lang.content, await hastebin(message.content, {
+                                                        url: "https://paste.aliceraina.moe",
                                                         extension: "txt"
                                                     }));
                                                     embed.addField(lang.attachment, message.attachments.first().proxyURL);
@@ -45,6 +46,7 @@ module.exports = async (bot, message) => {
                                             }
                                         } else {
                                             if (message.content.length > 1023) embed.addField(lang.content, await hastebin(message.content, {
+                                                url: "https://paste.aliceraina.moe",
                                                 extension: "txt"
                                             }));
                                             else embed.addField(lang.content, message.content);
