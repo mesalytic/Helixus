@@ -39,6 +39,16 @@ module.exports = class LogsCommand extends Command {
             })
         }
 
+        if (args[0] === "off") {
+            this.bot.db.query(`SELECT * FROM Logs WHERE guildID='${message.guild.id}'`, (err, rows) => {
+                if (!rows[0] || rows[0].activated === "false") return message.reply(message.guild.lang.COMMANDS.LOGS.OFF.alreadyDisabled)
+                else {
+                        this.bot.db.query(`UPDATE Logs SET activated='false' WHERE guildID='${message.guild.id}'`)
+                        return message.channel.send(message.guild.lang.COMMANDS.LOGS.OFF.disabled)
+                }
+            })
+        }
+
         if (args[0] === "channel") {
             if (!message.mentions.channels.first()) return message.reply(message.guild.lang.COMMANDS.LOGS.CHANNEL.noChanSpecified);
 

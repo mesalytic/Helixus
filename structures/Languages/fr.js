@@ -409,6 +409,10 @@ module.exports = {
                 alreadyEnabled: '❌ - Les logs sont déja activés sur ce serveur !',
                 enabled: `✅ - Les logs sont désormais activés sur ce serveur!`
             },
+            OFF: {
+                alreadyDisabled: '❌ - Les logs sont déja désactivés sur ce serveur !',
+                enabled: `✅ - Les logs sont désormais désactivés sur ce serveur!`
+            },
             CHANNEL: {
                 noChanSpecified: '❌ - Veuillez indiquer un ID, un nom ou une mention de salon!',
                 notEnabled: '❌ - Les logs ne sont pas activés.',

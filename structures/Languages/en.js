@@ -406,8 +406,12 @@ module.exports = {
         LOGS: {
             description: 'Lets you configure the logging system.',
             ON: {
-                alreadyEnabled: '❌ - Logs are already activated in this server!',
+                alreadyEnabled: '❌ - Logs are already enabled in this server!',
                 enabled: `✅ - Logs are now enabled in this server.`
+            },
+            OFF: {
+                alreadyDisabled: '❌ - Logs are already disabled in this server!',
+                disabled: `✅ - Logs are now disabled in this server.`
             },
             CHANNEL: {
                 noChanSpecified: '❌ - Please specify a channel name, ID, or mention!',
