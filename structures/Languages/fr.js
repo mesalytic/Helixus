@@ -541,7 +541,7 @@ module.exports = {
         },
         PURGE: {
             description: 'Supprime le nombre spécifié de messages.',
-            notes: "`number` est limité à 100 messages, dù a des limitations Discord. Pour supprimer plus de 100 messages, vous devrez exécuter la commande plusieurs fois.",
+            notes: "`number` est limité à 100 messages, dù a des limitations Discord. Pour supprimer plus de 100 messages, vous devrez exécuter la commande plusieurs fois.\nLes messages vieux de plus de 2 semaines ne peuvent pas être supprimés.",
             noValidNumber: "❌ - Veuillez spécifier un nombre valide.",
             purged: (deleted) => `✅ - **${deleted}** messages ont __**bien**__ été supprimés.`
         },

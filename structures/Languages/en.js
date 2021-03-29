@@ -541,7 +541,7 @@ module.exports = {
         },
         PURGE: {
             description: 'Removes the specified amount of messages.',
-            notes: "`number` is limited to 100 messages, due to API limitations. To delete more than 100 messages, you'll need to run the command multiple times.",
+            notes: "`number` is limited to 100 messages, due to API limitations. To delete more than 100 messages, you'll need to run the command multiple times.\n\nMessages older than 2 weeks cannot be deleted.",
             noValidNumber: "❌ - Please specify a valid number.",
             purged: (deleted) => `✅ - **${deleted}** messages have been __**successfully**__ been deleted.`
         },
