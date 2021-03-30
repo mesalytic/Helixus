@@ -869,6 +869,9 @@ module.exports = {
             notReady: (time) => `You already collected your weekly bonus! Come back in ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
             success: (amount) => `You've collected your weekly reward of ${amount} coins!`
         },
+        WORK: {
+            worked: (job, money) => `✅ - You worked as a __**${job}**__. You gained **${money}** coins!`
+        },
         YANDERE: {
             description: 'Displays a (potential) NSFW image from Gelbooru with your specified tags.',
             pleaseWait: "<a:loading:543460555113889792> - Please wait...",

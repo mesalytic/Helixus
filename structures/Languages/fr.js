@@ -869,6 +869,9 @@ module.exports = {
             notReady: (time) => `Vous avez déjà collecté votre récompense hebdomadaire! Revenez dans ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s !`,
             success: (amount) => `Vous avez récupéré votre récompense hebdomadaire de ${amount} pièces !`
         },
+        WORK: {
+            worked: (job, money) => `✅ - Tu as travaillé en tant que __**${job}**__. Tu as gagné **${money}** pièces!`
+        },
         YANDERE: {
             description: 'Affiche une image (potentiellement) NSFW venant de Gelbooru avec les tags spécifiés.',
             pleaseWait: "<a:loading:543460555113889792> - Veuillez patienter...",
