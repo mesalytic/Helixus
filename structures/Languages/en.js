@@ -870,6 +870,7 @@ module.exports = {
             success: (amount) => `You've collected your weekly reward of ${amount} coins!`
         },
         WORK: {
+            description: "Work to gain money.",
             worked: (job, money) => `✅ - You worked as a __**${job}**__. You gained **${money}** coins!`
         },
         YANDERE: {
