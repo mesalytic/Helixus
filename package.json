@@ -18,7 +18,7 @@
     "cpu-stat": "^2.0.1",
     "disco-oauth": "^5.0.1",
     "discord-ytdl-core": "^5.0.2",
-    "discord.js": "^12.5.1",
+    "discord.js": "^12.5.2",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
     "ffmpeg-static": "^4.2.8",
