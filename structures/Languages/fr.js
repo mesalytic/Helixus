@@ -620,6 +620,14 @@ module.exports = {
                 embedTitle: (page, pages) => `Liste des récompenses de niveau (${page + 1}/${pages + 1})`
             }
         },
+        ROB: {
+            description: "Vole les pièces de quelqu'un!",
+            noMention: "X - Vous ne pouvez pas vous voler vous même... Veuillez mentionner quelqu'un.",
+            robbedNotEnoughCoins: "X - La personne que vous essayez de voler doit avoir au moins 300 pièces.",
+            robberNotEnoughCoins: "X - Vous devez avoir au moins 300 pièces.",
+            cooldown: (time) => `X - Vous avez déjà volé quelqu'un récemment... Agissez correctement et attendez **${time.hours}:${time.minutes}:${time.seconds}** !`,
+            success: (robbed, userTag) => `V - Vous avez volé **${robbed}** pièces à __**${userTag}**__ !`
+        },
         ROBOT: {
             description: 'Montre une photo de robot unique a vous (ou au texte indiqué).',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'

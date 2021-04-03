@@ -620,6 +620,14 @@ module.exports = {
                 embedTitle: (page, pages) => `Role Rewards List (${page + 1}/${pages + 1})`
             }
         },
+        ROB: {
+            description: "Rob someone's coins!",
+            noMention: "X - You cannot rob yourself, please mention someone.",
+            robbedNotEnoughCoins: "X - The user you are trying to rob must have at least 300 coins.",
+            robberNotEnoughCoins: "X - You must have at least 300 coins.",
+            cooldown: (time) => `X - You've already robbed someone recently... Behave correctly and wait **${time.hours}:${time.minutes}:${time.seconds}**`,
+            success: (robbed, userTag) => `V - You successfully stole **${robbed}** coins from __**${userTag}**__ !`
+        },
         ROBOT: {
             description: 'Displays a robot based on you (or on any specified text).',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
