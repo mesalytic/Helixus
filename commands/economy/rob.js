@@ -3,11 +3,11 @@ const ms = require('parse-ms');
 const Command = require("../../structures/Command");
 const { randomInt } = require("../../structures/Utils");
 
-module.exports = class WorkCommand extends Command {
+module.exports = class RobCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'rob',
-            description: "Work to gain money.",
+            description: "Rob someone's coins!",
             type: 'economy',
             usage: 'rob @user'
         });
