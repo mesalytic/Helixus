@@ -871,7 +871,8 @@ module.exports = {
         },
         WORK: {
             description: "Work to gain money.",
-            worked: (job, money) => `✅ - You worked as a __**${job}**__. You gained **${money}** coins!`
+            worked: (job, money) => `✅ - You worked as a __**${job}**__. You gained **${money}** coins!`,
+            cooldown: (time) => `❌ - You are still on break! You'll be able to work again in **${time.hours}:${time.minutes}:${time.seconds}**!`
         },
         YANDERE: {
             description: 'Displays a (potential) NSFW image from Gelbooru with your specified tags.',

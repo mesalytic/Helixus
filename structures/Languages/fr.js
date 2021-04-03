@@ -871,7 +871,8 @@ module.exports = {
         },
         WORK: {
             description: "Travaillez pour gagner de l'argent.",
-            worked: (job, money) => `✅ - Tu as travaillé en tant que __**${job}**__. Tu as gagné **${money}** pièces!`
+            worked: (job, money) => `✅ - Tu as travaillé en tant que __**${job}**__. Tu as gagné **${money}** pièces!`,
+            cooldown: (time) => `❌ - Vous êtes encore en pause! Vous pourrez retravailler dans **${time.hours}:${time.minutes}:${time.seconds}**!`
         },
         YANDERE: {
             description: 'Affiche une image (potentiellement) NSFW venant de Gelbooru avec les tags spécifiés.',
