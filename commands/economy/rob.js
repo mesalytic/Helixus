@@ -35,8 +35,6 @@ module.exports = class RobCommand extends Command {
 
                 let robbed = randomInt(1, Math.round(rRows[0].balance / 30));
 
-                console.log(`${robbed}/${Math.round(rRows[0].balance / 30)}`)
-
                 if (rows[0] && (rows[0].robCooldown !== null && timeout - (Date.now() - rows[0].robCooldown) > 0)) {
 
                     let time = ms(timeout - (Date.now() - rows[0].robCooldown));
