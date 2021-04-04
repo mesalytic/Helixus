@@ -852,6 +852,10 @@ module.exports = {
             volume: (volume) => `🔊 - Le volume est à **${volume}%**.`,
             success: (volume) => `✅ - Le volume est maintenant à **${volume}%**!`
         },
+        VOTE: {
+            description: "Votez toutes les 12h et gagnez 450 coins.",
+            vote: "Vous pouvez voter et obtenir 450 coins toutes les 12 heures!\nLes votes peuvent prendre plusieurs minutes avant d'être validés.\nhttps://top.gg/bot/437190817195753472/vote"
+        },
         WANTED: {
             description: 'Ajoute le cadre Wanted de One Piece a l\'image.',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...',
