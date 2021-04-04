@@ -93,7 +93,7 @@ module.exports = class LogsCommand extends Command {
             if (!args[1] || !loggingEventsList.includes(args[1].toLowerCase())) return message.reply(message.guild.lang.COMMANDS.LOGS.TOGGLE.notValidEvent(loggingEventsList.join(', ')));
 
             this.bot.db.query(`SELECT * FROM Logs WHERE guildID='${message.guild.id}'`, (err, rows) => {
-                if (!rows[0]) return message.reply(message.guild.lang.COMMAND.LOGS.TOGGLE.notEnabled);
+                if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.LOGS.TOGGLE.notEnabled);
                 else {
                     if (rows[0][args[1].toLowerCase()] === "false") {
                         this.bot.db.query(`UPDATE Logs SET ${args[1].toLowerCase()} = 'true' WHERE guildID='${message.guild.id}'`);
