@@ -32,8 +32,8 @@ module.exports = async (bot, messages) => {
                                             .setColor("RANDOM")
                                             .setTimestamp();
 
-                                        let msg = lang.header
-                                        messages.forEach((m) => {
+                                        let msg = "";
+                                        messages.array().reverse().forEach((m) => {
                                             let content;
                                             if (m.attachments.first() && !m.content) content = lang.contentWithoutMessage(m.attachments.first().proxyURL);
                                             else if (m.attachments.first() && m.content) content = lang.contentWithMessage(m.attachments.first().proxyURL, m.content);

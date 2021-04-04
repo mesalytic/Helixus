@@ -1010,7 +1010,6 @@ module.exports = {
             deleted: (messages, channel) => `**${messages.size}** messages ont été supprimés dans ${channel}.`,
             deletedBy: "Supprimés par",
             unknownUser: `Membre Inconnu`,
-            header: `Le message le plus récent est en haut. Le message le plus ancien est en bas.\n\n\n\n`,
             contentWithoutMessage: (link) => `Fichier attaché: ${link}`,
             contentWithMessage: (link, message) => `Fichier attaché: ${link} | Message: ${message}`,
             noContent: "Aucun contenu n'a été trouvé..."
