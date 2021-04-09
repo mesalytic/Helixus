@@ -17,6 +17,8 @@ module.exports = class ServerInfoCommand extends Command {
     }
 
     async run(message, args) {
+        moment.locale(message.guild.lang.code);
+
         let embed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle(`📡 | ${message.guild.name}`)
