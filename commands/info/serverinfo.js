@@ -17,7 +17,6 @@ module.exports = class ServerInfoCommand extends Command {
     }
 
     async run(message, args) {
-
         let embed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle(`📡 | ${message.guild.name}`)
@@ -26,7 +25,7 @@ module.exports = class ServerInfoCommand extends Command {
                 format: "png",
                 dynamic: true
             }))
-            .setThumbnail(message.guild.iconURL)
+            .setThumbnail(message.guild.iconURL())
             .addField(message.guild.lang.COMMANDS.SERVERINFO.owner, `${message.guild.owner} \`${message.guild.owner.user.tag}\``, true)
             .addField(message.guild.lang.COMMANDS.SERVERINFO.members, message.guild.memberCount, true)
             .addField(message.guild.lang.COMMANDS.SERVERINFO.serverID, message.guild.id, true)
