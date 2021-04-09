@@ -35,7 +35,7 @@
     "node-fetch": "^2.6.1",
     "node-superfetch": "^0.2.2",
     "os": "^0.1.1",
-    "parse-ms": "^2.1.0",
+    "parse-ms": "^3.0.0",
     "path": "^0.12.7",
     "pug": "^3.0.2",
     "simple-youtube-api": "^5.2.1",
