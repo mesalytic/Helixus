@@ -114,7 +114,7 @@ module.exports = class BackgroundCommand extends Command {
                     let array = Object.keys(backgroundColor).slice(page * 10, (page * 10) + 10)
 
                     array.forEach(bg => {
-                        output += `[${rows[0][bg] === "true" ? '✅' : '❌'}] ${bg} - 5000 coins\n`
+                        output += `[${rows[0][bg] === "true" ? '✅' : '❌'}] ${bg} - 5000 coins [${message.guild.lang.COMMANDS.BACKGROUND.LIST.preview}](https://aliceraina.moe/img/${bg.replace(/ /g, '_')}.png)\n`
                     })
 
                     const embed = new MessageEmbed()

@@ -61,7 +61,8 @@ module.exports = {
                 pleaseWait: "Veuillez patienter...",
                 closedPaginator: "❌ Pagination fermée... ❌",
                 embedAuthor: "Liste des fonds",
-                embedTitle: `Le signe ❌ signifie que vous ne possédez pas le fond.\nAchetez le en faisant \`am!background buy <fond>\` !`
+                embedTitle: `Le signe ❌ signifie que vous ne possédez pas le fond.\nAchetez le en faisant \`am!background buy <fond>\` !`,
+                preview: '[Aperçu]'
             }
         },
         BAKA: {

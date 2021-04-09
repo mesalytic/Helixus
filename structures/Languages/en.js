@@ -61,7 +61,8 @@ module.exports = {
                 pleaseWait: "Please wait...",
                 closedPaginator: "❌ Paginator closed... ❌",
                 embedAuthor: "Rank Background List",
-                embedTitle: `The ❌ sign means you don't have the background.\nBuy it with \`am!background buy <background>\` !`
+                embedTitle: `The ❌ sign means you don't have the background.\nBuy it with \`am!background buy <background>\` !`,
+                preview: '[Preview]'
             }
         },
         BAKA: {
