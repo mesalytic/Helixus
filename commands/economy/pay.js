@@ -26,10 +26,10 @@ module.exports = class PayCommand extends Command {
                     this.bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${message.author.id}', '0')`);
                     return message.reply(message.guild.lang.COMMANDS.PAY.notEnoughCoins);
                 } else {
-                    if (!args[1] || isNaN(args[1])) return message.reply(message.guild.lang.COMMANDS.PAY.noCoinsSpecified)
-                    if (payerRows[0].balance < Math.floor(Number(args[1]))) return message.reply(message.guild.lang.COMMANDS.PAY.notEnoughCoins);
+                    if (!args[1] || isNaN(args[1]) || args[1] <= 0) return message.reply(message.guild.lang.COMMANDS.PAY.noCoinsSpecified);
+                    if (payerRows[0].balance < Math.round(Number(args[1]))) return message.reply(message.guild.lang.COMMANDS.PAY.notEnoughCoins);
 
-                    let m = await message.channel.send(message.guild.lang.COMMANDS.PAY.pending(Math.floor(Number(args[1])), Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05)), user))
+                    let m = await message.channel.send(message.guild.lang.COMMANDS.PAY.pending(Math.round(Number(args[1])), Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)), user))
                     m.react("✅").then(() => {
                         m.react("❌").then(() => {
                             const filter = (reaction, user) => ['✅', '❌'].includes(reaction.emoji.name) && user.id === message.author.id
@@ -40,10 +40,10 @@ module.exports = class PayCommand extends Command {
                             reactionCollector.on('collect', async reaction => {
                                 switch (reaction.emoji.name) {
                                     case '✅': {
-                                        if (!payedRows[0]) this.bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${user.id}', '${Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05))}')`);
-                                        else this.bot.db.query(`UPDATE Economy SET balance='${payedRows[0].balance + Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05))}' WHERE userID='${user.id}'`);
+                                        if (!payedRows[0]) this.bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${user.id}', '${Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05))}')`);
+                                        else this.bot.db.query(`UPDATE Economy SET balance='${payedRows[0].balance + Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05))}' WHERE userID='${user.id}'`);
 
-                                        this.bot.db.query(`UPDATE Economy SET balance='${payerRows[0].balance - Math.floor(Number(args[1]))}' WHERE userID='${message.author.id}'`);
+                                        this.bot.db.query(`UPDATE Economy SET balance='${payerRows[0].balance - Math.round(Number(args[1]))}' WHERE userID='${message.author.id}'`);
                                         reactionCollector.stop("pay_success");
                                     }
                                     case '❌':
@@ -53,7 +53,7 @@ module.exports = class PayCommand extends Command {
                             reactionCollector.on('end', (_, reason) => {
                                 switch (reason) {
                                     case "pay_success":
-                                        m.edit(message.guild.lang.COMMANDS.PAY.success(Math.floor(Number(args[1]) - (Math.floor(Number(args[1])) * 0.05)), user))
+                                        m.edit(message.guild.lang.COMMANDS.PAY.success(Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)), user))
                                         break;
                                     case "pay_denied":
                                         m.edit(message.guild.lang.COMMANDS.PAY.cancelled)
