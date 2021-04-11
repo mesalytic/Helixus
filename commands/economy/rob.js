@@ -18,6 +18,7 @@ module.exports = class RobCommand extends Command {
 
         let member = message.mentions.members.first();
         if (!member) return message.reply(message.guild.lang.COMMANDS.ROB.noMention);
+        if (member.id === message.author.id) return message.reply(message.guild.lang.COMMANDS.ROB.noMention);
 
         this.bot.db.query(`SELECT * FROM Economy WHERE userID='${message.author.id}'`, (err, rows) => {
             if (err) throw err;
