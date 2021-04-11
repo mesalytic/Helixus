@@ -18,6 +18,7 @@ module.exports = class PayCommand extends Command {
         let user = message.mentions.users.first();
         if (!user) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
         if (user.bot) return message.reply(message.guild.lang.COMMANDS.PAY.isBot)
+        if (Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)) <= 0) return message.reply(message.guild.lang.COMMANDS.PAY.noCoinsSpecified);
         if (user === message.author) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
 
         this.bot.db.query(`SELECT * FROM Economy WHERE userID='${message.author.id}'`, async (err, payerRows) => {
