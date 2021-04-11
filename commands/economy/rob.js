@@ -33,7 +33,7 @@ module.exports = class RobCommand extends Command {
                 if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.ROB.robberNotEnoughCoins)
                 if (rows[0] && rows[0].balance <= 300) return message.reply(message.guild.lang.COMMANDS.ROB.robberNotEnoughCoins)
 
-                let robbed = randomInt(1, Math.round(rRows[0].balance / 30));
+                let robbed = randomInt(1, Math.round(rRows[0].balance / 30) > 1000 ? 1000 : Math.round(rRows[0].balance / 30));
 
                 if (rows[0] && (rows[0].robCooldown !== null && timeout - (Date.now() - rows[0].robCooldown) > 0)) {
 
