@@ -17,8 +17,8 @@ module.exports = class AvatarCommand extends Command {
         let mentionned = message.mentions.users.first();
         let embed = new MessageEmbed()
             .setTitle(message.guild.lang.COMMANDS.AVATAR.avatar(mentionned ? mentionned.tag : message.author.tag))
-            .setDescription(`[${message.guild.lang.COMMANDS.AVATAR.notShowing}](${mentionned ? mentionned.avatarURL({ dynamic: true, size: 2048 }) : message.author.avatarURL({ dynamic: true, size: 2048 })})`)
-            .setImage(mentionned ? mentionned.avatarURL({ dynamic: true, size: 2048 }) : message.author.avatarURL({ dynamic: true, size: 2048 }))
+            .setDescription(`[${message.guild.lang.COMMANDS.AVATAR.notShowing}](${mentionned ? mentionned.displayAvatarURL({ dynamic: true, size: 2048 }) : message.author.displayAvatarURL({ dynamic: true, size: 2048 })})`)
+            .setImage(mentionned ? mentionned.displayAvatarURL({ dynamic: true, size: 2048 }) : message.author.displayAvatarURL({ dynamic: true, size: 2048 }))
             .setColor("RANDOM")
             .setTimestamp();
 

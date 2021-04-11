@@ -23,7 +23,7 @@ module.exports = async (bot, oldMessage, newMessage) => {
                                         if (!oldMessage.content || !newMessage.content) return;
                                         if (oldMessage.content !== newMessage.content && oldMessage.content.length !== 0) {
                                             let embed = new MessageEmbed()
-                                                .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
+                                                .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL())
                                                 .setDescription(lang.updated(newMessage.author))
                                                 .addField(lang.oldMessage, oldMessage.content.length > 1000 ? await hastebin(oldMessage.content, {
                                                     url: "https://paste.aliceraina.moe",

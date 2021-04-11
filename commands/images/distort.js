@@ -14,7 +14,7 @@ module.exports = class DistortCommand extends Command {
 
     async run(message, args) {
         let url;
-        if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().avatarURL({ format: "png", size: 2048 }); } else { url = args[0] ? args[0] : message.author.avatarURL({ format: "png", size: 2048 }); }
+        if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().displayAvatarURL({ format: "png", size: 2048 }); } else { url = args[0] ? args[0] : message.author.displayAvatarURL({ format: "png", size: 2048 }); }
 
         const m = await message.channel.send(message.guild.lang.COMMANDS.DISTORT.pleaseWait);
         

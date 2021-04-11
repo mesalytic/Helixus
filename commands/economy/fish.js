@@ -43,13 +43,13 @@ module.exports = class FishCommand extends Command {
             if (args[0] === "inventory") {
                 let embed = new MessageEmbed()
                     .setColor("RANDOM")
-                    .setAuthor(message.guild.lang.COMMANDS.FISH.INVENTORY.inventory, message.author.avatarURL())
+                    .setAuthor(message.guild.lang.COMMANDS.FISH.INVENTORY.inventory, message.author.displayAvatarURL())
                     .setDescription(message.guild.lang.COMMANDS.FISH.INVENTORY.content(rows[0] ? rows[0].junkFish : 0, rows[0] ? rows[0].commonFish : 0, rows[0] ? rows[0].uncommonFish : 0, rows[0] ? rows[0].rareFish : 0))
                 message.channel.send(embed);
             } else if (args[0] === "sell") {
                 let embed = new MessageEmbed()
                     .setColor("RANDOM")
-                    .setAuthor(message.guild.lang.COMMANDS.FISH.SELL.sellWhat, message.author.avatarURL())
+                    .setAuthor(message.guild.lang.COMMANDS.FISH.SELL.sellWhat, message.author.displayAvatarURL())
                     .setDescription(message.guild.lang.COMMANDS.FISH.SELL.content(rows[0] ? rows[0].junkFish : 0, rows[0] ? rows[0].commonFish : 0, rows[0] ? rows[0].uncommonFish : 0, rows[0] ? rows[0].rareFish : 0))
 
                 let m = await message.channel.send(message.guild.lang.COMMANDS.FISH.SELL.pleaseWait);

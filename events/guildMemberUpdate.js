@@ -21,7 +21,7 @@ module.exports = async (bot, oldMember, newMember) => {
 
 
                                 const embed = new MessageEmbed()
-                                    .setAuthor(`${newMember.user.username}#${newMember.user.discriminator}`, newMember.user.avatarURL())
+                                    .setAuthor(`${newMember.user.username}#${newMember.user.discriminator}`, newMember.user.displayAvatarURL())
                                     .setDescription(lang.updated(newMember))
                                     .addField(lang.unknownChanges, lang.weird)
 

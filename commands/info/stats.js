@@ -20,7 +20,7 @@ module.exports = class StatsCommand extends Command {
         cpuStat.usagePercent((err, percent, _) => {
             const embed = new MessageEmbed()
             .setColor("RANDOM")
-            .setAuthor(this.bot.user.username, this.bot.user.avatarURL())
+            .setAuthor(this.bot.user.username, this.bot.user.displayAvatarURL())
             .setDescription(message.guild.lang.COMMANDS.STATS.license)
             .addField(message.guild.lang.COMMANDS.STATS.developer, this.bot.users.cache.get("604779545018761237").tag)
             .addField(message.guild.lang.COMMANDS.STATS.statistics, message.guild.lang.COMMANDS.STATS.statisticsValue(this.bot.guilds.cache.size, this.bot.users.cache.size, this.bot.channels.cache.size), true)

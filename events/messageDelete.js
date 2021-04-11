@@ -24,7 +24,7 @@ module.exports = async (bot, message) => {
                                         const webhook = new WebhookClient(logsSettings[0].webhookID, logsSettings[0].webhookToken);
 
                                         let embed = new MessageEmbed()
-                                            .setAuthor(message.author.tag, message.author.avatarURL())
+                                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                             .setDescription(lang.deleted(message))
                                             .addField(lang.deletedBy, message.author, true)
                                             .setColor("RANDOM")

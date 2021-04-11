@@ -37,7 +37,7 @@ module.exports = class RankCommand extends Command {
                                 return item.user == message.author.id;
                             })
                             const rank = new Rank()
-                                .setAvatar(message.author.avatarURL( { format: "png", size: 1024 }))
+                                .setAvatar(message.author.displayAvatarURL( { format: "png", size: 1024 }))
                                 .setCurrentXP(rows[0].points)
                                 .setRequiredXP(xpNextLvl)
                                 .setLevel(rows[0].level)

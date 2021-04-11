@@ -90,31 +90,33 @@ module.exports = (bot, message) => {
 
               wb.send(`\`\`\`${Util.escapeMarkdown(`${message.author.tag} (${message.author.id}) - ${message.content} (${message.guild.name} | ${message.guild.id})`)}\`\`\``);
 
-              message.guild.members.fetch();
-              command.run(message, args).catch(e => {
-                const webhook = new WebhookClient(bot.config.webhook.error.id, bot.config.webhook.error.password)
-
-                function makeid(length) {
-                  var result = '';
-                  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                  var charactersLength = characters.length;
-                  for (var i = 0; i < length; i++) {
-                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+              message.guild.members.fetch().then(() => {
+                command.run(message, args).catch(e => {
+                  const webhook = new WebhookClient(bot.config.webhook.error.id, bot.config.webhook.error.password)
+  
+                  function makeid(length) {
+                    var result = '';
+                    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                    var charactersLength = characters.length;
+                    for (var i = 0; i < length; i++) {
+                      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                    }
+                    return result;
                   }
-                  return result;
-                }
-
-                let errorID = makeid(16);
-
-                const embed = new MessageEmbed()
-                  .setColor("RANDOM")
-                  .setDescription(`Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${command.name}**\nMessage content: **${message.content}**\n\nError Stack:\n\`${e.stack}\``)
-                  .setFooter(`ID: ${errorID}`);
-
-                bot.logger.error(e);
-                webhook.send(embed);
-                return message.reply(message.guild.lang.EVENTS.MESSAGE.error(e, errorID))
+  
+                  let errorID = makeid(16);
+  
+                  const embed = new MessageEmbed()
+                    .setColor("RANDOM")
+                    .setDescription(`Server: **${message.guild.name}** (\`${message.guild.id}\`)\nCommand: **${command.name}**\nMessage content: **${message.content}**\n\nError Stack:\n\`${e.stack}\``)
+                    .setFooter(`ID: ${errorID}`);
+  
+                  bot.logger.error(e);
+                  webhook.send(embed);
+                  return message.reply(message.guild.lang.EVENTS.MESSAGE.error(e, errorID))
+                })
               })
+              
             }
           })
 

@@ -31,7 +31,7 @@ module.exports = class RpsCommand extends Command {
 
         const embed = new MessageEmbed()
             .setColor("RANDOM")
-            .setAuthor(message.author.tag, message.author.avatarURL({
+            .setAuthor(message.author.tag, message.author.displayAvatarURL({
                 size: 512
             }))
             .setTitle(message.guild.lang.COMMANDS.RPS.whatChoice)

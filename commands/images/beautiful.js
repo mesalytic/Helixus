@@ -15,7 +15,7 @@ module.exports = class BeautifulCommand extends Command {
 
     async run(message, args) {
         let url;
-        if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().avatarURL({ format: "png" }); } else { url = args[0] ? args[0] : message.author.avatarURL({ format: "png" }); }
+        if (message.attachments.first()) { url = message.attachments.first().url; } else if (message.mentions.users.first()) { url = message.mentions.users.first().displayAvatarURL({ format: "png" }); } else { url = args[0] ? args[0] : message.author.displayAvatarURL({ format: "png" }); }
 
         const m = await message.channel.send(message.guild.lang.COMMANDS.BEAUTIFUL.pleaseWait);
 

@@ -46,7 +46,7 @@ module.exports = async (bot, oldState, newState) => {
 
                                 if (!oldState.channel && newState.channel) {
                                     let embed = new MessageEmbed()
-                                        .setAuthor(newState.member.user.tag, newState.member.user.avatarURL())
+                                        .setAuthor(newState.member.user.tag, newState.member.user.displayAvatarURL())
                                         .setDescription(lang.joined(newState.member, newState.channel))
                                         .setColor("RANDOM")
                                         .setTimestamp();
@@ -54,7 +54,7 @@ module.exports = async (bot, oldState, newState) => {
                                     webhook.send(embed);
                                 } else if ((oldState.channel && newState.channel) && ((oldState.deaf === newState.deaf) && (oldState.mute === newState.mute))) {
                                     let embed = new MessageEmbed()
-                                        .setAuthor(newState.member.user.tag, newState.member.user.avatarURL())
+                                        .setAuthor(newState.member.user.tag, newState.member.user.displayAvatarURL())
                                         .setDescription(lang.switch(newState.member, newState.channel, oldState.channel))
                                         .setColor("RANDOM")
                                         .setTimestamp();
@@ -62,7 +62,7 @@ module.exports = async (bot, oldState, newState) => {
                                     webhook.send(embed);
                                 } else if (oldState.channel && !newState.channel) {
                                     let embed = new MessageEmbed()
-                                        .setAuthor(newState.member.user.tag, newState.member.user.avatarURL())
+                                        .setAuthor(newState.member.user.tag, newState.member.user.displayAvatarURL())
                                         .setDescription(lang.left(newState.member, oldState.channel))
                                         .setColor("RANDOM")
                                         .setTimestamp();
@@ -88,7 +88,7 @@ module.exports = async (bot, oldState, newState) => {
 
                                     if (!log || !log.changes[0] || !["deaf", "mute"].includes(log.changes[0].key)) return;
                                     const embed = new MessageEmbed()
-                                        .setAuthor(`${newState.member.user.username}#${newState.member.user.discriminator}`, newState.member.user.avatarURL())
+                                        .setAuthor(`${newState.member.user.username}#${newState.member.user.discriminator}`, newState.member.user.displayAvatarURL())
                                         .setDescription(lang.updated(newState))
                                         .addField(lang.voiceChannel, `${newState.channel.name} (${newState.channelID})`)
                                         .setColor("RANDOM")

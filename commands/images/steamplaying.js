@@ -24,7 +24,7 @@ module.exports = class SteamPlayingCommand extends Command {
 
         const {
             body
-        } = await request.get(message.author.avatarURL({ format: "png", size: 2048 }));
+        } = await request.get(message.author.displayAvatarURL({ format: "png", size: 2048 }));
         const avatar = await Canvas.loadImage(body);
 
         const canvas = Canvas.createCanvas(base.width, base.height);

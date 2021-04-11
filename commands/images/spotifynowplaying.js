@@ -25,7 +25,7 @@ module.exports = class SpotifyNowPlayingCommand extends Command {
 
         const base = await Canvas.loadImage(`${process.cwd()}/assets/images/spotify.png`);
         
-        const { body } = await request.get(message.author.avatarURL({ format: "png", size: 512 }));
+        const { body } = await request.get(message.author.displayAvatarURL({ format: "png", size: 512 }));
         const avatar = await Canvas.loadImage(body);
         
         const canvas = Canvas.createCanvas(base.width, base.height);
