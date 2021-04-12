@@ -1,5 +1,5 @@
 {
-  "name": "helixusv3",
+  "name": "helixus",
   "version": "1.0.0",
   "description": "",
   "main": "ShardManager.js",
@@ -52,12 +52,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chocololat/HelixusV3.git"
+    "url": "git+https://github.com/chocololat/Helixus.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chocololat/HelixusV3/issues"
+    "url": "https://github.com/chocololat/Helixus/issues"
   },
-  "homepage": "https://github.com/chocololat/HelixusV3#readme"
+  "homepage": "https://github.com/chocololat/Helixus#readme"
 }
