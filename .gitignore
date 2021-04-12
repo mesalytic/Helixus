@@ -105,6 +105,7 @@ dist
 
 config.json
 old.config.json
+package-lock.json
 node_modules
 .vscode/
 dashboard
