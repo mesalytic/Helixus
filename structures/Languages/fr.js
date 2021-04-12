@@ -517,14 +517,15 @@ module.exports = {
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
         },
         PLAY: {
-            description: "Vous permets de jouer de la musique venant de YouTube ou SoundCloud",
+            description: "Vous permets de jouer de la musique venant de YouTube, SoundCloud ou Spotify!",
             noVoiceChannel: "❌ - Vous devez être dans un salon vocal!",
             notSameVoiceChannel: "❌ - Vous devez être dans le même salon vocal que le bot.",
             embedAuthor: "Selection de musique",
             addedToQueue: (song, author) => `✅ - **${song}** a été ajouté par ${author}`,
             error: (error) => `❌ - Impossible de rejoindre le salon vocal: ${error}`,
             ended: "🚫 File terminée.",
-            startedPlaying: (title, url) => `🎶 Joue: **${title}** <${url}>`
+            startedPlaying: (title, url) => `🎶 Joue: **${title}** <${url}>`,
+            notSupported: "❌ - Les playlists Spotify ne sont actuellement pas supportées."
         },
         PLAYLIST: {
             description: "Vous permets de charger des playlists venant de YouTube ou SoundCloud",

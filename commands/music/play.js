@@ -7,6 +7,10 @@ const YoutubeAPI = require("simple-youtube-api");
 const youtube = new YoutubeAPI(YOUTUBE_KEY);
 const scdl = require('soundcloud-downloader');
 const ytdl = require('discord-ytdl-core');
+
+const spdl = require('spdl-core').default;
+spdl.setCredentials(config.spotify.clientID, config.spotify.clientSecret);
+
 const {
     MessageEmbed
 } = require("discord.js");
@@ -15,10 +19,10 @@ module.exports = class PlayCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'play',
-            description: "Allows you to play music from YouTube or SoundCloud!",
-            usage: "play <search | YouTube/SoundCloud URL>",
+            description: "Allows you to play music from YouTube, SoundCloud or Spotify!",
+            usage: "play <search | YouTube/SoundCloud/Spotify URL>",
             type: 'music',
-            examples: ["play The Chainsmokers", "play https://www.youtube.com/watch?v=dQw4w9WgXcQ", "play https://soundcloud.com/abvssmalx/shallow-waters"],
+            examples: ["play The Chainsmokers", "play https://www.youtube.com/watch?v=dQw4w9WgXcQ", "play https://soundcloud.com/abvssmalx/shallow-waters", "play https://open.spotify.com/track/0ZqveF2rEFlz2oqF2xrriP"],
             clientPermissions: ["SPEAK", "CONNECT"]
         });
     }
@@ -43,12 +47,13 @@ module.exports = class PlayCommand extends Command {
         const videoRegex = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
         const playlistYTRegex = /^.*(list=)([^#\&\?]*).*/gi;
         const soundcloudRegex = /^https?:\/\/(soundcloud\.com)\/(.*)$/;
+        const spotifyRegex = /^https?:\/\/(open\.spotify\.com)\/(.*)$/;
         const url = args[0];
         const urlValid = videoRegex.test(args[0]);
 
         if (!videoRegex.test(args[0]) && playlistYTRegex.test(args[0])) return this.bot.commands.get("playlist").run(message, args);
         else if (soundcloudRegex.test(args[0]) && url.includes("/sets")) return this.bot.commands.get("playlist").run(message, args);
-
+        else if (spotifyRegex.test(args[0]) && url.includes("/playlist")) return message.reply(message.guild.lang.COMMANDS.PLAY.notSupported);
         const queueConstruct = {
             textChannel: message.channel,
             voiceChannel,
@@ -85,6 +90,19 @@ module.exports = class PlayCommand extends Command {
             } catch (error) {
                 console.error(error);
                 return message.reply(error.message).catch(console.error);
+            }
+        } else if (spotifyRegex.test(url)) {
+            try {
+                const infos = await spdl.getInfo(url);
+                console.log(infos);
+                
+                song = {
+                    title: infos.title,
+                    url: infos.url,
+                    duration: Math.ceil(infos.duration / 1000)
+                }
+            } catch (error) {
+                console.error(error);
             }
         } else {
             try {
@@ -165,6 +183,8 @@ module.exports = class PlayCommand extends Command {
                 });
             } else if (song.url.includes("soundcloud.com")) {
                 stream = await scdl.default.downloadFormat(song.url, scdl.default.FORMATS.MP3, config.soundcloud);
+            } else if (song.url.includes("open.spotify.com")) {
+                stream = await spdl(song.url);
             }
         } catch (error) {
             if (queue) {

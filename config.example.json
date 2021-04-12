@@ -32,5 +32,9 @@
     "ksoft": "",
 	"osu": "",
     "topgg": "",
-    "topggWebhook": ""
+    "topggWebhook": "",
+	"spotify": {
+		"clientID": "",
+		"clientSecret": ""
+	}
 }
