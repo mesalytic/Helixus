@@ -168,6 +168,10 @@ module.exports = {
             description: 'Applique des napes de courants sur votre image',
             pleaseWait: '<a:loading:543460555113889792> - Veuillez patienter...'
         },
+        COOLDOWNS: {
+            description: "Affiche les différents temps d'attente pour les commandes Economie.",
+            available: "**Disponible**"
+        },
         CUDDLE: {
             description: 'Cajole quelqu\'un!',
             cuddleNoMention: (memberTag) => `**${memberTag}** cajole quelqu\'un!`,

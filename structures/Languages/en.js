@@ -168,6 +168,10 @@ module.exports = {
             description: 'Convolutes the image.',
             pleaseWait: '<a:loading:543460555113889792> - Please wait...'
         },
+        COOLDOWNS: {
+            description: "Displays your different cooldowns for economy commands.",
+            available: "**Available**"
+        },
         CUDDLE: {
             description: 'Cuddle someone!',
             cuddleNoMention: (memberTag) => `**${memberTag}** is cuddling someone!`,
