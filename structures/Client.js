@@ -55,7 +55,8 @@ module.exports = class Bot extends Client {
             MUSIC: 'music',
             NSFW: 'nsfw',
             OWNER: 'owner',
-            RP: 'rp'
+            RP: 'rp',
+            TCG: 'tcg'
         };
     }
 
