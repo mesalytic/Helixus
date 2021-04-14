@@ -61,7 +61,7 @@ module.exports = class PlayCommand extends Command {
             songs: [],
             loop: false,
             seek: 0,
-            volume: 100,
+            volume: 18, // 18 is a good amount, as 100 is too much
             playing: true
         }
 
