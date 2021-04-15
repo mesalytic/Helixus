@@ -367,6 +367,15 @@ module.exports = {
             description: 'Change la langue du bot sur le serveur.',
             success: `✅ - La langue du bot sur ce serveur a bien été mis en **Français** !`
         },
+        LEADERBOARD: {
+            description: 'Affiche le classement mensuel des votes.',
+            notes: 'Des récompenses seront offertes pour le top 3!',
+            loading: "<a:loading:543460555113889792> - Veuillez patienter...",
+            fullTop: (link) => `Voici le classement mensuel des votes entier: ${link}`,
+            closed: "❌ - Paginateur fermé.",
+            title: "Classement mensuel des votes",
+            footer: "Utilisez les réactions pour intéragir avec le classement."
+        },
         LEAVEMESSAGE: {
             description: "Vous permets de configurer un message qui sera affiché dès le départ d'un membre.",
             notes: 'Voici la liste des tags que vous pouvez utiliser:\n\n{username} - affiche le pseudo du membre\n{server} - affiche le nom du serveur\n\nVous pouvez mentionner des rôles ou des emotes comme vous le feriez sur un message classique.',

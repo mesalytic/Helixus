@@ -367,6 +367,15 @@ module.exports = {
             description: 'Changes the bot\'s language on the server.',
             success: `✅ - The server language has been updated to **English**!`
         },
+        LEADERBOARD: {
+            description: 'Displays a leaderboard of monthly votes.',
+            notes: 'Prizes awaits the top 3!',
+            loading: "<a:loading:543460555113889792> - Please wait...",
+            fullTop: (link) => `Here is the full **Monthly Votes** leaderboard: ${link}`,
+            closed: "❌ - Paginator Closed.",
+            title: "Monthly Votes Leaderboard",
+            footer: "Use the reactions to interact with the pages."
+        },
         LEAVEMESSAGE: {
             description: "Configure the message that will display when a user leaves the server",
             notes: 'Here is the list of tags you can use:\n\n{username} displays the username of the member\n{server} - displays the server name\n\nYou can use channel and role mentions like you would on an ordinary message.',
