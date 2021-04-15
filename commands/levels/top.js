@@ -12,7 +12,6 @@ module.exports = class TopCommand extends Command {
         super(bot, {
             name: 'top',
             description: 'Displays a leaderboard of the guild\'s XP ranks.',
-            aliases: ['leaderboard'],
             type: 'levels'
         });
     }
