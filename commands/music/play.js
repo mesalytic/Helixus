@@ -5,7 +5,7 @@ let YOUTUBE_KEY = config.youtube;
 
 const YoutubeAPI = require("simple-youtube-api");
 const youtube = new YoutubeAPI(YOUTUBE_KEY);
-const scdl = require('soundcloud-downloader');
+const scdl = require('soundcloud-downloader').default;
 const ytdl = require('discord-ytdl-core');
 
 const spdl = require('spdl-core').default;
@@ -82,6 +82,7 @@ module.exports = class PlayCommand extends Command {
         } else if (soundcloudRegex.test(url)) {
             try {
                 const infos = await scdl.getInfo(url, config.soundcloud);
+                
                 song = {
                     title: infos.title,
                     url: infos.permalink_url,
@@ -94,7 +95,6 @@ module.exports = class PlayCommand extends Command {
         } else if (spotifyRegex.test(url)) {
             try {
                 const infos = await spdl.getInfo(url);
-                console.log(infos);
                 
                 song = {
                     title: infos.title,
@@ -182,7 +182,7 @@ module.exports = class PlayCommand extends Command {
                     fmt: "mp3",
                 });
             } else if (song.url.includes("soundcloud.com")) {
-                stream = await scdl.default.downloadFormat(song.url, scdl.default.FORMATS.MP3, config.soundcloud);
+                stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.soundcloud);
             } else if (song.url.includes("open.spotify.com")) {
                 stream = await spdl(song.url);
             }
