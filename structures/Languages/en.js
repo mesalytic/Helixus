@@ -29,13 +29,15 @@ module.exports = {
             providedBy: 'Provided by NekoBotAPI (nekobot.xyz)'
         },
         AUTOROLE: {
-            description: 'Allows you to configure a role which will be given to new members.',
+            description: 'Allows you to configure role which will be given to new members.',
             OFF: {
                 noRoleConfigured: '❌ - No role has been configured.',
-                removed: '✅ - The role has been removed from the autorole.'
+                removed: '✅ - Roles have been removed from the autorole.'
             },
-            added: (role) => `✅ - The role ${role} will now be given to new members.`,
-            notFound: '❌ - The role has not been found.'
+            added: `✅ - The specified roles will now be given to new members.`,
+            removed: `✅ - The specified roles will stop being given to new members.`,
+            notFound: (role) =>  `❌ - The role \`${role}\` has not been found.`,
+            notUsed: (role) => `❌ - The role \`${role}\` is not used as an autorole.`
         },
         AVATAR: {
             description: 'Displays your avatar or the avatar of the mentionned user.',

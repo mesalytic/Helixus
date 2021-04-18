@@ -17,13 +17,18 @@ module.exports = async (bot, member) => {
 
     bot.db.query(`SELECT * FROM Autorole WHERE guildId=${member.guild.id}`, (err, rows) => {
         if (err) throw err;
-        if (rows[0]) {
-            const role = member.guild.roles.resolve(rows[0].roleID);
 
-            member.roles.add(role).catch((err) => {
-                throw new Error(err);
-            });
+        let roles = [];
+
+        for (let i = 0; i < rows.length; i++) {
+            const role = member.guild.roles.resolve(rows[i].roleID);
+
+            roles.push(role);
         }
+
+        member.roles.add(roles).catch((err) => {
+            throw new Error(err);
+        })
     });
 
     bot.db.query(`SELECT * FROM Logs WHERE guildID='${member.guild.id}'`, async (err, logsSettings) => {
