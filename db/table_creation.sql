@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `backgrounds` (
   `Magic` varchar(10) DEFAULT 'false',
   `MegaTron` varchar(10) DEFAULT 'false',
   `Memariani` varchar(10) DEFAULT 'false',
+  `Moonlit Asteroid` varchar(10) DEFAULT 'true',
   `Neuromancer` varchar(10) DEFAULT 'false',
   `Pink Flavour` varchar(10) DEFAULT 'false',
   `Pure Lust` varchar(10) DEFAULT 'false',
@@ -54,11 +55,13 @@ CREATE TABLE IF NOT EXISTS `economy` (
   `dailyCooldown` varchar(100) DEFAULT NULL,
   `begCooldown` varchar(100) DEFAULT NULL,
   `weeklyCooldown` varchar(100) DEFAULT NULL,
-  `robCooldown` varchar(100) DEFAULT NULL,
+  `workCooldown` varchar(100) DEFAULT NULL,
+  `voteCooldown` varchar(100) DEFAULT NULL,
   `junkFish` int(11) DEFAULT 0,
   `commonFish` int(11) DEFAULT 0,
   `uncommonFish` int(11) DEFAULT 0,
-  `rareFish` int(11) DEFAULT 0
+  `rareFish` int(11) DEFAULT 0,
+  `monthlyVotes` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `ignorechannels` (
@@ -165,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `reactionrole` (
 CREATE TABLE IF NOT EXISTS `reminders` (
   `userID` varchar(50) DEFAULT NULL,
   `reason` varchar(500) DEFAULT NULL,
-  `timestamp` varchar(100) DEFAULT NULL
+  `timestamp` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `warnconfig` (
@@ -179,5 +182,5 @@ CREATE TABLE IF NOT EXISTS `warns` (
   `memberID` varchar(50) DEFAULT '',
   `reason` varchar(2000) DEFAULT '',
   `date` bigint(20) DEFAULT NULL,
-  `moderatorID` varchar(50) DEFAULT NULL
+  `moderatorID` varchar(50) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
