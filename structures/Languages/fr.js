@@ -486,7 +486,8 @@ module.exports = {
             description: 'Affiche la musique actuellement jouée.',
             noQueue: "❌ - Aucune musique n'est jouée.",
             embedAuthor: (title) => `Joue: ${title}`,
-            embedFooter: (time) => `Temps restant: ${time}`
+            embedFooter: (time) => `Temps restant: ${time}`,
+            requestedBy: (requester) => `Demandé par: ${requester}`
         },
         OSU: {
             description: 'Affiche les informations d\'un joueur, sur le mode de jeu osu! spécifié.',

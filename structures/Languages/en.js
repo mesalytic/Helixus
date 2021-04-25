@@ -486,7 +486,8 @@ module.exports = {
             description: 'Shows what music is currently playing.',
             noQueue: "❌ - There is nothing playing.",
             embedAuthor: (title) => `Now playing: ${title}`,
-            embedFooter: (time) => `Time Remaining: ${time}`
+            embedFooter: (time) => `Time Remaining: ${time}`,
+            requestedBy: (requester) => `Requested by: ${requester}`
         },
         OSU: {
             description: 'Displays informations about the specified player, in the specified game mode.',

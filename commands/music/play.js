@@ -74,7 +74,8 @@ module.exports = class PlayCommand extends Command {
                     title: infos.title,
                     url: infos.url,
                     duration: infos.durationSeconds,
-                    thumbnail: infos.thumbnails.maxres.url
+                    thumbnail: infos.thumbnails.maxres.url,
+                    requester: message.author
                 }
             } catch (e) {
                 console.error(e);
@@ -88,7 +89,8 @@ module.exports = class PlayCommand extends Command {
                     title: infos.title,
                     url: infos.permalink_url,
                     duration: Math.ceil(infos.duration / 1000),
-                    thumbnail: infos.artwork_url
+                    thumbnail: infos.artwork_url,
+                    requester: message.author
                 };
             } catch (error) {
                 console.error(error);
@@ -102,7 +104,8 @@ module.exports = class PlayCommand extends Command {
                     title: infos.title,
                     url: infos.url,
                     duration: Math.ceil(infos.duration / 1000),
-                    thumbnail: infos.thumbnail
+                    thumbnail: infos.thumbnail,
+                    requester: message.author
                 }
             } catch (error) {
                 console.error(error);
@@ -137,7 +140,8 @@ module.exports = class PlayCommand extends Command {
                     title: infos.title,
                     url: infos.url,
                     duration: infos.durationSeconds,
-                    thumbnail: infos.thumbnails.maxres.url
+                    thumbnail: infos.thumbnails.maxres.url,
+                    requester: message.author
                 }
 
             } catch (e) {
