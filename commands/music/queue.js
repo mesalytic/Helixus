@@ -75,8 +75,10 @@ module.exports = class QueueCommand extends Command {
                     .setTitle(message.guild.lang.COMMANDS.QUEUE.embedTitle)
                     .setThumbnail(message.guild.iconURL())
                     .setColor("RANDOM")
-                    .setDescription(message.guild.lang.COMMANDS.QUEUE.embedDescription(queue[0].title, queue[0].url, info))
-                    .setTimestamp();
+                    .setDescription(`${message.guild.lang.COMMANDS.QUEUE.embedDescription(queue[0].title, queue[0].url, info)}\n`)
+                    .setTimestamp()
+                    .setThumbnail(queue[0].thumbnail)
+                    .setFooter(`footer`);
                 embeds.push(embed);
             }
 

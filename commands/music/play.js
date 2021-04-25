@@ -73,7 +73,8 @@ module.exports = class PlayCommand extends Command {
                 song = {
                     title: infos.title,
                     url: infos.url,
-                    duration: infos.durationSeconds
+                    duration: infos.durationSeconds,
+                    thumbnail: infos.thumbnails.maxres.url
                 }
             } catch (e) {
                 console.error(e);
@@ -86,7 +87,8 @@ module.exports = class PlayCommand extends Command {
                 song = {
                     title: infos.title,
                     url: infos.permalink_url,
-                    duration: Math.ceil(infos.duration / 1000)
+                    duration: Math.ceil(infos.duration / 1000),
+                    thumbnail: infos.artwork_url
                 };
             } catch (error) {
                 console.error(error);
@@ -99,7 +101,8 @@ module.exports = class PlayCommand extends Command {
                 song = {
                     title: infos.title,
                     url: infos.url,
-                    duration: Math.ceil(infos.duration / 1000)
+                    duration: Math.ceil(infos.duration / 1000),
+                    thumbnail: infos.thumbnail
                 }
             } catch (error) {
                 console.error(error);
@@ -133,7 +136,8 @@ module.exports = class PlayCommand extends Command {
                 song = {
                     title: infos.title,
                     url: infos.url,
-                    duration: infos.durationSeconds
+                    duration: infos.durationSeconds,
+                    thumbnail: infos.thumbnails.maxres.url
                 }
 
             } catch (e) {
