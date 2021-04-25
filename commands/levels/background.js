@@ -33,10 +33,10 @@ module.exports = class BackgroundCommand extends Command {
                         this.bot.db.query(`INSERT INTO Economy (userID, balance, dailyCooldown) VALUES ('${message.author.id}', '${amount}', '${Date.now()}')`)
                         coins = 0;
                     } else coins = eRows[0].balance;
-                    if (coins < 5000) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.notEnoughCoins);
+                    if (coins < 12500) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.notEnoughCoins);
                     else {
                         if (rows[0][bgBuy] === "true") return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.alreadyBought)
-                        this.bot.db.query(`UPDATE Economy SET balance = '${coins - 5000}' WHERE userID='${message.author.id}'`);
+                        this.bot.db.query(`UPDATE Economy SET balance = '${coins - 12500}' WHERE userID='${message.author.id}'`);
                         this.bot.db.query(`UPDATE Backgrounds SET \`${bgBuy}\` = 'true' WHERE userID='${message.author.id}'`);
                         return message.channel.send(message.guild.lang.COMMANDS.BACKGROUND.BUY.success(bgBuy))
                     }
@@ -114,7 +114,7 @@ module.exports = class BackgroundCommand extends Command {
                     let array = Object.keys(backgroundColor).slice(page * 10, (page * 10) + 10)
 
                     array.forEach(bg => {
-                        output += `[${rows[0][bg] === "true" ? '✅' : '❌'}] ${bg} - 5000 coins [${message.guild.lang.COMMANDS.BACKGROUND.LIST.preview}](https://aliceraina.moe/img/${bg.replace(/ /g, '_')}.png)\n`
+                        output += `[${rows[0][bg] === "true" ? '✅' : '❌'}] ${bg} - 12500 coins [${message.guild.lang.COMMANDS.BACKGROUND.LIST.preview}](https://aliceraina.moe/img/${bg.replace(/ /g, '_')}.png)\n`
                     })
 
                     const embed = new MessageEmbed()
