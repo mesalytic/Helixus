@@ -14,7 +14,8 @@ module.exports = class VolumeCommand extends Command {
     async run(message, args) {
         const queue = this.bot.queue.get(message.guild.id);
         if (!queue) return message.reply(message.guild.lang.COMMANDS.VOLUME.noQueue).catch(console.error);
-
+        if (queue && message.member.voice.channel !== message.guild.me.voice.channel) return message.reply(message.guild.lang.COMMANDS.PLAY.notSameVoiceChannel)
+        
         if (!args[0]) return message.channel.send(message.guild.lang.COMMANDS.VOLUME.volume(queue.volume))
 
         if (isNaN(args[0]) || parseInt(args[0]) > 100 || parseInt(args[0]) < 0) return this.bot.commands.get("help").run(message, ["volume"]);

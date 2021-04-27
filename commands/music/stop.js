@@ -13,7 +13,7 @@ module.exports = class StopCommand extends Command {
     async run(message, args) {
         const queue = this.bot.queue.get(message.guild.id);
         if (!queue) return message.reply(message.guild.lang.COMMANDS.STOP.noQueue).catch(console.error);
-
+        if (queue && message.member.voice.channel !== message.guild.me.voice.channel) return message.reply(message.guild.lang.COMMANDS.PLAY.notSameVoiceChannel)
 
         queue.songs = [];
         queue.connection.dispatcher.end();

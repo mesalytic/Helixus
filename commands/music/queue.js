@@ -17,7 +17,8 @@ module.exports = class QueueCommand extends Command {
     async run(message) {
         const queue = this.bot.queue.get(message.guild.id);
         if (!queue) return message.channel.send(message.guild.lang.COMMANDS.QUEUE.noQueue);
-
+        if (queue && message.member.voice.channel !== message.guild.me.voice.channel) return message.reply(message.guild.lang.COMMANDS.PLAY.notSameVoiceChannel)
+        
         let currentPage = 0;
         const embeds = generateQueueEmbed(message, queue.songs);
 
