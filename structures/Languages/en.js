@@ -521,6 +521,7 @@ module.exports = {
             notEnoughCoins: '❌ - You don\'t have enough coins!',
             noCoinsSpecified: '❌ - You have to specify an amount of coins to give.',
             pending: (oldAmt, newAmt, user) => `<a:loading:543460555113889792> - Do you want to send ~~${oldAmt}~~ (_5% transaction fee_) **${newAmt} coins** to ${user} ?`,
+            pendingPremium: (amt, user) => `<a:loading:543460555113889792> - Do you want to send **${amt} coins** (_0% transaction fee [PREMIUM]_) to ${user} ?`,
             success: (amount, user) => `✅ - You have succesfully transferred **${amount} coins** to ${user}!`,
             cancelled: `❌ - The transaction has been cancelled.`
         },

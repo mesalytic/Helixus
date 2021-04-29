@@ -521,6 +521,7 @@ module.exports = {
             notEnoughCoins: '❌ - Vous n\'avez pas suffisamment de pièces!',
             noCoinsSpecified: '❌ - Vous devez specifier un nombre de pièces.',
             pending: (oldAmt, newAmt, user) => `<a:loading:543460555113889792> - Voulez vous vraiment envoyer ~~${oldAmt}~~ (_5% de taxe_) **${newAmt} pièces** à ${user} ?`,
+            pendingPremium: (amt, user) => `<a:loading:543460555113889792> - Voulez vous vraiment envoyer **${amt} pièces** (_0% de taxe [PREMIUM]_) à ${user} ?`,
             success: (amount, user) => `✅ - Vous avez envoyé **${amount} pièces** à ${user}!`,
             cancelled: `❌ - La transaction a été annulée.`
         },
