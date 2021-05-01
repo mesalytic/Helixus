@@ -44,4 +44,25 @@ module.exports = async (bot) => {
             })
         }
     })
+
+    bot.db.query(`SELECT * FROM userPremiums WHERE activated='true'`, (err, rows) => {
+        if (rows[0]) {
+            rows.forEach(row => {
+                let time = row.endOfPremium - Date.now();
+                if (time > 0) {
+                    setTimeout(() => {
+                        let user = bot.users.cache.get(row.premiumHolder);
+
+                        user.send(`⌛ - Your premium has expired.`)
+                        bot.db.query(`UPDATE userPremiums SET endOfPremium='0', activated='false' WHERE premiumHolder='${user.id}'`)
+                    }, time);
+                } else if (time < 0) {
+                    let user = bot.users.cache.get(row.premiumHolder);
+
+                        user.send(`⌛ - Your premium has expired.`)
+                        bot.db.query(`UPDATE userPremiums SET endOfPremium='0', activated='false' WHERE premiumHolder='${user.id}'`)
+                }
+            })
+        }
+    })
 }
