@@ -558,6 +558,16 @@ module.exports = {
             tooLong: `❌ - The prefix must be only 5 characters long.`,
             success: (prefix) => `✅ - The prefix for this server is now \`${prefix}\`.`
         },
+        PREMIUM: {
+            description: 'Check how much time left is on your premium, and how you can have it!',
+            status: "Your Premium Status",
+            activated: "Your premium is currently **activated**!",
+            disabled: "Your premium is currently **disabled**.",
+            until: "Your premium is active until",
+            tokens: (tokens) => `You have **${tokens}** tokens`,
+            how: "How to get Tokens",
+            heresHow: "Tokens corresponds to 1 month of premium. Each token cost 3.50 EUR.\nThey can be obtained via:\n     - __DonateBot__: You must join the support server and type `donate` on a bot channel. After the payment, you must contact **@mesa#0101** on Discord.\n     - [PaysafeCard](https://www.paysafecard.com): Contact **@mesa#0101** on Discord.\n\nMore payment methods will come in the future, as preparing them takes long time."
+        },
         PURGE: {
             description: 'Removes the specified amount of messages.',
             notes: "`number` is limited to 100 messages, due to API limitations. To delete more than 100 messages, you'll need to run the command multiple times.\n\nMessages older than 2 weeks cannot be deleted.",

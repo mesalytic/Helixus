@@ -558,6 +558,16 @@ module.exports = {
             tooLong: `❌ - Le préfixe doit faire moins de 5 caractères.`,
             success: (prefix) => `✅ - Le préfixe pour ce serveur est maintenant \`${prefix}\`.`
         },
+        PREMIUM: {
+            description: 'Verifiez combien de temps il vous reste sur le premium, et comment vous pouvez l\'avoir!',
+            status: "Votre Statut Premium!",
+            activated: "Votre premium est actuellement **activé**!",
+            disabled: "Votre premium est actuellement **désactivé**.",
+            until: "Votre premium est activé jusqu'au",
+            tokens: (tokens) => `Vous avez **${tokens}** tokens`,
+            how: "Comment avoir les Tokens",
+            heresHow: "Les tokens correspondent a 1 mois de premium. Chaque token coute 3.50 EUR.\nIls peuvent être obtenus via:\n     - __DonateBot__: Vous devez rejoindre le serveur de support et écrire `donate` dans un salon commandes. Après le paiement, vous devez contacter **@mesa#0101** sur Discord.\n     - [PaysafeCard](https://www.paysafecard.com): Contactez **@mesa#0101** sur Discord.\n\nD'autres moyens de paiements arriveront dans le futur, la mise en place étant assez longue."
+        },
         PURGE: {
             description: 'Supprime le nombre spécifié de messages.',
             notes: "`number` est limité à 100 messages, dù a des limitations Discord. Pour supprimer plus de 100 messages, vous devrez exécuter la commande plusieurs fois.\nLes messages vieux de plus de 2 semaines ne peuvent pas être supprimés.",
