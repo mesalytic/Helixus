@@ -15,11 +15,11 @@ module.exports = class PayCommand extends Command {
     }
 
     async run(message, args) {
-        let user = message.mentions.users.first();
-        //.filter(u => !u.bot)
+        let user = message.mentions.users.filter(u => !u.bot).first();
+        
         console.log(user);
         if (!user) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
-        // if (user.bot) return message.reply(message.guild.lang.COMMANDS.PAY.isBot)
+        if (user.bot) return message.reply(message.guild.lang.COMMANDS.PAY.isBot)
         if (Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)) <= 0) return message.reply(message.guild.lang.COMMANDS.PAY.noCoinsSpecified);
         if (user === message.author) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
 
