@@ -50,12 +50,14 @@ module.exports = async (bot) => {
             rows.forEach(row => {
                 let time = row.endOfPremium - Date.now();
                 if (time > 0) {
-                    setTimeout(() => {
-                        let user = bot.users.cache.get(row.premiumHolder);
-
-                        user.send(`⌛ - Your premium has expired.`)
-                        bot.db.query(`UPDATE userPremiums SET endOfPremium='0', activated='false' WHERE premiumHolder='${user.id}'`)
-                    }, time);
+                    if (time < 2147483647) {
+                        setTimeout(() => {
+                            let user = bot.users.cache.get(row.premiumHolder);
+    
+                            user.send(`⌛ - Your premium has expired.`)
+                            bot.db.query(`UPDATE userPremiums SET endOfPremium='0', activated='false' WHERE premiumHolder='${user.id}'`)
+                        }, time);    
+                    }
                 } else if (time < 0) {
                     let user = bot.users.cache.get(row.premiumHolder);
 
