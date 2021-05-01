@@ -15,10 +15,11 @@ module.exports = class PayCommand extends Command {
     }
 
     async run(message, args) {
-        let user = message.mentions.users.filter(u => !u.bot).first();
+        let user = message.mentions.users.first();
+        //.filter(u => !u.bot)
         console.log(user);
         if (!user) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
-        if (user.bot) return message.reply(message.guild.lang.COMMANDS.PAY.isBot)
+        // if (user.bot) return message.reply(message.guild.lang.COMMANDS.PAY.isBot)
         if (Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)) <= 0) return message.reply(message.guild.lang.COMMANDS.PAY.noCoinsSpecified);
         if (user === message.author) return message.reply(message.guild.lang.COMMANDS.PAY.noUser);
 
@@ -32,7 +33,7 @@ module.exports = class PayCommand extends Command {
                         if (!args[1] || isNaN(args[1]) || args[1] <= 0) return message.reply(message.guild.lang.COMMANDS.PAY.noCoinsSpecified);
                         if (payerRows[0].balance < Math.round(Number(args[1]))) return message.reply(message.guild.lang.COMMANDS.PAY.notEnoughCoins);
     
-                        let m = await message.channel.send(premiums[0] ? message.guild.lang.COMMANDS.PAY.pendingPremium(Math.round(Number(args[1])), user) : message.guild.lang.COMMANDS.PAY.pending(Math.round(Number(args[1])), Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)), user))
+                        let m = await message.channel.send(premiums[0] && premiums[0].activated === "true" ? message.guild.lang.COMMANDS.PAY.pendingPremium(Math.round(Number(args[1])), user) : message.guild.lang.COMMANDS.PAY.pending(Math.round(Number(args[1])), Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)), user))
                         m.react("✅").then(() => {
                             m.react("❌").then(() => {
                                 const filter = (reaction, user) => ['✅', '❌'].includes(reaction.emoji.name) && user.id === message.author.id
@@ -43,8 +44,9 @@ module.exports = class PayCommand extends Command {
                                 reactionCollector.on('collect', async reaction => {
                                     switch (reaction.emoji.name) {
                                         case '✅': {
-                                            if (!payedRows[0]) this.bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${user.id}', '${premiums[0] ? Math.round(Number(args[1])) : Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05))}')`);
-                                            else this.bot.db.query(`UPDATE Economy SET balance='${payedRows[0].balance + premiums[0] ? Math.round(Number(args[1])) : Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05))}' WHERE userID='${user.id}'`);
+                                            let amount = premiums[0] && premiums[0].activated === "true" ? Math.round(Number(args[1])) : Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05))
+                                            if (!payedRows[0]) this.bot.db.query(`INSERT INTO Economy (userID, balance) VALUES ('${user.id}', '${amount}')`);
+                                            else this.bot.db.query(`UPDATE Economy SET balance='${payedRows[0].balance + amount}' WHERE userID='${user.id}'`);
     
                                             this.bot.db.query(`UPDATE Economy SET balance='${payerRows[0].balance - Math.round(Number(args[1]))}' WHERE userID='${message.author.id}'`);
                                             reactionCollector.stop("pay_success");
@@ -56,7 +58,7 @@ module.exports = class PayCommand extends Command {
                                 reactionCollector.on('end', (_, reason) => {
                                     switch (reason) {
                                         case "pay_success":
-                                            m.edit(message.guild.lang.COMMANDS.PAY.success(premiums[0] ? Math.round(Number(args[1])) : Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)), user))
+                                            m.edit(message.guild.lang.COMMANDS.PAY.success(premiums[0] && premiums[0].activated === "true" ? Math.round(Number(args[1])) : Math.round(Number(args[1]) - (Math.round(Number(args[1])) * 0.05)), user))
                                             break;
                                         case "pay_denied":
                                             m.edit(message.guild.lang.COMMANDS.PAY.cancelled)
