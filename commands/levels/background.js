@@ -33,7 +33,7 @@ module.exports = class BackgroundCommand extends Command {
                         this.bot.db.query(`INSERT INTO Economy (userID, balance, dailyCooldown) VALUES ('${message.author.id}', '${amount}', '${Date.now()}')`)
                         coins = 0;
                     } else coins = eRows[0].balance;
-                    if (coins < 12500) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.notEnoughCoins);
+                    if (coins < 22500) return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.notEnoughCoins);
                     else {
                         if (rows[0][bgBuy] === "true") return message.reply(message.guild.lang.COMMANDS.BACKGROUND.BUY.alreadyBought)
                         this.bot.db.query(`UPDATE Economy SET balance = '${coins - 12500}' WHERE userID='${message.author.id}'`);
