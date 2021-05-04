@@ -41,7 +41,9 @@ module.exports = class Bot extends Client {
         this.config = require('../config.json');
         this.token = this.config.token;
 
-
+        this.dashboard = require('../dashboard/app');
+        this.states = {};
+        this.knownGuilds = [];
 
         this.types = {
             ADMINISTRATION: 'administration',

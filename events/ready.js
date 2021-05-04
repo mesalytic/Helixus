@@ -24,6 +24,8 @@ module.exports = async (bot) => {
 
     wb.send(embed);
 
+    bot.dashboard.load(bot);
+
     bot.db.query(`SELECT * FROM Reminders`, (err, rows) => {
         if (rows[0]) {
             rows.forEach(row => {
@@ -53,16 +55,16 @@ module.exports = async (bot) => {
                     if (time < 2147483647) {
                         setTimeout(() => {
                             let user = bot.users.cache.get(row.premiumHolder);
-    
+
                             user.send(`⌛ - Your premium has expired.`)
                             bot.db.query(`UPDATE userPremiums SET endOfPremium='0', activated='false' WHERE premiumHolder='${user.id}'`)
-                        }, time);    
+                        }, time);
                     }
                 } else if (time < 0) {
                     let user = bot.users.cache.get(row.premiumHolder);
 
-                        user.send(`⌛ - Your premium has expired.`)
-                        bot.db.query(`UPDATE userPremiums SET endOfPremium='0', activated='false' WHERE premiumHolder='${user.id}'`)
+                    user.send(`⌛ - Your premium has expired.`)
+                    bot.db.query(`UPDATE userPremiums SET endOfPremium='0', activated='false' WHERE premiumHolder='${user.id}'`)
                 }
             })
         }
