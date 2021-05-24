@@ -40,7 +40,7 @@
     "pug": "^3.0.2",
     "simple-youtube-api": "^5.2.1",
     "soundcloud-downloader": "^1.0.0",
-    "spdl-core": "^1.6.0",
+    "spdl-core": "^2.0.2",
     "string-progressbar": "^1.0.3",
     "tictactoe-minimax-ai": "^1.2.1",
     "topgg-autoposter": "^1.1.10",
