@@ -11,7 +11,7 @@ const Manager = new ShardingManager("./index.js", {
 
 if (os.platform() === "win32") { /* */ }
 else {
-    const AutoPoster = require('topgg-autoposter');
+    const { AutoPoster } = require('topgg-autoposter');
 
     const ap = AutoPoster(config.topgg, Manager);
 }
