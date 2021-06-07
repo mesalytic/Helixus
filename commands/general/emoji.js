@@ -42,11 +42,11 @@ module.exports = class EmojiCommand extends Command {
                 message.channel.send(message.guild.lang.COMMANDS.EMOJI.ADD.created(emote));
             } else {
                 if (message.attachments.first() && args[2]) return message.reply(message.guild.lang.COMMANDS.EMOJI.ADD.tooMuch);
-                if (unicodeRegex.test(args[1]) === true) return message.reply(message.guild.lang.COMMANDS.EMOJI.ADD.unicode);
+                if (unicodeRegex.test(args[2]) === true) return message.reply(message.guild.lang.COMMANDS.EMOJI.ADD.unicode);
 
-                if (message.guild.emojis.resolve(parseEmoji(args[1]).id)) return message.reply(message.guild.lang.COMMANDS.EMOJI.ADD.alreadyInServer)
+                if (message.guild.emojis.resolve(parseEmoji(args[2]).id)) return message.reply(message.guild.lang.COMMANDS.EMOJI.ADD.alreadyInServer)
 
-                let emote = await message.guild.emojis.create(`https://cdn.discordapp.com/emojis/${parseEmoji(args[1]).id}${parseEmoji(args[1]).animated ? ".gif" : ".png"}`, args[2]);
+                let emote = await message.guild.emojis.create(`https://cdn.discordapp.com/emojis/${parseEmoji(args[2]).id}${parseEmoji(args[2]).animated ? ".gif" : ".png"}`, args[1]);
                 message.channel.send(message.guild.lang.COMMANDS.EMOJI.ADD.created(emote));
             }
         } else if (args[0] === "remove") {
