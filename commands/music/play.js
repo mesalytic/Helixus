@@ -74,7 +74,7 @@ module.exports = class PlayCommand extends Command {
                     title: infos.title,
                     url: infos.url,
                     duration: infos.durationSeconds,
-                    thumbnail: infos.thumbnails.maxres.url,
+                    thumbnail: infos.thumbnails.maxres ? infos.thumbnails.maxres.url : infos.thumbnails.default.url,
                     requester: message.author
                 }
             } catch (e) {
@@ -140,7 +140,7 @@ module.exports = class PlayCommand extends Command {
                     title: infos.title,
                     url: infos.url,
                     duration: infos.durationSeconds,
-                    thumbnail: infos.thumbnails.maxres.url,
+                    thumbnail: infos.thumbnails.maxres ? infos.thumbnails.maxres.url : infos.thumbnails.default.url,
                     requester: message.author
                 }
 
