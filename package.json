@@ -10,6 +10,7 @@
     "@top-gg/sdk": "^3.0.9",
     "ascii-table": "0.0.9",
     "body-parser": "^1.19.0",
+    "btoa": "^1.2.1",
     "canvacord": "^5.1.0",
     "canvas": "^2.7.0",
     "common-tags": "^1.8.0",
@@ -17,10 +18,11 @@
     "cookies": "^0.8.0",
     "cpu-stat": "^2.0.1",
     "disco-oauth": "^5.0.1",
-    "discord-ytdl-core": "^5.0.2",
     "discord.js": "^12.5.3",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
+    "express-session": "^1.17.2",
     "ffmpeg-static": "^4.3.0",
     "figlet": "^1.5.0",
     "gifencoder": "^2.0.1",
@@ -45,7 +47,7 @@
     "tictactoe-minimax-ai": "^1.2.1",
     "topgg-autoposter": "^2.0.0",
     "winston": "^3.3.3",
-    "ytdl-core": "^4.5.0"
+    "ytdl-core": "^4.8.3"
   },
   "devDependencies": {},
   "scripts": {

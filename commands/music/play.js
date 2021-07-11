@@ -6,10 +6,9 @@ let YOUTUBE_KEY = config.youtube;
 const YoutubeAPI = require("simple-youtube-api");
 const youtube = new YoutubeAPI(YOUTUBE_KEY);
 const scdl = require('soundcloud-downloader').default;
-const ytdl = require('discord-ytdl-core');
+const ytdl = require('ytdl-core');
 
 const spdl = require('spdl-core').default;
-spdl.setCredentials(config.spotify.clientID, config.spotify.clientSecret);
 
 const {
     MessageEmbed
