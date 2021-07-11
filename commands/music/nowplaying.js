@@ -29,7 +29,7 @@ module.exports = class NowPlayingCommand extends Command {
             .setColor("RANDOM")
 
         if (song.duration > 0) {
-            nowPlaying.setDescription(`${(song.requester)}\n${new Date(seek * 1000).toISOString().substr(11, 8) + "[" + createBar(song.duration == 0 ? seek : song.duration, seek, 20)[0] + "]" + (song.duration == 0 ? " ◉ LIVE" : new Date(song.duration * 1000).toISOString().substr(11, 8))}`, false);
+            nowPlaying.setDescription(`${(song.requester)}\n${new Date(seek * 1000).toISOString().substr(11, 8) + "[" + createBar.splitBar(song.duration == 0 ? seek : song.duration, seek, 20)[0] + "]" + (song.duration == 0 ? " ◉ LIVE" : new Date(song.duration * 1000).toISOString().substr(11, 8))}`, false);
             nowPlaying.setFooter(message.guild.lang.COMMANDS.NOWPLAYING.embedFooter(new Date(left * 1000).toISOString().substr(11, 8)));
         }
 
