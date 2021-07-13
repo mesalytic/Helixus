@@ -24,8 +24,6 @@ module.exports = async (bot) => {
 
     wb.send(embed);
 
-    bot.dashboard.load(bot);
-
     bot.db.query(`SELECT * FROM Reminders`, (err, rows) => {
         if (rows[0]) {
             rows.forEach(row => {
