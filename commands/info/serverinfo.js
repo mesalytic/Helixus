@@ -36,7 +36,7 @@ module.exports = class ServerInfoCommand extends Command {
             .addField(message.guild.lang.COMMANDS.SERVERINFO.channelCount, message.guild.lang.COMMANDS.SERVERINFO.channelCountValue(message.guild.channels.cache.size), true)
             .addField(message.guild.lang.COMMANDS.SERVERINFO.emojiCount, message.guild.lang.COMMANDS.SERVERINFO.emojiCountValue(message.guild.emojis.cache.size), true)
             .addField(message.guild.lang.COMMANDS.SERVERINFO.createdOn, moment(message.guild.createdAt).format("DD MMMM Y | HH:mm:ss"), true)
-            .addField(message.guild.lang.COMMANDS.SERVERINFO.joinedOn, moment(message.guild.joinedAt).format("DD MMMM Y | HH:mm:ss"), true)
+            .addField(message.guild.lang.COMMANDS.SERVERINFO.joinedOn, moment(message.member.joinedAt).format("DD MMMM Y | HH:mm:ss"), true)
             .addField(message.guild.lang.COMMANDS.SERVERINFO.verificationLevel, message.guild.verificationLevel, true)
             .addField(message.guild.lang.COMMANDS.SERVERINFO.mfaLevel, message.guild.mfaLevel, true)
             .addField(message.guild.lang.COMMANDS.SERVERINFO.boostsCount, message.guild.premiumSubscriptionCount, true)
