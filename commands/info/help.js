@@ -84,7 +84,6 @@ module.exports = class HelpCommand extends Command {
                     [NSFW] : '🔞 NSFW',
                     [RP]: '🛂 RP',
                     [MODERATION]: '🔨 Moderation',
-                    [TCG]: 'tcg'
                 }
 
                 this.bot.commands.forEach(command => {
