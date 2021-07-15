@@ -46,7 +46,7 @@ module.exports = class UserInfoCommand extends Command {
                 }))
                 .addField(message.guild.lang.COMMANDS.USERINFO.username, member.user.tag, true)
                 .addField("Type", member.user.bot ? message.guild.lang.COMMANDS.USERINFO.bot : message.guild.lang.COMMANDS.USERINFO.user, true)
-                .addField("Badges", member.user.flags ? member.user.flags.toArray().filter(b => b !== "VERIFIED_DEVELOPER").map(badge => `${badgesEmotes[badge]}`).join(" ") : message.guild.lang.COMMANDS.USERINFO.none)
+                .addField("Badges", member.user.flags > 0 ? member.user.flags.toArray().filter(b => b !== "VERIFIED_DEVELOPER").map(badge => `${badgesEmotes[badge]}`).join(" ") : message.guild.lang.COMMANDS.USERINFO.none)
                 .addField(message.guild.lang.COMMANDS.USERINFO.currentStatus, member.user.presence.status.charAt(0).toUpperCase() + member.user.presence.status.slice(1), true)
                 .addField(message.guild.lang.COMMANDS.USERINFO.accountCreated, `${timeZoneConvert(member.user.createdAt).split(/ +/).splice(0, 3).join(' ')} | ${message.guild.lang.COMMANDS.USERINFO.accountCreatedAgo(ms(new Date().getTime() - member.user.createdTimestamp, { long: true }))}`)
                 .addField(message.guild.lang.COMMANDS.USERINFO.joined, `${timeZoneConvert(member.joinedAt).split(/ +/).splice(0,3).join(' ')}, ${message.guild.lang.COMMANDS.USERINFO.joinedAgo(ms(new Date() - member.joinedTimestamp, { long: true }))}`)
