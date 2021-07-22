@@ -1,0 +1,34 @@
+{
+    "assassin": {
+        "uniquePowers": [
+            {
+                "name": "Instant Death",
+                "description": "Removes half of enemy's life.",
+                "cooldown": 86400000,
+                "damage": "50% of the enemy's health",
+                "heal": 0,
+                "cost": "100% of your maximum mana.",
+                "type": "active"
+            },
+            {
+                "name": "Poisoned Blade",
+                "description": "Poisons your blade, dealing damage and slowing down your enemy",
+                "cooldown": 86400000,
+                "damage": 50,
+                "heal": 0,
+                "cost": 25,
+                "type": "active"
+            }
+        ],
+        "normalAbilities": [
+            {
+                "name": "Stealth",
+                "description": "Go into stealth mode, attacking your enemy from the flank",
+                "cooldown": 7200000,
+                "damage": 30,
+                "heal": 0,
+                "cost": 18
+            }
+        ]
+    }
+}
