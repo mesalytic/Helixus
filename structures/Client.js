@@ -11,6 +11,7 @@ const {
     join
 } = require("path");
 const mysql = require('mysql');
+const MongoDB = require('./MongoDatabase');
 const { KSoftClient } = require('@ksoft/api');
 
 module.exports = class Bot extends Client {
@@ -27,6 +28,9 @@ module.exports = class Bot extends Client {
             if (err) throw err;
             this.logger.log("info", "Connected to database");
         });
+
+        this.mongoDB = new MongoDB('mongodb://alice:aliciacytadine56@localhost:27017')
+        this.mongoDB.createConnection();
 
         this.logger = require('./Logger');
 
@@ -65,6 +69,7 @@ module.exports = class Bot extends Client {
                 const Command = require(resolve(__basedir, join(path, dir, f)));
                 const command = new Command(this);
                 if (command.name && !command.disabled) {
+                    if (command.type === "economy") return;
                     this.commands.set(command.name, command);
                     this.logger.info(`Loading command: ${command.name}`)
 
