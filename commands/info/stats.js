@@ -6,13 +6,13 @@ const os = require("os");
   const cpuStat = require("cpu-stat");
 const Command = require("../../structures/Command");
 
-module.exports = class StatsCommand extends Command {
+module.exports = class InfoCommand extends Command {
     constructor(bot) {
         super(bot, {
-            name: 'stats',
+            name: 'info',
             type: 'info',
             description: 'Shows statistics about the bot.',
-            aliases: ["statistics", "botinfo", "info"]
+            aliases: ["statistics", "botinfo"]
         });
     }
 
