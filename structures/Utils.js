@@ -1,3 +1,5 @@
+const { icons } = require("./Constants");
+
 const yes = ['yes', 'y', 'ye', 'yeah', 'yup', 'yea', 'ya', 'hai', 'si', 'sí', 'oui', 'はい', 'correct'];
 const no = ['no', 'n', 'nah', 'nope', 'nop', 'iie', 'いいえ', 'non', 'fuck off'];
 
@@ -92,3 +94,20 @@ exports.list = function(arr, conj = 'and') {
     if (len === 1) return arr[0];
     return `${arr.slice(0, -1).join(', ')}${len > 1 ? `${len > 2 ? ',' : ''} ${conj} ` : ''}${arr.slice(-1)}`;
 }
+
+exports.getIcon = function (type, style = "name") {
+    return icons[type] ? icons[type][style] : "⚠️";
+}
+
+exports.getPlayerPosition = async function (id, criteria = "hero.currentExp", bot) {
+    const bestPlayers = await bot.mongoDB.Rpg
+        .find({})
+        .select("account")
+        .sort({ [criteria]:-1 })
+        .lean();
+    const position = bestPlayers.findIndex(p=> p.account.userId === id) + 1;
+    if (position > 100) {
+        return ">100";
+    }
+    return position;
+};

@@ -214,3 +214,269 @@ exports.jobs = {
     "fr": ["Architecte", "Mathématicien", "Developpeur Web", "Barman", "Serveur/Serveuse", "Acteur/Actrice", "Chanteur/Chanteuse"],
     "en": ["Architect", "Mathematician", "Web Developer", "Bartender", "Waiter/Waitress", "Actor/Actress", "Singer"]
 }
+
+exports.icons = {
+    // Resources
+    "gold": { name: ":moneybag:", icon: "💰" },
+
+    "oak wood": { name: ":evergreen_tree:", icon: "🌲" },
+    "yew wood": { name: ":deciduous_tree:", icon: "🌳" },
+    "barlind wood": { name: ":tanabata_tree:", icon: "🎋" },
+    "aspen wood": { name: ":mountain_snow:", icon: "" },
+
+    "copper ore": { name: ":orange_circle:", icon: "🟠" },
+    "iron ore": { name: ":white_circle:", icon: "⚪️" },
+    "mithril ore": { name: ":blue_circle:", icon: "🔵" },
+    "burite ore": { name: ":purple_circle:", icon: "🟣" },
+    "obsidian ore": { name: ":black_circle:", icon: "⚫️" },
+
+    "bronze bar": { name: ":orange_square:", icon: "🟧" },
+    "iron bar": { name: ":white_large_square:", icon: "⬜️" },
+    "steel bar": { name: ":brown_square:", icon: "🟫" },
+    "mithril bar": { name: ":blue_square:", icon: "" },
+    "pyrite bar": { name: ":purple_square:", icon: "" },
+
+    // Universe
+    "Grassy Plains": { name: ":deciduous_tree:", icon: "🌳" },
+    "Misty Mountains": { name: ":mountain_snow:", icon: "🏔" },
+    "Deep Caves": { name: ":volcano:", icon: "🌋" },
+
+    // actions
+    "raid": { name: ":man_supervillain:", icon: "🦹‍♂️" },
+    "hunt": { name: ":frog:", icon: "🐸" },
+    "miniboss": { name: ":zombie:", icon: "🧟" },
+    "fish": { name: ":blowfish:", icon: "🐡" },
+    "dungeon": { name: ":map:", icon: "🗺" },
+
+    // dungeon keys
+    "CM Key": { name: ":key2:", icon: "🗝" },
+    "The One Shell": { name: ":shell:", icon: "🐚" },
+    "Eridian Vase": { name: ":amphora:", icon: "🏺" },
+
+    // Military units
+    "archery": { name: ":archery:", icon: "🏹" },
+    "barracks": { name: ":crossed_swords:", icon: "⚔️" },
+
+    // Equipment Types
+    "weapon": { name: ":probing_cane:", icon: "🦯" },
+    "helmet": { name: ":helmet_with_cross:", icon: "⛑" },
+    "chest": { name: ":womans_clothes:", icon: "👚" },
+    "legging": { name: ":jeans:", icon: "👖" },
+
+    // Shop
+    "Small Healing Potion": { name: ":thermometer:", icon: "🌡" },
+    "Large Healing Potion": { name: ":syringe:", icon: "💉" },
+    "Enourmous Healing Potion": { name: ":scarf:", icon: "🧣" },
+    "Quality Healing Potion": { name: ":pill:", icon: "💊" },
+    "Mega Healing Potion": { name: ":school_satchel:", icon: "🎒" },
+    "Ultra Healing Potion": { name: ":drop_of_blood:", icon: "🩸" },
+    "Small Healing Salve": { name: ":rose:", icon: "🌹" },
+    "Large Healing Salve": { name: ":maple_leaf:", icon: "🍁" },
+    "Quality Healing Salve": { name: ":bowl_with_spoon:", icon: "🥣" },
+
+
+    // Stats
+    "xp": { name: ":mortar_board:", icon: "🎓" },
+    "health": { name: ":heart:", icon: "❤️" },
+    "attack": { name: ":crossed_swords:", icon: "⚔️" },
+    "defense": { name: ":shield:", icon: "🛡" },
+
+    // Hero
+    "armor": { name: ":martial_arts_uniform:", icon: "🥋" },
+    "inventory": { name: ":school_satchel:", icon: "🎒" },
+
+    // weapons
+    "strike": { name: ":knife:", icon: "🔪" },
+    "critical": { name: ":bangbang:", icon: "‼️" },
+    "slash": { name: ":dagger:", icon: "🗡" },
+    "disarm": { name: ":dove:", icon: "🕊" },
+    "heal": { name: ":test_tube:", icon: "🧪" },
+    "poke": { name: ":point_right:", icon: "👉" },
+
+    // Tower
+    "tower header": { name: ":japanese_ogre:", icon: "👹" },
+    "tower drop": { name: "", icon: "" },
+    "tower won": { name: ":medal:", icon: "🏅" },
+    "tower lost": { name: ":anger:", icon: "😠" },
+    "tower fight": { name: ":crossed_swords:", icon: "⚔️" },
+
+    // Misc
+    "false": { name: ":x:", icon: "❌" },
+    "true": { name: ":white_check_mark:", icon: "✅" },
+    "quest": { name: ":boom:", icon: "💥" },
+    "weeklyPrizeStar": { name: ":star2:", icon: "🌟" },
+    "dailyPrizeStar": { name: ":star:", icon: "⭐️" },
+    "Carrot": { name: ":carrot:", icon: "🥕" },
+    "cooldown": { name: ":clock9:", icon: "🕘" },
+    "lottery": { name: ":money_with_wings:", icon: "💸" }
+};
+
+exports.allUnits = {
+
+    huntsman: {
+        name: "huntsman",
+        cost: {
+            gold: 5,
+            ["oak wood"]: 5,
+        },
+        requirement: {
+            building: "archery",
+            level: 0,
+        },
+        stats: {
+            health: 14,
+            attack: 6,
+        },
+    },
+    archer: {
+        name: "archer",
+        cost: {
+            gold: 22,
+            ["yew wood"]: 7,
+        },
+        requirement: {
+            building: "archery",
+            level: 1,
+        },
+        stats: {
+            health: 27,
+            attack: 30,
+        },
+    },
+    ranger: {
+        name: "ranger",
+        cost: {
+            gold: 45,
+            ["yew wood"]: 10,
+            ["oak wood"]: 10,
+        },
+        requirement: {
+            building: "archery",
+            level: 2,
+        },
+        stats: {
+            health: 70,
+            attack: 75,
+        },
+    },
+    survivalist: {
+        name: "survivalist",
+        cost: {
+            gold: 100,
+            ["barlind wood"]: 10,
+        },
+        requirement: {
+            building: "archery",
+            level: 3,
+        },
+        stats: {
+            health: 110,
+            attack: 110,
+        },
+    },
+    sharpshooter: {
+        name: "sharpshooter",
+        cost: {
+            gold: 190,
+            ["aspen wood"]: 15,
+        },
+        requirement: {
+            building: "archery",
+            level: 4,
+        },
+        stats: {
+            health: 150,
+            attack: 160,
+        },
+    },
+
+    peasant: {
+        name: "peasant",
+        cost: {
+            gold: 6,
+        },
+        requirement: {
+            building: "barracks",
+            level: 0,
+        },
+        stats: {
+            health: 10,
+            attack: 5,
+        },
+    },
+    militia: {
+        name: "militia",
+        cost: {
+            gold: 15,
+            ["bronze bar"]: 2,
+        },
+        requirement: {
+            building: "barracks",
+            level: 1,
+        },
+        stats: {
+            health: 35,
+            attack: 16,
+        },
+    },
+    guardsman: {
+        name: "guardsman",
+        cost: {
+            gold: 35,
+            ["iron bar"]: 4,
+        },
+        requirement: {
+            building: "barracks",
+            level: 2,
+        },
+        stats: {
+            health: 80,
+            attack: 25,
+        },
+    },
+    knight: {
+        name: "knight",
+        cost: {
+            gold: 55,
+            ["steel bar"]: 4,
+        },
+        requirement: {
+            building: "barracks",
+            level: 3,
+        },
+        stats: {
+            health: 120,
+            attack: 40,
+        },
+    },
+    berserker: {
+        name: "berserker",
+        cost: {
+            gold: 80,
+            ["mithril bar"]: 3,
+        },
+        requirement: {
+            building: "barracks",
+            level: 4,
+        },
+        stats: {
+            health: 160,
+            attack: 55,
+        },
+    },
+    justicar: {
+        name: "justicar",
+        cost: {
+            gold: 110,
+            ["pyrite bar"]: 2,
+        },
+        requirement: {
+            building: "barracks",
+            level: 5,
+        },
+        stats: {
+            health: 200,
+            attack: 70,
+        },
+    }
+}
