@@ -29,7 +29,7 @@ module.exports = class Bot extends Client {
             this.logger.log("info", "Connected to database");
         });
 
-        this.mongoDB = new MongoDB('mongodb://alice:aliciacytadine56@localhost:27017')
+        this.mongoDB = new MongoDB(config.database.mongodbString)
         this.mongoDB.createConnection();
 
         this.logger = require('./Logger');

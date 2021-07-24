@@ -3,7 +3,8 @@
     "ownerID": "",
     "database": {
         "host": "",
-        "password": ""
+        "password": "",
+        "mongodbString": ""
     },
     "webhook": {
         "joinleaves": {
