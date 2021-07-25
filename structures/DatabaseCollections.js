@@ -13,10 +13,9 @@ const rpgSchema = mongoose.Schema({
             type: Boolean,
             default: false,
         },
-        patreon: {
-            type: String,
-            enum: ["", "Bronze", "Silver", "Gold", "Platinum"],
-            default: "",
+        premium: {
+            type: Boolean,
+            default: false,
         },
     },
     maxPop: {
