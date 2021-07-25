@@ -37,7 +37,6 @@ module.exports = class LookCommand extends Command {
 
         Object.keys(worldLocations[currentLocation].places).map(p => {
             console.log(p);
-            const { type } = worldLocations[currentLocation].places[p];
             legend.add(`${getIcon(p, "icon")} \`am!${p}\`\n`)
         });
         const legendCollection = Array.from(legend).join("");
