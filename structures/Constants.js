@@ -480,3 +480,233 @@ exports.allUnits = {
         },
     }
 }
+
+exports.worldLocations = {
+    "Grassy Plains": {
+        description: "You've entered a hostile environment where rewards are equally big as the threats",
+        places: {
+            dungeon: {
+                "Collapsing Sanctuary": {
+                    name: "Collapsing Sanctuary",
+                    requires: "The One Shell",
+                    type: "dungeon",
+                    rules: {
+                        allowArmy: false,
+                        canKill: true,
+                        allowHelpers: true,
+                    },
+                    rewards: {
+                        gold: 5000,
+                        xp: 1100,
+                    },
+                    helperIds: [],
+                    stats: {
+                        attack: 500,
+                        health: 500,
+                    },
+                },
+            },
+            fish: {
+                ["Subterranean Spring"]: {
+                    name: "Subterranean Spring",
+                    type: "fish",
+                    fish: ["Cod", "Trout", "Swordfish", "Salmon", "Macrel", "Bass", "Eel"],
+                }
+            },
+            hunt: {
+                ["Quartz Corner"]: {
+                    name: "Quartz Corner",
+                    type: "hunt",
+                    stats: {
+                        attack: 10,
+                        health: 10,
+                    },
+                    rewards: {
+                        gold: 40,
+                    },
+                },
+                ["Colorless Subterrane"]: {
+                    name: "Colorless Subterrane",
+                    type: "hunt",
+                    stats: {
+                        attack: 20,
+                        health: 15,
+                    },
+                    rewards: {
+                        gold: 50,
+                    },
+                }
+            },
+            miniboss: {
+                "Kraken": {
+                    name: "Kraken",
+                    type: "miniboss",
+                    stats: {
+                        attack: 1800,
+                        health: 1800,
+                    },
+                    combatRules: {
+                        maxRounds: 3,
+                        armyAllowed: false,
+                        helpersAllowed: true,
+                    },
+                    allowedNumOfAttacks: 3,
+                    weapons: ["slash", "strike", "critical"],
+                    minRankToGetKey: 22,
+                    rewards: {
+                        dungeonKey: "The One Shell",
+                        gold: 8888,
+                        xp: 9999,
+                    },
+                }
+            },
+            quest: {
+                "Moriths Mine": {
+                    name: "Moriths Mine",
+                    type: "raid",
+                    notExplorable: true,
+                    stats: {
+                        attack: 400,
+                        health: 400,
+                    },
+                    rewards: {
+                        "copper ore": 4,
+                        "iron ore": 3,
+                        "obsidian ore": 2,
+                    },
+                },
+
+                "Confront Bandits": {
+                    name: "Confront Bandits",
+                    type: "raid",
+                    notExplorable: true,
+                    stats: {
+                        attack: 300,
+                        health: 300,
+                    },
+                    rewards: {
+                        gold: 170,
+                        "iron bar": 20,
+                        "yew wood": 40,
+                    },
+                },
+                "Pack of Implings": {
+                    name: "Pack of Implings",
+                    type: "hunt",
+                    notExplorable: true,
+                    stats: {
+                        attack: 180,
+                        health: 180,
+                    },
+                    rewards: {
+                        gold: 185,
+                        "yew wood": 60,
+                    },
+                },
+                "Bugbear": {
+                    name: "Bugbear",
+                    type: "raid",
+                    notExplorable: true,
+                    stats: {
+                        attack: 600,
+                        health: 600,
+                    },
+                    rewards: {
+                        gold: 470,
+                    },
+                },
+                "Wood Elves": {
+                    name: "Wood Elves",
+                    type: "raid",
+                    notExplorable: true,
+                    stats: {
+                        attack: 550,
+                        health: 550,
+                    },
+                    rewards: {
+                        "oak wood": 60,
+                        "yew wood": 60,
+                    },
+                },
+                "Pack of Wolves": {
+                    name: "Pack of Wolves",
+                    type: "hunt",
+                    notExplorable: true,
+                    stats: {
+                        attack: 100,
+                        health: 100,
+                    },
+                    rewards: {
+                        gold: 110,
+                        "yew wood": 20,
+                    },
+                },
+                "The Alpha Wolf": {
+                    name: "The Alpha Wolf",
+                    type: "hunt",
+                    notExplorable: true,
+                    stats: {
+                        attack: 200,
+                        health: 200,
+                    },
+                    rewards: {
+                        "yew wood": 35,
+                        gold: 150,
+                    },
+                },
+                "Courtyard Guards": {
+                    name: "Courtyard Guards",
+                    type: "raid",
+                    notExplorable: true,
+                    stats: {
+                        attack: 750,
+                        health: 750,
+                    },
+                    rewards: {
+                        "steel bar": 40,
+                        gold: 720,
+                    },
+                }
+            },
+            raid: {
+                "Ancient Graveyard": {
+                    name: "Ancient Graveyard",
+                    type: "raid",
+                    stats: {
+                        attack: 300,
+                        health: 200,
+                    },
+                    rewards: {
+                        gold: 70,
+                    },
+                },
+                "Thiefs Guild": {
+                    name: "Thiefs Guild",
+                    type: "raid",
+                    stats: {
+                        attack: 100,
+                        health: 300,
+                    },
+                    rewards: {
+                        gold: 100,
+                        "oak wood": 50,
+                        "yew wood": 20,
+                    },
+                },
+                "Unstable Cavern": {
+                    name: "Unstable Cavern",
+                    type: "raid",
+                    stats: {
+                        attack: 200,
+                        health: 200,
+                    },
+                    rewards: {
+                        gold: 50,
+                        "copper ore": 100,
+                        "iron ore": 60,
+                    },
+                }
+            }
+        }
+    }
+}
