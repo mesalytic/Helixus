@@ -4,14 +4,16 @@ const {
   WebhookClient,
   Util
 } = require("discord.js");
+const { handleCaptcha } = require("../structures/Captcha");
 const {
   permissions
 } = require("../structures/Constants");
 const cooldowns = new Collection();
+const ms = require('enhanced-ms');
 
 module.exports = (bot, message) => {
   if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot) return;
-  bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, (err, prefixes) => {
+  bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, async (err, prefixes) => {
     let prefix;
     if (err) bot.logger.error(err);
 
@@ -79,6 +81,21 @@ module.exports = (bot, message) => {
 
         timestamps.set(message.author.id, now);
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+        let userProfile = await bot.mongoDB.Rpg.findOne({ "account.userId": message.author.id }).exec();
+        //console.log(userProfile);
+        
+        if (!userProfile && command.type === "rpg" && command.name !== "register") {
+          return message.channel.send('You are not registered. Please do so with `am!register`.');
+        }
+        
+        if (userProfile) {
+          if (command.type === "rpg" && userProfile.account.banTime > Date.now()) {
+            return message.channel.send(`Sorry ${message.author}, but you are banned. You can plead for an unban directly in our support server, or wait **${ms(userProfile.account.banTime - Date.now())}**.`);
+          }
+  
+          if (command.type === "rpg" && Math.random() <= 0.02) return handleCaptcha(message, userProfile, 3, Date.now());
+        }
 
         try {
           bot.db.query(`SELECT * FROM IgnoreChannels WHERE channelID='${message.channel.id}'`, (err, rows) => {
