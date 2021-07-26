@@ -539,5 +539,16 @@ const rpgSchema = mongoose.Schema({
     },
 });
 
+rpgSchema.methods.setNewCooldown = function(type, now) {
+    this.cooldowns[type] = now;
+}
+
+rpgSchema.methods.handleExplore = function(currentLoc, place) {
+    if (!this.world.locations[currentLoc].explored.includes(place)) {
+        this.world.locations[currentLoc].explored.push(place);
+        this.markModified(this.world.locations[currentLoc].explored);
+    }
+}
+
 const rpg = mongoose.model('rpgPlayer', rpgSchema);
 module.exports.Rpg = rpg;

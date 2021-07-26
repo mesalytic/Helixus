@@ -1,4 +1,6 @@
-const { icons } = require("./Constants");
+const { icons, cooldowns } = require("./Constants");
+const ms = require('enhanced-ms');
+const { MessageEmbed } = require('discord.js');
 
 const yes = ['yes', 'y', 'ye', 'yeah', 'yup', 'yea', 'ya', 'hai', 'si', 'sí', 'oui', 'はい', 'correct'];
 const no = ['no', 'n', 'nah', 'nope', 'nop', 'iie', 'いいえ', 'non', 'fuck off'];
@@ -111,3 +113,53 @@ exports.getPlayerPosition = async function (id, criteria = "hero.currentExp", bo
     }
     return position;
 };
+
+exports.onCooldown = (type, user) => {
+    if (!type || !user) throw "Missing Arguments.";
+    if (!Object.keys(cooldowns).includes(type)) throw `Cooldown for ${type} is not configured.`
+
+    const previousTime = user.cooldowns[type];
+    const now = new Date();
+    let cooldown = cooldowns[type];
+
+    const timePassed = Math.abs(previousTime - now);
+
+    if (timePassed < cooldown) {
+        const timeLeftMs = Math.ceil((cooldown - timePassed));
+        const timeFormat = ms(timeLeftMs);
+
+        return {
+            response: true,
+            timeLeftMs,
+            timeFormat,
+            message: `You're on cooldown for ${type}! Wait ${ms(timeFormat)} before you can perform this again!`,
+            embed: this.generateCooldownEmbed(timeLeftMs, user)
+        }
+    }
+    return {
+        reponse: false
+    }
+}
+
+exports.generateCooldownEmbed = (timeMs, user) => {
+    const timeLeftSentence = timeMs > 60000 ?
+    `You can't use this command for ${ms(timeMs)}`
+    : `You can't use this command for ${Math.ceil(timeMs / 1000)} seconds`;
+
+    const donatorsInformation = user.account.premium ?
+    "Your cooldown is lowered due to your premium subscription"
+    : "If you don't want to wait this much, subscribe to our premium! Donators get in game benefits.";
+
+    const cooldownEmbed = new MessageEmbed()
+    .setTitle("Cooldown")
+    .setColor("RANDOM")
+    .addField(timeLeftSentence, donatorsInformation, true);
+
+    return cooldownEmbed;
+}
+
+exports.objectFilter = (obj, predicate) => {
+    return Object.keys(obj)
+        .filter(key => predicate(obj[key]))
+        .reduce((res, key) => (res[key] = obj[key], res), {});
+}

@@ -1,7 +1,7 @@
 const Command = require("../../structures/Command");
 const { Message, MessageEmbed } = require('discord.js');
 const { getIcon } = require("../../structures/Utils");
-const { worldLocations } = require('../../structures/Constants')
+const { worldLocations } = require('../../structures/Universe/index');
 
 module.exports = class LookCommand extends Command {
     constructor(bot) {
@@ -22,7 +22,7 @@ module.exports = class LookCommand extends Command {
 
         const exploredPlaces = dbUser.world.locations[currentLocation].explored;
         const strengths = this.calculateStrengths(currentLocation);
-        const expPlacesIcons = exploredPlaces.length ? exploredPLaces.map(place => {
+        const expPlacesIcons = exploredPlaces.length ? exploredPlaces.map(place => {
             const { type, stats } = worldLocations[currentLocation].places[place];
             let diff = "";
             if (strengths[type]) {
@@ -36,8 +36,8 @@ module.exports = class LookCommand extends Command {
         const legend = new Set();
 
         Object.keys(worldLocations[currentLocation].places).map(p => {
-            console.log(p);
-            legend.add(`${getIcon(p, "icon")} \`am!${p}\`\n`)
+            const { type } = worldLocations[currentLocation].places[p];
+            legend.add(`${getIcon(type, "icon")} \`am!${type}\`\n`)
         });
         const legendCollection = Array.from(legend).join("");
         const fields = [
