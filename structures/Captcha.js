@@ -32,7 +32,7 @@ const handleCaptcha = async (message, user, tries, now) => {
 		}
 
 		if (captcha.join("") === userAnswer) {
-			return message.channel.send(`<@${message.author.id}>`);
+			return message.channel.send(`<@${message.author.id}>, you passed the test successfully! You are free to go.`);
 		}
 
 		return await handleCaptcha(message, user, tries - 1, now);
