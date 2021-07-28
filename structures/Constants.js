@@ -485,4 +485,15 @@ exports.cooldowns = {
 	dailyPrize: (1000 * 60 * 60 * 24),
 	explore: (1000 * 60 * 60),
 	weeklyPrize: (1000 * 60 * 60 * 24 * 7),
+    fish: (1000 * 30)
+};
+
+exports.fishPrices = {
+	"Cod":5,
+	"Eel":10,
+	"Trout":15,
+	"Macrel":25,
+	"Bass":30,
+	"Salmon":40,
+	"Swordfish":80,
 };

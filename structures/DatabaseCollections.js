@@ -550,5 +550,11 @@ rpgSchema.methods.handleExplore = function(currentLoc, place) {
     }
 }
 
+rpgSchema.methods.gainManyResources = function(obj) {
+    Object.keys(obj).forEach(r => {
+        this.resources[r] += obj[r];
+    })
+}
+
 const rpg = mongoose.model('rpgPlayer', rpgSchema);
 module.exports.Rpg = rpg;
