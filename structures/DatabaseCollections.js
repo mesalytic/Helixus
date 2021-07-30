@@ -556,5 +556,56 @@ rpgSchema.methods.gainManyResources = function(obj) {
     })
 }
 
+rpgSchema.methods.startQuest = async function(questName) {
+    const foundIndex = this.quests.indexOf(this.quests.find(q => {
+        return q.name === questName;
+    }))
+    this.quests[foundIndex].started = true;
+    this.markModified(`quests.${foundIndex}.started`);
+}
+
+rpgSchema.methods.addNewQuest = async function(quest) {
+    this.quests.push(quest);
+}
+
+rpgSchema.methods.removeQuest = async function(questName) {
+    const questIndex = this.quests.indexOf(this.quests.find(q => q.name === questName));
+    this.quests.splice(questIndex, 1);
+    this.completedQuests.push(questName);
+
+    return;
+}
+
+rpgSchema.methods.addItem = function(item, amt = 1, craft) {
+    if (craft) {
+        for (const resource in item.cost) {
+            this.resources[resource] -= item.cost[resource] * amt;
+        }
+    }
+
+    let itemType;
+    let markModifiedString = "";
+    item.typeSequence.forEach(type => {
+        itemType = itemType ? itemType[type] : this[type];
+        markModifiedString += type + ".";
+    });
+
+    itemType[item.name] = typeof itemType[item.name] === "number" ?
+        itemType[item.name] + amount : amount;
+
+    this.markModified(`${markModifiedString}${item.name}`);
+}
+
+rpgSchema.methods.addOrRemoveUnits = function(unit, amount, free) {
+    if (!free) {
+        for (const resource of unit.cost) {
+            this.resources[resource] -= unit.cost[resource] * amount;
+        }
+    }
+
+    this.army.units[unit.requirement.building][unit.name] += amount;
+    //this.markModified ???
+}
+
 const rpg = mongoose.model('rpgPlayer', rpgSchema);
 module.exports.Rpg = rpg;
