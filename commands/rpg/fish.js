@@ -8,7 +8,7 @@ module.exports = class FishCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'fish',
-            description: "Fish and gain fishes",
+            description: "Fish and gain gold.",
             type: 'rpg'
         });
     }

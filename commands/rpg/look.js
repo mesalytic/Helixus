@@ -7,7 +7,7 @@ module.exports = class LookCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'look',
-            description: "look",
+            description: "Display where you are and what you already explored.",
             type: 'rpg'
         });
     }

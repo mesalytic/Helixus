@@ -6,7 +6,7 @@ module.exports = class QuestCommand extends Command {
     constructor(bot) {
         super(bot, {
             name: 'quest',
-            description: "quest",
+            description: "Displays available quests.",
             type: 'rpg'
         });
     }
