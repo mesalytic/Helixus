@@ -607,5 +607,40 @@ rpgSchema.methods.addOrRemoveUnits = function(unit, amount, free) {
     //this.markModified ???
 }
 
+rpgSchema.methods.updateHousePop = function(newPop) {
+    this.maxPop = newPop;
+    return this.save();
+}
+
+rpgSchema.methods.updateNewProduction = function(productionName, now, producing) {
+    const foundIndex = this.empire.findIndex(building => building.name === productionName && !building.lastCollected);
+    if (foundIndex === -1) return;
+
+    this.empire[foundIndex].lastCollected = now;
+
+    if (!this.empire[foundIndex].producing) this.empire[foundIndex].producing = producing;
+
+    this.markModified(`empire.${foundIndex}.lastCollected`);
+    this.markModified(`empire.${foundIndex}.producing`);
+    
+    return this.save();
+}
+
+rpgSchema.methods.updateMaxBuildings = function() {
+    const senate = this.empire.find(building => building.name === "senate");
+
+    this.maxBuildings = 9 + senate.level + 1;
+}
+
+rpgSchema.methods.buyBuilding = function(building, buildCost) {
+    for (const resource in buildCost.cost) {
+        this.resources[resource] -= buildCost.cost[resource];
+    }
+
+    this.empire = this.empire.filter(structure => !(structure.position[0] === building.position[0] && structure.position[1] === building.position[1]));
+    this.empire.push(building);
+    return this.save();
+}
+
 const rpg = mongoose.model('rpgPlayer', rpgSchema);
 module.exports.Rpg = rpg;
