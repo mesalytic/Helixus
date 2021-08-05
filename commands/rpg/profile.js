@@ -1,8 +1,7 @@
 const Command = require("../../structures/Command");
 const { Message, MessageEmbed } = require('discord.js');
 const { getIcon, capitalize, getPlayerPosition } = require("../../structures/Utils");
-const { allUnits } = require("../../structures/Constants");
-
+const allUnits = require("../../structures/Units/allUnits");
 module.exports = class ProfileCommand extends Command {
     constructor(bot) {
         super(bot, {
@@ -76,7 +75,7 @@ module.exports = class ProfileCommand extends Command {
 		Object.keys(unitType).forEach(unit => {
 
 			if (!unit.startsWith("$")) {
-				const { stats } = allUnits[unit];
+                const { stats } = allUnits[unit];
 				for (const stat in stats) {
 					unitStats[stat] = unitStats[stat] && unitStats[stat] !== 0 ? (unitStats[stat] + stats[stat] * unitType[unit]) : stats[stat] * unitType[unit];
 				}
