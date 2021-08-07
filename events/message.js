@@ -1,60 +1,60 @@
 const {
-  Collection,
-  MessageEmbed,
-  WebhookClient,
-  Util
+    Collection,
+    MessageEmbed,
+    WebhookClient,
+    Util
 } = require("discord.js");
 const { handleCaptcha } = require("../structures/Captcha");
 const {
-  permissions
+    permissions
 } = require("../structures/Constants");
 const cooldowns = new Collection();
 const ms = require('enhanced-ms');
 
 module.exports = (bot, message) => {
-  if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot) return;
-  bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, async (err, prefixes) => {
-    let prefix;
-    if (err) bot.logger.error(err);
+        if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot) return;
+        bot.db.query(`SELECT * FROM Prefixes WHERE guildID='${message.guild.id}'`, async(err, prefixes) => {
+                    let prefix;
+                    if (err) bot.logger.error(err);
 
-    if (!prefixes[0]) prefix = "am!"
-    else prefix = prefixes[0].prefix;
+                    if (!prefixes[0]) prefix = "am!"
+                    else prefix = prefixes[0].prefix;
 
-    const prefixRegex = new RegExp(`^(<@!?${bot.user.id}>|am\!|${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\s*`);
+                    const prefixRegex = new RegExp(`^(<@!?${bot.user.id}>|am\!|${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\s*`);
 
-    if (prefixRegex.test(message.content)) {
-      const [, match] = message.content.match(prefixRegex);
-      const args = message.content.slice(match.length).trim().split(/ +/g);
-      const cmd = args.shift().toLowerCase();
-      let command = bot.commands.get(cmd) || bot.aliases.get(cmd);
+                    if (prefixRegex.test(message.content)) {
+                        const [, match] = message.content.match(prefixRegex);
+                        const args = message.content.slice(match.length).trim().split(/ +/g);
+                        const cmd = args.shift().toLowerCase();
+                        let command = bot.commands.get(cmd) || bot.aliases.get(cmd);
 
-      if (!message.guild.lang) {
-        bot.db.query(`SELECT * FROM Langs WHERE guildID='${message.guild.id}'`, (err, rows) => {
-          message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
-        })
-      }
+                        if (!message.guild.lang) {
+                            bot.db.query(`SELECT * FROM Langs WHERE guildID='${message.guild.id}'`, (err, rows) => {
+                                message.guild.lang = require(`../structures/Languages/${rows[0] ? rows[0].lang : "en"}.js`);
+                            })
+                        }
 
-      if (command) {
-        /* Owner Check */
-        if (command.ownerOnly && message.author.id !== bot.config.ownerID) return;
+                        if (command) {
+                            /* Owner Check */
+                            if (command.ownerOnly && message.author.id !== bot.config.ownerID) return;
 
-        /* NSFW check */
-        if (command.type === "nsfw" && !message.channel.nsfw) return message.reply(message.guild.lang ? message.guild.lang.EVENTS.MESSAGE.noNsfw : '❌ - Please execute this command in an NSFW channel.') // the latter solution is only a temporary rusty fix for a bug, patch will come later I hope.
+                            /* NSFW check */
+                            if (command.type === "nsfw" && !message.channel.nsfw) return message.reply(message.guild.lang ? message.guild.lang.EVENTS.MESSAGE.noNsfw : '❌ - Please execute this command in an NSFW channel.') // the latter solution is only a temporary rusty fix for a bug, patch will come later I hope.
 
-        /* Permissions Check */
-        let neededPermsBot = [];
-        let neededPermsUser = [];
+                            /* Permissions Check */
+                            let neededPermsBot = [];
+                            let neededPermsUser = [];
 
-        command.userPermissions.forEach(uP => {
-          if (!message.channel.permissionsFor(message.member).has(uP)) neededPermsUser.push(uP);
-        })
+                            command.userPermissions.forEach(uP => {
+                                if (!message.channel.permissionsFor(message.member).has(uP)) neededPermsUser.push(uP);
+                            })
 
-        command.clientPermissions.forEach(uP => {
-          if (!message.channel.permissionsFor(message.guild.me).has(uP)) neededPermsBot.push(uP);
-        })
+                            command.clientPermissions.forEach(uP => {
+                                if (!message.channel.permissionsFor(message.guild.me).has(uP)) neededPermsBot.push(uP);
+                            })
 
-        if (neededPermsUser.length > 0) {
-          return message.reply(message.guild.lang.EVENTS.MESSAGE.missingUserPerms(neededPermsUser.map((p) => `\`${permissions[`${p}`]}\``).join(", ")))
+                            if (neededPermsUser.length > 0) {
+                                return message.reply(message.guild.lang.EVENTS.MESSAGE.missingUserPerms(neededPermsUser.map((p) => `\`${permissions[`${p}`]}\``).join(", ")))
         }
 
         if (neededPermsBot.length > 0) {
@@ -83,7 +83,6 @@ module.exports = (bot, message) => {
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
         let userProfile = await bot.mongoDB.Rpg.findOne({ "account.userId": message.author.id }).exec();
-        //console.log(userProfile);
         
         if (!userProfile && command.type === "rpg" && command.name !== "register") {
           return message.channel.send('You are not registered. Please do so with `am!register`.');

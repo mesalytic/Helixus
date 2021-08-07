@@ -3,40 +3,37 @@ const Canvas = require("canvas");
 const jimp = require('jimp');
 const ms = require('enhanced-ms');
 
-const handleCaptcha = async (message, user, tries, now) => {
-    console.log(user);
+const handleCaptcha = async(message, user, tries, now) => {
     const captcha = createCaptcha(message, tries);
 
     const filter = msg => msg.author.id === message.author.id
     const collector = message.channel.createMessageCollector(filter, { time: 15000 });
 
-	let userAnswer = "";
+    let userAnswer = "";
 
-	collector.on("collect", m => {
-		userAnswer = m.content;
-		collector.stop();
-	});
+    collector.on("collect", m => {
+        userAnswer = m.content;
+        collector.stop();
+    });
 
-    collector.on("end", async () => {
+    collector.on("end", async() => {
 
-		if(tries <= 1) {
-			const currentBans = parseInt(user.account.bans, 10) || 1;
-			const banTime = currentBans <= 3 ? now + 1800000 : now + parseInt(Math.pow(50, currentBans), 10);
-			user.account.bans += 1;
-			user.account.banTime = banTime;
+        if (tries <= 1) {
+            const currentBans = parseInt(user.account.bans, 10) || 1;
+            const banTime = currentBans <= 3 ? now + 1800000 : now + parseInt(Math.pow(50, currentBans), 10);
+            user.account.bans += 1;
+            user.account.banTime = banTime;
 
-            console.log(banTime);
-            console.log(now);
-			await user.save();
-			return message.channel.send(`Sorry <@${message.author.id}>, but rules are the rules. You are now banned for **${ms(banTime - now)}**.`);
-		}
+            await user.save();
+            return message.channel.send(`Sorry <@${message.author.id}>, but rules are the rules. You are now banned for **${ms(banTime - now)}**.`);
+        }
 
-		if (captcha.join("") === userAnswer) {
-			return message.channel.send(`<@${message.author.id}>, you passed the test successfully! You are free to go.`);
-		}
+        if (captcha.join("") === userAnswer) {
+            return message.channel.send(`<@${message.author.id}>, you passed the test successfully! You are free to go.`);
+        }
 
-		return await handleCaptcha(message, user, tries - 1, now);
-	});
+        return await handleCaptcha(message, user, tries - 1, now);
+    });
 }
 
 const createCaptcha = (message, tries) => {
@@ -56,19 +53,19 @@ const createCaptcha = (message, tries) => {
     });
 
     let bufferB64 = canvas.toDataURL();
-    let buffer = new Buffer(bufferB64.replace(/^data:image\/\w+;base64,/, ""),'base64');
+    let buffer = new Buffer(bufferB64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
     jimp.read(buffer).then(img => {
         img.pixelate(7)
-        .getBuffer(jimp.MIME_PNG, async (err, res) => {
-            const attachment = new Discord.MessageAttachment(new Buffer(res, 'base64'));
-            await message.channel.send(`Hey there <@${message.author.id}>! We just need you to complete this verfication thingy, just to be sure that, you know, you're human.\n You have **${tries} ${tries > 1 ? "tries" : "try"}** left!`, attachment);
+            .getBuffer(jimp.MIME_PNG, async(err, res) => {
+                const attachment = new Discord.MessageAttachment(new Buffer(res, 'base64'));
+                await message.channel.send(`Hey there <@${message.author.id}>! We just need you to complete this verfication thingy, just to be sure that, you know, you're human.\n You have **${tries} ${tries > 1 ? "tries" : "try"}** left!`, attachment);
 
-        })
+            })
     })
 
     return captchaNumbers;
-    
+
 
 }
 

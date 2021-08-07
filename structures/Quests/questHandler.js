@@ -1,6 +1,6 @@
 const quests = require('./quests');
 
-const questHandler = async (user, questName) => {
+const questHandler = async(user, questName) => {
     if (user.quests.length === 0) return "You currently have no available quests. You may get new ones when you explore new areas or obtain specific items or building levels";
 
     if (user.quests.length === 1) {
@@ -17,7 +17,6 @@ const questHandler = async (user, questName) => {
     }
 
     if (!quest) return showUnableToFindQuest(user, questName);
-
     return await handleExecuteQuest(user, quest, questName.split(" ").slice(1));
 }
 
@@ -48,10 +47,10 @@ const replaceHandler = (user, userQuest, questText) => {
 
 const showQuestRewards = (user, quest) => {
     let msg = `Congratulations you have completed **__${quest.name}__**!`;
-	if(quest.winDescription) msg += ` \n\n${quest.winDescription.replace(/%username%/g, user.account.username)}`;
-	if(quest.reward) msg += `\n\n__Rewards:__\n${quest.reward}`;
+    if (quest.winDescription) msg += ` \n\n${quest.winDescription.replace(/%username%/g, user.account.username)}`;
+    if (quest.reward) msg += `\n\n__Rewards:__\n${quest.reward}`;
 
-	return msg;
+    return msg;
 }
 
 const showAvailableQuests = (user) => {

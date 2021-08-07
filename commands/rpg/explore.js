@@ -5,20 +5,19 @@ const { worldLocations } = require('../../structures/Universe/index');
 
 module.exports = class ExploreCommand extends Command {
     constructor(bot) {
-        super(bot, {
-            name: 'explore',
-            description: "Explore the surroundings of the current location.",
-            type: 'rpg'
-        });
-    }
-    /**
-     * @param {Message} message
-     */
+            super(bot, {
+                name: 'explore',
+                description: "Explore the surroundings of the current location.",
+                type: 'rpg'
+            });
+        }
+        /**
+         * @param {Message} message
+         */
     async run(message) {
         let dbUser = await this.bot.mongoDB.Rpg.findOne({ "account.userId": message.author.id });
 
         const cooldown = onCooldown("explore", dbUser);
-        console.log(onCooldown("explore", dbUser));
         if (cooldown.response) return message.channel.send(cooldown.embed);
 
         const { currentLocation } = dbUser.world;
@@ -42,10 +41,8 @@ module.exports = class ExploreCommand extends Command {
         if (0.73 > Math.random() || previouslyExplored.includes(newlyExplored)) {
             msg = "After a long adventure, you came back exploring nothing new";
         } else {
-            console.log(newlyExplored);
             const wLoc = worldLocations[currentLoc].places[newlyExplored];
 
-            console.log(wLoc);
             let placeIcon = getIcon(currentLoc)
             user.handleExplore(currentLoc, newlyExplored);
             msg = `You went onto a new path and found a ${placeIcon} **${newlyExplored}**`
