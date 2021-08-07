@@ -4,10 +4,10 @@ const { questHelper } = require("../questHelper")
 
 module.exports = {
     buildMine: {
-        name: "Build A Mine",
+        name: "Build a Mine",
         description: "Welcome %username% !\n\nYour first objective is to __build a Mine__ and __collect 5 copper ore__. \n\nYou can build a Mine with the command `am!build mine` and it will passively collect ores depending on the level of the Mine. A level 0 Mine will collect 1 copper ore per minute, and can be collected with the command `am!collect`. Mines are crucial for rapid expansion and in production of an unbeatable army! \nType `am!quest` when you're finshed.",
         winDescription: "A Mine will help you build new structures in your empire! To see the different available buildings type the command `am!build`. If you are not pleased with one of your buildings you can remove it with the command `am!destroy <building_name>`.\n\n**A new quest is available**. To check it out, type `am!quest`",
-        questKeySentence: ["gettingStarted", "buildMine"],
+        questKeySequence: ["gettingStarted", "buildMine"],
 
         execute: async function (user) {
             const questRes = questHelper(user, this.name);
@@ -24,7 +24,7 @@ module.exports = {
             const newQ = {
                 name: "Build a Lumbermill",
                 started: false,
-                questKeySentence: ["gettingStarted", "buildLumbermill"]
+                questKeySequence: ["gettingStarted", "buildLumbermill"]
             }
 
             user.addNewQuest(newQ);
@@ -85,7 +85,7 @@ module.exports = {
             const newQ = {
                 name: "BUild a shop",
                 started: false,
-                questKeySentence: ["gettingStarted", "buildShop"]
+                questKeySequence: ["gettingStarted", "buildShop"]
             }
 
             user.addNewQuest(newQ);
