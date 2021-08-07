@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const allBuilds = require('./allBuilds');
 
 const rpgSchema = mongoose.Schema({
     account: {
@@ -640,6 +641,38 @@ rpgSchema.methods.buyBuilding = function(building, buildCost) {
     this.empire = this.empire.filter(structure => !(structure.position[0] === building.position[0] && structure.position[1] === building.position[1]));
     this.empire.push(building);
     return this.save();
+}
+
+rpgSchema.methods.collectResource = async function (collectBuildings, now, resource) {
+    const totalCollected = {};
+
+    collectBuildings.forEach(collect => {
+        this.empire.forEach((build, i) => {
+            if (build.name === collect) {
+                const { producing, lastCollected:lastCol, level, name } = build;
+
+                const lastCollected = (now - lastCol) / 60000;
+                let produced = Math.floor(lastCollected * allBuilds[name].levels.find(b => b.level === level).productionRate);
+
+                if (!produced && !resource) return totalCollected[producing] = totalCollected[producing] ? totalCollected[producing] + produced : produced;
+                if (produced > 100 + build.level * 10) produced = 100 + build.level * 10;
+
+                this.resources[producing] = this.resources[producing] ? this.resources[producing] + produced : produced;
+                totalCollected[producing] = totalCollected[producing] ? totalCollected[producing] + produced : produced;
+                build.lastCollected = now;
+
+                this.markModified(`empire.${i}.lastCollected`);
+
+                if (resource) {
+                    build.producing = resource;
+                    this.markModified(`empire.${i}.producing`)
+                }
+            }
+        })
+    })
+
+    await this.save();
+    return totalCollected;
 }
 
 const rpg = mongoose.model('rpgPlayer', rpgSchema);
