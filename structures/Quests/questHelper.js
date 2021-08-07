@@ -1,7 +1,7 @@
 const questHelper = (user, questName, newPlaces, newQuests) => {
     const quest = user.quests.find(q => q.name === questName);
     if (!quest) {
-        console.error(`Did not find quest '${questName.name}' to user '${user.account.username}'`)
+        console.error(`Did not find quest '${questName}' to user '${user.account.username}'`)
         return false;
     }
 
