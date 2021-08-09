@@ -2,6 +2,7 @@ const Command = require("../../structures/Command");
 const { Message, MessageEmbed } = require('discord.js');
 const { getIcon, capitalize, getPlayerPosition } = require("../../structures/Utils");
 const allUnits = require("../../structures/Units/allUnits");
+const allItems = require("../../structures/Items/allItems");
 module.exports = class ProfileCommand extends Command {
     constructor(bot) {
             super(bot, {
