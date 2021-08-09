@@ -9,7 +9,7 @@ const no = ['no', 'n', 'nah', 'nope', 'nop', 'iie', 'いいえ', 'non', 'fuck of
  * Capitalizes a string
  * @param {string} string 
  */
-exports.capitalize = function (string) {
+exports.capitalize = function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -17,7 +17,7 @@ exports.capitalize = function (string) {
  * Converts timestamps or DateResolvables to current TZ
  * @param {DateResolvable} data
  */
-exports.timeZoneConvert = function (data) {
+exports.timeZoneConvert = function(data) {
     var months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let d1 = new Date(data);
     let date = d1.getDate();
@@ -68,7 +68,7 @@ exports.base64 = function(text, mode = 'encode') {
     throw new TypeError(`${mode} is not a supported base64 mode.`);
 }
 
-exports.randomInt = function (min, max) {
+exports.randomInt = function(min, max) {
     return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
 }
 
@@ -76,8 +76,8 @@ exports.randomInt = function (min, max) {
 exports.verify = async function(channel, user, { time = 30000, extraYes = [], extraNo = [] } = {}) {
     const filter = res => {
         const value = res.content.toLowerCase();
-        return (user ? res.author.id === user.id : true)
-            && (yes.includes(value) || no.includes(value) || extraYes.includes(value) || extraNo.includes(value));
+        return (user ? res.author.id === user.id : true) &&
+            (yes.includes(value) || no.includes(value) || extraYes.includes(value) || extraNo.includes(value));
     };
     const verify = await channel.awaitMessages(filter, {
         max: 1,
@@ -91,10 +91,10 @@ exports.verify = async function(channel, user, { time = 30000, extraYes = [], ex
 }
 
 exports.list = function(arr, conj = 'and') {
-    const len = arr.length;
-    if (len === 0) return '';
-    if (len === 1) return arr[0];
-    return `${arr.slice(0, -1).join(', ')}${len > 1 ? `${len > 2 ? ',' : ''} ${conj} ` : ''}${arr.slice(-1)}`;
+        const len = arr.length;
+        if (len === 0) return '';
+        if (len === 1) return arr[0];
+        return `${arr.slice(0, -1).join(', ')}${len > 1 ? `${len > 2 ? ',' : ''} ${conj} ` : ''}${arr.slice(-1)}`;
 }
 
 exports.getIcon = function (type, style = "name") {
@@ -156,6 +156,33 @@ exports.generateCooldownEmbed = (timeMs, user) => {
     .addField(timeLeftSentence, donatorsInformation, true);
 
     return cooldownEmbed;
+}
+
+exports.allCooldowns = (user) => {
+    const { username } = user.account;
+    const cooldownsNames = Object.keys(cooldowns);
+    const allOnCooldowns = cooldownsNames.map(c => {
+        const info = this.onCooldown(c, user);
+        return info.response ? info.timeLeftMs : false
+    });
+
+    const status = allOnCooldowns.map((c, i) => {
+        const formattedName = `am!${cooldownsNames[i][0].toLowerCase() + cooldownsNames[i].slice(1)}`
+        if (!c) return `✅ - ${formattedName}`
+
+        return `🕘 - ${formattedName} **(${ms(c)})**`
+    });
+
+    const embed = new MessageEmbed()
+        .setTitle(`${username}'s cooldowns`)
+        .setColor("RANDOM")
+        .addFields({
+            name: "Current Status",
+            value: status,
+            inline: false
+        })
+
+    return embed;
 }
 
 exports.objectFilter = (obj, predicate) => {
