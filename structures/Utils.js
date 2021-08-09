@@ -101,7 +101,7 @@ exports.getIcon = function (type, style = "name") {
     return icons[type] ? icons[type][style] : "⚠️";
 }
 
-exports.getPlayerPosition = async function (id, criteria = "hero.currentExp", bot) {
+exports.getPlayerPosition = async function (id, criteria = "currentExp", bot) {
     const bestPlayers = await bot.mongoDB.Rpg
         .find({})
         .select("account")
