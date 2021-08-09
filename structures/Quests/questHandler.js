@@ -22,7 +22,9 @@ const questHandler = async(user, questName) => {
 
 const handleExecuteQuest = async(user, userQuest, choice) => {
     let quest;
+    console.log(quests);
     userQuest.questKeySequence.forEach(questKey => {
+
         quest = quest ? quest[questKey] : quests[questKey]
     })
 

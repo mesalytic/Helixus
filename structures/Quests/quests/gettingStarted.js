@@ -94,117 +94,117 @@ module.exports = {
             user.save();
 
             return true;
-        },
-        buildShop: {
-            name: "Build a shop",
-            description: "Your will lose hp when fighting, and thus need to get healed back up. To do this you can buy healing potions from a shop. Your goal is to build a shop and buy a small healing potion\n\nYou can build a shop with the command `am!build shop`, buy a small healing potion with the command `am!buy small healing potion`.",
-            winDescription: "A higher leveled shop will contain several items. To see all the different items in the shop use the command `am!buy`. Your newly bought Healing potion can be used with the command `am!use small healing potions` if you took damage. You can also use shortcuts to save time like `am!buy shp`. See available shortcuts with the command `am!buy shortcuts`. Make sure to not die as you will lose experience and possibly ranks.\n**A new quest is available**",
-            questKeySequence: ["gettingStarted", "buildShop"],
-            execute: async function(user) {
-                const questRes = await questHelper(user, this.name);
-                if (!questRes) return false;
+        }
+    },
+    buildShop: {
+        name: "Build a shop",
+        description: "Your will lose hp when fighting, and thus need to get healed back up. To do this you can buy healing potions from a shop. Your goal is to build a shop and buy a small healing potion\n\nYou can build a shop with the command `am!build shop`, buy a small healing potion with the command `am!buy small healing potion`.",
+        winDescription: "A higher leveled shop will contain several items. To see all the different items in the shop use the command `am!buy`. Your newly bought Healing potion can be used with the command `am!use small healing potions` if you took damage. You can also use shortcuts to save time like `am!buy shp`. See available shortcuts with the command `am!buy shortcuts`. Make sure to not die as you will lose experience and possibly ranks.\n**A new quest is available**",
+        questKeySequence: ["gettingStarted", "buildShop"],
+        execute: async function(user) {
+            const questRes = await questHelper(user, this.name);
+            if (!questRes) return false;
 
-                if (!user.empire.find(b => b.name === "shop")) return false;
+            if (!user.empire.find(b => b.name === "shop")) return false;
 
-                await user.gainManyResources({
-                    gold: 20
-                });
+            await user.gainManyResources({
+                gold: 20
+            });
 
-                await user.addItem(allItems["bronze sword"], 1)
+            await user.addItem(allItems["bronze sword"], 1)
 
-                const newQ = {
-                    name: "Preparing Yourself",
-                    started: false,
-                    questKeySequence: ["gettingStarted", "preparingYourself"],
-                };
+            const newQ = {
+                name: "Preparing Yourself",
+                started: false,
+                questKeySequence: ["gettingStarted", "preparingYourself"],
+            };
 
-                user.addNewQuest(newQ);
-                user.removeQuest(this.name);
+            user.addNewQuest(newQ);
+            user.removeQuest(this.name);
 
-                await user.save();
+            await user.save();
 
-                return true;
-            }
-        },
-        preparingYourself: {
-            name: "Preparing Yourself",
-            description: "The newly aquired weapon can be equipped to increase your combat potency. Equip the Bronze Sword with the command `am!equip bronze sword`.",
-            winDescription: "You're an experienced fighter and wield weaponry more efficient and with higher combat capabilities compared to your army. You can see your stats with the command `am!profile` or `am!army`.\n**A new quest is available**",
-            questKeySequence: ["gettingStarted", "preparingYourself"],
-            execute: async function(user) {
-                const questRes = await questHelper(user, this.name);
-                if (!questRes) return false;
+            return true;
+        }
+    },
+    preparingYourself: {
+        name: "Preparing Yourself",
+        description: "The newly aquired weapon can be equipped to increase your combat potency. Equip the Bronze Sword with the command `am!equip bronze sword`.",
+        winDescription: "You're an experienced fighter and wield weaponry more efficient and with higher combat capabilities compared to your army. You can see your stats with the command `am!profile` or `am!army`.\n**A new quest is available**",
+        questKeySequence: ["gettingStarted", "preparingYourself"],
+        execute: async function(user) {
+            const questRes = await questHelper(user, this.name);
+            if (!questRes) return false;
 
-                if (user.armor.weapon === "[NONE]") return false;
+            if (user.armor.weapon === "[NONE]") return false;
 
-                await user.addItem(allItems["bronze platemail"], 1);
+            await user.addItem(allItems["bronze platemail"], 1);
 
-                const newQuest = {
-                    name: "Recruit an Army",
-                    started: false,
-                    questKeySequence: ["gettingStarted", "recruitArmy"],
-                };
+            const newQuest = {
+                name: "Recruit an Army",
+                started: false,
+                questKeySequence: ["gettingStarted", "recruitArmy"],
+            };
 
-                user.addNewQuest(newQuest);
-                user.removeQuest(this.name);
+            user.addNewQuest(newQuest);
+            user.removeQuest(this.name);
 
-                await user.save();
+            await user.save();
 
-                return true;
-            }
-        },
-        recruitArmy: {
-            name: "Recruit an Army",
-            description: "With the exploration of the nearby areas you will find animals to hunt, hostile encampments, minibosses, dungeons or even new quests areas! To prepare you for the enemies around your empire you will have to recruit an army to deal with these dangers. Your objective is to build a Forge, Blacksmith and Barracks to produce an army that can raid nearby encampments. \n\nYou can build Forge, Blacksmith and Barracks with `am!build forge`, `am!build blacksmith` and `am!build barracks`, respectively. A Forge enables you to can craft bronze bars `am!craft bronze bar 1`, Blacksmith can use the bronze bars to craft weaponry `am!craft bronze sword 1` and a Barracks can be used to produce soldiers that can use the crafted equipment `am!recruit peasant 1`",
-            winDescription: "The weaponry is automatically worn by your army so you dont have to worry about that, just make sure you have enough equipment for all your units to improve their fighting capabilities. Don't forget to also build some farms to increase your max population allowing more units to be recruited. With an army well prepared you can `am!explore` until you find an encampment to `am!raid` and gain valuable resources and experience! \n\nHint: To see all available crafts type `am!craft` and to see all available recruits type `am!recruit`.\n**A new quest is available**",
-            questKeySequence: ["gettingStarted", "recruitArmy"],
-            execute: async function(user) {
-                const questRes = questHelper(user, this.name);
-                if (!questRes) return false;
+            return true;
+        }
+    },
+    recruitArmy: {
+        name: "Recruit an Army",
+        description: "With the exploration of the nearby areas you will find animals to hunt, hostile encampments, minibosses, dungeons or even new quests areas! To prepare you for the enemies around your empire you will have to recruit an army to deal with these dangers. Your objective is to build a Forge, Blacksmith and Barracks to produce an army that can raid nearby encampments. \n\nYou can build Forge, Blacksmith and Barracks with `am!build forge`, `am!build blacksmith` and `am!build barracks`, respectively. A Forge enables you to can craft bronze bars `am!craft bronze bar 1`, Blacksmith can use the bronze bars to craft weaponry `am!craft bronze sword 1` and a Barracks can be used to produce soldiers that can use the crafted equipment `am!recruit peasant 1`",
+        winDescription: "The weaponry is automatically worn by your army so you dont have to worry about that, just make sure you have enough equipment for all your units to improve their fighting capabilities. Don't forget to also build some farms to increase your max population allowing more units to be recruited. With an army well prepared you can `am!explore` until you find an encampment to `am!raid` and gain valuable resources and experience! \n\nHint: To see all available crafts type `am!craft` and to see all available recruits type `am!recruit`.\n**A new quest is available**",
+        questKeySequence: ["gettingStarted", "recruitArmy"],
+        execute: async function(user) {
+            const questRes = questHelper(user, this.name);
+            if (!questRes) return false;
 
-                if (!(user.army.armory.weapon["bronze sword"] >= 3)) return false;
-                if (!(user.army.units.barracks.peasant >= 10)) return false;
+            if (!(user.army.armory.weapon["bronze sword"] >= 3)) return false;
+            if (!(user.army.units.barracks.peasant >= 10)) return false;
 
-                user.addOrRemoveUnits(allUnits["peasant"], 5, ture);
-                user.addItem(allItems["bronze helmet"], 5);
-                user.addItem(allItems["bronze leggings"], 5);
+            user.addOrRemoveUnits(allUnits["peasant"], 5, ture);
+            user.addItem(allItems["bronze helmet"], 5);
+            user.addItem(allItems["bronze leggings"], 5);
 
-                const newQuest = {
-                    name: "Upgrade Mine",
-                    started: false,
-                    questKeySequence: ["gettingStarted", "upgradeMine"],
-                };
+            const newQuest = {
+                name: "Upgrade Mine",
+                started: false,
+                questKeySequence: ["gettingStarted", "upgradeMine"],
+            };
 
-                user.addNewQuest(newQuest);
-                user.removeQuest(this.name);
+            user.addNewQuest(newQuest);
+            user.removeQuest(this.name);
 
-                await user.save();
+            await user.save();
 
-                return true;
-            }
-        },
-        upgradeMine: {
-            name: "Upgrade Mine",
-            description: "Now that your empire is starting to take form, you can go ahead and aim towards upgrading your buildings. To upgrade a building you can type the command `am!build <buildingName> -u`. Upgrade your Mine to increase your ore production and to access new resources.",
-            winDescription: "With the newly built Mine you can now start producing Iron Ore. You can do this with the command `am!produce iron`. To see all your available productions you can use the command `am!produce`.",
-            questKeySequence: ["gettingStarted", "upgradeMine"],
-            execute: async function(user) {
-                const questRes = questHelper(user, this.name);
-                if (!questRes) return false;
+            return true;
+        }
+    },
+    upgradeMine: {
+        name: "Upgrade Mine",
+        description: "Now that your empire is starting to take form, you can go ahead and aim towards upgrading your buildings. To upgrade a building you can type the command `am!build <buildingName> -u`. Upgrade your Mine to increase your ore production and to access new resources.",
+        winDescription: "With the newly built Mine you can now start producing Iron Ore. You can do this with the command `am!produce iron`. To see all your available productions you can use the command `am!produce`.",
+        questKeySequence: ["gettingStarted", "upgradeMine"],
+        execute: async function(user) {
+            const questRes = questHelper(user, this.name);
+            if (!questRes) return false;
 
-                if (!user.empire.find(b => b.name === "mine" && b.level === 1)) return false;
+            if (!user.empire.find(b => b.name === "mine" && b.level === 1)) return false;
 
-                await user.gainManyResources({
-                    gold: 90,
-                    "iron ore": 20
-                });
+            await user.gainManyResources({
+                gold: 90,
+                "iron ore": 20
+            });
 
-                user.removeQuest(this.name);
+            user.removeQuest(this.name);
 
-                await user.save();
+            await user.save();
 
-                return true;
-            }
+            return true;
         }
     }
 }
