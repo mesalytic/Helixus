@@ -281,7 +281,7 @@ exports.icons = {
     "attack": { name: ":crossed_swords:", icon: "⚔️" },
     "defense": { name: ":shield:", icon: "🛡" },
 
-    // Hero
+    // Player
     "armor": { name: ":martial_arts_uniform:", icon: "🥋" },
     "inventory": { name: ":school_satchel:", icon: "🎒" },
 
@@ -326,4 +326,79 @@ exports.fishPrices = {
     "Bass": 30,
     "Salmon": 40,
     "Swordfish": 80,
+};
+
+exports.consumablesObject = {
+	["Small Healing Potion"]: {
+		name: "Small Healing Potion",
+		healingValue: 200,
+		price: 5,
+		requirement: {
+			building: "shop",
+			level: 0,
+		}
+	},
+	["Large Healing Potion"]: {
+		name: "Large Healing Potion",
+		healingValue: 1200,
+		price: 30,
+		requirement: {
+			building: "shop",
+			level: 1,
+		}
+	},
+	["Enourmous Healing Potion"]: {
+		name: "Enourmous Healing Potion",
+		healingValue: 2000,
+		price: 45,
+		requirement: {
+			building: "shop",
+			level: 2,
+		}
+	},
+	["Quality Healing Potion"]: {
+		name: "Quality Healing Potion",
+		healingValue: 3000,
+		price: 60,
+		requirement: {
+			building: "shop",
+			level: 3,
+		}
+	},
+	["Mega Healing Potion"]: {
+		name: "Mega Healing Potion",
+		healingValue: 4500,
+		price: 80,
+		requirement: {
+			building: "shop",
+			level: 4,
+		}
+	},
+	["Ultra Healing Potion"]: {
+		name: "Ultra Healing Potion",
+		healingValue: 6000,
+		price: 100,
+		requirement: {
+			building: "shop",
+			level: 5,
+		}
+	},
+	["Small Healing Salve"]: {
+		name: "Small Healing Salve",
+		healingValue: 8000,
+		price: 140,
+		requirement: {
+			building: "shop",
+			level: 6,
+		}
+	},
+	["Large Healing Salve"]: {
+		name: "Large Healing Salve",
+		healingValue: 9500,
+		price: 160,
+		requirement: {
+			building: "shop",
+			level: 7,
+		}
+	},
 };

@@ -577,10 +577,10 @@ rpgSchema.methods.removeQuest = async function(questName) {
     return;
 }
 
-rpgSchema.methods.addItem = function(item, amt = 1, craft) {
+rpgSchema.methods.addItem = function(item, amount = 1, craft) {
     if (craft) {
         for (const resource in item.cost) {
-            this.resources[resource] -= item.cost[resource] * amt;
+            this.resources[resource] -= item.cost[resource] * amount;
         }
     }
 
@@ -673,6 +673,15 @@ rpgSchema.methods.collectResource = async function (collectBuildings, now, resou
 
     await this.save();
     return totalCollected;
+}
+
+rpgSchema.methods.buyItem = async function(item, amount = 1) {
+    if (item.price) this.resources.gold -= item.price * amount;
+
+    if (!this.inventory[item.name]) this.inventory[item.name] = amount;
+    else this.inventory[item.name] += amount;
+
+    this.markModified("inventory");
 }
 
 const rpg = mongoose.model('rpgPlayer', rpgSchema);
