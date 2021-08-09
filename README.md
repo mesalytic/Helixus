@@ -1,6 +1,8 @@
 # Helixus
 > Helixus is a multi-purpose Discord bot built with Discord.JS.
 
+> This is the master branch, on-going development is currently being pushed to this branch. The (future) `production` branch will contain the production state of the bot.
+
 ## [Invite Link](https://is.gd/Helixus)
 ## [Support Server Invite](https://is.gd/HelixusSupportServer)
 
