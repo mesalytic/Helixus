@@ -190,3 +190,10 @@ exports.objectFilter = (obj, predicate) => {
         .filter(key => predicate(obj[key]))
         .reduce((res, key) => (res[key] = obj[key], res), {});
 }
+
+exports.objectMessage = (costs) => {
+    let message = "";
+    for (const cost in costs) message += `${this.getIcon[cost] || ""} ${this.capitalize(cost)}: ${costs[cost]} \n`
+
+    return message;
+}

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const allBuilds = require('./allBuilds');
+const { statIncreaseOnLevel, expToNextLevel } = require('./Constants');
+const { randomInt } = require('./Utils');
 
 const rpgSchema = mongoose.Schema({
     account: {
@@ -597,6 +599,18 @@ rpgSchema.methods.addItem = function(item, amount = 1, craft) {
     this.markModified(`${markModifiedString}${item.name}`);
 }
 
+rpgSchema.methods.removeItem = function (item, user, amount = 1) {
+    const itemType = item.typeSequence[item.typeSequence.length - 1];
+
+    if (user) {
+        this.armor[itemType] = "[NONE]";
+        this.markModified("armor");
+    } else {
+        this.army.armory[itemType][item.name] -= amount;
+        this.markModified(`army.armory.${itemType}.${item.name}`);
+    }
+}
+
 rpgSchema.methods.addOrRemoveUnits = function(unit, amount, free) {
     if (!free) {
         for (const resource of unit.cost) {
@@ -682,6 +696,77 @@ rpgSchema.methods.buyItem = async function(item, amount = 1) {
     else this.inventory[item.name] += amount;
 
     this.markModified("inventory");
+}
+
+rpgSchema.methods.unitLoss = function(lossPercent, towerFight) {
+    Object.values(this.army.units).forEach(unitBuilding => {
+        Object.keys(unitBuilding).forEach(unit => {
+            if (typeof unitBuilding[unit] === "number") {
+                unitBuilding[unit] = Math.floor(unitBuilding[unit] * lossPercent);
+                this.markModified(`army.units.${unitBuilding}.${unit}`);
+            }
+        })
+    })
+
+    this.currentHealth = Math.floor(this.currentHealth * lossPercent);
+
+    if (this.currentHealth <= 0 && this.rank > 0 && !towerFight) {
+        Object.keys(statIncreaseOnLevel[this.rank]).forEach(s => {
+            this[s] -= statIncreaseOnLevel[this.rank][s];
+        })
+        this.rank -= 1;
+        this.expToNextRank = expToNextLevel[this.rank];
+        this.currentExp = expToNextLevel[this.rank - 1] ? getNewCurrentExpAfterDeath(expToNextLevel[this.rank - 1], expToNextLevel[this.rank - 1]) : 50;
+    }
+}
+
+rpgSchema.methods.alternativeGainXp = async function(xp = 0) {
+    if (xp) this.currentExp += xp;
+    if (this.currentExp >= this.expToNextRank) {
+        if (expToNextLevel.length > this.rank + 1) {
+            this.rank += 1;
+            this.expToNextRank = expToNextLevel[this.rank];
+            Object.keys(statIncreaseOnLevel[this.rank]).forEach(s => {
+                this[s] += statIncreaseOnLevel[this.rank][s];
+            })    
+        }
+    }
+}
+
+rpgSchema.methods.changeTowerLevel = function(towerCategory, newLevel) {
+    if (typeof newLevel !== "number") {
+        console.error(`newLevel is not a number but ${typeof newLevel}`);
+        return;
+    }
+    this.tower[towerCategory].level = newLevel;
+}
+
+rpgSchema.methods.equipItem = function (item, currentItem) {
+    const equipmentBonus = 2;
+    const itemType = item.typeSequence[item.typeSequence.length - 1];
+
+    this.army.armory[itemType][item.name] -= 1;
+    this.armor[itemType] = item.name;
+
+    if (currentItem) {
+        if (!this.army.armory[itemType][currentItem.name]) this.army.armory[itemType][currentItem.name] = 0;
+        this.army.armory[itemType][currentItem.name] += 1;
+
+        for (const stat in currentItem.stats) this[stat] -= currentItem.stats[stat] * equipmentBonus;
+    }
+
+    for (const stat in item.stats) this[stat] += item.stats[stat] * equipmentBonus;
+
+    this.markModified(`army.armory.${itemType}`);
+    this.markModified(`armor.${itemType}`);
+
+    return this.save();
+}
+
+const getNewCurrentExpAfterDeath = (oneLevelDown, currentLevel) => {
+    const difference = currentLevel - oneLevelDown;
+    const result = randomInt(oneLevelDown + (difference / 2), currentLevel - (difference / 3));
+    return result;
 }
 
 const rpg = mongoose.model('rpgPlayer', rpgSchema);
