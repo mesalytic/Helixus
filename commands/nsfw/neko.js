@@ -8,7 +8,8 @@ module.exports = class NekoCommand extends Command {
         super(bot, {
             name: 'neko',
             description: 'Displays an NSFW image with neko.',
-            type: 'nsfw'
+            type: 'nsfw',
+            cooldown: 10
         });
     }
 

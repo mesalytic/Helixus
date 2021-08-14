@@ -8,7 +8,8 @@ module.exports = class FourKCommand extends Command {
         super(bot, {
             name: '4k',
             description: 'Displays a 4K categorized NSFW picture.',
-            type: 'nsfw'
+            type: 'nsfw',
+            cooldown: 10
         });
     }
 

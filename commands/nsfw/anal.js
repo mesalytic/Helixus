@@ -8,7 +8,8 @@ module.exports = class AnalCommand extends Command {
         super(bot, {
             name: 'anal',
             description: 'Displays an NSFW image with anal.',
-            type: 'nsfw'
+            type: 'nsfw',
+            cooldown: 10
         });
     }
 

@@ -9,7 +9,8 @@ module.exports = class GelbooruCommand extends Command {
         super(bot, {
             name: 'gelbooru',
             description: 'Displays a (potential) NSFW image from Gelbooru with your specified tags.',
-            type: 'nsfw'
+            type: 'nsfw',
+            cooldown: 10
         });
     }
 

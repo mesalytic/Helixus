@@ -9,7 +9,8 @@ module.exports = class YandereCommand extends Command {
         super(bot, {
             name: 'yandere',
             description: 'Displays a (potential) NSFW image from Yande.re with your specified tags.',
-            type: 'nsfw'
+            type: 'nsfw',
+            cooldown: 10
         });
     }
 

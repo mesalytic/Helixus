@@ -8,7 +8,8 @@ module.exports = class HentaiCommand extends Command {
         super(bot, {
             name: 'hentai',
             description: 'Displays an NSFW image with hentai.',
-            type: 'nsfw'
+            type: 'nsfw',
+            cooldown: 10
         });
     }
 

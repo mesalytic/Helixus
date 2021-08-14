@@ -8,7 +8,8 @@ module.exports = class PussyCommand extends Command {
         super(bot, {
             name: 'pussy',
             description: 'Displays an NSFW image with pussy.',
-            type: 'nsfw'
+            type: 'nsfw',
+            cooldown: 10
         });
     }
 
