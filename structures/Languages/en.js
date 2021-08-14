@@ -405,7 +405,8 @@ module.exports = {
                 noChanSpecified: '❌ - Please specify a channel name, ID, or mention!',
                 invalidChan: '❌ - This channel doesn\'t exist.',
                 levelNotEnabled: '❌ - Levelling is not enabled on this server. See `am!help toggle`.',
-                success: (chan) => `✅ - Level up messages will now be sent to ${chan}!`
+                success: (chan) => `✅ - Level up messages will now be sent to ${chan}!`,
+                msgChannel: "the channel where the user leveled up"
             },
             MESSAGE: {
                 noContent: '❌ - You haven\'t specified a levelup message content. Please check `am!help levelup` to see which tags you can use inside of your levelup message.',

@@ -405,7 +405,8 @@ module.exports = {
                 noChanSpecified: '❌ - Veuillez indiquer un ID, un nom ou une mention de salon!',
                 invalidChan: '❌ - Ce salon n\'existe pas.',
                 levelNotEnabled: '❌ - Le système de niveau n\'est pas activé sur votre serveur. Voir `am!help toggle`.',
-                success: (chan) => `✅ - Les messages de level up seront maintenant envoyés dans ${chan}!`
+                success: (chan) => `✅ - Les messages de level up seront maintenant envoyés dans ${chan}!`,
+                msgChannel: "le salon auquel le membre aura gagné un niveau"
             },
             MESSAGE: {
                 noContent: '❌ - Vous n\'avez spécifié aucun contenu pour le message de level up. Afin de voir les tags que vous pouvez utiliser au sein de votre message, faites `am!help levelup`.',

@@ -18,16 +18,20 @@ module.exports = class LevelUpCommand extends Command {
 
     if (args[0] === "channel") {
       let chanName = args.slice(1);
+      let chan;
+      
       if (!chanName) return message.reply(message.guild.lang.COMMANDS.LEVELUP.CHANNEL.noChanSpecified)
-      let chan = message.guild.channels.cache.find(chan => (chan.name === chanName.toString()) || (chan.id === chanName.toString().replace(/[^\w\s]/gi, '')));
+      
+      if (chanName.toString() === "msgChannel") chan = "msgChannel"
+      else chan = message.guild.channels.cache.find(channel => channel.name === chanName.toString() || channel.id === chanName.toString().replace(/[^\w\s]/gi, ''));
 
-      if (!chan || chanName !== "msgChannel") return message.reply(message.guild.lang.COMMANDS.LEVELUP.CHANNEL.invalidChan)
+      if (!chan) return message.reply(message.guild.lang.COMMANDS.LEVELUP.CHANNEL.invalidChan);
       else {
         this.bot.db.query(`SELECT * FROM LevelsConfig WHERE guildID='${message.guild.id}'`, (err, rows) => {
           if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.LEVELUP.CHANNEL.levelNotEnabled);
           else {
-            this.bot.db.query(`UPDATE LevelsConfig SET lvlupChannelID='${chanName === "msgChannel" ? "msgChannel" : chan.id}' WHERE guildID='${message.guild.id}'`);
-            return message.channel.send(message.guild.lang.COMMANDS.LEVELUP.CHANNEL.success(chanName === "msgChannel" ? "msgChannel" : chan));
+            this.bot.db.query(`UPDATE LevelsConfig SET lvlupChannelID='${chanName.toString() === "msgChannel" ? "msgChannel" : chan.id}' WHERE guildID='${message.guild.id}'`);
+            return message.channel.send(message.guild.lang.COMMANDS.LEVELUP.CHANNEL.success(chanName.toString() === "msgChannel" ? message.guild.lang.COMMANDS.LEVELUP.CHANNEL.msgChannel : chan));
           }
         })
       }
