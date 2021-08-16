@@ -32,12 +32,12 @@ module.exports = class JoinMessageCommand extends Command {
                 case "channel":
                     let chanName = args.slice(1);
                     if (!chanName) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.noChanSpecified)
-                    let chan = message.guild.channels.cache.find(chan => (chan.name === chanName.toString()) || (chan.id === chanName.toString().replace(/[^\w\s]/gi, '')));
+                    let chan = message.guild.channels.cache.find(channel => (channel.name === chanName.toString()) || (channel.id === chanName.toString().replace(/[^\w\s]/gi, '')));
                     if (!chan) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.noValidChan)
 
                     if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.notEnabled)
                     else this.bot.db.query(`UPDATE JoinMessages SET channelID = '${chan.id}' WHERE guildID='${message.guild.id}'`)
-                    message.channel.send(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.notEnabled(chan))
+                    message.channel.send(message.guild.lang.COMMANDS.JOINMESSAGE.CHANNEL.success(chan))
                     break;
                 default:
                     let content = args.join(" ");
