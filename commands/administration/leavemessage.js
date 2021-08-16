@@ -41,7 +41,7 @@ module.exports = class LeaveMessageCommand extends Command {
                     message.channel.send(message.guild.lang.COMMANDS.LEAVEMESSAGE.CHANNEL.success(chan))
                     break;
                 default:
-                    let content = args.leave(" ");
+                    let content = args.join(" ");
                     if (!content) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.noContent)
 
                     if (!rows[0]) return message.reply(message.guild.lang.COMMANDS.LEAVEMESSAGE.notEnabled)
