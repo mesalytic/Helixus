@@ -19,29 +19,32 @@ module.exports = class BuildCommand extends Command {
     async run(message, args) {
         let name = args[0];
 
-        let dbUser = await this.bot.mongoDB.Rpg.findOne({ "account.userId": message.author.id })
+        let dbUser = await this.bot.mongoDB.Rpg.findOne({ "account.userId": message.author.id });
 
         if (!args[0]) return message.channel.send(this.availableBuilds(dbUser));
-        const building = Object.values(allBuilds).find(building => name === building.name)
-        
-            if (args.includes("-u") && building) {
-            const gridCoords = args.find(el => el.match(/\d+\.\d+/g));
-            const userBuildings = dbUser.empire.filter(b => {
-                gridCoords
-                ? b.name === building.name
-                && b.position[0] === parseInt(gridCoords.split(".")[0])
-                && b.position[1] === parseInt(gridCoords.split(".")[1])
-                : b.name === building.name
-            }).sort((a, b) => a.level - b.level)
-            if (userBuildings.length > 0) {
-                args[args.length - 1] = userBuildings[0].position.join(".");
+        const building = Object.values(allBuilds).find((building) =>
+            args.includes(building.name)
+        );
+
+        if (args.includes("-u") && building) {
+            const gridCords = args.find((el) => el.match(/\d+\.\d+/g));
+            const usersBuildings = dbUser.empire
+                .filter((b) =>
+                    gridCords ? b.name === building.name &&
+                        b.position[0] === parseInt(gridCords.split(".")[0]) &&
+                        b.position[1] === parseInt(gridCords.split(".")[1])
+                        : b.name === building.name
+                )
+                .sort((a, b) => a.level - b.level);
+            if (usersBuildings.length > 0) {
+                args[args.length - 1] = usersBuildings[0].position.join(".");
             }
         }
 
         const coords = args[args.length - 1].split(".").map(cord => parseInt(cord));
         this.constructBuilding(dbUser, building, coords).then((res) => {
-            message.channel.send(`${message.author}: ${res}`)
-        })
+            message.channel.send(`${message.author}: ${res}`);
+        });
     }
 
     availableBuilds(user) {
@@ -85,7 +88,7 @@ module.exports = class BuildCommand extends Command {
                 name: capitalize(name),
                 value: "Max level reached",
                 inline: true
-            }
+            };
         }
 
         const field = {
@@ -101,7 +104,7 @@ module.exports = class BuildCommand extends Command {
         let msg = "";
 
         for (const cost in costs) {
-            msg += `${getIcon[cost] || ""} ${capitalize(cost)}: ${costs[cost]} \n`
+            msg += `${getIcon[cost] || ""} ${capitalize(cost)}: ${costs[cost]} \n`;
         }
 
         return msg;
@@ -110,7 +113,7 @@ module.exports = class BuildCommand extends Command {
     async constructBuilding(user, building, coords) {
         if (!coords[0] && coords[0] !== 0) {
             coords = this.findAvailableSpot(user);
-            if (!coords) return "You don't have an available spot in your empire!"
+            if (!coords) return "You don't have an available spot in your empire!";
         }
 
         const { response, message, buildingCost } = this.checkIfBuildIsPossible(user, building, coords);
@@ -120,14 +123,14 @@ module.exports = class BuildCommand extends Command {
             name: building.name,
             position: coords,
             level: buildingCost.level
-        }
+        };
 
         await user.buyBuilding(newBuild, buildingCost);
 
         if (building.execute) await building.execute(user);
-        
+
         let msg = `You have successfully created ${newBuild.name} level ${newBuild.level}!`;
-        
+
         // const questIntro = await checkBuildQuests(user, newBuild);
         // if (questIntro) msg += `\n\n**New Quest:**\n`
 
@@ -153,25 +156,25 @@ module.exports = class BuildCommand extends Command {
             return {
                 response: false,
                 message: "You have one or more faulty coordinate."
-            }
+            };
         }
 
         if (coords.find(cord => cord > Math.ceil(Math.pow(user.maxBuildings, 1 / 2)) || cord < 0) || coords.length !== 2) {
             return {
                 response: false,
                 message: "Please enter two coordinates between 0-2 divided by a punctuation, e.g: `am!build barracks 1.1`"
-            }
-        } else if (!building) return { response: false, message: "Unknown building command."}
+            };
+        } else if (!building) return { response: false, message: "Unknown building command." };
 
         const userBuildings = user.empire.find(structure => structure.position[0] === coords[0] && structure.position[1] === coords[1]);
-        if (!userBuildings && user.empire.length >= user.maxBuildings) return { response: false, message: "In order to get additional building spots, level up your Senate!"}
+        if (!userBuildings && user.empire.length >= user.maxBuildings) return { response: false, message: "In order to get additional building spots, level up your Senate!" };
 
         const upgradeBuilding = !(userBuildings && userBuildings.name !== building.name);
-        if (!upgradeBuilding) return { response: false, message: `This building position is occupied by ${userBuildings.name} !`}
-        if (!upgradeBuilding && building.unique && user.empire.find(structure => structure.name === building.name)) return { response: false, message: "You can only have one of this building" }
+        if (!upgradeBuilding) return { response: false, message: `This building position is occupied by ${userBuildings.name} !` };
+        if (!upgradeBuilding && building.unique && user.empire.find(structure => structure.name === building.name)) return { response: false, message: "You can only have one of this building" };
 
         const buildingCost = building.levels.find(b => userBuildings ? b.level === userBuildings.level + 1 : b.level === 0);
-        if (!buildingCost) return { response: false, message: "You already reached max level for this building." }
+        if (!buildingCost) return { response: false, message: "You already reached max level for this building." };
 
         for (const resource in buildingCost.cost) {
             const userRes = user.resources[resource];
@@ -179,14 +182,14 @@ module.exports = class BuildCommand extends Command {
 
             if (!(userRes >= buildRes)) {
                 let msg = "";
-                if (resource === "Copper Ore" || resource === "Iron Ore") msg += "Build a Mine to gather ore."
+                if (resource === "Copper Ore" || resource === "Iron Ore") msg += "Build a Mine to gather ore.";
                 else if (resource === "Oak Wood" || resource === "Yew Wood") msg += "Build a Lumbermill to gather wood.";
                 else if (resource === "Gold") msg += "You can gather gold by hunting, raiding, fishing, or duel players.";
-                
-                return { response: false, message: `You are missing ${userRes ? buildRes - userRes : buildRes} of ${resource} to build a ${capitalize(building.name)} level ${buildingCost.level}. ` + msg }
+
+                return { response: false, message: `You are missing ${userRes ? buildRes - userRes : buildRes} of ${resource} to build a ${capitalize(building.name)} level ${buildingCost.level}. ` + msg };
             }
         }
 
-        return { response: true, buildingCost }
+        return { response: true, buildingCost };
     }
-}
+};
