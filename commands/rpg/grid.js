@@ -65,12 +65,12 @@ module.exports = class GridCommand extends Command {
                 (width / (gridSize + gridSize / 6)) - 20,
             );
 
-            ctx.font = "24px sans-serif";
+            ctx.font = "20px sans-serif";
             ctx.fillStyle = "#000000";
 
             ctx.fillText(
-                `${name[0].toUpperCase() + name.slice(1)}(${level})`,
-                (((width / 6) - (name.length + 3) * 2 * gridSize) + ((width / gridSize) * position[0])),
+                `${name[0].toUpperCase() + name.slice(1)}(${level}) [${position[0]}.${position[1]}]`,
+                (((width / 7) - (name.length + 3) * 2 * gridSize) + ((width / gridSize) * position[0])),
                 (width * 0.04 + ((width / gridSize) * position[1]))
             );
         }
