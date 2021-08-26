@@ -23,15 +23,15 @@ module.exports = class GridCommand extends Command {
     }
 
     async grid(user) {
-        const canvas = createCanvas(700, 700);
+        const canvas = createCanvas(709, 709);
         const ctx = canvas.getContext('2d');
         
         const gridSize = Math.ceil(Math.sqrt(user.maxBuildings));
         let bg;
         try {
-            const bgURL = `./assets/images/grids/grid-${gridSize}x${gridSize}.jpg`;
+            const bgURL = `./assets/images/grids/grid-${gridSize}x${gridSize}.png`;
             if (fs.existsSync(bgURL)) bg = await loadImage(bgURL);
-            else bg = await loadImage(`./assets/images/grids/grid-3x3.jpg`);
+            else bg = await loadImage(`./assets/images/grids/grid-3x3.png`);
         } catch (err) {
             throw err;
         }
@@ -42,7 +42,7 @@ module.exports = class GridCommand extends Command {
             const { name, level } = building;
             return new Promise((resolve) => {
                 try {
-                    const imgURL = `./assets/images/grids/${name.replace(" ", "-")}-level-${level}.png`;
+                    const imgURL = `./assets/images/grids/${name.replace(" ", "-")}.png`;
 
                     if (fs.existsSync(imgURL)) return resolve(loadImage(imgURL))
                     else return resolve(loadImage("./assets/images/grids/no-image.png"))
