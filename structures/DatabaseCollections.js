@@ -763,6 +763,10 @@ rpgSchema.methods.equipItem = function (item, currentItem) {
     return this.save();
 }
 
+rpgSchema.methods.destroyBuilding = function(building) {
+    this.empire = this.empire.filter(structure => !(structure.position[0] === building.position[0] && structure.position[1] === building.position[1]));
+};
+
 const getNewCurrentExpAfterDeath = (oneLevelDown, currentLevel) => {
     const difference = currentLevel - oneLevelDown;
     const result = randomInt(oneLevelDown + (difference / 2), currentLevel - (difference / 3));
