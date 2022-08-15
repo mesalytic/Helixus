@@ -1,7 +1,7 @@
 # Helixus
 > Helixus is a multi-purpose Discord bot built with Discord.JS.
 
-> This project has been archived. Use this repository at your own risk.
+> This project has been archived. The new version is being developped [here](https://github.com/chocololat/Mesalytic)
 
 ## [Invite Link](https://is.gd/Helixus)
 ## [Support Server Invite](https://is.gd/HelixusSupportServer)
