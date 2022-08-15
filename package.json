@@ -24,7 +24,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
     "express-session": "^1.17.2",
-    "ffmpeg-static": "^4.3.0",
+    "ffmpeg-static": "^5.0.2",
     "figlet": "^1.5.0",
     "gifencoder": "^2.0.1",
     "hastebin-gen": "^2.0.5",
